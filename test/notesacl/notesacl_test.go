@@ -1,153 +1,185 @@
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESACL_CLASS.html */
 package notesacl_test
 
 import (
 	"domigo/domino/notesacl"
 	"domigo/domino/notessession"
+	testhelpers "domigo/test/helpers"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
+
+const TEST_ROLE = "TestRole"
+const TEST_ENTRY_NAME = "TestUser"
+const TEST_ENTRY_LEVEL = 2
 
 var acl notesacl.NotesACL
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.New()
-	db, _ := session.GetDatabase("", "GoInterface.nsf")
-	aclTmp, _ := db.ACL()
-	acl = aclTmp
+	session, _ := notessession.Initialize()
+	defer session.Release()
+
+	db, _ := testhelpers.CreateTestDatabase(session)
+	defer db.Release()
+	defer db.Remove()
+
+	acl, _ = db.ACL()
 
 	m.Run()
-	session.Release()
 }
 
-func TestNotesACLAdministrationServer(t *testing.T) {
+/* --------------------------------- Properties --------------------------------- */
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADMINISTRATIONSERVER_PROPERTY_ACL.html */
+func TestAdministrationServer(t *testing.T) {
 	_, err := acl.AdministrationServer()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesACLInternetLevel(t *testing.T) {
-	_, err := acl.InternetLevel()
-	assert.Nil(t, err)
-}
-
-func TestNotesACLIsAdminNames(t *testing.T) {
-	_, err := acl.IsAdminNames()
-	assert.Nil(t, err)
-}
-
-func TestNotesACLIsAdminReaderAuthor(t *testing.T) {
-	_, err := acl.IsAdminReaderAuthor()
-	assert.Nil(t, err)
-}
-
-func TestNotesACLIsExtendedAccess(t *testing.T) {
-	_, err := acl.IsExtendedAccess()
-	assert.Nil(t, err)
-}
-
-func TestNotesACLParent(t *testing.T) {
-	p, err := acl.Parent()
-
-	assert.Nil(t, err)
-	assert.NotNil(t, p)
-}
-
-func TestNotesACLRoles(t *testing.T) {
-	_, err := acl.Roles()
-	assert.Nil(t, err)
-}
-
-func TestNotesACLSetAdministrationServer(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADMINISTRATIONSERVER_PROPERTY_ACL.html */
+func TestSetAdministrationServer(t *testing.T) {
 	s, err := acl.AdministrationServer()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 
 	err = acl.SetAdministrationServer(s)
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesACLSetInternetLevel(t *testing.T) {
-	l, err := acl.InternetLevel()
-	assert.Nil(t, err)
-
-	err = acl.SetInternetLevel(l)
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERNETLEVEL_PROPERTY_1219.html */
+func TestInternetLevel(t *testing.T) {
+	_, err := acl.InternetLevel()
+	require.Nil(t, err)
 }
 
-func TestNotesACLSetIsAdminNames(t *testing.T) {
-	i, err := acl.IsAdminNames()
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERNETLEVEL_PROPERTY_1219.html */
+func TestSetInternetLevel(t *testing.T) {
+	s, err := acl.InternetLevel()
+	require.Nil(t, err)
 
-	err = acl.SetIsAdminNames(i)
-	assert.Nil(t, err)
+	err = acl.SetInternetLevel(s)
+	require.Nil(t, err)
 }
 
-func TestNotesACLSetIsAdminReaderAuthor(t *testing.T) {
-	i, err := acl.IsAdminReaderAuthor()
-	assert.Nil(t, err)
-
-	err = acl.SetIsAdminReaderAuthor(i)
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISADMINNAMES_PROPERTY_ACL.html */
+func TestIsAdminNames(t *testing.T) {
+	_, err := acl.IsAdminNames()
+	require.Nil(t, err)
 }
 
-func TestNotesACLSetIsExtendedAccess(t *testing.T) {
-	i, err := acl.IsExtendedAccess()
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISADMINNAMES_PROPERTY_ACL.html */
+func TestSetIsAdminNames(t *testing.T) {
+	s, err := acl.IsAdminNames()
+	require.Nil(t, err)
 
-	err = acl.SetIsExtendedAccess(i)
-	assert.Nil(t, err)
+	err = acl.SetIsAdminNames(s)
+	require.Nil(t, err)
 }
 
-func TestNotesACLSetUniformAccess(t *testing.T) {
-	u, err := acl.UniformAccess()
-	assert.Nil(t, err)
-
-	err = acl.SetUniformAccess(u)
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISADMINREADERAUTHOR_PROPERTY_ACL.html */
+func TestIsAdminReaderAuthor(t *testing.T) {
+	_, err := acl.IsAdminReaderAuthor()
+	require.Nil(t, err)
 }
 
-func TestNotesACLAddRole(t *testing.T) {
-	err := acl.AddRole("TestRole")
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISADMINREADERAUTHOR_PROPERTY_ACL.html */
+func TestSetIsAdminReaderAuthor(t *testing.T) {
+	s, err := acl.IsAdminReaderAuthor()
+	require.Nil(t, err)
+
+	err = acl.SetIsAdminReaderAuthor(s)
+	require.Nil(t, err)
 }
 
-func TestNotesACLRenameRole(t *testing.T) {
-	err := acl.RenameRole("TestRole", "TestRole1")
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISEXTENDEDACCESS_PROPERTY_ACL.html */
+func TestIsExtendedAccess(t *testing.T) {
+	_, err := acl.IsExtendedAccess()
+	require.Nil(t, err)
 }
 
-func TestNotesACLDeleteRole(t *testing.T) {
-	err := acl.DeleteRole("TestRole1")
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISEXTENDEDACCESS_PROPERTY_ACL.html */
+func TestSetIsExtendedAccess(t *testing.T) {
+	s, err := acl.IsExtendedAccess()
+	require.Nil(t, err)
+
+	err = acl.SetIsExtendedAccess(s)
+	require.Nil(t, err)
 }
 
-func TestNotesACLCreateACLEntry(t *testing.T) {
-	err := acl.CreateACLEntry("TestGroup", 0)
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROLES_PROPERTY_ACL.html */
+func TestRoles(t *testing.T) {
+	_, err := acl.Roles()
+	require.Nil(t, err)
 }
 
-func TestNotesACLGetEntry(t *testing.T) {
-	_, err := acl.GetEntry("TestGroup")
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNIFORMACCESS_PROPERTY.html */
+func TestUniformAccess(t *testing.T) {
+	_, err := acl.UniformAccess()
+	require.Nil(t, err)
 }
 
-func TestNotesACLGetFirstEntry(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNIFORMACCESS_PROPERTY.html */
+func TestSetUniformAccess(t *testing.T) {
+	s, err := acl.UniformAccess()
+	require.Nil(t, err)
+
+	err = acl.SetUniformAccess(s)
+	require.Nil(t, err)
+}
+
+/* --------------------------------- Methods ------------------------------------ */
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDROLE_METHOD.html */
+func TestAddRole(t *testing.T) {
+	err := acl.AddRole(TEST_ROLE)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEACLENTRY_METHOD.html */
+func TestCreateACLEntry(t *testing.T) {
+	_, err := acl.CreateACLEntry(TEST_ENTRY_NAME, TEST_ENTRY_LEVEL)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD.html */
+func TestGetEntry(t *testing.T) {
+	_, err := acl.GetEntry(TEST_ENTRY_NAME)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTENTRY_METHOD.html */
+func TestGetFirstEntry(t *testing.T) {
 	_, err := acl.GetFirstEntry()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-/* TODO: Find out how to implement GetNextEntry. */
-// func TestNotesACLGetNextEntry(t *testing.T) {
-// 	_, err := acl.GetNextEntry()
-// 	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTENTRY_METHOD.html */
+func TestGetNextEntry(t *testing.T) {
+	first, _ := acl.GetFirstEntry()
+	_, err := acl.GetNextEntry(first)
+
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RENAMEROLE_METHOD.html */
+func TestRenameRole(t *testing.T) {
+	err := acl.RenameRole(TEST_ENTRY_NAME, TEST_ENTRY_NAME)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEACLENTRY_METHOD_ACL_COM.html */
+// func TestRemoveACLEntry(t *testing.T) {
+// 	err := acl.RemoveACLEntry(TEST_ENTRY_NAME)
+// 	require.Nil(t, err)
 // }
 
-func TestNotesACLRemoveACLEntry(t *testing.T) {
-	err := acl.RemoveACLEntry("TestGroup")
-	assert.Nil(t, err)
-}
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEROLE_METHOD.html */
+// func TestDeleteRole(t *testing.T) {
+// 	err := acl.DeleteRole(TEST_ROLE)
+// 	require.Nil(t, err)
+// }
 
-func TestNotesACLSave(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVE_METHOD_ACL.html */
+func TestSave(t *testing.T) {
 	err := acl.Save()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }

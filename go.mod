@@ -13,4 +13,5 @@ require (
 require (
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/sys v0.1.0 // indirect
+	lukechampine.com/uint128 v1.3.0
 )

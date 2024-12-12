@@ -1,140 +1,173 @@
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESFORM_CLASS.html */
 package notesform_test
 
 import (
 	"domigo/domino/notesform"
 	"domigo/domino/notessession"
+	testhelpers "domigo/test/helpers"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var form notesform.NotesForm
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.New()
-	db, _ := session.GetDatabase("", "GoInterface.nsf")
+	session, _ := notessession.Initialize()
+	db, _ := testhelpers.CreateTestDatabase(session)
 	forms, _ := db.Forms()
-	form = forms[0]
 
-	/* Prepare database for NotesForm tests. */
-	dle, edle := db.IsDesignLockingEnabled()
+	db.SetIsDesignLockingEnabled(true)
 
-	if edle == nil {
-		db.SetIsDesignLockingEnabled(true)
+	for _, f := range forms {
+		name, _ := f.Name()
+
+		if name == "TestForm" {
+			form = f
+		} else {
+			f.Release()
+		}
 	}
+
+	defer form.Release()
+	defer db.Release()
+	defer db.Remove()
+	defer session.Release()
+
 	m.Run()
-
-	/* Restore original values. */
-	if edle == nil {
-		db.SetIsDesignLockingEnabled(dle)
-	}
-	session.Release()
 }
 
-func TestNotesFormAliases(t *testing.T) {
+/* --------------------------------- Properties --------------------------------- */
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIASES_PROPERTY_FORM.html */
+func TestAliases(t *testing.T) {
 	_, err := form.Aliases()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormFields(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FIELDS_PROPERTY.html */
+func TestFields(t *testing.T) {
 	_, err := form.Fields()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormUsers(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMUSERS_PROPERTY.html */
+func TestFormUsers(t *testing.T) {
 	_, err := form.FormUsers()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormGetFieldType(t *testing.T) {
-	fields, err := form.Fields()
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMUSERS_PROPERTY.html */
+func TestSetFormUsers(t *testing.T) {
+	s, err := form.FormUsers()
+	require.Nil(t, err)
 
-	for _, f := range fields {
-		_, err = form.GetFieldType(f)
-		assert.Nil(t, err)
-	}
+	err = form.SetFormUsers(s)
+	require.Nil(t, err)
 }
 
-func TestNotesFormHttpURL(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_FORM_COM.html */
+func TestHttpURL(t *testing.T) {
 	_, err := form.HttpURL()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormIsSubForm(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSUBFORM_PROPERTY.html */
+func TestIsSubForm(t *testing.T) {
 	_, err := form.IsSubForm()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormLock(t *testing.T) {
-	_, err := form.Lock([]string{}, false)
-	assert.Nil(t, err)
-}
-
-func TestNotesFormLockHolders(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKHOLDERS_PROPERTY_FORM.html */
+func TestLockHolders(t *testing.T) {
 	_, err := form.LockHolders()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormLockProvisional(t *testing.T) {
-	_, err := form.LockProvisional([]string{})
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_FORM.html */
+func TestName(t *testing.T) {
+	_, err := form.Name()
+	require.Nil(t, err)
 }
 
-func TestNotesFormName(t *testing.T) {
-	name, err := form.Name()
-
-	assert.Nil(t, err)
-	assert.NotEmpty(t, name)
-}
-
-func TestNotesFormNotesURL(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESURL_PROPERTY_FORM_COM.html */
+func TestNotesURL(t *testing.T) {
 	_, err := form.NotesURL()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormParent(t *testing.T) {
-	_, err := form.Parent()
-	assert.Nil(t, err)
-}
-
-func TestNotesFormNotesProtectReaders(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY.html */
+func TestProtectReaders(t *testing.T) {
 	_, err := form.ProtectReaders()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormProtectUsers(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY.html */
+func TestSetProtectReaders(t *testing.T) {
+	s, err := form.ProtectReaders()
+	require.Nil(t, err)
+
+	err = form.SetProtectReaders(s)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTUSERS_PROPERTY.html */
+func TestProtectUsers(t *testing.T) {
 	_, err := form.ProtectUsers()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormNotesReaders(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTUSERS_PROPERTY.html */
+func TestSetProtectUsers(t *testing.T) {
+	s, err := form.ProtectUsers()
+	require.Nil(t, err)
+
+	err = form.SetProtectUsers(s)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY.html */
+func TestReaders(t *testing.T) {
 	_, err := form.Readers()
-	assert.Nil(t, err)
+	require.Nil(t, err)
 }
 
-func TestNotesFormNotesSetFormUsers(t *testing.T) {
-	err := form.SetFormUsers([]string{})
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY.html */
+func TestSetReaders(t *testing.T) {
+	s, err := form.Readers()
+	require.Nil(t, err)
+
+	err = form.SetReaders(s)
+	require.Nil(t, err)
 }
 
-func TestNotesFormNotesSetProtectReaders(t *testing.T) {
-	err := form.SetProtectReaders(false)
-	assert.Nil(t, err)
+/* --------------------------------- Methods ------------------------------------ */
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIELDTYPE_METHOD_FORM.html */
+func TestGetFieldType(t *testing.T) {
+	_, err := form.GetFieldType("testField")
+	require.Nil(t, err)
 }
 
-func TestNotesFormNotesSetProtectUsers(t *testing.T) {
-	err := form.SetProtectUsers(false)
-	assert.Nil(t, err)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCK_METHOD_FORM.html */
+func TestLock(t *testing.T) {
+	_, err := form.Lock()
+	require.Nil(t, err)
 }
 
-func TestNotesFormNotesSetReaders(t *testing.T) {
-	err := form.SetReaders([]string{})
-	assert.Nil(t, err)
-}
-
-func TestNotesFormNotesUnlock(t *testing.T) {
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_FORM.html */
+func TestUnLock(t *testing.T) {
 	err := form.UnLock()
-	assert.Nil(t, err)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKPROVISIONAL_METHOD_FORM.html */
+func TestLockProvisional(t *testing.T) {
+	_, err := form.LockProvisional()
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_FORM.html */
+func TestRemove(t *testing.T) {
+	err := form.Remove()
+	require.Nil(t, err)
 }

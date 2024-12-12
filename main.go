@@ -7,7 +7,7 @@ import (
 
 func main() {
 	/* "http://test19web1.test-edv.net/at.gv.bgld.kulturgutschein-import-test.nsf/", "adsfas" */
-	session, err := notessession.New()
+	session, err := notessession.Initialize()
 
 	if err != nil {
 		fmt.Println(err)

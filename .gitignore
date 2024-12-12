@@ -1,1 +1,5 @@
 main.exe
+__pycache__
+tools/sites
+tools/generated
+loaded-test.md

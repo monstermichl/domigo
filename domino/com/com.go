@@ -52,7 +52,68 @@ func CreateObject(id string) (Com, error) {
 
 /* TODO: Find out if there's a better way... */
 func GetObjectArrayProperty[T any](c Com, modifyFn ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
-	dispatchPtrs, err := c.GetObjectArrayProperty(name, params...)
+	return objectArrayActionInternal(c.GetObjectArrayProperty, modifyFn, name, params...)
+}
+
+func CallObjectArrayMethod[T any](c Com, modifyFn ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
+	return objectArrayActionInternal(c.CallObjectArrayMethod, modifyFn, name, params...)
+}
+
+func (c Com) Dispatch() *ole.IDispatch {
+	return c.dispatchPtr
+}
+
+func (c Com) Release() {
+	err := c.checkPreconditions()
+
+	if err == nil {
+		c.dispatchPtr.Release()
+	}
+}
+
+func (c Com) CallMethod(name string, params ...interface{}) (interface{}, error) {
+	return c.valueActionInternal(c.callMethodInternal, name, params...)
+}
+
+func (c Com) CallObjectMethod(name string, params ...interface{}) (*ole.IDispatch, error) {
+	return c.objectActionInternal(c.callMethodInternal, name, params...)
+}
+
+func (c Com) CallArrayMethod(name string, params ...interface{}) ([]interface{}, error) {
+	return c.arrayActionInternal(c.callMethodInternal, name, params...)
+}
+
+func (c Com) CallObjectArrayMethod(name string, params ...interface{}) ([]*ole.IDispatch, error) {
+	return c.objectArrayActionInternal(c.CallArrayMethod, name, params...)
+}
+
+func (c Com) GetProperty(name string, params ...interface{}) (interface{}, error) {
+	return c.valueActionInternal(c.getPropertyInternal, name, params...)
+}
+
+func (c Com) GetObjectProperty(name string, params ...interface{}) (*ole.IDispatch, error) {
+	return c.objectActionInternal(c.getPropertyInternal, name, params...)
+}
+
+func (c Com) GetArrayProperty(name string, params ...interface{}) ([]interface{}, error) {
+	return c.arrayActionInternal(c.getPropertyInternal, name, params...)
+}
+
+func (c Com) GetObjectArrayProperty(name string, params ...interface{}) ([]*ole.IDispatch, error) {
+	return c.objectArrayActionInternal(c.GetArrayProperty, name, params...)
+}
+
+func (c Com) PutProperty(name string, params ...interface{}) error {
+	_, err := c.actionInternal(oleutil.PutProperty, name, params...)
+
+	if err != nil {
+		err = fmt.Errorf("property '%s' could not be set", name)
+	}
+	return err
+}
+
+func objectArrayActionInternal[T any](fn func(string, ...interface{}) ([]*ole.IDispatch, error), modifyFn ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
+	dispatchPtrs, err := fn(name, params...)
 
 	if err != nil {
 		return []T{}, err
@@ -65,16 +126,22 @@ func GetObjectArrayProperty[T any](c Com, modifyFn ModifyFunc[T], name string, p
 	return objects, err
 }
 
-func (c Com) Release() {
+func (c Com) actionInternal(fn func(*ole.IDispatch, string, ...interface{}) (*ole.VARIANT, error), name string, params ...interface{}) (*ole.VARIANT, error) {
 	err := c.checkPreconditions()
 
-	if err == nil {
-		c.dispatchPtr.Release()
+	if err != nil {
+		return nil, err
 	}
+	variantPtr, err := fn(c.dispatchPtr, name, params...)
+
+	if err != nil {
+		return nil, errors.New("COM command execution failed")
+	}
+	return variantPtr, err
 }
 
-func (c Com) CallMethod(name string, params ...interface{}) (interface{}, error) {
-	variantPtr, err := c.CallMethodInternal(name, params...)
+func (c Com) valueActionInternal(fn func(string, ...interface{}) (*ole.VARIANT, error), name string, params ...interface{}) (interface{}, error) {
+	variantPtr, err := fn(name, params...)
 
 	if err != nil {
 		return nil, err
@@ -82,8 +149,8 @@ func (c Com) CallMethod(name string, params ...interface{}) (interface{}, error)
 	return variantPtr.Value(), err
 }
 
-func (c Com) CallObjectMethod(name string, params ...interface{}) (*ole.IDispatch, error) {
-	variantPtr, err := c.CallMethodInternal(name, params...)
+func (c Com) objectActionInternal(fn func(string, ...interface{}) (*ole.VARIANT, error), name string, params ...interface{}) (*ole.IDispatch, error) {
+	variantPtr, err := fn(name, params...)
 
 	if err != nil {
 		return nil, err
@@ -91,87 +158,35 @@ func (c Com) CallObjectMethod(name string, params ...interface{}) (*ole.IDispatc
 	return variantPtr.ToIDispatch(), err
 }
 
-func (c Com) GetProperty(name string, params ...interface{}) (interface{}, error) {
-	err := c.checkPreconditions()
-
-	if err != nil {
-		return nil, err
-	}
-	variantPtr, err := oleutil.GetProperty(c.dispatchPtr, name, params...)
-
-	if err != nil {
-		return nil, fmt.Errorf("property '%s' could not be retrieved", name)
-	}
-	return variantPtr.Value(), err
-}
-
-func (c Com) GetObjectProperty(name string, params ...interface{}) (*ole.IDispatch, error) {
-	variantPtr, err := c.getPropertyInternal(name, params...)
-
-	if err != nil {
-		return nil, err
-	}
-	return variantPtr.ToIDispatch(), err
-}
-
-func (c Com) GetArrayProperty(name string, params ...interface{}) ([]interface{}, error) {
-	variantPtr, err := c.getPropertyInternal(name, params...)
+func (c Com) arrayActionInternal(fn func(name string, params ...interface{}) (*ole.VARIANT, error), name string, params ...interface{}) ([]interface{}, error) {
+	variantPtr, err := fn(name, params...)
 
 	if err != nil {
 		return []any{}, err
 	}
 
 	if variantPtr.ToIDispatch() != nil {
-		return []any{}, fmt.Errorf("property '%s' is not an array property", name)
+		return []any{}, fmt.Errorf("returned value for '%s' is not an array", name)
 	}
-	return variantPtr.ToArray().ToValueArray(), err
+	safeArray := variantPtr.ToArray()
+
+	if safeArray == nil {
+		return []any{}, err
+	}
+	return safeArray.ToValueArray(), err
 }
 
-func (c Com) GetObjectArrayProperty(name string, params ...interface{}) ([]*ole.IDispatch, error) {
-	array, err := c.GetArrayProperty(name, params...)
+func (c Com) objectArrayActionInternal(fn func(name string, params ...interface{}) ([]interface{}, error), name string, params ...interface{}) ([]*ole.IDispatch, error) {
+	array, err := fn(name, params...)
 	return helpers.CastSlice[*ole.IDispatch](array), err
 }
 
-func (c Com) PutProperty(name string, params ...interface{}) error {
-	err := c.checkPreconditions()
-
-	if err != nil {
-		return err
-	}
-	_, err = c.dispatchPtr.PutProperty(name, params...)
-
-	if err != nil {
-		err = fmt.Errorf("property '%s' could not be set", name)
-	}
-	return err
-}
-
-func (c Com) CallMethodInternal(name string, params ...interface{}) (*ole.VARIANT, error) {
-	err := c.checkPreconditions()
-
-	if err != nil {
-		return nil, err
-	}
-	variantPtr, err := oleutil.CallMethod(c.dispatchPtr, name, params...)
-
-	if err != nil {
-		return nil, fmt.Errorf("method '%s' could not be called", name)
-	}
-	return variantPtr, err
-}
-
 func (c Com) getPropertyInternal(name string, params ...interface{}) (*ole.VARIANT, error) {
-	err := c.checkPreconditions()
+	return c.actionInternal(oleutil.GetProperty, name, params...)
+}
 
-	if err != nil {
-		return nil, err
-	}
-	variantPtr, err := oleutil.GetProperty(c.dispatchPtr, name, params...)
-
-	if err != nil {
-		return nil, fmt.Errorf("property '%s' could not be retrieved", name)
-	}
-	return variantPtr, err
+func (c Com) callMethodInternal(name string, params ...interface{}) (*ole.VARIANT, error) {
+	return c.actionInternal(oleutil.CallMethod, name, params...)
 }
 
 func (c Com) checkPreconditions() error {

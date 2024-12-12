@@ -1,3 +1,4 @@
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESFORM_CLASS.html */
 package notesform
 
 import (
@@ -16,98 +17,173 @@ func New(dispatchPtr *ole.IDispatch) NotesForm {
 }
 
 /* --------------------------------- Properties --------------------------------- */
-func (n NotesForm) Aliases() ([]string, error) {
-	vals, err := n.Com.GetArrayProperty("Aliases")
-	return helpers.CastSlice[string](vals), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIASES_PROPERTY_FORM.html */
+func (f NotesForm) Aliases() ([]domino.String, error) {
+	vals, err := f.Com().GetArrayProperty("Aliases")
+	return helpers.CastSlice[domino.String](vals), err
 }
 
-func (n NotesForm) Fields() ([]string, error) {
-	vals, err := n.Com.GetArrayProperty("Fields")
-	return helpers.CastSlice[string](vals), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FIELDS_PROPERTY.html */
+func (f NotesForm) Fields() ([]domino.String, error) {
+	vals, err := f.Com().GetArrayProperty("Fields")
+	return helpers.CastSlice[domino.String](vals), err
 }
 
-func (n NotesForm) FormUsers() ([]string, error) {
-	vals, err := n.Com.GetArrayProperty("FormUsers")
-	return helpers.CastSlice[string](vals), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMUSERS_PROPERTY.html */
+func (f NotesForm) FormUsers() ([]domino.String, error) {
+	vals, err := f.Com().GetArrayProperty("FormUsers")
+	return helpers.CastSlice[domino.String](vals), err
 }
 
-func (n NotesForm) SetFormUsers(users []string) error {
-	return n.Com.PutProperty("FormUsers", users)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMUSERS_PROPERTY.html */
+func (f NotesForm) SetFormUsers(v []domino.String) error {
+	return f.Com().PutProperty("FormUsers", v)
 }
 
-func (n NotesForm) HttpURL() (string, error) {
-	val, err := n.Com.GetProperty("HttpURL")
-	return helpers.CastValue[string](val), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_FORM_COM.html */
+func (f NotesForm) HttpURL() (domino.String, error) {
+	val, err := f.Com().GetProperty("HttpURL")
+	return helpers.CastValue[domino.String](val), err
 }
 
-func (n NotesForm) IsSubForm() (bool, error) {
-	val, err := n.Com.GetProperty("IsSubForm")
-	return helpers.CastValue[bool](val), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSUBFORM_PROPERTY.html */
+func (f NotesForm) IsSubForm() (domino.Boolean, error) {
+	val, err := f.Com().GetProperty("IsSubForm")
+	return helpers.CastValue[domino.Boolean](val), err
 }
 
-func (n NotesForm) LockHolders() ([]string, error) {
-	vals, err := n.Com.GetArrayProperty("LockHolders")
-	return helpers.CastSlice[string](vals), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKHOLDERS_PROPERTY_FORM.html */
+func (f NotesForm) LockHolders() ([]domino.String, error) {
+	vals, err := f.Com().GetArrayProperty("LockHolders")
+	return helpers.CastSlice[domino.String](vals), err
 }
 
-func (n NotesForm) Name() (string, error) {
-	val, err := n.Com.GetProperty("Name")
-	return helpers.CastValue[string](val), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_FORM.html */
+func (f NotesForm) Name() (domino.String, error) {
+	val, err := f.Com().GetProperty("Name")
+	return helpers.CastValue[domino.String](val), err
 }
 
-func (n NotesForm) NotesURL() (string, error) {
-	val, err := n.Com.GetProperty("NotesURL")
-	return helpers.CastValue[string](val), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESURL_PROPERTY_FORM_COM.html */
+func (f NotesForm) NotesURL() (domino.String, error) {
+	val, err := f.Com().GetProperty("NotesURL")
+	return helpers.CastValue[domino.String](val), err
 }
 
-func (n NotesForm) ProtectReaders() (bool, error) {
-	val, err := n.Com.GetProperty("ProtectReaders")
-	return helpers.CastValue[bool](val), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY.html */
+func (f NotesForm) ProtectReaders() (domino.Boolean, error) {
+	val, err := f.Com().GetProperty("ProtectReaders")
+	return helpers.CastValue[domino.Boolean](val), err
 }
 
-func (n NotesForm) SetProtectReaders(protect bool) error {
-	return n.Com.PutProperty("ProtectReaders", protect)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY.html */
+func (f NotesForm) SetProtectReaders(v domino.Boolean) error {
+	return f.Com().PutProperty("ProtectReaders", v)
 }
 
-func (n NotesForm) ProtectUsers() (bool, error) {
-	val, err := n.Com.GetProperty("ProtectUsers")
-	return helpers.CastValue[bool](val), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTUSERS_PROPERTY.html */
+func (f NotesForm) ProtectUsers() (domino.Boolean, error) {
+	val, err := f.Com().GetProperty("ProtectUsers")
+	return helpers.CastValue[domino.Boolean](val), err
 }
 
-func (n NotesForm) SetProtectUsers(protect bool) error {
-	return n.Com.PutProperty("ProtectUsers", protect)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTUSERS_PROPERTY.html */
+func (f NotesForm) SetProtectUsers(v domino.Boolean) error {
+	return f.Com().PutProperty("ProtectUsers", v)
 }
 
-func (n NotesForm) Readers() ([]string, error) {
-	vals, err := n.Com.GetArrayProperty("Readers")
-	return helpers.CastSlice[string](vals), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY.html */
+func (f NotesForm) Readers() ([]domino.String, error) {
+	vals, err := f.Com().GetArrayProperty("Readers")
+	return helpers.CastSlice[domino.String](vals), err
 }
 
-func (n NotesForm) SetReaders(readers []string) error {
-	return n.Com.PutProperty("Readers", readers)
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY.html */
+func (f NotesForm) SetReaders(v []domino.String) error {
+	return f.Com().PutProperty("Readers", v)
 }
 
 /* --------------------------------- Methods ------------------------------------ */
-func (n NotesForm) GetFieldType(name string) (int, error) {
-	val, err := n.Com.CallMethod("GetFieldType", name)
-	return helpers.CastValue[int](val), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIELDTYPE_METHOD_FORM.html */
+func (f NotesForm) GetFieldType(name domino.String) (domino.Long, error) {
+	val, err := f.Com().CallMethod("GetFieldType", name)
+	return helpers.CastValue[domino.Long](val), err
 }
 
-func (n NotesForm) Lock(names []string, provisional bool) (bool, error) {
-	val, err := n.Com.CallMethod("Lock", names, provisional)
-	return helpers.CastValue[bool](val), err
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCK_METHOD_FORM.html */
+type lockParams struct {
+	name          *[]domino.String
+	provisionalOK *domino.Boolean
 }
 
-func (n NotesForm) LockProvisional(names []string) (bool, error) {
-	return n.Lock(names, true)
+type lockParam func(*lockParams)
+
+func WithLockName(name []domino.String) lockParam {
+	return func(c *lockParams) {
+		c.name = &name
+	}
 }
 
-func (n NotesForm) Remove() error {
-	_, err := n.Com.CallMethod("Remove")
+func WithLockProvisionalOK(provisionalOK domino.Boolean) lockParam {
+	return func(c *lockParams) {
+		c.provisionalOK = &provisionalOK
+	}
+}
+
+func (f NotesForm) Lock(params ...lockParam) (domino.Boolean, error) {
+	paramsStruct := &lockParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.name != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
+		if paramsStruct.provisionalOK != nil {
+			paramsOrdered = append(paramsOrdered, *paramsStruct.provisionalOK)
+		}
+	}
+	val, err := f.Com().CallMethod("Lock", paramsOrdered...)
+	return helpers.CastValue[domino.Boolean](val), err
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKPROVISIONAL_METHOD_FORM.html */
+type lockProvisionalParams struct {
+	name *[]domino.String
+}
+
+type lockProvisionalParam func(*lockProvisionalParams)
+
+func WithLockProvisionalName(name []domino.String) lockProvisionalParam {
+	return func(c *lockProvisionalParams) {
+		c.name = &name
+	}
+}
+
+func (f NotesForm) LockProvisional(params ...lockProvisionalParam) (domino.Boolean, error) {
+	paramsStruct := &lockProvisionalParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.name != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
+	}
+	val, err := f.Com().CallMethod("LockProvisional", paramsOrdered...)
+	return helpers.CastValue[domino.Boolean](val), err
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_FORM.html */
+func (f NotesForm) Remove() error {
+	_, err := f.Com().CallMethod("Remove")
 	return err
 }
 
-func (n NotesForm) UnLock() error {
-	_, err := n.Com.CallMethod("UnLock")
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_FORM.html */
+func (f NotesForm) UnLock() error {
+	_, err := f.Com().CallMethod("UnLock")
 	return err
 }

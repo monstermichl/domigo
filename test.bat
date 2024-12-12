@@ -1,2 +1,6 @@
+rem Make sure module is built for 32 bit architecture as Domino COM is only
+rem available as 32 bit...
+set GOARCH=386
+
 rem Run tests recursively (https://stackoverflow.com/a/28240537).
 go test -v ./test/...

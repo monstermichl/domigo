@@ -7,17 +7,17 @@ import (
 )
 
 type NotesStruct struct {
-	Com com.Com
+	com com.Com
 }
 
 func NewNotesStruct(dispatchPtr *ole.IDispatch) NotesStruct {
-	return NotesStruct{
-		Com: com.New(dispatchPtr),
-	}
+	return NotesStruct{com.New(dispatchPtr)}
 }
 
-/* --------------------------------- Properties --------------------------------- */
-func (s NotesStruct) Parent() (interface{}, error) {
-	val, err := s.Com.GetProperty("Parent")
-	return val, err
+func (s NotesStruct) Com() com.Com {
+	return s.com
+}
+
+func (s NotesStruct) Release() {
+	s.Com().Release()
 }
