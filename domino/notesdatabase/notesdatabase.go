@@ -138,6 +138,69 @@ func NotesViewParent(v notesview.NotesView) (NotesDatabase, error) {
 	return New(dispatchPtr), err
 }
 
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXECUTETOVIEW_METHOD.html */
+/* Moved from NotesQueryResultsProcessor. */
+type executeToViewParams struct {
+	expireHours       *domino.Long
+	readers           *[]domino.String
+	designSrcDB       *NotesDatabase
+	designSrcViewName *domino.String
+}
+
+type executeToViewParam func(*executeToViewParams)
+
+func WithExecuteToViewExpireHours(expireHours domino.Long) executeToViewParam {
+	return func(c *executeToViewParams) {
+		c.expireHours = &expireHours
+	}
+}
+
+func WithExecuteToViewReaders(readers []domino.String) executeToViewParam {
+	return func(c *executeToViewParams) {
+		c.readers = &readers
+	}
+}
+
+func WithExecuteToViewDesignSrcDB(designSrcDB NotesDatabase) executeToViewParam {
+	return func(c *executeToViewParams) {
+		c.designSrcDB = &designSrcDB
+	}
+}
+
+func WithExecuteToViewDesignSrcViewName(designSrcViewName domino.String) executeToViewParam {
+	return func(c *executeToViewParams) {
+		c.designSrcViewName = &designSrcViewName
+	}
+}
+
+func NotesQueryResultsProcessorExecuteToView(q notesqueryresultsprocessor.NotesQueryResultsProcessor, name domino.String, params ...executeToViewParam) error {
+	paramsStruct := &executeToViewParams{}
+	paramsOrdered := []interface{}{name}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.expireHours != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.expireHours)
+
+		if paramsStruct.readers != nil {
+			paramsOrdered = append(paramsOrdered, *paramsStruct.readers)
+		} else {
+			paramsOrdered = append(paramsOrdered, nil) /* According to the examples in the documentation, it's allowed to pass null/nil. */
+		}
+
+		if paramsStruct.designSrcDB != nil {
+			paramsOrdered = append(paramsOrdered, *paramsStruct.designSrcDB)
+			if paramsStruct.designSrcViewName != nil {
+				paramsOrdered = append(paramsOrdered, *paramsStruct.designSrcViewName)
+			}
+		}
+	}
+	_, err := q.Com().CallMethod("ExecuteToView", paramsOrdered...)
+	return err
+}
+
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ACL_PROPERTY.html */
 func (d NotesDatabase) ACL() (notesacl.NotesACL, error) {
@@ -1284,6 +1347,12 @@ func (d NotesDatabase) GetProfileDocument(profilename domino.String, params ...g
 	}
 	dispatchPtr, err := d.Com().CallObjectMethod("GetProfileDocument", paramsOrdered...)
 	return notesdocument.New(dispatchPtr), err
+}
+
+/* https://help.hcl-software.com/dom_designer/12.0.0/basic/H_GETQUERYRESULTSPROCESSOR_DB_JAVA.html */
+func (d NotesDatabase) CreateQueryResultsProcessor() (notesqueryresultsprocessor.NotesQueryResultsProcessor, error) {
+	dispatchPtr, err := d.Com().CallObjectMethod("CreateQueryResultsProcessor")
+	return notesqueryresultsprocessor.New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETQUERYRESULTSPROCESSOR_METHOD.html */

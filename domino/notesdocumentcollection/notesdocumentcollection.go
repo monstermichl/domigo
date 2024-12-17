@@ -25,6 +25,13 @@ func NotesDocumentResponses(d notesdocument.NotesDocument) (NotesDocumentCollect
 	return New(dispatchPtr), err
 }
 
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ATTACHVCARD_METHOD.html */
+/* Moved from NotesDocument. */
+func NotesDocumentAttachVCard(d notesdocument.NotesDocument, clientADTObject NotesDocumentCollection) error {
+	_, err := d.Com().CallMethod("AttachVCard", clientADTObject)
+	return err
+}
+
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COUNT_PROPERTY.html */
 func (d NotesDocumentCollection) Count() (domino.Long, error) {

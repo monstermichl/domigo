@@ -2,4 +2,5 @@ main.exe
 __pycache__
 tools/sites
 tools/generated
+tools/sites.json
 loaded-test.md

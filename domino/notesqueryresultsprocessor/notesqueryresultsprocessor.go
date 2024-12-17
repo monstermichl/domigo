@@ -1,3 +1,4 @@
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESQUERYRESULTSPROCESSOR_CLASS.html */
 package notesqueryresultsprocessor
 
 import (
@@ -17,7 +18,6 @@ func New(dispatchPtr *ole.IDispatch) NotesQueryResultsProcessor {
 }
 
 /* --------------------------------- Properties --------------------------------- */
-/* TODO: Access type for MaxEntries could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXENTRIES_PROPERTY.html */
 func (q NotesQueryResultsProcessor) MaxEntries() (domino.Long, error) {
 	val, err := q.Com().GetProperty("MaxEntries")
@@ -29,7 +29,6 @@ func (q NotesQueryResultsProcessor) SetMaxEntries(v domino.Long) error {
 	return q.Com().PutProperty("MaxEntries", v)
 }
 
-/* TODO: Access type for TimeOutSec could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEOUTSECQRP_PROPERTY.html */
 func (q NotesQueryResultsProcessor) TimeOutSec() (domino.Integer, error) {
 	val, err := q.Com().GetProperty("TimeOutSec")
@@ -49,21 +48,82 @@ func (q NotesQueryResultsProcessor) AddCollection(Collection domino.Variant, Ref
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDCOLUMN_METHOD.html */
-/* TODO: Some parameters are optional. Make sure to handle them correctly. */
-func (q NotesQueryResultsProcessor) AddColumn(name domino.String, title domino.String, formula domino.String, sortOrder domino.Integer, hidden domino.Boolean, categorized domino.Boolean) error {
-	_, err := q.Com().CallMethod("AddColumn", name, title, formula, sortOrder, hidden, categorized)
+type addColumnParams struct {
+	title       *domino.String
+	formula     *domino.String
+	sortOrder   *domino.Integer
+	hidden      *domino.Boolean
+	categorized *[]domino.Boolean
+}
+
+type addColumnParam func(*addColumnParams)
+
+func WithAddColumnTitle(title domino.String) addColumnParam {
+	return func(c *addColumnParams) {
+		c.title = &title
+	}
+}
+
+func WithAddColumnFormula(formula domino.String) addColumnParam {
+	return func(c *addColumnParams) {
+		c.formula = &formula
+	}
+}
+
+func WithAddColumnSortOrder(sortOrder domino.Integer) addColumnParam {
+	return func(c *addColumnParams) {
+		c.sortOrder = &sortOrder
+	}
+}
+
+func WithAddColumnHidden(hidden domino.Boolean) addColumnParam {
+	return func(c *addColumnParams) {
+		c.hidden = &hidden
+	}
+}
+
+func WithAddColumnCategorized(categorized []domino.Boolean) addColumnParam {
+	return func(c *addColumnParams) {
+		c.categorized = &categorized
+	}
+}
+
+func (q NotesQueryResultsProcessor) AddColumn(name domino.String, params ...addColumnParam) error {
+	paramsStruct := &addColumnParams{}
+	paramsOrdered := []interface{}{name}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.title != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.title)
+		if paramsStruct.formula != nil {
+			paramsOrdered = append(paramsOrdered, *paramsStruct.formula)
+			if paramsStruct.sortOrder != nil {
+				paramsOrdered = append(paramsOrdered, *paramsStruct.sortOrder)
+				if paramsStruct.hidden != nil {
+					paramsOrdered = append(paramsOrdered, *paramsStruct.hidden)
+					if paramsStruct.categorized != nil {
+						paramsOrdered = append(paramsOrdered, *paramsStruct.categorized)
+					}
+				}
+			}
+		}
+	}
+	_, err := q.Com().CallMethod("AddColumn", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDDOMINOQUERY_METHOD.html */
-func (q NotesQueryResultsProcessor) AddDominoQuery(query notesdominoquery.NotesDominoQuery, QueryString domino.String, ReferenceName domino.String) error {
-	_, err := q.Com().CallMethod("AddDominoQuery", query.Com().Dispatch(), QueryString, ReferenceName)
+func (q NotesQueryResultsProcessor) AddDominoQuery(query notesdominoquery.NotesDominoQuery, queryString domino.String, referenceName domino.String) error {
+	_, err := q.Com().CallMethod("AddDominoQuery", query.Com().Dispatch(), queryString, referenceName)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDFORMULA_METHOD.html */
-func (q NotesQueryResultsProcessor) AddFormula(Formula domino.String, ColumnName domino.String, ReferenceName domino.String) error {
-	_, err := q.Com().CallMethod("AddFormula", Formula, ColumnName, ReferenceName)
+func (q NotesQueryResultsProcessor) AddFormula(formula domino.String, columnName domino.String, referenceName domino.String) error {
+	_, err := q.Com().CallMethod("AddFormula", formula, columnName, referenceName)
 	return err
 }
 
@@ -71,10 +131,4 @@ func (q NotesQueryResultsProcessor) AddFormula(Formula domino.String, ColumnName
 func (q NotesQueryResultsProcessor) ExecuteToJSON() (domino.String, error) {
 	val, err := q.Com().CallMethod("ExecuteToJSON")
 	return helpers.CastValue[domino.String](val), err
-}
-
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXECUTETOVIEW_METHOD.html */
-func (q NotesQueryResultsProcessor) ExecuteToView() error {
-	_, err := q.Com().CallMethod("ExecuteToView")
-	return err
 }

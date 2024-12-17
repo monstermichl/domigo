@@ -30,19 +30,12 @@ func (r NotesReplication) SetAbstract(v domino.Boolean) error {
 	return r.Com().PutProperty("Abstract", v)
 }
 
-/* TODO: Access type for CutoffDate could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFDATE_PROPERTY_296.html */
 func (r NotesReplication) CutoffDate() (domino.Time, error) {
 	val, err := r.Com().GetProperty("CutoffDate")
 	return helpers.CastValue[domino.Time](val), err
 }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFDATE_PROPERTY_296.html */
-func (r NotesReplication) SetCutoffDate(v domino.Time) error {
-	return r.Com().PutProperty("CutoffDate", v)
-}
-
-/* TODO: Access type for CutoffDelete could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFDELETE_PROPERTY_8613.html */
 func (r NotesReplication) CutoffDelete() (domino.Boolean, error) {
 	val, err := r.Com().GetProperty("CutoffDelete")
@@ -54,7 +47,6 @@ func (r NotesReplication) SetCutoffDelete(v domino.Boolean) error {
 	return r.Com().PutProperty("CutoffDelete", v)
 }
 
-/* TODO: Access type for CutoffInterval could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFINTERVAL_PROPERTY_6968.html */
 func (r NotesReplication) CutoffInterval() (domino.Long, error) {
 	val, err := r.Com().GetProperty("CutoffInterval")
@@ -129,10 +121,30 @@ func (r NotesReplication) ClearHistory() error {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD_REP.html */
-func (r NotesReplication) GetEntry(source domino.String, destination domino.String, createflag domino.Boolean) (notesreplicationentry.NotesReplicationEntry, error) {
-	params := helpers.OptionalParams(source, destination, createflag)
+type getEntryParams struct {
+	createflag *domino.Boolean
+}
 
-	dispatchPtr, err := r.Com().CallObjectMethod("GetEntry", params...)
+type getEntryParam func(*getEntryParams)
+
+func WithGetEntryCreateflag(createflag domino.Boolean) getEntryParam {
+	return func(c *getEntryParams) {
+		c.createflag = &createflag
+	}
+}
+
+func (r NotesReplication) GetEntry(source domino.String, destination domino.String, params ...getEntryParam) (notesreplicationentry.NotesReplicationEntry, error) {
+	paramsStruct := &getEntryParams{}
+	paramsOrdered := []interface{}{source, destination}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.createflag != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.createflag)
+	}
+	dispatchPtr, err := r.Com().CallObjectMethod("GetEntry", paramsOrdered...)
 	return notesreplicationentry.New(dispatchPtr), err
 }
 

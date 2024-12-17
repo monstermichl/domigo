@@ -319,7 +319,6 @@ func (d NotesDocument) AppendItemValue(itemName domino.String, value any) (notes
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ATTACHVCARD_METHOD.html */
-/* TODO: Handle other parameter types too. */
 func (d NotesDocument) AttachVCard(clientADTObject NotesDocument) error {
 	_, err := d.Com().CallMethod("AttachVCard", clientADTObject)
 	return err

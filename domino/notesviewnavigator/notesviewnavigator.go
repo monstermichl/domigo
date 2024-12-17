@@ -1,10 +1,10 @@
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESVIEWNAVIGATOR_CLASS.html */
 package notesviewnavigator
 
 import (
 	"domigo/domino"
 	"domigo/domino/notesview"
 	"domigo/domino/notesviewentry"
-
 	"domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
@@ -20,53 +20,204 @@ func New(dispatchPtr *ole.IDispatch) NotesViewNavigator {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAV_METHOD_1631.html */
 /* Moved from NotesView. */
-func NotesViewCreateViewNav(v notesview.NotesView, cacheSize domino.Long) (NotesViewNavigator, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNav", cacheSize)
+type createViewNavParams struct {
+	cacheSize *domino.Long
+}
+
+type createViewNavParam func(*createViewNavParams)
+
+func WithCreateViewNavCacheSize(cacheSize domino.Long) createViewNavParam {
+	return func(c *createViewNavParams) {
+		c.cacheSize = &cacheSize
+	}
+}
+
+func NotesViewCreateViewNav(v notesview.NotesView, params ...createViewNavParam) (NotesViewNavigator, error) {
+	paramsStruct := &createViewNavParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.cacheSize != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNav", paramsOrdered...)
 	return New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROM_METHOD_5742.html */
 /* Moved from NotesView. */
-/* TODO: Handle Variant types. */
-func NotesViewCreateViewNavFrom(v notesview.NotesView, navigatorObject domino.Variant, cacheSize domino.Long) (NotesViewNavigator, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFrom", navigatorObject, cacheSize)
+type createViewNavFromParams struct {
+	cacheSize *domino.Long
+}
+
+type createViewNavFromParam func(*createViewNavFromParams)
+
+func WithCreateViewNavFromCacheSize(cacheSize domino.Long) createViewNavFromParam {
+	return func(c *createViewNavFromParams) {
+		c.cacheSize = &cacheSize
+	}
+}
+
+func NotesViewCreateViewNavFrom(v notesview.NotesView, navigatorObject domino.NotesConnector, params ...createViewNavFromParam) (NotesViewNavigator, error) {
+	paramsStruct := &createViewNavFromParams{}
+	paramsOrdered := []interface{}{navigatorObject.Com().Dispatch()}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.cacheSize != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFrom", paramsOrdered...)
 	return New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROMALLUNREAD.html */
 /* Moved from NotesView. */
-func NotesViewCreateViewNavFromAllUnread(v notesview.NotesView, username domino.String) (NotesViewNavigator, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFromAllUnread", username)
+type createViewNavFromAllUnreadParams struct {
+	username *domino.String
+}
+
+type createViewNavFromAllUnreadParam func(*createViewNavFromAllUnreadParams)
+
+func WithCreateViewNavFromAllUnreadUsername(username domino.String) createViewNavFromAllUnreadParam {
+	return func(c *createViewNavFromAllUnreadParams) {
+		c.username = &username
+	}
+}
+
+func NotesViewCreateViewNavFromAllUnread(v notesview.NotesView, params ...createViewNavFromAllUnreadParam) (NotesViewNavigator, error) {
+	paramsStruct := &createViewNavFromAllUnreadParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.username != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFromAllUnread", paramsOrdered...)
 	return New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROMCATEGORY_METHOD_3595.html */
 /* Moved from NotesView. */
-func NotesViewCreateViewNavFromCategory(v notesview.NotesView, category domino.String, cacheSize domino.Long) (NotesViewNavigator, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFromCategory", category, cacheSize)
+type createViewNavFromCategoryParams struct {
+	cacheSize *domino.Long
+}
+
+type createViewNavFromCategoryParam func(*createViewNavFromCategoryParams)
+
+func WithCreateViewNavFromCategoryCacheSize(cacheSize domino.Long) createViewNavFromCategoryParam {
+	return func(c *createViewNavFromCategoryParams) {
+		c.cacheSize = &cacheSize
+	}
+}
+
+func NotesViewCreateViewNavFromCategory(v notesview.NotesView, category domino.String, params ...createViewNavFromCategoryParam) (NotesViewNavigator, error) {
+	paramsStruct := &createViewNavFromCategoryParams{}
+	paramsOrdered := []interface{}{category}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.cacheSize != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFromCategory", paramsOrdered...)
 	return New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROMCHILDREN_METHOD_9100.html */
 /* Moved from NotesView. */
-/* TODO: Handle Variant types. */
-func NotesViewCreateViewNavFromChildren(v notesview.NotesView, navigatorObject domino.Variant, cacheSize domino.Long) (NotesViewNavigator, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFromChildren", navigatorObject, cacheSize)
+type createViewNavFromChildrenParams struct {
+	cacheSize *domino.Long
+}
+
+type createViewNavFromChildrenParam func(*createViewNavFromChildrenParams)
+
+func WithCreateViewNavFromChildrenCacheSize(cacheSize domino.Long) createViewNavFromChildrenParam {
+	return func(c *createViewNavFromChildrenParams) {
+		c.cacheSize = &cacheSize
+	}
+}
+
+func NotesViewCreateViewNavFromChildren(v notesview.NotesView, navigatorObject domino.NotesConnector, params ...createViewNavFromChildrenParam) (NotesViewNavigator, error) {
+	paramsStruct := &createViewNavFromChildrenParams{}
+	paramsOrdered := []interface{}{navigatorObject.Com().Dispatch()}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.cacheSize != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFromChildren", paramsOrdered...)
 	return New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROMDESCENDANTS_METHOD_2893.html */
 /* Moved from NotesView. */
-/* TODO: Handle Variant types. */
-func NotesViewCreateViewNavFromDescendants(v notesview.NotesView, navigatorObject domino.Variant, cacheSize domino.Long) (NotesViewNavigator, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFromDescendants", navigatorObject, cacheSize)
+type createViewNavFromDescendantsParams struct {
+	cacheSize *domino.Long
+}
+
+type createViewNavFromDescendantsParam func(*createViewNavFromDescendantsParams)
+
+func WithCreateViewNavFromDescendantsCacheSize(cacheSize domino.Long) createViewNavFromDescendantsParam {
+	return func(c *createViewNavFromDescendantsParams) {
+		c.cacheSize = &cacheSize
+	}
+}
+
+func NotesViewCreateViewNavFromDescendants(v notesview.NotesView, navigatorObject domino.NotesConnector, params ...createViewNavFromDescendantsParam) (NotesViewNavigator, error) {
+	paramsStruct := &createViewNavFromDescendantsParams{}
+	paramsOrdered := []interface{}{navigatorObject.Com().Dispatch()}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.cacheSize != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavFromDescendants", paramsOrdered...)
 	return New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVMAXLEVEL_METHOD_NOTESVIEW_CLASS.html */
 /* Moved from NotesView. */
-func NotesViewCreateViewNavMaxLevel(v notesview.NotesView, level domino.Long, cacheSize domino.Long) (NotesViewNavigator, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavMaxLevel", level, cacheSize)
+type createViewNavMaxLevelParams struct {
+	cacheSize *domino.Long
+}
+
+type createViewNavMaxLevelParam func(*createViewNavMaxLevelParams)
+
+func WithCreateViewNavMaxLevelCacheSize(cacheSize domino.Long) createViewNavMaxLevelParam {
+	return func(c *createViewNavMaxLevelParams) {
+		c.cacheSize = &cacheSize
+	}
+}
+
+func NotesViewCreateViewNavMaxLevel(v notesview.NotesView, level domino.Long, params ...createViewNavMaxLevelParam) (NotesViewNavigator, error) {
+	paramsStruct := &createViewNavMaxLevelParams{}
+	paramsOrdered := []interface{}{level}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.cacheSize != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CreateViewNavMaxLevel", paramsOrdered...)
 	return New(dispatchPtr), err
 }
 
@@ -119,8 +270,8 @@ func (v NotesViewNavigator) GetCurrent() (notesviewentry.NotesViewEntry, error) 
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD_VIEWNAV.html */
-func (v NotesViewNavigator) GetEntry(entry domino.Variant) (notesviewentry.NotesViewEntry, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetEntry", entry)
+func (v NotesViewNavigator) GetEntry(entry domino.NotesConnector) (notesviewentry.NotesViewEntry, error) {
+	dispatchPtr, err := v.Com().CallObjectMethod("GetEntry", entry.Com().Dispatch())
 	return notesviewentry.New(dispatchPtr), err
 }
 
@@ -221,11 +372,10 @@ func (v NotesViewNavigator) GotoChild(entry notesviewentry.NotesViewEntry) error
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOENTRY_METHOD_VIEWNAV.html */
-/* TODO: Find out what to pass to the function. */
-// func (v NotesViewNavigator) GotoEntry(objUnknown domino.Object) error {
-// 	_, err := v.Com().CallMethod("GotoEntry", objUnknown)
-// 	return err
-// }
+func (v NotesViewNavigator) GotoEntry(objUnknown domino.NotesConnector) error {
+	_, err := v.Com().CallMethod("GotoEntry", objUnknown.Com().Dispatch())
+	return err
+}
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOFIRST_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoFirst() error {
@@ -312,15 +462,57 @@ func (v NotesViewNavigator) GotoPrevSibling(entry notesviewentry.NotesViewEntry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MARKALLREAD_VIEWNAV.html */
-/* TODO: Some parameters are optional. Make sure to handle them correctly. */
-func (v NotesViewNavigator) MarkAllRead(username domino.String) error {
-	_, err := v.Com().CallMethod("MarkAllRead", username)
+type markAllReadParams struct {
+	username *domino.String
+}
+
+type markAllReadParam func(*markAllReadParams)
+
+func WithMarkAllReadUsername(username domino.String) markAllReadParam {
+	return func(c *markAllReadParams) {
+		c.username = &username
+	}
+}
+
+func (v NotesViewNavigator) MarkAllRead(params ...markAllReadParam) error {
+	paramsStruct := &markAllReadParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.username != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
+	}
+	_, err := v.Com().CallMethod("MarkAllRead", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MARKALLUNREAD_VIEWNAV.html */
-/* TODO: Some parameters are optional. Make sure to handle them correctly. */
-func (v NotesViewNavigator) MarkAllUnread(username domino.String) error {
-	_, err := v.Com().CallMethod("MarkAllUnread", username)
+type markAllUnreadParams struct {
+	username *domino.String
+}
+
+type markAllUnreadParam func(*markAllUnreadParams)
+
+func WithMarkAllUnreadUsername(username domino.String) markAllUnreadParam {
+	return func(c *markAllUnreadParams) {
+		c.username = &username
+	}
+}
+
+func (v NotesViewNavigator) MarkAllUnread(params ...markAllUnreadParam) error {
+	paramsStruct := &markAllUnreadParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.username != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
+	}
+	_, err := v.Com().CallMethod("MarkAllUnread", paramsOrdered...)
 	return err
 }

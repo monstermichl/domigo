@@ -143,7 +143,6 @@ func (o NotesOutlineEntry) SetKeepSelectionFocus(v domino.Boolean) error {
 	return o.Com().PutProperty("KeepSelectionFocus", v)
 }
 
-/* TODO: Access type for Label could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LABEL_PROPERTY_OUTLINEENTRY.html */
 func (o NotesOutlineEntry) Label() (domino.String, error) {
 	val, err := o.Com().GetProperty("Label")

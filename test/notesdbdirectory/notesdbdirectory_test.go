@@ -26,7 +26,7 @@ func TestMain(m *testing.M) {
 	}()
 
 	if err != nil {
-		info = "Session could no be initialized"
+		info = "Session could not be initialized"
 		return
 	}
 
@@ -34,7 +34,7 @@ func TestMain(m *testing.M) {
 	defer dbdirectory.Release()
 
 	if err != nil {
-		info = "NotesDbDirectory could no be created"
+		info = "NotesDbDirectory could not be created"
 		return
 	}
 

@@ -26,7 +26,7 @@ func TestMain(m *testing.M) {
 	}()
 
 	if err != nil {
-		info = "Session could no be initialized"
+		info = "Session could not be initialized"
 		return
 	}
 
@@ -35,7 +35,7 @@ func TestMain(m *testing.M) {
 	defer db.Remove()
 
 	if err != nil {
-		info = "Database could no be created"
+		info = "Database could not be created"
 		return
 	}
 	err = db.SetIsDesignLockingEnabled(true)
@@ -47,7 +47,7 @@ func TestMain(m *testing.M) {
 	agents, _ := db.Agents()
 
 	if err != nil {
-		info = "Agents could no be retrieved"
+		info = "Agents could not be retrieved"
 		return
 	}
 
@@ -231,12 +231,6 @@ func TestLockProvisional(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_AGENT.html */
-func TestRemove(t *testing.T) {
-	err := agent.Remove()
-	require.Nil(t, err)
-}
-
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RUN_METHOD_6415.html */
 func TestRun(t *testing.T) {
 	_, err := agent.Run()
@@ -258,5 +252,11 @@ func TestSave(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_AGENT.html */
 func TestUnLock(t *testing.T) {
 	err := agent.UnLock()
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_AGENT.html */
+func TestRemove(t *testing.T) {
+	err := agent.Remove()
 	require.Nil(t, err)
 }

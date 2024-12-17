@@ -278,16 +278,10 @@ func (s NotesSession) DocumentContext() (notesdocument.NotesDocument, error) {
 	return notesdocument.New(dispatchPtr), err
 }
 
-/* TODO: Access type for EffectiveUserName could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EFFECTIVEUSERNAME_PROPERTY.html */
 func (s NotesSession) EffectiveUserName() (domino.String, error) {
 	val, err := s.Com().GetProperty("EffectiveUserName")
 	return helpers.CastValue[domino.String](val), err
-}
-
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EFFECTIVEUSERNAME_PROPERTY.html */
-func (s NotesSession) SetEffectiveUserName(v domino.String) error {
-	return s.Com().PutProperty("EffectiveUserName", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_SESSION_COM.html */

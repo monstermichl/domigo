@@ -1,3 +1,4 @@
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESVIEW_CLASS.html */
 package notesview
 
 import (
@@ -73,16 +74,21 @@ func NotesViewEntryParent(v notesviewentry.NotesViewEntry) (NotesView, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_9184.html */
 /* Moved from NotesViewEntryCollection. */
-func  NotesViewEntryCollectionParent(v notesviewentrycollection.NotesViewEntryCollection) (NotesView, error) {
+func NotesViewEntryCollectionParent(v notesviewentrycollection.NotesViewEntryCollection) (NotesView, error) {
 	dispatchPtr, err := v.Com().GetObjectProperty("Parent")
 	return New(dispatchPtr), err
 }
 
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIASES_PROPERTY_VIEW.html */
-func (v NotesView) Aliases() (domino.String, error) {
-	val, err := v.Com().GetProperty("Aliases")
-	return helpers.CastValue[domino.String](val), err
+func (v NotesView) Aliases() ([]domino.String, error) {
+	vals, err := v.Com().GetArrayProperty("Aliases")
+	return helpers.CastSlice[domino.String](vals), err
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIASES_PROPERTY_VIEW.html */
+func (v NotesView) SetAliases(aliases []domino.String) error {
+	return v.Com().PutProperty("Aliases", aliases)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLENTRIES_PROPERTY_6084.html */
@@ -103,20 +109,20 @@ func (v NotesView) SetAutoUpdate(val domino.Boolean) error {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BACKGROUNDCOLOR_PROPERTY_4608.html */
-func (v NotesView) BackgroundColor() (domino.Integer, error) {
+func (v NotesView) BackgroundColor() (domino.Long, error) {
 	val, err := v.Com().GetProperty("BackgroundColor")
-	return helpers.CastValue[domino.Integer](val), err
+	return helpers.CastValue[domino.Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BACKGROUNDCOLOR_PROPERTY_4608.html */
-func (v NotesView) SetBackgroundColor(val domino.Integer) error {
+func (v NotesView) SetBackgroundColor(val domino.Long) error {
 	return v.Com().PutProperty("BackgroundColor", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNCOUNT_PROPERTY_7753.html */
-func (v NotesView) ColumnCount() (domino.Integer, error) {
+func (v NotesView) ColumnCount() (domino.Long, error) {
 	val, err := v.Com().GetProperty("ColumnCount")
-	return helpers.CastValue[domino.Integer](val), err
+	return helpers.CastValue[domino.Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNNAMES_PROPERTY_NOTESVIEW_CLASS.html */
@@ -144,9 +150,9 @@ func (v NotesView) EntryCount() (domino.Long, error) {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HEADERLINES_PROPERTY_1209.html */
-func (v NotesView) HeaderLines() (domino.Integer, error) {
+func (v NotesView) HeaderLines() (domino.Long, error) {
 	val, err := v.Com().GetProperty("HeaderLines")
-	return helpers.CastValue[domino.Integer](val), err
+	return helpers.CastValue[domino.Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_NOTESVIEW_CLASS.html */
@@ -260,20 +266,20 @@ func (v NotesView) SetProtectReaders(val domino.Boolean) error {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY_VIEW.html */
-func (v NotesView) Readers() (domino.String, error) {
-	val, err := v.Com().GetProperty("Readers")
-	return helpers.CastValue[domino.String](val), err
+func (v NotesView) Readers() ([]domino.String, error) {
+	vals, err := v.Com().GetArrayProperty("Readers")
+	return helpers.CastSlice[domino.String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY_VIEW.html */
-func (v NotesView) SetReaders(val domino.String) error {
-	return v.Com().PutProperty("Readers", val)
+func (v NotesView) SetReaders(readers []domino.String) error {
+	return v.Com().PutProperty("Readers", readers)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROWLINES_PROPERTY_4578.html */
-func (v NotesView) RowLines() (domino.Integer, error) {
+func (v NotesView) RowLines() (domino.Long, error) {
 	val, err := v.Com().GetProperty("RowLines")
-	return helpers.CastValue[domino.Integer](val), err
+	return helpers.CastValue[domino.Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTIONFORMULA_PROPERTY_VIEW.html */
@@ -283,25 +289,25 @@ func (v NotesView) SelectionFormula() (domino.String, error) {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTIONFORMULA_PROPERTY_VIEW.html */
-func (v NotesView) SetSelectionFormula(val domino.String) error {
-	return v.Com().PutProperty("SelectionFormula", val)
+func (v NotesView) SetSelectionFormula(formula domino.String) error {
+	return v.Com().PutProperty("SelectionFormula", formula)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SPACING_PROPERTY_4165.html */
-func (v NotesView) Spacing() (domino.Integer, error) {
+func (v NotesView) Spacing() (domino.Long, error) {
 	val, err := v.Com().GetProperty("Spacing")
-	return helpers.CastValue[domino.Integer](val), err
+	return helpers.CastValue[domino.Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SPACING_PROPERTY_4165.html */
-func (v NotesView) SetSpacing(val domino.Integer) error {
+func (v NotesView) SetSpacing(val domino.Long) error {
 	return v.Com().PutProperty("Spacing", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TOPLEVELENTRYCOUNT_PROPERTY_6487.html */
-func (v NotesView) TopLevelEntryCount() (domino.Integer, error) {
+func (v NotesView) TopLevelEntryCount() (domino.Long, error) {
 	val, err := v.Com().GetProperty("TopLevelEntryCount")
-	return helpers.CastValue[domino.Integer](val), err
+	return helpers.CastValue[domino.Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNIVERSALID_PROPERTY_VIEW.html */
@@ -324,14 +330,79 @@ func (v NotesView) Clear() error {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYCOLUMN_METHOD_VIEW.html */
-func (v NotesView) CopyColumn(sourceColumn domino.Integer, destinationIndex domino.Long) (notesviewcolumn.NotesViewColumn, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CopyColumn", sourceColumn, destinationIndex)
+type copyColumnParams struct {
+	destinationIndex *domino.Long
+}
+
+type copyColumnParam func(*copyColumnParams)
+
+func WithCopyColumnDestinationIndex(destinationIndex domino.Long) copyColumnParam {
+	return func(c *copyColumnParams) {
+		c.destinationIndex = &destinationIndex
+	}
+}
+
+/* TODO: Handle different types. */
+func (v NotesView) CopyColumn(sourceColumn domino.Integer, params ...copyColumnParam) (notesviewcolumn.NotesViewColumn, error) {
+	paramsStruct := &copyColumnParams{}
+	paramsOrdered := []interface{}{sourceColumn}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.destinationIndex != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.destinationIndex)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CopyColumn", paramsOrdered...)
 	return notesviewcolumn.New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATECOLUMN_METHOD_VIEW.html */
-func (v NotesView) CreateColumn(position domino.Long, columnName domino.String, formula domino.String) (notesviewcolumn.NotesViewColumn, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("CreateColumn", position, columnName, formula)
+type createColumnParams struct {
+	position   *domino.Long
+	columnName *domino.String
+	formula    *domino.String
+}
+
+type createColumnParam func(*createColumnParams)
+
+func WithCreateColumnPosition(position domino.Long) createColumnParam {
+	return func(c *createColumnParams) {
+		c.position = &position
+	}
+}
+
+func WithCreateColumnColumnName(columnName domino.String) createColumnParam {
+	return func(c *createColumnParams) {
+		c.columnName = &columnName
+	}
+}
+
+func WithCreateColumnFormula(formula domino.String) createColumnParam {
+	return func(c *createColumnParams) {
+		c.formula = &formula
+	}
+}
+
+func (v NotesView) CreateColumn(params ...createColumnParam) (notesviewcolumn.NotesViewColumn, error) {
+	paramsStruct := &createColumnParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.position != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.position)
+		if paramsStruct.columnName != nil {
+			paramsOrdered = append(paramsOrdered, *paramsStruct.columnName)
+			if paramsStruct.formula != nil {
+				paramsOrdered = append(paramsOrdered, *paramsStruct.formula)
+			}
+		}
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("CreateColumn", paramsOrdered...)
 	return notesviewcolumn.New(dispatchPtr), err
 }
 
@@ -342,26 +413,114 @@ func (v NotesView) FTSearch(query domino.String, maxDocs domino.Integer) (domino
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLDOCUMENTSBYKEY_METHOD.html */
-func (v NotesView) GetAllDocumentsByKey(keyArray []domino.Integer, exactMatch domino.Boolean) (notesdocumentcollection.NotesDocumentCollection, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetAllDocumentsByKey", keyArray, exactMatch)
+type getAllDocumentsByKeyParams struct {
+	exactMatch *domino.Boolean
+}
+
+type getAllDocumentsByKeyParam func(*getAllDocumentsByKeyParams)
+
+func WithGetAllDocumentsByKeyExactMatch(exactMatch domino.Boolean) getAllDocumentsByKeyParam {
+	return func(c *getAllDocumentsByKeyParams) {
+		c.exactMatch = &exactMatch
+	}
+}
+
+func (v NotesView) GetAllDocumentsByKey(keyArray []domino.String, params ...getAllDocumentsByKeyParam) (notesdocumentcollection.NotesDocumentCollection, error) {
+	paramsStruct := &getAllDocumentsByKeyParams{}
+	paramsOrdered := []interface{}{keyArray}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.exactMatch != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("GetAllDocumentsByKey", paramsOrdered...)
 	return notesdocumentcollection.New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLENTRIESBYKEY_METHOD_9837.html */
-func (v NotesView) GetAllEntriesByKey(keyArray []domino.Integer, exactMatch domino.Boolean) (notesviewentrycollection.NotesViewEntryCollection, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetAllEntriesByKey", keyArray, exactMatch)
+type getAllEntriesByKeyParams struct {
+	exactMatch *domino.Boolean
+}
+
+type getAllEntriesByKeyParam func(*getAllEntriesByKeyParams)
+
+func WithGetAllEntriesByKeyExactMatch(exactMatch domino.Boolean) getAllEntriesByKeyParam {
+	return func(c *getAllEntriesByKeyParams) {
+		c.exactMatch = &exactMatch
+	}
+}
+
+func (v NotesView) GetAllEntriesByKey(keyArray []domino.String, params ...getAllEntriesByKeyParam) (notesviewentrycollection.NotesViewEntryCollection, error) {
+	paramsStruct := &getAllEntriesByKeyParams{}
+	paramsOrdered := []interface{}{keyArray}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.exactMatch != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("GetAllEntriesByKey", paramsOrdered...)
 	return notesviewentrycollection.New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLREADENTRIES.html */
-func (v NotesView) GetAllReadEntries(username domino.String) (notesviewentrycollection.NotesViewEntryCollection, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetAllReadEntries", username)
+type getAllReadEntriesParams struct {
+	username *domino.String
+}
+
+type getAllReadEntriesParam func(*getAllReadEntriesParams)
+
+func WithGetAllReadEntriesUsername(username domino.String) getAllReadEntriesParam {
+	return func(c *getAllReadEntriesParams) {
+		c.username = &username
+	}
+}
+
+func (v NotesView) GetAllReadEntries(params ...getAllReadEntriesParam) (notesviewentrycollection.NotesViewEntryCollection, error) {
+	paramsStruct := &getAllReadEntriesParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.username != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("GetAllReadEntries", paramsOrdered...)
 	return notesviewentrycollection.New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLUNREADENTRIES.html */
-func (v NotesView) GetAllUnreadEntries(username domino.String) (notesviewentrycollection.NotesViewEntryCollection, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetAllUnreadEntries", username)
+type getAllUnreadEntriesParams struct {
+	username *domino.String
+}
+
+type getAllUnreadEntriesParam func(*getAllUnreadEntriesParams)
+
+func WithGetAllUnreadEntriesUsername(username domino.String) getAllUnreadEntriesParam {
+	return func(c *getAllUnreadEntriesParams) {
+		c.username = &username
+	}
+}
+
+func (v NotesView) GetAllUnreadEntries(params ...getAllUnreadEntriesParam) (notesviewentrycollection.NotesViewEntryCollection, error) {
+	paramsStruct := &getAllUnreadEntriesParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.username != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("GetAllUnreadEntries", paramsOrdered...)
 	return notesviewentrycollection.New(dispatchPtr), err
 }
 
@@ -378,14 +537,58 @@ func (v NotesView) GetColumn(columnNumber domino.Long) (notesviewcolumn.NotesVie
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENTBYKEY_METHOD.html */
-func (v NotesView) GetDocumentByKey(keyArray []domino.Integer, exactMatch domino.Boolean) (notesdocument.NotesDocument, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetDocumentByKey", keyArray, exactMatch)
+type getDocumentByKeyParams struct {
+	exactMatch *domino.Boolean
+}
+
+type getDocumentByKeyParam func(*getDocumentByKeyParams)
+
+func WithGetDocumentByKeyExactMatch(exactMatch domino.Boolean) getDocumentByKeyParam {
+	return func(c *getDocumentByKeyParams) {
+		c.exactMatch = &exactMatch
+	}
+}
+
+func (v NotesView) GetDocumentByKey(keyArray []domino.String, params ...getDocumentByKeyParam) (notesdocument.NotesDocument, error) {
+	paramsStruct := &getDocumentByKeyParams{}
+	paramsOrdered := []interface{}{keyArray}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.exactMatch != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("GetDocumentByKey", paramsOrdered...)
 	return notesdocument.New(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRYBYKEY_METHOD_3846.html */
-func (v NotesView) GetEntryByKey(keyArray []domino.Integer, exactMatch domino.Boolean) (notesviewentry.NotesViewEntry, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetEntryByKey", keyArray, exactMatch)
+type getEntryByKeyParams struct {
+	exactMatch *domino.Boolean
+}
+
+type getEntryByKeyParam func(*getEntryByKeyParams)
+
+func WithGetEntryByKeyExactMatch(exactMatch domino.Boolean) getEntryByKeyParam {
+	return func(c *getEntryByKeyParams) {
+		c.exactMatch = &exactMatch
+	}
+}
+
+func (v NotesView) GetEntryByKey(keyArray []domino.String, params ...getEntryByKeyParam) (notesviewentry.NotesViewEntry, error) {
+	paramsStruct := &getEntryByKeyParams{}
+	paramsOrdered := []interface{}{keyArray}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.exactMatch != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
+	}
+	dispatchPtr, err := v.Com().CallObjectMethod("GetEntryByKey", paramsOrdered...)
 	return notesviewentry.New(dispatchPtr), err
 }
 
@@ -438,26 +641,124 @@ func (v NotesView) GetPrevSibling(document notesdocument.NotesDocument) (notesdo
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCK_METHOD_VIEW.html */
-func (v NotesView) Lock(name []domino.String, provisionalOK domino.Boolean) (domino.Boolean, error) {
-	val, err := v.Com().CallMethod("Lock", name, provisionalOK)
+type lockParams struct {
+	name          *[]domino.String
+	provisionalOK *domino.Boolean
+}
+
+type lockParam func(*lockParams)
+
+func WithLockName(name []domino.String) lockParam {
+	return func(c *lockParams) {
+		c.name = &name
+	}
+}
+
+func WithLockProvisionalOK(provisionalOK domino.Boolean) lockParam {
+	return func(c *lockParams) {
+		c.provisionalOK = &provisionalOK
+	}
+}
+
+func (v NotesView) Lock(params ...lockParam) (domino.Boolean, error) {
+	paramsStruct := &lockParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.name != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
+		if paramsStruct.provisionalOK != nil {
+			paramsOrdered = append(paramsOrdered, *paramsStruct.provisionalOK)
+		}
+	}
+	val, err := v.Com().CallMethod("Lock", paramsOrdered...)
 	return helpers.CastValue[domino.Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKPROVISIONAL_METHOD_VIEW.html */
-func (v NotesView) LockProvisional(name []domino.String) (domino.Boolean, error) {
-	val, err := v.Com().CallMethod("LockProvisional", name)
+type lockProvisionalParams struct {
+	name *[]domino.String
+}
+
+type lockProvisionalParam func(*lockProvisionalParams)
+
+func WithLockProvisionalName(name []domino.String) lockProvisionalParam {
+	return func(c *lockProvisionalParams) {
+		c.name = &name
+	}
+}
+
+func (v NotesView) LockProvisional(params ...lockProvisionalParam) (domino.Boolean, error) {
+	paramsStruct := &lockProvisionalParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.name != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
+	}
+	val, err := v.Com().CallMethod("LockProvisional", paramsOrdered...)
 	return helpers.CastValue[domino.Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MARKALLREAD_VIEW.html */
-func (v NotesView) MarkAllRead(username domino.String) error {
-	_, err := v.Com().CallMethod("MarkAllRead", username)
+type markAllReadParams struct {
+	username *domino.String
+}
+
+type markAllReadParam func(*markAllReadParams)
+
+func WithMarkAllReadUsername(username domino.String) markAllReadParam {
+	return func(c *markAllReadParams) {
+		c.username = &username
+	}
+}
+
+func (v NotesView) MarkAllRead(params ...markAllReadParam) error {
+	paramsStruct := &markAllReadParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.username != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
+	}
+	_, err := v.Com().CallMethod("MarkAllRead", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MARKALLUNREAD_VIEW.html */
-func (v NotesView) MarkAllUnread(username domino.String) error {
-	_, err := v.Com().CallMethod("MarkAllUnread", username)
+type markAllUnreadParams struct {
+	username *domino.String
+}
+
+type markAllUnreadParam func(*markAllUnreadParams)
+
+func WithMarkAllUnreadUsername(username domino.String) markAllUnreadParam {
+	return func(c *markAllUnreadParams) {
+		c.username = &username
+	}
+}
+
+func (v NotesView) MarkAllUnread(params ...markAllUnreadParam) error {
+	paramsStruct := &markAllUnreadParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.username != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
+	}
+	_, err := v.Com().CallMethod("MarkAllUnread", paramsOrdered...)
 	return err
 }
 
@@ -474,21 +775,71 @@ func (v NotesView) Remove() error {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESORTVIEW_METHOD_VIEW.html */
-func (v NotesView) ResortView(columnName domino.String, ascendingFlag domino.Boolean) error {
-	_, err := v.Com().CallMethod("ResortView", columnName, ascendingFlag)
+type resortViewParams struct {
+	columnName    *domino.String
+	ascendingFlag *domino.Boolean
+}
+
+type resortViewParam func(*resortViewParams)
+
+func WithResortViewColumnName(columnName domino.String) resortViewParam {
+	return func(c *resortViewParams) {
+		c.columnName = &columnName
+	}
+}
+
+func WithResortViewAscendingFlag(ascendingFlag domino.Boolean) resortViewParam {
+	return func(c *resortViewParams) {
+		c.ascendingFlag = &ascendingFlag
+	}
+}
+
+func (v NotesView) ResortView(params ...resortViewParam) error {
+	paramsStruct := &resortViewParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.columnName != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.columnName)
+		if paramsStruct.ascendingFlag != nil {
+			paramsOrdered = append(paramsOrdered, *paramsStruct.ascendingFlag)
+		}
+	}
+	_, err := v.Com().CallMethod("ResortView", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVECOLUMN_METHOD_VIEW.html */
-func (v NotesView) RemoveColumn(columnNameOrIndex domino.Long) error {
-	_, err := v.Com().CallMethod("RemoveColumn", columnNameOrIndex)
-	return err
+type removeColumnParams struct {
+	columnNameOrIndex *domino.Long
 }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETALIASES_METHOD_VIEW.html */
-func (v NotesView) SetAliases(alias domino.String) (domino.Long, error) {
-	val, err := v.Com().CallMethod("SetAliases", alias)
-	return helpers.CastValue[domino.Long](val), err
+type removeColumnParam func(*removeColumnParams)
+
+func WithRemoveColumnColumnNameOrIndex(columnNameOrIndex domino.Long) removeColumnParam {
+	return func(c *removeColumnParams) {
+		c.columnNameOrIndex = &columnNameOrIndex
+	}
+}
+
+func (v NotesView) RemoveColumn(params ...removeColumnParam) error {
+	paramsStruct := &removeColumnParams{}
+	paramsOrdered := []interface{}{}
+
+	for _, p := range params {
+		p(paramsStruct)
+	}
+
+	if paramsStruct.columnNameOrIndex != nil {
+		paramsOrdered = append(paramsOrdered, *paramsStruct.columnNameOrIndex)
+	} else {
+		paramsOrdered = append(paramsOrdered, nil)
+	}
+	_, err := v.Com().CallMethod("RemoveColumn", paramsOrdered...)
+	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_VIEW.html */

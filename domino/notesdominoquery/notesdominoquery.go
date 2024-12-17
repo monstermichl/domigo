@@ -19,7 +19,6 @@ func New(dispatchPtr *ole.IDispatch) NotesDominoQuery {
 }
 
 /* --------------------------------- Properties --------------------------------- */
-/* TODO: Access type for MaxScanDocs could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSCANDOCS_PROPERTY_NDQ.html#reference_a4g_r13_cgb */
 func (d NotesDominoQuery) MaxScanDocs() (domino.Long, error) {
 	val, err := d.Com().GetProperty("MaxScanDocs")
@@ -31,7 +30,6 @@ func (d NotesDominoQuery) SetMaxScanDocs(v domino.Long) error {
 	return d.Com().PutProperty("MaxScanDocs", v)
 }
 
-/* TODO: Access type for MaxScanEntries could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSCANENTRIES_PROPERTY_NDQ.html#reference_yyx_cd3_cgb */
 func (d NotesDominoQuery) MaxScanEntries() (domino.Long, error) {
 	val, err := d.Com().GetProperty("MaxScanEntries")
@@ -43,7 +41,6 @@ func (d NotesDominoQuery) SetMaxScanEntries(v domino.Long) error {
 	return d.Com().PutProperty("MaxScanEntries", v)
 }
 
-/* TODO: Access type for NoViews could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOVIEWS_PROPERTY_NDQ.html#reference_o3c_kf3_cgb */
 func (d NotesDominoQuery) NoViews() (domino.Boolean, error) {
 	val, err := d.Com().GetProperty("NoViews")
@@ -55,7 +52,6 @@ func (d NotesDominoQuery) SetNoViews(v domino.Boolean) error {
 	return d.Com().PutProperty("NoViews", v)
 }
 
-/* TODO: Access type for RebuildDesignCatalog could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REBUILDDESIGNCATALOG_PROPERTY_NDQ.html#reference_pdc_hyy_ljb */
 func (d NotesDominoQuery) RebuildDesignCatalog() (domino.Boolean, error) {
 	val, err := d.Com().GetProperty("RebuildDesignCatalog")
@@ -67,7 +63,6 @@ func (d NotesDominoQuery) SetRebuildDesignCatalog(v domino.Boolean) error {
 	return d.Com().PutProperty("RebuildDesignCatalog", v)
 }
 
-/* TODO: Access type for RefreshDesignCatalog could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHDESIGNCATALOG_PROPERTY_NDQ.html#reference_vvz_3zy_ljb */
 func (d NotesDominoQuery) RefreshDesignCatalog() (domino.Boolean, error) {
 	val, err := d.Com().GetProperty("RefreshDesignCatalog")
@@ -79,7 +74,6 @@ func (d NotesDominoQuery) SetRefreshDesignCatalog(v domino.Boolean) error {
 	return d.Com().PutProperty("RefreshDesignCatalog", v)
 }
 
-/* TODO: Access type for RefreshFullText could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHFULLTEXT_PROPERTY_NDQ.html#reference_wzg_d1z_ljb */
 func (d NotesDominoQuery) RefreshFullText() (domino.Boolean, error) {
 	val, err := d.Com().GetProperty("RefreshFullText")
@@ -91,7 +85,6 @@ func (d NotesDominoQuery) SetRefreshFullText(v domino.Boolean) error {
 	return d.Com().PutProperty("RefreshFullText", v)
 }
 
-/* TODO: Access type for RefreshViews could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHVIEWS_PROPERTY_NDQ.html#reference_enn_rx3_cgb */
 func (d NotesDominoQuery) RefreshViews() (domino.Boolean, error) {
 	val, err := d.Com().GetProperty("RefreshViews")
@@ -103,7 +96,6 @@ func (d NotesDominoQuery) SetRefreshViews(v domino.Boolean) error {
 	return d.Com().PutProperty("RefreshViews", v)
 }
 
-/* TODO: Access type for DesignDocumentsOnly could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DESIGNDOCUMENTSONLY_PROPERTY_NDQ.html */
 func (d NotesDominoQuery) DesignDocumentsOnly() (domino.Boolean, error) {
 	val, err := d.Com().GetProperty("DesignDocumentsOnly")
@@ -115,7 +107,6 @@ func (d NotesDominoQuery) SetDesignDocumentsOnly(v domino.Boolean) error {
 	return d.Com().PutProperty("DesignDocumentsOnly", v)
 }
 
-/* TODO: Access type for TimeoutSec could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEOUTSEC_PROPERTY_NDQ.html#reference_qwv_123_cgb */
 func (d NotesDominoQuery) TimeoutSec() (domino.Integer, error) {
 	val, err := d.Com().GetProperty("TimeoutSec")

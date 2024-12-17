@@ -26,7 +26,7 @@ func TestMain(m *testing.M) {
 	}()
 
 	if err != nil {
-		info = "Session could no be initialized"
+		info = "Session could not be initialized"
 		return
 	}
 
@@ -35,7 +35,7 @@ func TestMain(m *testing.M) {
 	defer db.Remove()
 
 	if err != nil {
-		info = "Database could no be created"
+		info = "Database could not be created"
 		return
 	}
 
@@ -43,7 +43,7 @@ func TestMain(m *testing.M) {
 	defer outline.Release()
 
 	if err != nil {
-		info = "Outline could no be created"
+		info = "Outline could not be created"
 		return
 	}
 
@@ -51,7 +51,7 @@ func TestMain(m *testing.M) {
 	defer outlineentry.Release()
 
 	if err != nil {
-		info = "Outline entry could no be created"
+		info = "Outline entry could not be created"
 		return
 	}
 	m.Run()

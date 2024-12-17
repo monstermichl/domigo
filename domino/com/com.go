@@ -105,10 +105,6 @@ func (c Com) GetObjectArrayProperty(name string, params ...interface{}) ([]*ole.
 
 func (c Com) PutProperty(name string, params ...interface{}) error {
 	_, err := c.actionInternal(oleutil.PutProperty, name, params...)
-
-	if err != nil {
-		err = fmt.Errorf("property '%s' could not be set", name)
-	}
 	return err
 }
 
@@ -135,7 +131,7 @@ func (c Com) actionInternal(fn func(*ole.IDispatch, string, ...interface{}) (*ol
 	variantPtr, err := fn(c.dispatchPtr, name, params...)
 
 	if err != nil {
-		return nil, errors.New("COM command execution failed")
+		return nil, fmt.Errorf("COM command execution failed: %s", err)
 	}
 	return variantPtr, err
 }
@@ -164,8 +160,10 @@ func (c Com) arrayActionInternal(fn func(name string, params ...interface{}) (*o
 	if err != nil {
 		return []any{}, err
 	}
+	dispatchPtr := variantPtr.ToIDispatch()
 
-	if variantPtr.ToIDispatch() != nil {
+	if dispatchPtr != nil {
+		dispatchPtr.Release()
 		return []any{}, fmt.Errorf("returned value for '%s' is not an array", name)
 	}
 	safeArray := variantPtr.ToArray()
