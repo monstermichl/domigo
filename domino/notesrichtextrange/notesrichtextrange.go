@@ -2,10 +2,10 @@
 package notesrichtextrange
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesrichtextnavigator"
-	"domigo/domino/notesrichtextstyle"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesrichtextnavigator"
+	"github.com/monstermichl/domigo/domino/notesrichtextstyle"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

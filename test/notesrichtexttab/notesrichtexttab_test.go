@@ -2,9 +2,10 @@
 package notesrichtexttab_test
 
 import (
-	"domigo/domino/notesrichtexttab"
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesrichtexttab"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

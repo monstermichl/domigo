@@ -1,8 +1,8 @@
 package notesviewcolumn
 
 import (
-	"domigo/domino"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

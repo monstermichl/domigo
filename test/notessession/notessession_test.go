@@ -1,8 +1,9 @@
 package notessession_test
 
 import (
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

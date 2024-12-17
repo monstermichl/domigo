@@ -1,8 +1,9 @@
 package main
 
 import (
-	"domigo/domino/notessession"
 	"fmt"
+
+	"github.com/monstermichl/domigo/domino/notessession"
 )
 
 func main() {

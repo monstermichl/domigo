@@ -2,10 +2,11 @@
 package notesproperty_test
 
 import (
-	"domigo/domino/notesproperty"
-	"domigo/domino/notessession"
 	"fmt"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesproperty"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

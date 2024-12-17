@@ -3,12 +3,13 @@ package notesviewentry_test
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESVIEWENTRY_CLASS_2925.html */
 
 import (
-	"domigo/domino/notessession"
-	"domigo/domino/notesviewentry"
-	testhelpers "domigo/test/helpers"
 	"fmt"
 	"testing"
 	"time"
+
+	"github.com/monstermichl/domigo/domino/notessession"
+	"github.com/monstermichl/domigo/domino/notesviewentry"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

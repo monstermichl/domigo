@@ -2,11 +2,12 @@
 package notesreplication_test
 
 import (
-	"domigo/domino/notesreplication"
-	"domigo/domino/notessession"
-	testhelpers "domigo/test/helpers"
 	"fmt"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesreplication"
+	"github.com/monstermichl/domigo/domino/notessession"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

@@ -2,14 +2,14 @@
 package notesdocument
 
 import (
-	"domigo/domino"
-	"domigo/domino/com"
-	"domigo/domino/notesdatetime"
-	"domigo/domino/notesembeddedobject"
-	"domigo/domino/notesitem"
-	"domigo/domino/notesmimeentity"
-	"domigo/domino/notesrichtextitem"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/com"
+	"github.com/monstermichl/domigo/domino/notesdatetime"
+	"github.com/monstermichl/domigo/domino/notesembeddedobject"
+	"github.com/monstermichl/domigo/domino/notesitem"
+	"github.com/monstermichl/domigo/domino/notesmimeentity"
+	"github.com/monstermichl/domigo/domino/notesrichtextitem"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

@@ -2,10 +2,10 @@
 package notespropertybroker
 
 import (
-	"domigo/domino"
-	"domigo/domino/com"
-	"domigo/domino/notesproperty"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/com"
+	"github.com/monstermichl/domigo/domino/notesproperty"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

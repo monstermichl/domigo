@@ -2,11 +2,12 @@
 package notesagent_test
 
 import (
-	"domigo/domino/notesagent"
-	"domigo/domino/notessession"
-	testhelpers "domigo/test/helpers"
 	"fmt"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesagent"
+	"github.com/monstermichl/domigo/domino/notessession"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

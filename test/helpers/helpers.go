@@ -1,14 +1,15 @@
 package testhelpers
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesdatabase"
-	"domigo/domino/notesdocument"
-	"domigo/domino/notessession"
-	"domigo/domino/notesview"
 	"errors"
 	"fmt"
 	"time"
+
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesdatabase"
+	"github.com/monstermichl/domigo/domino/notesdocument"
+	"github.com/monstermichl/domigo/domino/notessession"
+	"github.com/monstermichl/domigo/domino/notesview"
 )
 
 func TestDatabaseName() string {

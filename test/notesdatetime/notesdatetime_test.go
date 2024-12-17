@@ -2,9 +2,10 @@
 package notesdatetime_test
 
 import (
-	"domigo/domino/notesdatetime"
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesdatetime"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

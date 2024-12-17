@@ -1,9 +1,10 @@
 package notesname_test
 
 import (
-	"domigo/domino/notesname"
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesname"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

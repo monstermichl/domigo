@@ -2,16 +2,16 @@
 package notesrichtextitem
 
 import (
-	"domigo/domino"
-	"domigo/domino/com"
-	"domigo/domino/notescolorobject"
-	"domigo/domino/notesembeddedobject"
-	"domigo/domino/notesitem"
-	"domigo/domino/notesrichtextnavigator"
-	"domigo/domino/notesrichtextparagraphstyle"
-	"domigo/domino/notesrichtextrange"
-	"domigo/domino/notesrichtextstyle"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/com"
+	"github.com/monstermichl/domigo/domino/notescolorobject"
+	"github.com/monstermichl/domigo/domino/notesembeddedobject"
+	"github.com/monstermichl/domigo/domino/notesitem"
+	"github.com/monstermichl/domigo/domino/notesrichtextnavigator"
+	"github.com/monstermichl/domigo/domino/notesrichtextparagraphstyle"
+	"github.com/monstermichl/domigo/domino/notesrichtextrange"
+	"github.com/monstermichl/domigo/domino/notesrichtextstyle"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

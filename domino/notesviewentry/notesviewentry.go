@@ -2,9 +2,9 @@
 package notesviewentry
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesdocument"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesdocument"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

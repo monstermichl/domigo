@@ -3,9 +3,10 @@ package com
 /* Got started with this example: https://github.com/go-ole/go-ole/blob/master/_example/excel/excel.go.*/
 
 import (
-	"domigo/helpers"
 	"errors"
 	"fmt"
+
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 	"github.com/go-ole/go-ole/oleutil"

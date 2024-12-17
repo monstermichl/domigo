@@ -2,9 +2,10 @@
 package noteslog_test
 
 import (
-	"domigo/domino/noteslog"
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/noteslog"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

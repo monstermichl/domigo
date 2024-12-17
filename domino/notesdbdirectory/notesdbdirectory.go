@@ -2,10 +2,10 @@
 package notesdbdirectory
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesdatabase"
-	"domigo/domino/notesdatetime"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesdatabase"
+	"github.com/monstermichl/domigo/domino/notesdatetime"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

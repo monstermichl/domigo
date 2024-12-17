@@ -2,9 +2,9 @@
 package notesqueryresultsprocessor
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesdominoquery"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesdominoquery"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

@@ -2,11 +2,12 @@
 package notesoutlineentry_test
 
 import (
-	"domigo/domino/notesoutlineentry"
-	"domigo/domino/notessession"
-	testhelpers "domigo/test/helpers"
 	"fmt"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesoutlineentry"
+	"github.com/monstermichl/domigo/domino/notessession"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

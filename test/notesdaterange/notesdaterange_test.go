@@ -2,10 +2,11 @@
 package notesdaterange_test
 
 import (
-	"domigo/domino/notesdaterange"
-	"domigo/domino/notessession"
-	testhelpers "domigo/test/helpers"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesdaterange"
+	"github.com/monstermichl/domigo/domino/notessession"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

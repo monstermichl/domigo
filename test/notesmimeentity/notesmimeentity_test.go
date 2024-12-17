@@ -2,11 +2,12 @@
 package notesmimeentity_test
 
 import (
-	"domigo/domino/notesmimeentity"
-	"domigo/domino/notessession"
-	"domigo/domino/notesstream"
-	testhelpers "domigo/test/helpers"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesmimeentity"
+	"github.com/monstermichl/domigo/domino/notessession"
+	"github.com/monstermichl/domigo/domino/notesstream"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

@@ -2,9 +2,9 @@
 package notesacl
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesaclentry"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesaclentry"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

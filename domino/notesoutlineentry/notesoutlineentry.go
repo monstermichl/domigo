@@ -2,10 +2,10 @@
 package notesoutlineentry
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesdocument"
-	"domigo/domino/notesview"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesdocument"
+	"github.com/monstermichl/domigo/domino/notesview"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

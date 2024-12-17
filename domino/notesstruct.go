@@ -1,7 +1,7 @@
 package domino
 
 import (
-	"domigo/domino/com"
+	"github.com/monstermichl/domigo/domino/com"
 
 	ole "github.com/go-ole/go-ole"
 )

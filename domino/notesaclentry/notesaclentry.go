@@ -2,9 +2,9 @@
 package notesaclentry
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesname"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesname"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

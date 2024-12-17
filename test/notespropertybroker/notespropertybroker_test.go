@@ -2,9 +2,10 @@
 package notespropertybroker_test
 
 import (
-	"domigo/domino/notespropertybroker"
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notespropertybroker"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

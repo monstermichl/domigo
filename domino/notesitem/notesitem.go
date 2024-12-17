@@ -2,11 +2,11 @@
 package notesitem
 
 import (
-	"domigo/domino"
-	"domigo/domino/com"
-	"domigo/domino/notesdatetime"
-	"domigo/domino/notesmimeentity"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/com"
+	"github.com/monstermichl/domigo/domino/notesdatetime"
+	"github.com/monstermichl/domigo/domino/notesmimeentity"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

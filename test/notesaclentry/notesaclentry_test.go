@@ -2,10 +2,11 @@
 package notesaclentry_test
 
 import (
-	"domigo/domino/notesaclentry"
-	"domigo/domino/notessession"
-	testhelpers "domigo/test/helpers"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesaclentry"
+	"github.com/monstermichl/domigo/domino/notessession"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

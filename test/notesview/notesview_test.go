@@ -2,13 +2,14 @@
 package notesview_test
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesdocument"
-	"domigo/domino/notessession"
-	"domigo/domino/notesview"
-	testhelpers "domigo/test/helpers"
 	"fmt"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesdocument"
+	"github.com/monstermichl/domigo/domino/notessession"
+	"github.com/monstermichl/domigo/domino/notesview"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

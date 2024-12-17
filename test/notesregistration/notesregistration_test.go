@@ -2,9 +2,10 @@
 package notesregistration_test
 
 import (
-	"domigo/domino/notesregistration"
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesregistration"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

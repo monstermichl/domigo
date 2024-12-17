@@ -2,14 +2,14 @@
 package notesview
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesdocument"
-	"domigo/domino/notesdocumentcollection"
-	"domigo/domino/notesrichtextitem"
-	"domigo/domino/notesviewcolumn"
-	"domigo/domino/notesviewentry"
-	"domigo/domino/notesviewentrycollection"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesdocument"
+	"github.com/monstermichl/domigo/domino/notesdocumentcollection"
+	"github.com/monstermichl/domigo/domino/notesrichtextitem"
+	"github.com/monstermichl/domigo/domino/notesviewcolumn"
+	"github.com/monstermichl/domigo/domino/notesviewentry"
+	"github.com/monstermichl/domigo/domino/notesviewentrycollection"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

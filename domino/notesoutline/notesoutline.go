@@ -2,9 +2,9 @@
 package notesoutline
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesoutlineentry"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesoutlineentry"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

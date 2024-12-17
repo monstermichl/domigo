@@ -2,11 +2,12 @@
 package notesembeddedobject_test
 
 import (
-	"domigo/domino/notesembeddedobject"
-	"domigo/domino/notessession"
-	testhelpers "domigo/test/helpers"
 	"path/filepath"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesembeddedobject"
+	"github.com/monstermichl/domigo/domino/notessession"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

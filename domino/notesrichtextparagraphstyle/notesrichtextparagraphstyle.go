@@ -2,10 +2,10 @@
 package notesrichtextparagraphstyle
 
 import (
-	"domigo/domino"
-	"domigo/domino/com"
-	"domigo/domino/notesrichtexttab"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/com"
+	"github.com/monstermichl/domigo/domino/notesrichtexttab"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

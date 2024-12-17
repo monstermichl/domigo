@@ -2,10 +2,11 @@
 package notesform_test
 
 import (
-	"domigo/domino/notesform"
-	"domigo/domino/notessession"
-	testhelpers "domigo/test/helpers"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesform"
+	"github.com/monstermichl/domigo/domino/notessession"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

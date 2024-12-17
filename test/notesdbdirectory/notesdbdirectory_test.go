@@ -2,11 +2,12 @@
 package notesdbdirectory_test
 
 import (
-	"domigo/domino/notesdbdirectory"
-	"domigo/domino/notessession"
-	testhelpers "domigo/test/helpers"
 	"fmt"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesdbdirectory"
+	"github.com/monstermichl/domigo/domino/notessession"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )

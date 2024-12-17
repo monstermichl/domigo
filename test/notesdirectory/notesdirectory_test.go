@@ -2,9 +2,10 @@
 package notesdirectory_test
 
 import (
-	"domigo/domino/notesdirectory"
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesdirectory"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

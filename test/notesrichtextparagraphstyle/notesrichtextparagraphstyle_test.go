@@ -2,9 +2,10 @@
 package notesrichtextparagraphstyle_test
 
 import (
-	"domigo/domino/notesrichtextparagraphstyle"
-	"domigo/domino/notessession"
 	"testing"
+
+	"github.com/monstermichl/domigo/domino/notesrichtextparagraphstyle"
+	"github.com/monstermichl/domigo/domino/notessession"
 
 	"github.com/stretchr/testify/require"
 )

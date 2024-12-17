@@ -2,10 +2,10 @@
 package notesviewnavigator
 
 import (
-	"domigo/domino"
-	"domigo/domino/notesview"
-	"domigo/domino/notesviewentry"
-	"domigo/helpers"
+	"github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo/domino/notesview"
+	"github.com/monstermichl/domigo/domino/notesviewentry"
+	"github.com/monstermichl/domigo/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )

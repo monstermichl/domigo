@@ -1,4 +1,4 @@
-module domigo
+module github.com/monstermichl/domigo
 
 go 1.22.2
 
