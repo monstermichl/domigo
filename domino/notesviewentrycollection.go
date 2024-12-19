@@ -18,19 +18,19 @@ func NewNotesViewEntryCollection(dispatchPtr *ole.IDispatch) NotesViewEntryColle
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COUNT_PROPERTY_8365.html */
 func (v NotesViewEntryCollection) Count() (Long, error) {
-	val, err := v.Com().GetProperty("Count")
+	val, err := v.com().GetProperty("Count")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_9184.html */
 func (v NotesViewEntryCollection) Parent() (NotesView, error) {
-	dispatchPtr, err := v.Com().GetObjectProperty("Parent")
+	dispatchPtr, err := v.com().GetObjectProperty("Parent")
 	return NewNotesView(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_QUERY_PROPERTY_8476.html */
 func (v NotesViewEntryCollection) Query() (String, error) {
-	val, err := v.Com().GetProperty("Query")
+	val, err := v.com().GetProperty("Query")
 	return helpers.CastValue[String](val), err
 }
 
@@ -50,7 +50,7 @@ func WithNotesViewEntryCollectionAddEntryCheckDups(checkDups Boolean) notesViewE
 
 func (v NotesViewEntryCollection) AddEntry(addentry NotesViewEntry, params ...notesViewEntryCollectionAddEntryParam) error {
 	paramsStruct := &notesViewEntryCollectionAddEntryParams{}
-	paramsOrdered := []interface{}{addentry.Com().Dispatch()}
+	paramsOrdered := []interface{}{addentry.com().Dispatch()}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -59,69 +59,69 @@ func (v NotesViewEntryCollection) AddEntry(addentry NotesViewEntry, params ...no
 	if paramsStruct.checkDups != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.checkDups)
 	}
-	_, err := v.Com().CallMethod("AddEntry", paramsOrdered...)
+	_, err := v.com().CallMethod("AddEntry", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLONE_METHOD_VIEWENTRYCOLLECTION.html */
 func (v NotesViewEntryCollection) Clone() error {
-	_, err := v.Com().CallMethod("Clone")
+	_, err := v.com().CallMethod("Clone")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONTAINS_METHOD_VIEWENTRYCOLLECTION.html */
 func (v NotesViewEntryCollection) Contains(inputNotes any) (Boolean, error) {
 	/* TODO: Handle different input types. */
-	val, err := v.Com().CallMethod("Contains", inputNotes)
+	val, err := v.com().CallMethod("Contains", inputNotes)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEENTRY_METHOD_2345.html */
 func (v NotesViewEntryCollection) DeleteEntry(deleteentry NotesViewEntry) error {
-	_, err := v.Com().CallMethod("DeleteEntry", deleteentry.Com().Dispatch())
+	_, err := v.com().CallMethod("DeleteEntry", deleteentry.com().Dispatch())
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCH_METHOD_6772.html */
 func (v NotesViewEntryCollection) FTSearch(query String, maxDocs Integer) error {
-	_, err := v.Com().CallMethod("FTSearch", query, maxDocs)
+	_, err := v.com().CallMethod("FTSearch", query, maxDocs)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD_9111.html */
 func (v NotesViewEntryCollection) GetEntry(entry any) (NotesViewEntry, error) {
 	/* TODO: Handle different input types (see documentation). */
-	dispatchPtr, err := v.Com().CallObjectMethod("GetEntry", entry)
+	dispatchPtr, err := v.com().CallObjectMethod("GetEntry", entry)
 	return NewNotesViewEntry(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTENTRY_METHOD_3097.html */
 func (v NotesViewEntryCollection) GetFirstEntry() (NotesViewEntry, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetFirstEntry")
+	dispatchPtr, err := v.com().CallObjectMethod("GetFirstEntry")
 	return NewNotesViewEntry(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETLASTENTRY_METHOD_5374.html */
 func (v NotesViewEntryCollection) GetLastEntry() (NotesViewEntry, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetLastEntry")
+	dispatchPtr, err := v.com().CallObjectMethod("GetLastEntry")
 	return NewNotesViewEntry(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTENTRY_6168.html */
 func (v NotesViewEntryCollection) GetNextEntry(currententry NotesViewEntry) (NotesViewEntry, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetNextEntry", currententry.Com().Dispatch())
+	dispatchPtr, err := v.com().CallObjectMethod("GetNextEntry", currententry.com().Dispatch())
 	return NewNotesViewEntry(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHENTRY_METHOD_4753.html */
 func (v NotesViewEntryCollection) GetNthEntry(index Long) (NotesViewEntry, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetNthEntry", index)
+	dispatchPtr, err := v.com().CallObjectMethod("GetNthEntry", index)
 	return NewNotesViewEntry(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVENTRY_METHOD_2018.html */
 func (v NotesViewEntryCollection) GetPrevEntry(currententry NotesViewEntry) (NotesViewEntry, error) {
-	dispatchPtr, err := v.Com().CallObjectMethod("GetPrevEntry", currententry.Com().Dispatch())
+	dispatchPtr, err := v.com().CallObjectMethod("GetPrevEntry", currententry.com().Dispatch())
 	return NewNotesViewEntry(dispatchPtr), err
 }
 
@@ -149,7 +149,7 @@ func (v NotesViewEntryCollection) Intersect(inputNotes Integer, params ...notesV
 	if paramsStruct.maintainOrder != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.maintainOrder)
 	}
-	_, err := v.Com().CallMethod("Intersect", paramsOrdered...)
+	_, err := v.com().CallMethod("Intersect", paramsOrdered...)
 	return err
 }
 
@@ -177,7 +177,7 @@ func (v NotesViewEntryCollection) MarkAllRead(params ...notesViewEntryCollection
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	_, err := v.Com().CallMethod("MarkAllRead", paramsOrdered...)
+	_, err := v.com().CallMethod("MarkAllRead", paramsOrdered...)
 	return err
 }
 
@@ -205,13 +205,13 @@ func (v NotesViewEntryCollection) MarkAllUnread(params ...notesViewEntryCollecti
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	_, err := v.Com().CallMethod("MarkAllUnread", paramsOrdered...)
+	_, err := v.com().CallMethod("MarkAllUnread", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MERGE_METHOD_VIEWENTRYCOLLECTION.html */
 func (v NotesViewEntryCollection) Merge(inputNotes Long) error {
-	_, err := v.Com().CallMethod("Merge", inputNotes)
+	_, err := v.com().CallMethod("Merge", inputNotes)
 	return err
 }
 
@@ -239,31 +239,31 @@ func (v NotesViewEntryCollection) PutAllInFolder(foldername String, params ...no
 	if paramsStruct.createonfail != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.createonfail)
 	}
-	_, err := v.Com().CallMethod("PutAllInFolder", paramsOrdered...)
+	_, err := v.com().CallMethod("PutAllInFolder", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEALL_METHOD_9278.html */
 func (v NotesViewEntryCollection) RemoveAll(force Boolean) error {
-	_, err := v.Com().CallMethod("RemoveAll", force)
+	_, err := v.com().CallMethod("RemoveAll", force)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEALLFROMFOLDER_METHOD_1275.html */
 func (v NotesViewEntryCollection) RemoveAllFromFolder(foldername String) error {
-	_, err := v.Com().CallMethod("RemoveAllFromFolder", foldername)
+	_, err := v.com().CallMethod("RemoveAllFromFolder", foldername)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STAMPALL_METHOD_1012.html */
 func (v NotesViewEntryCollection) StampAll(itemname String, value any) error {
-	_, err := v.Com().CallMethod("StampAll", itemname, value)
+	_, err := v.com().CallMethod("StampAll", itemname, value)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STAMPALLMULTI_METHOD.html */
 func (v NotesViewEntryCollection) StampAllMulti(document NotesDocument) error {
-	_, err := v.Com().CallMethod("StampAllMulti", document.Com().Dispatch())
+	_, err := v.com().CallMethod("StampAllMulti", document.com().Dispatch())
 	return err
 }
 
@@ -291,12 +291,12 @@ func (v NotesViewEntryCollection) Subtract(inputNotes Long, params ...notesViewE
 	if paramsStruct.maintainOrder != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.maintainOrder)
 	}
-	_, err := v.Com().CallMethod("Subtract", paramsOrdered...)
+	_, err := v.com().CallMethod("Subtract", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEALL_METHOD_9459.html */
 func (v NotesViewEntryCollection) UpdateAll() error {
-	_, err := v.Com().CallMethod("UpdateAll")
+	_, err := v.com().CallMethod("UpdateAll")
 	return err
 }

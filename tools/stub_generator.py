@@ -27,7 +27,7 @@ def get_go_params(params: List[NotesParameter], is_call) -> List[str]:
 
         if is_call:
             if p.type.type == NotesType.OBJECT and not p.type.is_array:
-                name = f'{name}.Com().Dispatch()'  # Make sure to pass the dispatch pointer, not the object.
+                name = f'{name}.com().Dispatch()'  # Make sure to pass the dispatch pointer, not the object.
             s = name
         else:
             s = f'{name} {get_go_type(p.type)[0]}'
@@ -70,16 +70,16 @@ def properties_stubs(class_name: str, props: List[NotesProperty]) -> Tuple[List[
             if notes_type == NotesType.OBJECT:
                 if is_array:
                     stubs.extend([
-                        f'return com.GetObjectArrayProperty({receiver}.Com(), New{go_cast_type}, "{name}")',
+                        f'return com.GetObjectArrayProperty({receiver}.com(), New{go_cast_type}, "{name}")',
                     ])
                 else:
                     stubs.extend([
-                        f'    dispatchPtr, err := {receiver}.Com().GetObjectProperty("{name}")',
+                        f'    dispatchPtr, err := {receiver}.com().GetObjectProperty("{name}")',
                         f'    return New{go_cast_type}(dispatchPtr), err',
                     ])
             else:
                 stubs.extend([
-                    f'    val{"s" if is_array else ""}, err := {receiver}.Com().Get{"Array" if is_array else ""}Property("{name}")',
+                    f'    val{"s" if is_array else ""}, err := {receiver}.com().Get{"Array" if is_array else ""}Property("{name}")',
                     f'    return helpers.Cast{"Slice" if is_array else "Value"}[{go_cast_type}](val{"s" if is_array else ""}), err',
                 ])
 
@@ -101,7 +101,7 @@ def properties_stubs(class_name: str, props: List[NotesProperty]) -> Tuple[List[
             stubs.extend([
                 f'/* {url} */',
                 f'func ({receiver} {class_name}) Set{name}(v {go_method_return_type}) error {{',
-                f'    return {receiver}.Com().PutProperty("{name}", v)',
+                f'    return {receiver}.com().PutProperty("{name}", v)',
                 '}',
             ])
 
@@ -224,23 +224,21 @@ def method_stubs(class_name: str, methods: List[NotesMethod]) -> Tuple[List[str]
         if notes_type == NotesType.OBJECT:
             if is_array:
                 stubs.extend([
-                    f'return com.CallObjectArrayMethod({receiver}.Com(), func(ptr *ole.IDispatch) {go_method_return_type} {{',
-                    f'    return New{go_cast_type}(ptr) /* TODO: Make sure this implementation is correct. */',
-                    f'}}, "{name}"{call_params})',
+                    f'return com.CallObjectArrayMethod({receiver}.com(), New{go_cast_type}, "{name}"{call_params})',
                 ])
             else:
                 stubs.extend([
-                    f'    dispatchPtr, err := {receiver}.Com().CallObjectMethod("{name}"{call_params})',
+                    f'    dispatchPtr, err := {receiver}.com().CallObjectMethod("{name}"{call_params})',
                     f'    return New{go_cast_type}(dispatchPtr), err',
                 ])
         elif notes_type == NotesType.VOID:
             stubs.extend([
-                f'    _, err := {receiver}.Com().CallMethod("{name}"{call_params})',
+                f'    _, err := {receiver}.com().CallMethod("{name}"{call_params})',
                 '    return err',
             ])
         else:
             stubs.extend([
-                f'    val{"s" if is_array else ""}, err := {receiver}.Com().Call{"Array" if is_array else ""}Method("{name}"{call_params})',
+                f'    val{"s" if is_array else ""}, err := {receiver}.com().Call{"Array" if is_array else ""}Method("{name}"{call_params})',
                 f'    return helpers.Cast{"Slice" if is_array else "Value"}[{go_cast_type}](val{"s" if is_array else ""}), err',
             ])
 

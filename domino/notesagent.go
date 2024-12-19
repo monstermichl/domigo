@@ -18,155 +18,155 @@ func NewNotesAgent(dispatchPtr *ole.IDispatch) NotesAgent {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COMMENT_PROPERTY.html */
 func (a NotesAgent) Comment() (String, error) {
-	val, err := a.Com().GetProperty("Comment")
+	val, err := a.com().GetProperty("Comment")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COMMONOWNER_PROPERTY.html */
 func (a NotesAgent) CommonOwner() (String, error) {
-	val, err := a.Com().GetProperty("CommonOwner")
+	val, err := a.com().GetProperty("CommonOwner")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HASRUNSINCEMODIFIED_PROPERTY_AGENT.html */
 func (a NotesAgent) HasRunSinceModified() (Boolean, error) {
-	val, err := a.Com().GetProperty("HasRunSinceModified")
+	val, err := a.com().GetProperty("HasRunSinceModified")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_AGENT_COM.html */
 func (a NotesAgent) HttpURL() (String, error) {
-	val, err := a.Com().GetProperty("HttpURL")
+	val, err := a.com().GetProperty("HttpURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISACTIVATABLE_PROPERTY_AGENT.html */
 func (a NotesAgent) IsActivatable() (Boolean, error) {
-	val, err := a.Com().GetProperty("IsActivatable")
+	val, err := a.com().GetProperty("IsActivatable")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISENABLED_PROPERTY.html */
 func (a NotesAgent) IsEnabled() (Boolean, error) {
-	val, err := a.Com().GetProperty("IsEnabled")
+	val, err := a.com().GetProperty("IsEnabled")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISENABLED_PROPERTY.html */
 func (a NotesAgent) SetIsEnabled(v Boolean) error {
-	return a.Com().PutProperty("IsEnabled", v)
+	return a.com().PutProperty("IsEnabled", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNOTESAGENT_PROPERTY_4410_ABOUT.html */
 func (a NotesAgent) IsNotesAgent() (Boolean, error) {
-	val, err := a.Com().GetProperty("IsNotesAgent")
+	val, err := a.com().GetProperty("IsNotesAgent")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPUBLIC_PROPERTY.html */
 func (a NotesAgent) IsPublic() (Boolean, error) {
-	val, err := a.Com().GetProperty("IsPublic")
+	val, err := a.com().GetProperty("IsPublic")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISWEBAGENT_PROPERTY_5149_ABOUT.html */
 func (a NotesAgent) IsWebAgent() (Boolean, error) {
-	val, err := a.Com().GetProperty("IsWebAgent")
+	val, err := a.com().GetProperty("IsWebAgent")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTRUN_PROPERTY_AGENT.html */
 func (a NotesAgent) LastRun() (Time, error) {
-	val, err := a.Com().GetProperty("LastRun")
+	val, err := a.com().GetProperty("LastRun")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKHOLDERS_PROPERTY_AGENT.html */
 func (a NotesAgent) LockHolders() ([]String, error) {
-	vals, err := a.Com().GetArrayProperty("LockHolders")
+	vals, err := a.com().GetArrayProperty("LockHolders")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_AGENT.html */
 func (a NotesAgent) Name() (String, error) {
-	val, err := a.Com().GetProperty("Name")
+	val, err := a.com().GetProperty("Name")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESURL_PROPERTY_AGENT_COM.html */
 func (a NotesAgent) NotesURL() (String, error) {
-	val, err := a.Com().GetProperty("NotesURL")
+	val, err := a.com().GetProperty("NotesURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ONBEHALFOF_PROPERTY_AGENT.html */
 func (a NotesAgent) OnBehalfOf() (String, error) {
-	val, err := a.Com().GetProperty("OnBehalfOf")
+	val, err := a.com().GetProperty("OnBehalfOf")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OWNER_PROPERTY.html */
 func (a NotesAgent) Owner() (String, error) {
-	val, err := a.Com().GetProperty("Owner")
+	val, err := a.com().GetProperty("Owner")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARAMETERDOCID_PROPERTY_AGENT.html */
 func (a NotesAgent) ParameterDocID() (String, error) {
-	val, err := a.Com().GetProperty("ParameterDocID")
+	val, err := a.com().GetProperty("ParameterDocID")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_AGENT.html */
 func (a NotesAgent) Parent() (NotesDatabase, error) {
-	dispatchPtr, err := a.Com().GetObjectProperty("Parent")
+	dispatchPtr, err := a.com().GetObjectProperty("Parent")
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROHIBITDESIGNUPDATE_PROPERTY.html */
 func (a NotesAgent) ProhibitDesignUpdate() (Boolean, error) {
-	val, err := a.Com().GetProperty("ProhibitDesignUpdate")
+	val, err := a.com().GetProperty("ProhibitDesignUpdate")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROHIBITDESIGNUPDATE_PROPERTY.html */
 func (a NotesAgent) SetProhibitDesignUpdate(v Boolean) error {
-	return a.Com().PutProperty("ProhibitDesignUpdate", v)
+	return a.com().PutProperty("ProhibitDesignUpdate", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_QUERY_PROPERTY_AGENT.html */
 func (a NotesAgent) Query() (String, error) {
-	val, err := a.Com().GetProperty("Query")
+	val, err := a.com().GetProperty("Query")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SERVERNAME_PROPERTY.html */
 func (a NotesAgent) ServerName() (String, error) {
-	val, err := a.Com().GetProperty("ServerName")
+	val, err := a.com().GetProperty("ServerName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SERVERNAME_PROPERTY.html */
 func (a NotesAgent) SetServerName(v String) error {
-	return a.Com().PutProperty("ServerName", v)
+	return a.com().PutProperty("ServerName", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TARGET_PROPERTY_1466_ABOUT.html */
 func (a NotesAgent) Target() (Long, error) {
-	val, err := a.Com().GetProperty("Target")
+	val, err := a.com().GetProperty("Target")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TRIGGER_PROPERTY_9708_ABOUT.html */
 func (a NotesAgent) Trigger() (Long, error) {
-	val, err := a.Com().GetProperty("Trigger")
+	val, err := a.com().GetProperty("Trigger")
 	return helpers.CastValue[Long](val), err
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPERFORMANCEDOCUMENT_METHOD_AGENT.html */
 func (a NotesAgent) GetPerformanceDocument() (NotesAgent, error) {
-	dispatchPtr, err := a.Com().CallObjectMethod("GetPerformanceDocument")
+	dispatchPtr, err := a.com().CallObjectMethod("GetPerformanceDocument")
 	return NewNotesAgent(dispatchPtr), err
 }
 
@@ -204,7 +204,7 @@ func (a NotesAgent) Lock(params ...notesAgentLockParam) (Boolean, error) {
 			paramsOrdered = append(paramsOrdered, *paramsStruct.provisionalOK)
 		}
 	}
-	val, err := a.Com().CallMethod("Lock", paramsOrdered...)
+	val, err := a.com().CallMethod("Lock", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -232,13 +232,13 @@ func (a NotesAgent) LockProvisional(params ...notesAgentLockProvisionalParam) (B
 	if paramsStruct.name != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
 	}
-	val, err := a.Com().CallMethod("LockProvisional", paramsOrdered...)
+	val, err := a.com().CallMethod("LockProvisional", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_AGENT.html */
 func (a NotesAgent) Remove() error {
-	_, err := a.Com().CallMethod("Remove")
+	_, err := a.com().CallMethod("Remove")
 	return err
 }
 
@@ -266,7 +266,7 @@ func (a NotesAgent) Run(params ...notesAgentRunParam) (Integer, error) {
 	if paramsStruct.noteID != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.noteID)
 	}
-	val, err := a.Com().CallMethod("Run", paramsOrdered...)
+	val, err := a.com().CallMethod("Run", paramsOrdered...)
 	return helpers.CastValue[Integer](val), err
 }
 
@@ -294,18 +294,18 @@ func (a NotesAgent) RunOnServer(params ...notesAgentRunOnServerParam) (Integer, 
 	if paramsStruct.noteID != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.noteID)
 	}
-	val, err := a.Com().CallMethod("RunOnServer", paramsOrdered...)
+	val, err := a.com().CallMethod("RunOnServer", paramsOrdered...)
 	return helpers.CastValue[Integer](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVE_METHOD_AGENT.html */
 func (a NotesAgent) Save() error {
-	_, err := a.Com().CallMethod("Save")
+	_, err := a.com().CallMethod("Save")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_AGENT.html */
 func (a NotesAgent) UnLock() error {
-	_, err := a.Com().CallMethod("UnLock")
+	_, err := a.com().CallMethod("UnLock")
 	return err
 }

@@ -18,77 +18,77 @@ func NewNotesDateTime(dispatchPtr *ole.IDispatch) NotesDateTime {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DATEONLY_PROPERTY.html */
 func (d NotesDateTime) DateOnly() (String, error) {
-	val, err := d.Com().GetProperty("DateOnly")
+	val, err := d.com().GetProperty("DateOnly")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GMTTIME_PROPERTY.html */
 func (d NotesDateTime) GMTTime() (String, error) {
-	val, err := d.Com().GetProperty("GMTTime")
+	val, err := d.com().GetProperty("GMTTime")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDST_PROPERTY.html */
 func (d NotesDateTime) IsDST() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsDST")
+	val, err := d.com().GetProperty("IsDST")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISVALIDDATE_PROPERTY_DATETIME.html */
 func (d NotesDateTime) IsValidDate() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsValidDate")
+	val, err := d.com().GetProperty("IsValidDate")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCALTIME_PROPERTY.html */
 func (d NotesDateTime) LocalTime() (String, error) {
-	val, err := d.Com().GetProperty("LocalTime")
+	val, err := d.com().GetProperty("LocalTime")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCALTIME_PROPERTY.html */
 func (d NotesDateTime) SetLocalTime(v String) error {
-	return d.Com().PutProperty("LocalTime", v)
+	return d.com().PutProperty("LocalTime", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LSGMTTIME_PROPERTY.html */
 func (d NotesDateTime) LSGMTTime() (Variant, error) {
-	val, err := d.Com().GetProperty("LSGMTTime")
+	val, err := d.com().GetProperty("LSGMTTime")
 	return helpers.CastValue[Variant](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LSLOCALTIME_PROPERTY.html */
 func (d NotesDateTime) LSLocalTime() (Variant, error) {
-	val, err := d.Com().GetProperty("LSLocalTime")
+	val, err := d.com().GetProperty("LSLocalTime")
 	return helpers.CastValue[Variant](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LSLOCALTIME_PROPERTY.html */
 func (d NotesDateTime) SetLSLocalTime(v Variant) error {
-	return d.Com().PutProperty("LSLocalTime", v)
+	return d.com().PutProperty("LSLocalTime", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_DATETIME_COM.html */
 func (d NotesDateTime) Parent() (NotesSession, error) {
-	dispatchPtr, err := d.Com().GetObjectProperty("Parent")
+	dispatchPtr, err := d.com().GetObjectProperty("Parent")
 	return NewNotesSession(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEONLY_PROPERTY.html */
 func (d NotesDateTime) TimeOnly() (String, error) {
-	val, err := d.Com().GetProperty("TimeOnly")
+	val, err := d.com().GetProperty("TimeOnly")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEZONE_PROPERTY.html */
 func (d NotesDateTime) TimeZone() (Long, error) {
-	val, err := d.Com().GetProperty("TimeZone")
+	val, err := d.com().GetProperty("TimeZone")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ZONETIME_PROPERTY.html */
 func (d NotesDateTime) ZoneTime() (String, error) {
-	val, err := d.Com().GetProperty("ZoneTime")
+	val, err := d.com().GetProperty("ZoneTime")
 	return helpers.CastValue[String](val), err
 }
 
@@ -117,7 +117,7 @@ func (d NotesDateTime) AdjustDay(n Integer, params ...notesDateTimeAdjustDayPara
 	if paramsStruct.preserveLocalTime != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.preserveLocalTime)
 	}
-	_, err := d.Com().CallMethod("AdjustDay", paramsOrdered...)
+	_, err := d.com().CallMethod("AdjustDay", paramsOrdered...)
 	return err
 }
 
@@ -145,7 +145,7 @@ func (d NotesDateTime) AdjustHour(n Integer, params ...notesDateTimeAdjustHourPa
 	if paramsStruct.preserveLocalTime != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.preserveLocalTime)
 	}
-	_, err := d.Com().CallMethod("AdjustHour", paramsOrdered...)
+	_, err := d.com().CallMethod("AdjustHour", paramsOrdered...)
 	return err
 }
 
@@ -173,7 +173,7 @@ func (d NotesDateTime) AdjustMinute(n Integer, params ...notesDateTimeAdjustMinu
 	if paramsStruct.preserveLocalTime != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.preserveLocalTime)
 	}
-	_, err := d.Com().CallMethod("AdjustMinute", paramsOrdered...)
+	_, err := d.com().CallMethod("AdjustMinute", paramsOrdered...)
 	return err
 }
 
@@ -201,7 +201,7 @@ func (d NotesDateTime) AdjustMonth(n Integer, params ...notesDateTimeAdjustMonth
 	if paramsStruct.preserveLocalTime != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.preserveLocalTime)
 	}
-	_, err := d.Com().CallMethod("AdjustMonth", paramsOrdered...)
+	_, err := d.com().CallMethod("AdjustMonth", paramsOrdered...)
 	return err
 }
 
@@ -229,7 +229,7 @@ func (d NotesDateTime) AdjustSecond(n Integer, params ...notesDateTimeAdjustSeco
 	if paramsStruct.preserveLocalTime != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.preserveLocalTime)
 	}
-	_, err := d.Com().CallMethod("AdjustSecond", paramsOrdered...)
+	_, err := d.com().CallMethod("AdjustSecond", paramsOrdered...)
 	return err
 }
 
@@ -257,42 +257,42 @@ func (d NotesDateTime) AdjustYear(n Integer, params ...notesDateTimeAdjustYearPa
 	if paramsStruct.preserveLocalTime != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.preserveLocalTime)
 	}
-	_, err := d.Com().CallMethod("AdjustYear", paramsOrdered...)
+	_, err := d.com().CallMethod("AdjustYear", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONVERTTOZONE_METHOD.html */
 func (d NotesDateTime) ConvertToZone(newzone Integer, dst Boolean) error {
-	_, err := d.Com().CallMethod("ConvertToZone", newzone, dst)
+	_, err := d.com().CallMethod("ConvertToZone", newzone, dst)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETANYDATE_METHOD.html */
 func (d NotesDateTime) SetAnyDate() error {
-	_, err := d.Com().CallMethod("SetAnyDate")
+	_, err := d.com().CallMethod("SetAnyDate")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETANYTIME_METHOD.html */
 func (d NotesDateTime) SetAnyTime() error {
-	_, err := d.Com().CallMethod("SetAnyTime")
+	_, err := d.com().CallMethod("SetAnyTime")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETNOW_METHOD.html */
 func (d NotesDateTime) SetNow() error {
-	_, err := d.Com().CallMethod("SetNow")
+	_, err := d.com().CallMethod("SetNow")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEDIFFERENCE_METHOD.html */
 func (d NotesDateTime) TimeDifference(notesDateTime NotesDateTime) (Long, error) {
-	val, err := d.Com().CallMethod("TimeDifference", notesDateTime.Com().Dispatch())
+	val, err := d.com().CallMethod("TimeDifference", notesDateTime.com().Dispatch())
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEDIFFERENCEDOUBLE_METHOD.html */
 func (d NotesDateTime) TimeDifferenceDouble(notesDateTime NotesDateTime) (Double, error) {
-	val, err := d.Com().CallMethod("TimeDifferenceDouble", notesDateTime.Com().Dispatch())
+	val, err := d.com().CallMethod("TimeDifferenceDouble", notesDateTime.com().Dispatch())
 	return helpers.CastValue[Double](val), err
 }

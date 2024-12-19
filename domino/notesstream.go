@@ -18,49 +18,49 @@ func NewNotesStream(dispatchPtr *ole.IDispatch) NotesStream {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BYTES_PROPERTY_STREAM.html */
 func (s NotesStream) Bytes() (Long, error) {
-	val, err := s.Com().GetProperty("Bytes")
+	val, err := s.com().GetProperty("Bytes")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CHARSET_PROPERTY_STREAM.html */
 func (s NotesStream) Charset() (String, error) {
-	val, err := s.Com().GetProperty("Charset")
+	val, err := s.com().GetProperty("Charset")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISEOS_PROPERTY_STREAM.html */
 func (s NotesStream) IsEOS() (Boolean, error) {
-	val, err := s.Com().GetProperty("IsEOS")
+	val, err := s.com().GetProperty("IsEOS")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISREADONLY_PROPERTY_STREAM.html */
 func (s NotesStream) IsReadOnly() (Boolean, error) {
-	val, err := s.Com().GetProperty("IsReadOnly")
+	val, err := s.com().GetProperty("IsReadOnly")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_STREAM.html */
 func (s NotesStream) Parent() (NotesSession, error) {
-	dispatchPtr, err := s.Com().GetObjectProperty("Parent")
+	dispatchPtr, err := s.com().GetObjectProperty("Parent")
 	return NewNotesSession(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POSITION_PROPERTY_STREAM.html */
 func (s NotesStream) Position() (Long, error) {
-	val, err := s.Com().GetProperty("Position")
+	val, err := s.com().GetProperty("Position")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POSITION_PROPERTY_STREAM.html */
 func (s NotesStream) SetPosition(v Long) error {
-	return s.Com().PutProperty("Position", v)
+	return s.com().PutProperty("Position", v)
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLOSE_METHOD_STREAM.html */
 func (s NotesStream) Close() error {
-	_, err := s.Com().CallMethod("Close")
+	_, err := s.com().CallMethod("Close")
 	return err
 }
 
@@ -88,7 +88,7 @@ func (s NotesStream) Open(pathname String, params ...notesStreamOpenParam) (Bool
 	if paramsStruct.charset != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.charset)
 	}
-	val, err := s.Com().CallMethod("Open", paramsOrdered...)
+	val, err := s.com().CallMethod("Open", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -116,7 +116,7 @@ func (s NotesStream) Read(params ...notesStreamReadParam) ([]Byte, error) {
 	if paramsStruct.length != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.length)
 	}
-	vals, err := s.Com().CallArrayMethod("Read", paramsOrdered...)
+	vals, err := s.com().CallArrayMethod("Read", paramsOrdered...)
 	return helpers.CastSlice[Byte](vals), err
 }
 
@@ -154,19 +154,19 @@ func (s NotesStream) ReadText(params ...notesStreamReadTextParam) (String, error
 			paramsOrdered = append(paramsOrdered, *paramsStruct.eol)
 		}
 	}
-	val, err := s.Com().CallMethod("ReadText", paramsOrdered...)
+	val, err := s.com().CallMethod("ReadText", paramsOrdered...)
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TRUNCATE_METHOD_STREAM.html */
 func (s NotesStream) Truncate() error {
-	_, err := s.Com().CallMethod("Truncate")
+	_, err := s.com().CallMethod("Truncate")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_WRITE_METHOD_STREAM.html */
 func (s NotesStream) Write(buffer []Byte) (Byte, error) {
-	val, err := s.Com().CallMethod("Write", buffer)
+	val, err := s.com().CallMethod("Write", buffer)
 	return helpers.CastValue[Byte](val), err
 }
 
@@ -194,6 +194,6 @@ func (s NotesStream) WriteText(text String, params ...notesStreamWriteTextParam)
 	if paramsStruct.eol != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.eol)
 	}
-	val, err := s.Com().CallMethod("WriteText", paramsOrdered...)
+	val, err := s.com().CallMethod("WriteText", paramsOrdered...)
 	return helpers.CastValue[Byte](val), err
 }

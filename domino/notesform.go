@@ -18,100 +18,100 @@ func NewNotesForm(dispatchPtr *ole.IDispatch) NotesForm {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIASES_PROPERTY_FORM.html */
 func (f NotesForm) Aliases() ([]String, error) {
-	vals, err := f.Com().GetArrayProperty("Aliases")
+	vals, err := f.com().GetArrayProperty("Aliases")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FIELDS_PROPERTY.html */
 func (f NotesForm) Fields() ([]String, error) {
-	vals, err := f.Com().GetArrayProperty("Fields")
+	vals, err := f.com().GetArrayProperty("Fields")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMUSERS_PROPERTY.html */
 func (f NotesForm) FormUsers() ([]String, error) {
-	vals, err := f.Com().GetArrayProperty("FormUsers")
+	vals, err := f.com().GetArrayProperty("FormUsers")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMUSERS_PROPERTY.html */
 func (f NotesForm) SetFormUsers(v []String) error {
-	return f.Com().PutProperty("FormUsers", v)
+	return f.com().PutProperty("FormUsers", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_FORM_COM.html */
 func (f NotesForm) HttpURL() (String, error) {
-	val, err := f.Com().GetProperty("HttpURL")
+	val, err := f.com().GetProperty("HttpURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSUBFORM_PROPERTY.html */
 func (f NotesForm) IsSubForm() (Boolean, error) {
-	val, err := f.Com().GetProperty("IsSubForm")
+	val, err := f.com().GetProperty("IsSubForm")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKHOLDERS_PROPERTY_FORM.html */
 func (f NotesForm) LockHolders() ([]String, error) {
-	vals, err := f.Com().GetArrayProperty("LockHolders")
+	vals, err := f.com().GetArrayProperty("LockHolders")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_FORM.html */
 func (f NotesForm) Name() (String, error) {
-	val, err := f.Com().GetProperty("Name")
+	val, err := f.com().GetProperty("Name")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESURL_PROPERTY_FORM_COM.html */
 func (f NotesForm) NotesURL() (String, error) {
-	val, err := f.Com().GetProperty("NotesURL")
+	val, err := f.com().GetProperty("NotesURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_FORM_COM.html */
 func (f NotesForm) Parent() (NotesDatabase, error) {
-	dispatchPtr, err := f.Com().GetObjectProperty("Parent")
+	dispatchPtr, err := f.com().GetObjectProperty("Parent")
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY.html */
 func (f NotesForm) ProtectReaders() (Boolean, error) {
-	val, err := f.Com().GetProperty("ProtectReaders")
+	val, err := f.com().GetProperty("ProtectReaders")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY.html */
 func (f NotesForm) SetProtectReaders(v Boolean) error {
-	return f.Com().PutProperty("ProtectReaders", v)
+	return f.com().PutProperty("ProtectReaders", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTUSERS_PROPERTY.html */
 func (f NotesForm) ProtectUsers() (Boolean, error) {
-	val, err := f.Com().GetProperty("ProtectUsers")
+	val, err := f.com().GetProperty("ProtectUsers")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTUSERS_PROPERTY.html */
 func (f NotesForm) SetProtectUsers(v Boolean) error {
-	return f.Com().PutProperty("ProtectUsers", v)
+	return f.com().PutProperty("ProtectUsers", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY.html */
 func (f NotesForm) Readers() ([]String, error) {
-	vals, err := f.Com().GetArrayProperty("Readers")
+	vals, err := f.com().GetArrayProperty("Readers")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY.html */
 func (f NotesForm) SetReaders(v []String) error {
-	return f.Com().PutProperty("Readers", v)
+	return f.com().PutProperty("Readers", v)
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIELDTYPE_METHOD_FORM.html */
 func (f NotesForm) GetFieldType(name String) (NotesItemDataType, error) {
-	val, err := f.Com().CallMethod("GetFieldType", name)
+	val, err := f.com().CallMethod("GetFieldType", name)
 	return helpers.CastValue[NotesItemDataType](val), err
 }
 
@@ -149,7 +149,7 @@ func (f NotesForm) Lock(params ...notesFormLockParam) (Boolean, error) {
 			paramsOrdered = append(paramsOrdered, *paramsStruct.provisionalOK)
 		}
 	}
-	val, err := f.Com().CallMethod("Lock", paramsOrdered...)
+	val, err := f.com().CallMethod("Lock", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -177,18 +177,18 @@ func (f NotesForm) LockProvisional(params ...notesFormLockProvisionalParam) (Boo
 	if paramsStruct.name != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
 	}
-	val, err := f.Com().CallMethod("LockProvisional", paramsOrdered...)
+	val, err := f.com().CallMethod("LockProvisional", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_FORM.html */
 func (f NotesForm) Remove() error {
-	_, err := f.Com().CallMethod("Remove")
+	_, err := f.com().CallMethod("Remove")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_FORM.html */
 func (f NotesForm) UnLock() error {
-	_, err := f.Com().CallMethod("UnLock")
+	_, err := f.com().CallMethod("UnLock")
 	return err
 }

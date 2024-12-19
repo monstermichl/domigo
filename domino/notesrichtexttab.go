@@ -27,19 +27,19 @@ func NewNotesRichTextTab(dispatchPtr *ole.IDispatch) NotesRichTextTab {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POSITION_PROPERTY_4695.html */
 func (r NotesRichTextTab) Position() (Long, error) {
-	val, err := r.Com().GetProperty("Position")
+	val, err := r.com().GetProperty("Position")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TYPE_PROPERTY_7073.html */
 func (r NotesRichTextTab) Type() (NotesRichTextTabType, error) {
-	val, err := r.Com().GetProperty("Type")
+	val, err := r.com().GetProperty("Type")
 	return helpers.CastValue[NotesRichTextTabType](val), err
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLEAR_METHOD_1029.html */
 func (r NotesRichTextTab) Clear() error {
-	_, err := r.Com().CallMethod("Clear")
+	_, err := r.com().CallMethod("Clear")
 	return err
 }

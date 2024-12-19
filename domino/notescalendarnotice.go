@@ -21,20 +21,20 @@ func NewNotesCalendarNotice(dispatchPtr *ole.IDispatch) NotesCalendarNotice {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTEID_PROPERTY_CALNOTICE.html */
 func (c NotesCalendarNotice) NoteID() (String, error) {
-	val, err := c.Com().GetProperty("NoteID")
+	val, err := c.com().GetProperty("NoteID")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNID_PROPERTY_CALNOTICE.html */
 func (c NotesCalendarNotice) UNID() (String, error) {
-	val, err := c.Com().GetProperty("UNID")
+	val, err := c.com().GetProperty("UNID")
 	return helpers.CastValue[String](val), err
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ACCEPTCOUNTER_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) AcceptCounter(comments String) error {
-	_, err := c.Com().CallMethod("AcceptCounter", comments)
+	_, err := c.com().CallMethod("AcceptCounter", comments)
 	return err
 }
 
@@ -67,12 +67,12 @@ func (c NotesCalendarNotice) Counter(comments String, params ...notesCalendarNot
 	}
 
 	if paramsStruct.start != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.start.Com().Dispatch())
+		paramsOrdered = append(paramsOrdered, *paramsStruct.start.com().Dispatch())
 		if paramsStruct.end != nil {
-			paramsOrdered = append(paramsOrdered, *paramsStruct.end.Com().Dispatch())
+			paramsOrdered = append(paramsOrdered, *paramsStruct.end.com().Dispatch())
 		}
 	}
-	_, err := c.Com().CallMethod("Counter", paramsOrdered...)
+	_, err := c.com().CallMethod("Counter", paramsOrdered...)
 	return err
 }
 
@@ -100,13 +100,13 @@ func (c NotesCalendarNotice) Decline(comments String, params ...notesCalendarNot
 	if paramsStruct.keepInformed != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.keepInformed)
 	}
-	_, err := c.Com().CallMethod("Decline", paramsOrdered...)
+	_, err := c.com().CallMethod("Decline", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DECLINECOUNTER_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) DeclineCounter(comments String) error {
-	_, err := c.Com().CallMethod("DeclineCounter", comments)
+	_, err := c.com().CallMethod("DeclineCounter", comments)
 	return err
 }
 
@@ -134,47 +134,47 @@ func (c NotesCalendarNotice) Delegate(commentsToOrganizer String, delegateTo Str
 	if paramsStruct.keepInformed != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.keepInformed)
 	}
-	_, err := c.Com().CallMethod("Delegate", paramsOrdered...)
+	_, err := c.com().CallMethod("Delegate", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETASDOCUMENT_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) GetAsDocument() (NotesDocument, error) {
-	dispatchPtr, err := c.Com().CallObjectMethod("GetAsDocument")
+	dispatchPtr, err := c.com().CallObjectMethod("GetAsDocument")
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETOUTSTANDINGINVITATIONS_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) GetOutstandingInvitations() ([]NotesCalendarNotice, error) {
-	return com.CallObjectArrayMethod(c.Com(), NewNotesCalendarNotice, "GetOutstandingInvitations")
+	return com.CallObjectArrayMethod(c.com(), NewNotesCalendarNotice, "GetOutstandingInvitations")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READ_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) Read() (String, error) {
-	val, err := c.Com().CallMethod("Read")
+	val, err := c.com().CallMethod("Read")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVECANCELLED_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) RemoveCancelled() error {
-	_, err := c.Com().CallMethod("RemoveCancelled")
+	_, err := c.com().CallMethod("RemoveCancelled")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REQUESTINFO_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) RequestInfo(comments String) error {
-	_, err := c.Com().CallMethod("RequestInfo", comments)
+	_, err := c.com().CallMethod("RequestInfo", comments)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SENDUPDATEDINFO_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) SendUpdatedInfo(comments String) error {
-	_, err := c.Com().CallMethod("SendUpdatedInfo", comments)
+	_, err := c.com().CallMethod("SendUpdatedInfo", comments)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TENTATIVELYACCEPT_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) TentativelyAccept(comments String) error {
-	_, err := c.Com().CallMethod("TentativelyAccept", comments)
+	_, err := c.com().CallMethod("TentativelyAccept", comments)
 	return err
 }

@@ -18,38 +18,38 @@ func NewNotesRichTextRange(dispatchPtr *ole.IDispatch) NotesRichTextRange {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAVIGATOR_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) Navigator() (NotesRichTextNavigator, error) {
-	dispatchPtr, err := r.Com().GetObjectProperty("Navigator")
+	dispatchPtr, err := r.com().GetObjectProperty("Navigator")
 	return NewNotesRichTextNavigator(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STYLE_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) Style() (NotesRichTextStyle, error) {
-	dispatchPtr, err := r.Com().GetObjectProperty("Style")
+	dispatchPtr, err := r.com().GetObjectProperty("Style")
 	return NewNotesRichTextStyle(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXTPARAGRAPH_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) TextParagraph() (String, error) {
-	val, err := r.Com().GetProperty("TextParagraph")
+	val, err := r.com().GetProperty("TextParagraph")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXTRUN_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) TextRun() (String, error) {
-	val, err := r.Com().GetProperty("TextRun")
+	val, err := r.com().GetProperty("TextRun")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TYPE_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) Type() (Long, error) {
-	val, err := r.Com().GetProperty("Type")
+	val, err := r.com().GetProperty("Type")
 	return helpers.CastValue[Long](val), err
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLONE_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) Clone() (NotesRichTextRange, error) {
-	dispatchPtr, err := r.Com().CallObjectMethod("Clone")
+	dispatchPtr, err := r.com().CallObjectMethod("Clone")
 	return NewNotesRichTextRange(dispatchPtr), err
 }
 
@@ -77,13 +77,13 @@ func (r NotesRichTextRange) FindAndReplace(target String, replacement String, pa
 	if paramsStruct.options != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.options)
 	}
-	val, err := r.Com().CallMethod("FindAndReplace", paramsOrdered...)
+	val, err := r.com().CallMethod("FindAndReplace", paramsOrdered...)
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) Remove() error {
-	_, err := r.Com().CallMethod("Remove")
+	_, err := r.com().CallMethod("Remove")
 	return err
 }
 
@@ -121,24 +121,24 @@ func (r NotesRichTextRange) Reset(params ...notesRichTextRangeResetParam) error 
 			paramsOrdered = append(paramsOrdered, *paramsStruct.end)
 		}
 	}
-	_, err := r.Com().CallMethod("Reset", paramsOrdered...)
+	_, err := r.com().CallMethod("Reset", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETBEGIN_METHOD_RTRANGE.html */
-func (r NotesRichTextRange) SetBegin(element NotesConnector) error {
-	_, err := r.Com().CallMethod("SetBegin", element.Com().Dispatch())
+func (r NotesRichTextRange) SetBegin(element notesStruct) error {
+	_, err := r.com().CallMethod("SetBegin", element.com().Dispatch())
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETEND_METHOD_RTRANGE.html */
-func (r NotesRichTextRange) SetEnd(element NotesConnector) error {
-	_, err := r.Com().CallMethod("SetEnd", element.Com().Dispatch())
+func (r NotesRichTextRange) SetEnd(element notesStruct) error {
+	_, err := r.com().CallMethod("SetEnd", element.com().Dispatch())
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETSTYLE_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) SetStyle(style NotesRichTextStyle) error {
-	_, err := r.Com().CallMethod("SetStyle", style.Com().Dispatch())
+	_, err := r.com().CallMethod("SetStyle", style.com().Dispatch())
 	return err
 }

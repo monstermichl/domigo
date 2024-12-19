@@ -19,277 +19,277 @@ func NewNotesDocument(dispatchPtr *ole.IDispatch) NotesDocument {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_AUTHORS_PROPERTY.html */
 func (d NotesDocument) Authors() ([]String, error) {
-	vals, err := d.Com().GetArrayProperty("Authors")
+	vals, err := d.com().GetArrayProperty("Authors")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNVALUES_PROPERTY.html */
 func (d NotesDocument) ColumnValues() ([]Variant, error) {
-	vals, err := d.Com().GetArrayProperty("ColumnValues")
+	vals, err := d.com().GetArrayProperty("ColumnValues")
 	return helpers.CastSlice[Variant](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATED_PROPERTY_DOC.html */
 func (d NotesDocument) Created() (Variant, error) {
-	val, err := d.Com().GetProperty("Created")
+	val, err := d.com().GetProperty("Created")
 	return helpers.CastValue[Variant](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EMBEDDEDOBJECTS_PROPERTY_DOC.html */
 func (d NotesDocument) EmbeddedObjects() ([]NotesEmbeddedObject, error) {
-	return com.GetObjectArrayProperty(d.Com(), NewNotesEmbeddedObject, "EmbeddedObjects")
+	return com.GetObjectArrayProperty(d.com(), NewNotesEmbeddedObject, "EmbeddedObjects")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPTIONKEYS_PROPERTY.html */
 func (d NotesDocument) EncryptionKeys() ([]String, error) {
-	vals, err := d.Com().GetArrayProperty("EncryptionKeys")
+	vals, err := d.com().GetArrayProperty("EncryptionKeys")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPTIONKEYS_PROPERTY.html */
 func (d NotesDocument) SetEncryptionKeys(v []String) error {
-	return d.Com().PutProperty("EncryptionKeys", v)
+	return d.com().PutProperty("EncryptionKeys", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPTONSEND_PROPERTY.html */
 func (d NotesDocument) EncryptOnSend() (Boolean, error) {
-	val, err := d.Com().GetProperty("EncryptOnSend")
+	val, err := d.com().GetProperty("EncryptOnSend")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPTONSEND_PROPERTY.html */
 func (d NotesDocument) SetEncryptOnSend(v Boolean) error {
-	return d.Com().PutProperty("EncryptOnSend", v)
+	return d.com().PutProperty("EncryptOnSend", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FOLDERREFERENCES_PROPERTY_1349_ABOUT.html */
 func (d NotesDocument) FolderReferences() ([]String, error) {
-	vals, err := d.Com().GetArrayProperty("FolderReferences")
+	vals, err := d.com().GetArrayProperty("FolderReferences")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCHSCORE_PROPERTY.html */
 func (d NotesDocument) FTSearchScore() (Long, error) {
-	val, err := d.Com().GetProperty("FTSearchScore")
+	val, err := d.com().GetProperty("FTSearchScore")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HASEMBEDDED_PROPERTY.html */
 func (d NotesDocument) HasEmbedded() (Boolean, error) {
-	val, err := d.Com().GetProperty("HasEmbedded")
+	val, err := d.com().GetProperty("HasEmbedded")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_DOCUMENT_COM.html */
 func (d NotesDocument) HttpURL() (String, error) {
-	val, err := d.Com().GetProperty("HttpURL")
+	val, err := d.com().GetProperty("HttpURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDELETED_PROPERTY_8893_ABOUT.html */
 func (d NotesDocument) IsDeleted() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsDeleted")
+	val, err := d.com().GetProperty("IsDeleted")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISENCRYPTED_PROPERTY_DOC.html */
 func (d NotesDocument) IsEncrypted() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsEncrypted")
+	val, err := d.com().GetProperty("IsEncrypted")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNAMEDDOC_PROPERTY.html */
 func (d NotesDocument) IsNamedDoc() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsNamedDoc")
+	val, err := d.com().GetProperty("IsNamedDoc")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNEWNOTE_PROPERTY.html */
 func (d NotesDocument) IsNewNote() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsNewNote")
+	val, err := d.com().GetProperty("IsNewNote")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPROFILE_PROPERTY.html */
 func (d NotesDocument) IsProfile() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsProfile")
+	val, err := d.com().GetProperty("IsProfile")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISRESPONSE_PROPERTY_DOC.html */
 func (d NotesDocument) IsResponse() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsResponse")
+	val, err := d.com().GetProperty("IsResponse")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSIGNED_PROPERTY_DOC.html */
 func (d NotesDocument) IsSigned() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsSigned")
+	val, err := d.com().GetProperty("IsSigned")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISUIDOCOPEN_PROPERTY.html */
 func (d NotesDocument) IsUIDocOpen() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsUIDocOpen")
+	val, err := d.com().GetProperty("IsUIDocOpen")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISVALID_PROPERTY_DOC.html */
 func (d NotesDocument) IsValid() (Boolean, error) {
-	val, err := d.Com().GetProperty("IsValid")
+	val, err := d.com().GetProperty("IsValid")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ITEMS_PROPERTY.html */
 func (d NotesDocument) Items() ([]NotesItem, error) {
-	return com.GetObjectArrayProperty(d.Com(), NewNotesItem, "Items")
+	return com.GetObjectArrayProperty(d.com(), NewNotesItem, "Items")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_KEY_PROPERTY.html */
 func (d NotesDocument) Key() (String, error) {
-	val, err := d.Com().GetProperty("Key")
+	val, err := d.com().GetProperty("Key")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTACCESSED_PROPERTY.html */
 func (d NotesDocument) LastAccessed() (Time, error) {
-	val, err := d.Com().GetProperty("LastAccessed")
+	val, err := d.com().GetProperty("LastAccessed")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTMODIFIED_PROPERTY_DOC.html */
 func (d NotesDocument) LastModified() (Time, error) {
-	val, err := d.Com().GetProperty("LastModified")
+	val, err := d.com().GetProperty("LastModified")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKHOLDERS_PROPERTY_DOC.html */
 func (d NotesDocument) LockHolders() ([]String, error) {
-	vals, err := d.Com().GetArrayProperty("LockHolders")
+	vals, err := d.com().GetArrayProperty("LockHolders")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAMEOFDOC_PROPERTY.html */
 func (d NotesDocument) NameOfDoc() (String, error) {
-	val, err := d.Com().GetProperty("NameOfDoc")
+	val, err := d.com().GetProperty("NameOfDoc")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAMEOFPROFILE_PROPERTY.html */
 func (d NotesDocument) NameOfProfile() (String, error) {
-	val, err := d.Com().GetProperty("NameOfProfile")
+	val, err := d.com().GetProperty("NameOfProfile")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTEID_PROPERTY.html */
 func (d NotesDocument) NoteID() (String, error) {
-	val, err := d.Com().GetProperty("NoteID")
+	val, err := d.com().GetProperty("NoteID")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESURL_PROPERTY_DOCUMENT_COM.html */
 func (d NotesDocument) NotesURL() (String, error) {
-	val, err := d.Com().GetProperty("NotesURL")
+	val, err := d.com().GetProperty("NotesURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENTDATABASE_PROPERTY.html */
 func (d NotesDocument) ParentDatabase() (NotesDatabase, error) {
-	dispatchPtr, err := d.Com().GetObjectProperty("ParentDatabase")
+	dispatchPtr, err := d.com().GetObjectProperty("ParentDatabase")
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENTDOCUMENTUNID_PROPERTY.html */
 func (d NotesDocument) ParentDocumentUNID() (String, error) {
-	val, err := d.Com().GetProperty("ParentDocumentUNID")
+	val, err := d.com().GetProperty("ParentDocumentUNID")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENTVIEW_PROPERTY.html */
 func (d NotesDocument) ParentView() (NotesView, error) {
-	dispatchPtr, err := d.Com().GetObjectProperty("ParentView")
+	dispatchPtr, err := d.com().GetObjectProperty("ParentView")
 	return NewNotesView(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESPONSES_PROPERTY.html */
 func (d NotesDocument) Responses() (NotesDocumentCollection, error) {
-	dispatchPtr, err := d.Com().GetObjectProperty("Responses")
+	dispatchPtr, err := d.com().GetObjectProperty("Responses")
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVEMESSAGEONSEND_PROPERTY.html */
 func (d NotesDocument) SaveMessageOnSend() (Boolean, error) {
-	val, err := d.Com().GetProperty("SaveMessageOnSend")
+	val, err := d.com().GetProperty("SaveMessageOnSend")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVEMESSAGEONSEND_PROPERTY.html */
 func (d NotesDocument) SetSaveMessageOnSend(v Boolean) error {
-	return d.Com().PutProperty("SaveMessageOnSend", v)
+	return d.com().PutProperty("SaveMessageOnSend", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SENTBYAGENT_PROPERTY.html */
 func (d NotesDocument) SentByAgent() (Boolean, error) {
-	val, err := d.Com().GetProperty("SentByAgent")
+	val, err := d.com().GetProperty("SentByAgent")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIGNER_PROPERTY.html */
 func (d NotesDocument) Signer() (String, error) {
-	val, err := d.Com().GetProperty("Signer")
+	val, err := d.com().GetProperty("Signer")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIGNONSEND_PROPERTY.html */
 func (d NotesDocument) SignOnSend() (Boolean, error) {
-	val, err := d.Com().GetProperty("SignOnSend")
+	val, err := d.com().GetProperty("SignOnSend")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIGNONSEND_PROPERTY.html */
 func (d NotesDocument) SetSignOnSend(v Boolean) error {
-	return d.Com().PutProperty("SignOnSend", v)
+	return d.com().PutProperty("SignOnSend", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERNAMEOFDOC_PROPERTY.html */
 func (d NotesDocument) UserNameOfDoc() (String, error) {
-	val, err := d.Com().GetProperty("UserNameOfDoc")
+	val, err := d.com().GetProperty("UserNameOfDoc")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIZE_PROPERTY_DOC.html */
 func (d NotesDocument) Size() (Long, error) {
-	val, err := d.Com().GetProperty("Size")
+	val, err := d.com().GetProperty("Size")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNIVERSALID_PROPERTY_DOC.html */
 func (d NotesDocument) UniversalID() (String, error) {
-	val, err := d.Com().GetProperty("UniversalID")
+	val, err := d.com().GetProperty("UniversalID")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNIVERSALID_PROPERTY_DOC.html */
 func (d NotesDocument) SetUniversalID(v String) error {
-	return d.Com().PutProperty("UniversalID", v)
+	return d.com().PutProperty("UniversalID", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VERIFIER_PROPERTY.html */
 func (d NotesDocument) Verifier() (String, error) {
-	val, err := d.Com().GetProperty("Verifier")
+	val, err := d.com().GetProperty("Verifier")
 	return helpers.CastValue[String](val), err
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPENDITEMVALUE_METHOD.html */
 func (d NotesDocument) AppendItemValue(itemName String, value any) (NotesItem, error) {
-	dispatchPtr, err := d.Com().CallObjectMethod("AppendItemValue", itemName, value)
+	dispatchPtr, err := d.com().CallObjectMethod("AppendItemValue", itemName, value)
 	return NewNotesItem(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ATTACHVCARD_METHOD.html */
 func (d NotesDocument) AttachVCard(clientADTObject NotesDocument) error {
-	_, err := d.Com().CallMethod("AttachVCard", clientADTObject)
+	_, err := d.com().CallMethod("AttachVCard", clientADTObject)
 	return err
 }
 
@@ -327,13 +327,13 @@ func (d NotesDocument) CloseMIMEEntities(params ...notesDocumentCloseMIMEEntitie
 			paramsOrdered = append(paramsOrdered, *paramsStruct.entityitemname)
 		}
 	}
-	val, err := d.Com().CallMethod("CloseMIMEEntities", paramsOrdered...)
+	val, err := d.com().CallMethod("CloseMIMEEntities", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COMPUTEWITHFORM_METHOD.html */
 func (d NotesDocument) ComputeWithForm(doDataTypes Boolean, raiseError Boolean) (Boolean, error) {
-	val, err := d.Com().CallMethod("ComputeWithForm", doDataTypes, raiseError)
+	val, err := d.com().CallMethod("ComputeWithForm", doDataTypes, raiseError)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -371,7 +371,7 @@ func (d NotesDocument) ConvertToMIME(params ...notesDocumentConvertToMIMEParam) 
 			paramsOrdered = append(paramsOrdered, *paramsStruct.options)
 		}
 	}
-	_, err := d.Com().CallMethod("ConvertToMIME", paramsOrdered...)
+	_, err := d.com().CallMethod("ConvertToMIME", paramsOrdered...)
 	return err
 }
 
@@ -390,7 +390,7 @@ func WithNotesDocumentCopyAllItemsReplace(replace Boolean) notesDocumentCopyAllI
 
 func (d NotesDocument) CopyAllItems(notesDocument NotesDocument, params ...notesDocumentCopyAllItemsParam) error {
 	paramsStruct := &notesDocumentCopyAllItemsParams{}
-	paramsOrdered := []interface{}{notesDocument.Com().Dispatch()}
+	paramsOrdered := []interface{}{notesDocument.com().Dispatch()}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -399,19 +399,19 @@ func (d NotesDocument) CopyAllItems(notesDocument NotesDocument, params ...notes
 	if paramsStruct.replace != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.replace)
 	}
-	_, err := d.Com().CallMethod("CopyAllItems", paramsOrdered...)
+	_, err := d.com().CallMethod("CopyAllItems", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYITEM_METHOD.html */
 func (d NotesDocument) CopyItem(item NotesItem, newName String) (NotesItem, error) {
-	dispatchPtr, err := d.Com().CallObjectMethod("CopyItem", item.Com().Dispatch(), newName)
+	dispatchPtr, err := d.com().CallObjectMethod("CopyItem", item.com().Dispatch(), newName)
 	return NewNotesItem(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYTODATABASE_METHOD.html */
 func (d NotesDocument) CopyToDatabase(notesDatabase NotesDatabase) (NotesDocument, error) {
-	dispatchPtr, err := d.Com().CallObjectMethod("CopyToDatabase", notesDatabase.Com().Dispatch())
+	dispatchPtr, err := d.com().CallObjectMethod("CopyToDatabase", notesDatabase.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
@@ -439,55 +439,55 @@ func (d NotesDocument) CreateMIMEEntity(params ...notesDocumentCreateMIMEEntityP
 	if paramsStruct.itemName != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.itemName)
 	}
-	dispatchPtr, err := d.Com().CallObjectMethod("CreateMIMEEntity", paramsOrdered...)
+	dispatchPtr, err := d.com().CallObjectMethod("CreateMIMEEntity", paramsOrdered...)
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEREPLYMESSAGE_METHOD.html */
 func (d NotesDocument) CreateReplyMessage(all Boolean) (NotesDocument, error) {
-	dispatchPtr, err := d.Com().CallObjectMethod("CreateReplyMessage", all)
+	dispatchPtr, err := d.com().CallObjectMethod("CreateReplyMessage", all)
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATERICHTEXTITEM_METHOD.html */
 func (d NotesDocument) CreateRichTextItem(name String) (NotesRichTextItem, error) {
-	dispatchPtr, err := d.Com().CallObjectMethod("CreateRichTextItem", name)
+	dispatchPtr, err := d.com().CallObjectMethod("CreateRichTextItem", name)
 	return NewNotesRichTextItem(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPT_METHOD.html */
 func (d NotesDocument) Encrypt() error {
-	_, err := d.Com().CallMethod("Encrypt")
+	_, err := d.com().CallMethod("Encrypt")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETATTACHMENT_METHOD.html */
 func (d NotesDocument) GetAttachment(fileName String) (NotesEmbeddedObject, error) {
-	dispatchPtr, err := d.Com().CallObjectMethod("GetAttachment", fileName)
+	dispatchPtr, err := d.com().CallObjectMethod("GetAttachment", fileName)
 	return NewNotesEmbeddedObject(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTITEM_METHOD.html */
 func (d NotesDocument) GetFirstItem(name String) (NotesItem, error) {
-	dispatchPtr, err := d.Com().CallObjectMethod("GetFirstItem", name)
+	dispatchPtr, err := d.com().CallObjectMethod("GetFirstItem", name)
 	return NewNotesItem(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUE_METHOD.html */
 func (d NotesDocument) GetItemValue(itemName String) (any, error) {
-	return d.Com().CallMethod("GetItemValue", itemName)
+	return d.com().CallMethod("GetItemValue", itemName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUECUSTOMDATABYTES_METHOD_DOC.html */
 func (d NotesDocument) GetItemValueCustomDataBytes(itemName String, dataTypeName String) ([]Byte, error) {
-	vals, err := d.Com().CallArrayMethod("GetItemValueCustomDataBytes", itemName, dataTypeName)
+	vals, err := d.com().CallArrayMethod("GetItemValueCustomDataBytes", itemName, dataTypeName)
 	return helpers.CastSlice[Byte](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUEDATETIMEARRAY_METHOD.html */
 /* TODO: Find out how to handle different return value types. */
 func (d NotesDocument) GetItemValueDateTimeArray(itemName String) ([]NotesDateTime, error) {
-	return com.GetObjectArrayProperty(d.Com(), NewNotesDateTime, "GetItemValueDateTimeArray")
+	return com.GetObjectArrayProperty(d.com(), NewNotesDateTime, "GetItemValueDateTimeArray")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMIMEENTITY_METHOD_DOC.html */
@@ -514,7 +514,7 @@ func (d NotesDocument) GetMIMEEntity(params ...notesDocumentGetMIMEEntityParam) 
 	if paramsStruct.itemName != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.itemName)
 	}
-	dispatchPtr, err := d.Com().CallObjectMethod("GetMIMEEntity", paramsOrdered...)
+	dispatchPtr, err := d.com().CallObjectMethod("GetMIMEEntity", paramsOrdered...)
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
@@ -542,19 +542,19 @@ func (d NotesDocument) GetRead(params ...notesDocumentGetReadParam) (Boolean, er
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	val, err := d.Com().CallMethod("GetRead", paramsOrdered...)
+	val, err := d.com().CallMethod("GetRead", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETRECEIVEDITEMTEXT_METHOD_DOC.html */
 func (d NotesDocument) GetReceivedItemText() (String, error) {
-	val, err := d.Com().CallMethod("GetReceivedItemText")
+	val, err := d.com().CallMethod("GetReceivedItemText")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HASITEM_METHOD.html */
 func (d NotesDocument) HasItem(itemName String) (Boolean, error) {
-	val, err := d.Com().CallMethod("HasItem", itemName)
+	val, err := d.com().CallMethod("HasItem", itemName)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -592,7 +592,7 @@ func (d NotesDocument) Lock(params ...notesDocumentLockParam) (Boolean, error) {
 			paramsOrdered = append(paramsOrdered, *paramsStruct.provisionalOK)
 		}
 	}
-	val, err := d.Com().CallMethod("Lock", paramsOrdered...)
+	val, err := d.com().CallMethod("Lock", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -620,13 +620,13 @@ func (d NotesDocument) LockProvisional(params ...notesDocumentLockProvisionalPar
 	if paramsStruct.name != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
 	}
-	val, err := d.Com().CallMethod("LockProvisional", paramsOrdered...)
+	val, err := d.com().CallMethod("LockProvisional", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAKERESPONSE_METHOD.html */
 func (d NotesDocument) MakeResponse(document NotesDocument) error {
-	_, err := d.Com().CallMethod("MakeResponse", document.Com().Dispatch())
+	_, err := d.com().CallMethod("MakeResponse", document.com().Dispatch())
 	return err
 }
 
@@ -654,7 +654,7 @@ func (d NotesDocument) MarkRead(params ...notesDocumentMarkReadParam) error {
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	_, err := d.Com().CallMethod("MarkRead", paramsOrdered...)
+	_, err := d.com().CallMethod("MarkRead", paramsOrdered...)
 	return err
 }
 
@@ -682,7 +682,7 @@ func (d NotesDocument) MarkUnread(params ...notesDocumentMarkUnreadParam) error 
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	_, err := d.Com().CallMethod("MarkUnread", paramsOrdered...)
+	_, err := d.com().CallMethod("MarkUnread", paramsOrdered...)
 	return err
 }
 
@@ -710,49 +710,49 @@ func (d NotesDocument) PutInFolder(folderName String, params ...notesDocumentPut
 	if paramsStruct.createonfail != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.createonfail)
 	}
-	_, err := d.Com().CallMethod("PutInFolder", paramsOrdered...)
+	_, err := d.com().CallMethod("PutInFolder", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_DOC.html */
 func (d NotesDocument) Remove(force Boolean) (Boolean, error) {
-	val, err := d.Com().CallMethod("Remove", force)
+	val, err := d.com().CallMethod("Remove", force)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEFROMFOLDER_METHOD.html */
 func (d NotesDocument) RemoveFromFolder(folderName String) error {
-	_, err := d.Com().CallMethod("RemoveFromFolder", folderName)
+	_, err := d.com().CallMethod("RemoveFromFolder", folderName)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEITEM_METHOD.html */
 func (d NotesDocument) RemoveItem(itemName String) error {
-	_, err := d.Com().CallMethod("RemoveItem", itemName)
+	_, err := d.com().CallMethod("RemoveItem", itemName)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEPERMANENTLY_METHOD_DOC.html */
 func (d NotesDocument) RemovePermanently(force Boolean) (Boolean, error) {
-	val, err := d.Com().CallMethod("RemovePermanently", force)
+	val, err := d.com().CallMethod("RemovePermanently", force)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RENDERTORTITEM_METHOD.html */
 func (d NotesDocument) RenderToRTItem(notesRichTextItem NotesRichTextItem) (Boolean, error) {
-	val, err := d.Com().CallMethod("RenderToRTItem", notesRichTextItem.Com().Dispatch())
+	val, err := d.com().CallMethod("RenderToRTItem", notesRichTextItem.com().Dispatch())
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLACEITEMVALUE_METHOD.html */
 func (d NotesDocument) ReplaceItemValue(itemName String, value any) (NotesItem, error) {
-	dispatchPtr, err := d.Com().CallObjectMethod("ReplaceItemValue", itemName, value)
+	dispatchPtr, err := d.com().CallObjectMethod("ReplaceItemValue", itemName, value)
 	return NewNotesItem(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLACEITEMVALUECUSTOMDATABYTES_METHOD_DOC.html */
 func (d NotesDocument) ReplaceItemValueCustomDataBytes(itemName String, dataTypeName String, byteArray []Byte) error {
-	_, err := d.Com().CallMethod("ReplaceItemValueCustomDataBytes", itemName, dataTypeName, byteArray)
+	_, err := d.com().CallMethod("ReplaceItemValueCustomDataBytes", itemName, dataTypeName, byteArray)
 	return err
 }
 
@@ -780,7 +780,7 @@ func (d NotesDocument) Save(force Boolean, createResponse Boolean, params ...not
 	if paramsStruct.markRead != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.markRead)
 	}
-	val, err := d.Com().CallMethod("Save", paramsOrdered...)
+	val, err := d.com().CallMethod("Save", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -808,18 +808,18 @@ func (d NotesDocument) Send(attachForm Boolean, params ...notesDocumentSendParam
 	if paramsStruct.recipients != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.recipients)
 	}
-	_, err := d.Com().CallMethod("Send", paramsOrdered...)
+	_, err := d.com().CallMethod("Send", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIGN_METHOD.html */
 func (d NotesDocument) Sign() error {
-	_, err := d.Com().CallMethod("Sign")
+	_, err := d.com().CallMethod("Sign")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_DOC.html */
 func (d NotesDocument) UnLock() error {
-	_, err := d.Com().CallMethod("UnLock")
+	_, err := d.com().CallMethod("UnLock")
 	return err
 }
