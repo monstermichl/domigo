@@ -3,17 +3,15 @@ package notesname_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesname"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var notesName notesname.NotesName
+var notesName domigo.NotesName
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	db, _ := session.GetDatabase("", "GoInterface.nsf")
 	aclTmp, _ := db.ACL()
 	aclEntry, _ := aclTmp.GetFirstEntry()

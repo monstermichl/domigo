@@ -5,20 +5,19 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesagent"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var agent notesagent.NotesAgent
+var agent domigo.NotesAgent
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
 	var info string
 
-	session, err := notessession.Initialize()
+	session, err := domigo.Initialize()
 	defer session.Release()
 
 	defer func() {

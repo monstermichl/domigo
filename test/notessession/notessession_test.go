@@ -3,23 +3,22 @@ package notessession_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var session notessession.NotesSession
+var session domigo.NotesSession
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = notessession.Initialize()
+	session, _ = domigo.Initialize()
 	m.Run()
 	session.Release()
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 func TestNotesSessionNew(t *testing.T) {
-	sTmp, err := notessession.Initialize()
+	sTmp, err := domigo.Initialize()
 	require.Nil(t, err)
 
 	session = sTmp

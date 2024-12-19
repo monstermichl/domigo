@@ -4,17 +4,15 @@ package notesrichtextparagraphstyle_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesrichtextparagraphstyle"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var richtextparagraphstyle notesrichtextparagraphstyle.NotesRichTextParagraphStyle
+var richtextparagraphstyle domigo.NotesRichTextParagraphStyle
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	richtextparagraphstyle, _ = session.CreateRichTextParagraphStyle()
 
 	defer richtextparagraphstyle.Release()
@@ -159,12 +157,12 @@ func TestClearAllTabs(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETTAB_METHOD_2382.html */
 func TestSetTab(t *testing.T) {
-	err := richtextparagraphstyle.SetTab(notesrichtextparagraphstyle.RULER_ONE_INCH)
+	err := richtextparagraphstyle.SetTab(domigo.NOTESRICHTEXTPARAGRAPHSTYLE_RULER_ONE_INCH)
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETTABS_METHOD_181.html */
 func TestSetTabs(t *testing.T) {
-	err := richtextparagraphstyle.SetTabs(1, notesrichtextparagraphstyle.RULER_ONE_INCH)
+	err := richtextparagraphstyle.SetTabs(1, domigo.NOTESRICHTEXTPARAGRAPHSTYLE_RULER_ONE_INCH)
 	require.Nil(t, err)
 }

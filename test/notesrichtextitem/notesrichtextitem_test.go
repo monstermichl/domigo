@@ -4,11 +4,7 @@ package notesrichtextitem_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdatabase"
-	"github.com/monstermichl/domigo/domino/notesdocument"
-	"github.com/monstermichl/domigo/domino/notesembeddedobject"
-	"github.com/monstermichl/domigo/domino/notesrichtextitem"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
@@ -16,14 +12,14 @@ import (
 
 const EMBEDDED_OBJECT_NAME = "EmbeddedTestObject"
 
-var session notessession.NotesSession
-var database notesdatabase.NotesDatabase
-var doc notesdocument.NotesDocument
-var richtextitem notesrichtextitem.NotesRichTextItem
+var session domigo.NotesSession
+var database domigo.NotesDatabase
+var doc domigo.NotesDocument
+var richtextitem domigo.NotesRichTextItem
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = notessession.Initialize()
+	session, _ = domigo.Initialize()
 	database, _ = testhelpers.CreateTestDatabase(session)
 	doc, _ = database.CreateDocument()
 	richtextitem, _ = doc.CreateRichTextItem("TestItem")
@@ -108,7 +104,7 @@ func TestAppendText(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_BEGININSERT_METHOD_RTITEM.html */
 func TestBeginInsert(t *testing.T) {
-	o, err := richtextitem.EmbedObject(notesembeddedobject.EMBED_ATTACHMENT, "", "notesrichtextitem_test.go")
+	o, err := richtextitem.EmbedObject(domigo.NOTESEMBEDDEDOBJECT_EMBED_ATTACHMENT, "", "notesrichtextitem_test.go")
 	require.Nil(t, err, "Could not create embedded object")
 
 	err = richtextitem.BeginInsert(o)
@@ -147,7 +143,7 @@ func TestCreateRange(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_EMBEDOBJECT_METHOD.html */
 func TestEmbedObject(t *testing.T) {
-	_, err := richtextitem.EmbedObject(notesembeddedobject.EMBED_OBJECT, "", "notesrichtextitem_test.go", notesrichtextitem.WithEmbedObjectName(EMBEDDED_OBJECT_NAME))
+	_, err := richtextitem.EmbedObject(domigo.NOTESEMBEDDEDOBJECT_EMBED_OBJECT, "", "notesrichtextitem_test.go", domigo.WithNotesRichTextItemEmbedObjectName(EMBEDDED_OBJECT_NAME))
 	require.Nil(t, err)
 }
 

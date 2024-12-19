@@ -4,20 +4,18 @@ package notesrichtextrange_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesrichtextitem"
-	"github.com/monstermichl/domigo/domino/notesrichtextrange"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var richtextitem notesrichtextitem.NotesRichTextItem
-var richtextrange notesrichtextrange.NotesRichTextRange
+var richtextitem domigo.NotesRichTextItem
+var richtextrange domigo.NotesRichTextRange
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	db, _ := testhelpers.CreateTestDatabase(session)
 	doc, _ := db.CreateDocument()
 	richtextitem, _ = doc.CreateRichTextItem("TestItem")

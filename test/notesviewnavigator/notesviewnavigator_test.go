@@ -5,25 +5,21 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/monstermichl/domigo/domino"
-	"github.com/monstermichl/domigo/domino/notesdocument"
-	"github.com/monstermichl/domigo/domino/notessession"
-	"github.com/monstermichl/domigo/domino/notesviewentry"
-	"github.com/monstermichl/domigo/domino/notesviewnavigator"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var entry notesviewentry.NotesViewEntry
-var document notesdocument.NotesDocument
-var viewnavigator notesviewnavigator.NotesViewNavigator
+var entry domigo.NotesViewEntry
+var document domigo.NotesDocument
+var viewnavigator domigo.NotesViewNavigator
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
 	var info string
 
-	session, err := notessession.Initialize()
+	session, err := domigo.Initialize()
 	defer session.Release()
 
 	defer func() {
@@ -52,7 +48,7 @@ func TestMain(m *testing.M) {
 		return
 	}
 
-	view, err := testhelpers.CreateTestView(db, []domino.String{"Column 1", "Column 2", "Column 2"})
+	view, err := testhelpers.CreateTestView(db, []domigo.String{"Column 1", "Column 2", "Column 2"})
 
 	if err != nil {
 		info = "View could not be created"
@@ -85,7 +81,7 @@ func TestMain(m *testing.M) {
 		return
 	}
 
-	viewnavigator, err = notesviewnavigator.NotesViewCreateViewNav(view)
+	viewnavigator, err = view.CreateViewNav()
 	defer viewnavigator.Release()
 
 	if err != nil {

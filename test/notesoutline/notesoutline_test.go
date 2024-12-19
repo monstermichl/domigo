@@ -4,9 +4,7 @@ package notesoutline_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdatabase"
-	"github.com/monstermichl/domigo/domino/notesoutline"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
@@ -14,12 +12,12 @@ import (
 
 const TEST_OUTLINE_NAME = "test-outline"
 
-var database notesdatabase.NotesDatabase
-var outline notesoutline.NotesOutline
+var database domigo.NotesDatabase
+var outline domigo.NotesOutline
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	database, _ = testhelpers.CreateTestDatabase(session)
 	outline, _ = database.CreateOutline(TEST_OUTLINE_NAME)
 

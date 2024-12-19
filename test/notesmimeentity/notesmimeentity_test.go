@@ -4,20 +4,18 @@ package notesmimeentity_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesmimeentity"
-	"github.com/monstermichl/domigo/domino/notessession"
-	"github.com/monstermichl/domigo/domino/notesstream"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var stream notesstream.NotesStream
-var mimeentity notesmimeentity.NotesMIMEEntity
+var stream domigo.NotesStream
+var mimeentity domigo.NotesMIMEEntity
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	db, _ := testhelpers.CreateTestDatabase(session)
 	doc, _ := db.CreateDocument()
 	stream, _ = session.CreateStream()
@@ -130,7 +128,7 @@ func TestDecodeContent(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCODECONTENT_METHOD_MIMEENTITY.html */
 func TestEncodeContent(t *testing.T) {
-	err := mimeentity.EncodeContent(notesmimeentity.ENC_NONE)
+	err := mimeentity.EncodeContent(domigo.NOTESMIMEENTITY_ENC_NONE)
 	require.Nil(t, err)
 }
 
@@ -208,12 +206,12 @@ func TestRemove(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCONTENTFROMBYTES_METHOD_MIMEENTITY.html */
 func TestSetContentFromBytes(t *testing.T) {
-	err := mimeentity.SetContentFromBytes(stream, "text/plain", notesmimeentity.ENC_BASE64)
+	err := mimeentity.SetContentFromBytes(stream, "text/plain", domigo.NOTESMIMEENTITY_ENC_BASE64)
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCONTENTFROMTEXT_METHOD_MIMEENTITY.html */
 func TestSetContentFromText(t *testing.T) {
-	err := mimeentity.SetContentFromText(stream, "text/plain", notesmimeentity.ENC_BASE64)
+	err := mimeentity.SetContentFromText(stream, "text/plain", domigo.NOTESMIMEENTITY_ENC_BASE64)
 	require.Nil(t, err)
 }

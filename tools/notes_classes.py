@@ -5,7 +5,7 @@ from hashlib import sha256
 import json
 import os
 import re
-from typing import Callable, List, Tuple
+from typing import Callable, Dict, List, Tuple
 from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup, Tag
@@ -377,6 +377,53 @@ def get_name_and_description(soup: BeautifulSoup) -> Tuple[str, str]:
     return name, description
 
 
+def get_table_from_header_pattern(soup: BeautifulSoup, pattern: str) -> Tuple[str, Dict[str, List[str]]]:
+    table: Tag = None
+    table_header = soup.find(lambda t: t.name == 'th' and re.match(pattern, t.text))
+    header_text: str = None
+    table_dict = {}
+
+    if table_header:
+        table = table_header.find_parent('table')
+        header_text = table_header.text
+
+    if table:
+        table_body = table.find('tbody')
+
+        if table_body:
+            table_headers = [evaluate_tag_text(th) for th in table.find_all('th')]
+            table_rows = table_body.find_all('tr')
+
+            for tr in table_rows:
+                row_cells = tr.find_all('td')
+
+                for i, cell in enumerate(row_cells):
+                    header = table_headers[i]
+                    
+                    if header not in table_dict:
+                        table_dict[header] = []
+                    table_dict[header].append(cell.text)
+            
+    return header_text, table_dict
+
+
+def get_section_from_table_header_pattern(soup: BeautifulSoup, pattern: str) -> Section:
+    header_text, table_dict = get_table_from_header_pattern(soup, pattern)
+    section: Section = None
+
+    if header_text:
+        section = Section(header_text, [])
+        entries = section.entries
+        names = table_dict[header_text]
+        descriptions = table_dict['Description']
+
+        for name, description in zip(names, descriptions):
+            entries.append(SectionEntry(name))
+            entries.append(SectionEntry(description))
+
+    return section
+
+
 def get_property(url: str) -> NotesProperty:
     soup = get_site(url)
     name, description = get_name_and_description(soup)
@@ -416,6 +463,10 @@ def get_method(url: str, callouts: NotesMethod.Callouts=None):
     return_type = Type()
     callouts = callouts if callouts else NotesMethod.Callouts()
 
+    # If params section could not be found, params are probably listed in a table.
+    if not params_section:
+        params_section = get_section_from_table_header_pattern(soup, r'Parameter(s)?')
+
     if params_section:
         entries = []
 
@@ -439,7 +490,7 @@ def get_method(url: str, callouts: NotesMethod.Callouts=None):
                 param = NotesParameter(
                     param_name,
                     param_type,
-                    re.search('optional', param_description, re.IGNORECASE),
+                    re.search('optional', param_description, re.IGNORECASE) or re.search('optional', title, re.IGNORECASE),
                     re.search('COM', param_description),
                     param_description,
                     url
@@ -454,6 +505,10 @@ def get_method(url: str, callouts: NotesMethod.Callouts=None):
                     param.type = callouts.get_param_type(param)
 
                 params.append(param)
+
+    # If return value section could not be found, return value is probably listed in a table.
+    if not return_value_section:
+        return_value_section = get_section_from_table_header_pattern(soup, r'Return value(s)?')
 
     if return_value_section:
         for entry in return_value_section.entries:

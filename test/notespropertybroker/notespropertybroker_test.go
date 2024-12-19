@@ -4,17 +4,15 @@ package notespropertybroker_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notespropertybroker"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var propertybroker notespropertybroker.NotesPropertyBroker
+var propertybroker domigo.NotesPropertyBroker
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	propertybroker, _ = session.GetPropertyBroker()
 
 	defer session.Release()

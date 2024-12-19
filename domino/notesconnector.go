@@ -1,4 +1,4 @@
-package domino
+package domigo
 
 import (
 	"github.com/monstermichl/domigo/domino/com"

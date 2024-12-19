@@ -1,4 +1,4 @@
-package domino
+package domigo
 
 import (
 	"time"

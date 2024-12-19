@@ -4,8 +4,7 @@ package notesacl_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesacl"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
@@ -15,11 +14,11 @@ const TEST_ROLE = "TestRole"
 const TEST_ENTRY_NAME = "TestUser"
 const TEST_ENTRY_LEVEL = 2
 
-var acl notesacl.NotesACL
+var acl domigo.NotesACL
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	defer session.Release()
 
 	db, _ := testhelpers.CreateTestDatabase(session)

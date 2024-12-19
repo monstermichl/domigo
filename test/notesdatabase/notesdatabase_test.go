@@ -3,18 +3,17 @@ package notesform_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdatabase"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var database notesdatabase.NotesDatabase
+var database domigo.NotesDatabase
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	database, _ = testhelpers.CreateTestDatabase(session)
 
 	defer database.Release()
@@ -605,7 +604,7 @@ func TestCreateOutline(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEW_METHOD_DB.html */
 func TestCreateView(t *testing.T) {
-	_, err := database.CreateView(notesdatabase.WithCreateViewViewName("test-view"))
+	_, err := database.CreateView(domigo.WithNotesDatabaseCreateViewViewName("test-view"))
 	require.Nil(t, err)
 }
 

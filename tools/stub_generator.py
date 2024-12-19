@@ -7,24 +7,17 @@ from pick import pick
 from notes_classes import AccessType, NotesComponent, NotesMethod, NotesParameter, NotesProperty, NotesType, Type, first_letter_lower, first_letter_upper, get_class
 
 
-def get_url() -> str:
+def get_urls() -> str:
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--url', '-u', required=True, help='URL to LotusScript class page')
+    parser.add_argument('--url', '-u', required=True, help='URL to LotusScript class page', action='append')
     args = parser.parse_args()
 
     return args.url
 
 
 def get_go_type(type: Type) -> Tuple[str, str]:
-    type_name = type.type_name
-    type_type = type.type
-
-    if type_name and type_type == NotesType.OBJECT:
-        cast_type = f'{type_name.lower()}.{type_name}'
-    else:
-        cast_type = f'domino.{type.type}'
-
+    cast_type = type.type
     return f'[]{cast_type}' if type.is_array else cast_type, cast_type
 
 
@@ -43,7 +36,8 @@ def get_go_params(params: List[NotesParameter], is_call) -> List[str]:
     return list(map(function, params))
 
 
-def properties_stubs(props: List[NotesProperty]) -> Tuple[List[str], List[str]]:
+def properties_stubs(class_name: str, props: List[NotesProperty]) -> Tuple[List[str], List[str]]:
+    class_name = first_letter_upper(class_name)
     stubs = []
     test_stubs = []
 
@@ -74,17 +68,14 @@ def properties_stubs(props: List[NotesProperty]) -> Tuple[List[str], List[str]]:
             ])
 
             if notes_type == NotesType.OBJECT:
-                type_name = value_type.type_name
-                module_name = type_name.lower() if type_name else 'unknown'
-
                 if is_array:
                     stubs.extend([
-                        f'return com.GetObjectArrayProperty({receiver}.Com(), {module_name}.New, "{name}")',
+                        f'return com.GetObjectArrayProperty({receiver}.Com(), New{go_cast_type}, "{name}")',
                     ])
                 else:
                     stubs.extend([
                         f'    dispatchPtr, err := {receiver}.Com().GetObjectProperty("{name}")',
-                        f'    return {module_name}.New(dispatchPtr), err',
+                        f'    return New{go_cast_type}(dispatchPtr), err',
                     ])
             else:
                 stubs.extend([
@@ -128,7 +119,8 @@ def properties_stubs(props: List[NotesProperty]) -> Tuple[List[str], List[str]]:
     return stubs, test_stubs
 
 
-def method_stubs(methods: List[NotesMethod]) -> Tuple[List[str], List[str]]:
+def method_stubs(class_name: str, methods: List[NotesMethod]) -> Tuple[List[str], List[str]]:
+    class_name = first_letter_upper(class_name)
     stubs = []
     test_stubs = []
 
@@ -153,7 +145,7 @@ def method_stubs(methods: List[NotesMethod]) -> Tuple[List[str], List[str]]:
 
         # Prepare optional params structs and functions.
         if has_optional_params:
-            first_letter_lower_name = first_letter_lower(name)
+            first_letter_lower_name = f'{first_letter_lower(class_name)}{first_letter_upper(name)}'
             params_type_name = f'{first_letter_lower_name}Params'
             param_type_name = f'{first_letter_lower_name}Param'
 
@@ -172,7 +164,7 @@ def method_stubs(methods: List[NotesMethod]) -> Tuple[List[str], List[str]]:
 
             for p in optional_params:
                 stubs.extend([
-                    f'func With{first_letter_upper(name)}{first_letter_upper(p.name)}({p_string(p, False)}) {param_type_name} {{',
+                    f'func With{class_name}{first_letter_upper(name)}{first_letter_upper(p.name)}({p_string(p, False)}) {param_type_name} {{',
                     f'    return func(c *{params_type_name}) {{',
                     f'        c.{p.name} = &{p.name}',
                     '    }',
@@ -219,7 +211,7 @@ def method_stubs(methods: List[NotesMethod]) -> Tuple[List[str], List[str]]:
 
                     lines.extend([
                         f'if {parameter_name} != nil {{',
-                        f'    paramsOrdered = append(paramsOrdered, {"domino.DispatchSlice(" if p_is_object_array else ""}*{parameter_name}{")" if p_is_object_array else ""})',
+                        f'    paramsOrdered = append(paramsOrdered, {"DispatchSlice(" if p_is_object_array else ""}*{parameter_name}{")" if p_is_object_array else ""})',
                         *parameter_check(ps[1:], indent + 1),
                         '}',
                     ])
@@ -230,20 +222,17 @@ def method_stubs(methods: List[NotesMethod]) -> Tuple[List[str], List[str]]:
         call_params = f', {call_params}' if call_params else ''
 
         if notes_type == NotesType.OBJECT:
-                type_name = return_type.type_name.strip()
-                module_name = type_name.lower() if type_name else 'unknown'
-
-                if is_array:
-                    stubs.extend([
-                        f'return com.CallObjectArrayMethod({receiver}.Com(), func(ptr *ole.IDispatch) {go_method_return_type} {{',
-                        f'    return {module_name}.New(ptr) /* TODO: Make sure this implementation is correct. */',
-                        f'}}, "{name}"{call_params})',
-                    ])
-                else:
-                    stubs.extend([
-                        f'    dispatchPtr, err := {receiver}.Com().CallObjectMethod("{name}"{call_params})',
-                        f'    return {module_name}.New(dispatchPtr), err',
-                    ])
+            if is_array:
+                stubs.extend([
+                    f'return com.CallObjectArrayMethod({receiver}.Com(), func(ptr *ole.IDispatch) {go_method_return_type} {{',
+                    f'    return New{go_cast_type}(ptr) /* TODO: Make sure this implementation is correct. */',
+                    f'}}, "{name}"{call_params})',
+                ])
+            else:
+                stubs.extend([
+                    f'    dispatchPtr, err := {receiver}.Com().CallObjectMethod("{name}"{call_params})',
+                    f'    return New{go_cast_type}(dispatchPtr), err',
+                ])
         elif notes_type == NotesType.VOID:
             stubs.extend([
                 f'    _, err := {receiver}.Com().CallMethod("{name}"{call_params})',
@@ -340,110 +329,111 @@ def get_return_type(method: NotesMethod) -> Type:
 if __name__ == '__main__':
     DATABASE_FILE = 'GoInterface.nsf'
 
-    url = get_url()
-    url_comment = f'/* {url} */'
-    c = get_class(url, callouts=NotesMethod.Callouts(
-        is_optional=is_optional,
-        #get_param_type=get_param_type,
-        #get_return_type=get_return_type,
-    ))
-    class_name = c.name
-    class_name_lower = class_name.lower()
-    variable = re.sub('notes', '', class_name_lower)  # Remove the "Notes" prefix.
-    receiver = variable[0]  # Just use the first letter.
-    path = os.path.join('generated', class_name_lower)
-    stubs = []
-    test_stubs = []
+    urls = get_urls()
 
-    stubs.extend([
-        url_comment,
-        f'package {class_name_lower}',
-        '',
-        'import (',
-        '    "github.com/monstermichl/domigo/domino"',
-        '    "github.com/monstermichl/domigo/helpers"',
-        '',
-        '    ole "github.com/go-ole/go-ole"',
-        ')',
-        '',
-        f'type {class_name} struct {{',
-        '    domino.NotesStruct',
-        '}',
-        '',
-        f'func New(dispatchPtr *ole.IDispatch) {class_name} {{',
-        f'    return {class_name}{{domino.NewNotesStruct(dispatchPtr)}}',
-        '}',
-        '',
-    ])
+    for url in urls:
+        url_comment = f'/* {url} */'
+        c = get_class(url, callouts=NotesMethod.Callouts(
+            is_optional=is_optional,
+            #get_param_type=get_param_type,
+            #get_return_type=get_return_type,
+        ))
+        class_name = c.name
+        class_name_lower = class_name.lower()
+        variable = re.sub('notes', '', class_name_lower)  # Remove the "Notes" prefix.
+        receiver = variable[0]  # Just use the first letter.
+        path = os.path.join('generated', class_name_lower)
+        stubs = []
+        test_stubs = []
 
-    test_stubs.extend([
-        url_comment,
-        f'package {class_name_lower}_test',
-        '',
-        'import (',
-        '    "github.com/monstermichl/domigo/domino/notessession"',
-        '    testhelpers "github.com/monstermichl/domigo/test/helpers"',
-        '    "testing"',
-        '',
-        '    "github.com/stretchr/testify/require"',
-        ')',
-        '',
-        f'var {variable} {class_name_lower}.{class_name}',
-        '',
-        '/* https://pkg.go.dev/testing#hdr-Main */',
-        'func TestMain(m *testing.M) {',
-        '    var info string',
-        '',
-        '    session, err := notessession.Initialize()',
-        '    defer session.Release()',
-        '',
-        '    defer func() {',
-        '        fmt.Println(err)',
-        '        fmt.Println(info)',
-        '    }()',
-        '',
-        '    if err != nil {',
-        '        info = "Session could not be initialized"',
-        '        return',
-        '    }',
-        '',
-        '    db, err := testhelpers.CreateTestDatabase(session)',
-        '    defer db.Release()',
-        '    defer db.Remove()',
-        '',
-        '    if err != nil {',
-        '        info = "Database could not be created"',
-        '        return',
-        '    }',
-        '',
-        f'    {variable}, err = /* TODO: Get variable. */',
-        f'    defer {variable}.Release()',
-        '',
-        '    if err != nil {',
-        f'        info = "{class_name} could not be created"',
-        '        return',
-        '    }',
-        '',
-        '    m.Run()',
-        '}',
-        '',
-    ])
+        stubs.extend([
+            url_comment,
+            'package domigo',
+            '',
+            'import (',
+            '    "github.com/monstermichl/domigo/helpers"',
+            '',
+            '    ole "github.com/go-ole/go-ole"',
+            ')',
+            '',
+            f'type {class_name} struct {{',
+            '    NotesStruct',
+            '}',
+            '',
+            f'func New{class_name}(dispatchPtr *ole.IDispatch) {class_name} {{',
+            f'    return {class_name}{{NewNotesStruct(dispatchPtr)}}',
+            '}',
+            '',
+        ])
 
-    # Add properties stubs.
-    properties_stubs_temp, properties_test_stubs_temp = properties_stubs(c.properties)
+        test_stubs.extend([
+            url_comment,
+            f'package {class_name_lower}_test',
+            '',
+            'import (',
+            '    domigo "github.com/monstermichl/domigo/domino"',
+            '    testhelpers "github.com/monstermichl/domigo/test/helpers"',
+            '    "testing"',
+            '',
+            '    "github.com/stretchr/testify/require"',
+            ')',
+            '',
+            f'var {variable} domigo.{class_name}',
+            '',
+            '/* https://pkg.go.dev/testing#hdr-Main */',
+            'func TestMain(m *testing.M) {',
+            '    var info string',
+            '',
+            '    session, err := domigo.Initialize()',
+            '    defer session.Release()',
+            '',
+            '    defer func() {',
+            '        fmt.Println(err)',
+            '        fmt.Println(info)',
+            '    }()',
+            '',
+            '    if err != nil {',
+            '        info = "Session could not be initialized"',
+            '        return',
+            '    }',
+            '',
+            '    db, err := testhelpers.CreateTestDatabase(session)',
+            '    defer db.Release()',
+            '    defer db.Remove()',
+            '',
+            '    if err != nil {',
+            '        info = "Database could not be created"',
+            '        return',
+            '    }',
+            '',
+            f'    {variable}, err = /* TODO: Get variable. */',
+            f'    defer {variable}.Release()',
+            '',
+            '    if err != nil {',
+            f'        info = "{class_name} could not be created"',
+            '        return',
+            '    }',
+            '',
+            '    m.Run()',
+            '}',
+            '',
+        ])
 
-    stubs.extend(properties_stubs_temp)
-    test_stubs.extend(properties_test_stubs_temp)
+        # Add properties stubs.
+        properties_stubs_temp, properties_test_stubs_temp = properties_stubs(class_name, c.properties)
 
-    # Add method stubs.
-    method_stubs_temp, method_test_stubs_temp = method_stubs(c.methods)
-    
-    stubs.extend(method_stubs_temp)
-    test_stubs.extend(method_test_stubs_temp)
+        stubs.extend(properties_stubs_temp)
+        test_stubs.extend(properties_test_stubs_temp)
 
-    # Write files.
-    with open(f'{path}.go', 'w') as f:
-        f.write('\n'.join(stubs))
+        # Add method stubs.
+        method_stubs_temp, method_test_stubs_temp = method_stubs(class_name, c.methods)
+        
+        stubs.extend(method_stubs_temp)
+        test_stubs.extend(method_test_stubs_temp)
 
-    with open(f'{path}_test.go', 'w') as f:
-        f.write('\n'.join(test_stubs))
+        # Write files.
+        with open(f'{path}.go', 'w') as f:
+            f.write('\n'.join(stubs))
+
+        with open(f'{path}_test.go', 'w') as f:
+            f.write('\n'.join(test_stubs))

@@ -4,17 +4,15 @@ package notesregistration_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesregistration"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var registration notesregistration.NotesRegistration
+var registration domigo.NotesRegistration
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	defer session.Release()
 
 	/* Don't run tests for now to not mess with some Notes stuff as NotesRegistration

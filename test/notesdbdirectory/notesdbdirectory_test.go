@@ -5,20 +5,19 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdbdirectory"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var dbdirectory notesdbdirectory.NotesDbDirectory
+var dbdirectory domigo.NotesDbDirectory
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
 	var info string
 
-	session, err := notessession.Initialize()
+	session, err := domigo.Initialize()
 	defer session.Release()
 
 	defer func() {
@@ -62,7 +61,7 @@ func TestCreateDatabase(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTDATABASE_METHOD.html */
 func TestGetFirstDatabase(t *testing.T) {
-	_, err := dbdirectory.GetFirstDatabase(notesdbdirectory.FILETYPE_NOTES_DATABASE)
+	_, err := dbdirectory.GetFirstDatabase(domigo.NOTESDBDIRECTORY_FILETYPE_DATABASE)
 	require.Nil(t, err)
 }
 

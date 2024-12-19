@@ -4,17 +4,15 @@ package notesrichtextstyle_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesrichtextstyle"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var richtextstyle notesrichtextstyle.NotesRichTextStyle
+var richtextstyle domigo.NotesRichTextStyle
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	richtextstyle, _ = session.CreateRichTextStyle()
 
 	defer richtextstyle.Release()

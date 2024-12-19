@@ -4,18 +4,16 @@ package notesdatetime_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdatetime"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var session notessession.NotesSession
-var datetime notesdatetime.NotesDateTime
+var session domigo.NotesSession
+var datetime domigo.NotesDateTime
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = notessession.Initialize()
+	session, _ = domigo.Initialize()
 	datetime, _ = session.CreateDateTime("Today")
 
 	defer session.Release()

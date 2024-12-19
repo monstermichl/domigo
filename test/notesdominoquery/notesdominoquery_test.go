@@ -4,20 +4,18 @@ package notesdominoquery_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino"
-	"github.com/monstermichl/domigo/domino/notesdominoquery"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var session notessession.NotesSession
-var dominoquery notesdominoquery.NotesDominoQuery
+var session domigo.NotesSession
+var dominoquery domigo.NotesDominoQuery
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = notessession.Initialize()
+	session, _ = domigo.Initialize()
 	db, _ := testhelpers.CreateTestDatabase(session)
 	dominoquery, _ := db.CreateDominoQuery()
 
@@ -30,7 +28,6 @@ func TestMain(m *testing.M) {
 }
 
 /* --------------------------------- Properties --------------------------------- */
-/* TODO: Access type for MaxScanDocs could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSCANDOCS_PROPERTY_NDQ.html#reference_a4g_r13_cgb */
 func TestMaxScanDocs(t *testing.T) {
 	_, err := dominoquery.MaxScanDocs()
@@ -46,7 +43,6 @@ func TestSetMaxScanDocs(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for MaxScanEntries could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSCANENTRIES_PROPERTY_NDQ.html#reference_yyx_cd3_cgb */
 func TestMaxScanEntries(t *testing.T) {
 	_, err := dominoquery.MaxScanEntries()
@@ -62,7 +58,6 @@ func TestSetMaxScanEntries(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for NoViews could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOVIEWS_PROPERTY_NDQ.html#reference_o3c_kf3_cgb */
 func TestNoViews(t *testing.T) {
 	_, err := dominoquery.NoViews()
@@ -78,7 +73,6 @@ func TestSetNoViews(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for RebuildDesignCatalog could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REBUILDDESIGNCATALOG_PROPERTY_NDQ.html#reference_pdc_hyy_ljb */
 func TestRebuildDesignCatalog(t *testing.T) {
 	_, err := dominoquery.RebuildDesignCatalog()
@@ -94,7 +88,6 @@ func TestSetRebuildDesignCatalog(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for RefreshDesignCatalog could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHDESIGNCATALOG_PROPERTY_NDQ.html#reference_vvz_3zy_ljb */
 func TestRefreshDesignCatalog(t *testing.T) {
 	_, err := dominoquery.RefreshDesignCatalog()
@@ -110,7 +103,6 @@ func TestSetRefreshDesignCatalog(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for RefreshFullText could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHFULLTEXT_PROPERTY_NDQ.html#reference_wzg_d1z_ljb */
 func TestRefreshFullText(t *testing.T) {
 	_, err := dominoquery.RefreshFullText()
@@ -126,7 +118,6 @@ func TestSetRefreshFullText(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for RefreshViews could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHVIEWS_PROPERTY_NDQ.html#reference_enn_rx3_cgb */
 func TestRefreshViews(t *testing.T) {
 	_, err := dominoquery.RefreshViews()
@@ -142,7 +133,6 @@ func TestSetRefreshViews(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for DesignDocumentsOnly could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DESIGNDOCUMENTSONLY_PROPERTY_NDQ.html */
 func TestDesignDocumentsOnly(t *testing.T) {
 	_, err := dominoquery.DesignDocumentsOnly()
@@ -158,7 +148,6 @@ func TestSetDesignDocumentsOnly(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for TimeoutSec could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEOUTSEC_PROPERTY_NDQ.html#reference_qwv_123_cgb */
 func TestTimeoutSec(t *testing.T) {
 	_, err := dominoquery.TimeoutSec()
@@ -201,28 +190,29 @@ func TestResetNamedVariables(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETNAMEDVARIABLE_METHOD_NDQ.html#reference_h2j_fgj_cgb */
 func TestSetNamedVariableString(t *testing.T) {
-	err := dominoquery.SetNamedVariableString("variable", "value")
+	err := dominoquery.SetNamedVariable("variable", "value")
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETNAMEDVARIABLE_METHOD_NDQ.html#reference_h2j_fgj_cgb */
 func TestSetNamedVariableNumber(t *testing.T) {
-	err := dominoquery.SetNamedVariableNumber("variable", 0)
+	err := dominoquery.SetNamedVariable("variable", 0)
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETNAMEDVARIABLE_METHOD_NDQ.html#reference_h2j_fgj_cgb */
 func TestSetNamedVariableDateTime(t *testing.T) {
 	dt, err := session.CreateDateTime("Today")
+	defer dt.Release()
 	require.Nil(t, err)
 
-	err = dominoquery.SetNamedVariableDateTime("variable", dt)
+	err = dominoquery.SetNamedVariable("variable", dt)
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEINDEX_METHOD_NDQ.html#reference_mvq_brw_ljb */
 func TestCreateIndex(t *testing.T) {
-	err := dominoquery.CreateIndex("testIndex", []domino.String{})
+	err := dominoquery.CreateIndex("testIndex", []domigo.String{})
 	require.Nil(t, err)
 }
 

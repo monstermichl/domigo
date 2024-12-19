@@ -5,23 +5,20 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/monstermichl/domigo/domino"
-	"github.com/monstermichl/domigo/domino/notesdocument"
-	"github.com/monstermichl/domigo/domino/notessession"
-	"github.com/monstermichl/domigo/domino/notesview"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var document notesdocument.NotesDocument
-var view notesview.NotesView
+var document domigo.NotesDocument
+var view domigo.NotesView
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
 	var info string
 
-	session, err := notessession.Initialize()
+	session, err := domigo.Initialize()
 	defer session.Release()
 
 	defer func() {
@@ -57,7 +54,7 @@ func TestMain(m *testing.M) {
 		return
 	}
 
-	view, err = testhelpers.CreateTestView(db, []domino.String{"Column 1", "Column 2", "Column 2"})
+	view, err = testhelpers.CreateTestView(db, []domigo.String{"Column 1", "Column 2", "Column 2"})
 
 	if err != nil {
 		info = "View could not be created"
@@ -365,7 +362,7 @@ func TestCopyColumn(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATECOLUMN_METHOD_VIEW.html */
 func TestCreateColumn(t *testing.T) {
-	_, err := view.CreateColumn(notesview.WithCreateColumnColumnName("secondColumn"))
+	_, err := view.CreateColumn(domigo.WithNotesViewCreateColumnColumnName("secondColumn"))
 	require.Nil(t, err)
 }
 
@@ -377,13 +374,13 @@ func TestFTSearch(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLDOCUMENTSBYKEY_METHOD.html */
 func TestGetAllDocumentsByKey(t *testing.T) {
-	_, err := view.GetAllDocumentsByKey([]domino.String{"key"})
+	_, err := view.GetAllDocumentsByKey([]domigo.String{"key"})
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLENTRIESBYKEY_METHOD_9837.html */
 func TestGetAllEntriesByKey(t *testing.T) {
-	_, err := view.GetAllEntriesByKey([]domino.String{"key"})
+	_, err := view.GetAllEntriesByKey([]domigo.String{"key"})
 	require.Nil(t, err)
 }
 
@@ -413,13 +410,13 @@ func TestGetColumn(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENTBYKEY_METHOD.html */
 func TestGetDocumentByKey(t *testing.T) {
-	_, err := view.GetDocumentByKey([]domino.String{"key"})
+	_, err := view.GetDocumentByKey([]domigo.String{"key"})
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRYBYKEY_METHOD_3846.html */
 func TestGetEntryByKey(t *testing.T) {
-	_, err := view.GetEntryByKey([]domino.String{"key"})
+	_, err := view.GetEntryByKey([]domigo.String{"key"})
 	require.Nil(t, err)
 }
 

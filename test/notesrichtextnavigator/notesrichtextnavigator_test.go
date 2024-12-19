@@ -4,18 +4,17 @@ package notesrichtextnavigator_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesrichtextnavigator"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var richtextnavigator notesrichtextnavigator.NotesRichTextNavigator
+var richtextnavigator domigo.NotesRichTextNavigator
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	db, _ := testhelpers.CreateTestDatabase(session)
 	doc, _ := db.CreateDocument()
 	richtextitem, _ := doc.CreateRichTextItem("TestItem")
@@ -40,7 +39,7 @@ func TestClone(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDFIRSTELEMENT_METHOD_RTNAV.html */
 func TestFindFirstElement(t *testing.T) {
-	_, err := richtextnavigator.FindFirstElement(notesrichtextnavigator.RTELEM_TYPE_SECTION)
+	_, err := richtextnavigator.FindFirstElement(domigo.NOTESRICHTEXTNAVIGATOR_RTELEM_TYPE_SECTION)
 	require.Nil(t, err)
 }
 
@@ -52,7 +51,7 @@ func TestFindFirstString(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDLASTELEMENT_METHOD_RTNAV.html */
 func TestFindLastElement(t *testing.T) {
-	_, err := richtextnavigator.FindLastElement(notesrichtextnavigator.RTELEM_TYPE_SECTION)
+	_, err := richtextnavigator.FindLastElement(domigo.NOTESRICHTEXTNAVIGATOR_RTELEM_TYPE_SECTION)
 	require.Nil(t, err)
 }
 
@@ -70,7 +69,7 @@ func TestFindNextString(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDNTHELEMENT_METHOD_RTNAV.html */
 func TestFindNthElement(t *testing.T) {
-	_, err := richtextnavigator.FindNthElement(notesrichtextnavigator.RTELEM_TYPE_SECTION)
+	_, err := richtextnavigator.FindNthElement(domigo.NOTESRICHTEXTNAVIGATOR_RTELEM_TYPE_SECTION)
 	require.Nil(t, err)
 }
 

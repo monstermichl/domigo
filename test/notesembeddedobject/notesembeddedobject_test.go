@@ -5,18 +5,17 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesembeddedobject"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var embeddedobject notesembeddedobject.NotesEmbeddedObject
+var embeddedobject domigo.NotesEmbeddedObject
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	defer session.Release()
 
 	db, _ := testhelpers.CreateTestDatabase(session)
@@ -30,7 +29,7 @@ func TestMain(m *testing.M) {
 	defer rti.Release()
 
 	path, _ := filepath.Abs("test.md")
-	embeddedobject, _ = rti.EmbedObject(notesembeddedobject.EMBED_ATTACHMENT, "", path)
+	embeddedobject, _ = rti.EmbedObject(domigo.NOTESEMBEDDEDOBJECT_EMBED_ATTACHMENT, "", path)
 	defer embeddedobject.Release()
 
 	m.Run()

@@ -7,20 +7,19 @@ import (
 	"testing"
 	"time"
 
-	"github.com/monstermichl/domigo/domino/notessession"
-	"github.com/monstermichl/domigo/domino/notesviewentry"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var viewentry notesviewentry.NotesViewEntry
+var viewentry domigo.NotesViewEntry
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
 	var info string
 
-	session, err := notessession.Initialize()
+	session, err := domigo.Initialize()
 	defer session.Release()
 
 	defer func() {

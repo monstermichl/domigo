@@ -4,20 +4,18 @@ package notesnewsletter_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdatabase"
-	"github.com/monstermichl/domigo/domino/notesnewsletter"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var db notesdatabase.NotesDatabase
-var newsletter notesnewsletter.NotesNewsletter
+var db domigo.NotesDatabase
+var newsletter domigo.NotesNewsletter
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	db, _ = testhelpers.CreateTestDatabase(session)
 	collection, _ := db.CreateDocumentCollection()
 	newsletter, _ = session.CreateNewsletter(collection)

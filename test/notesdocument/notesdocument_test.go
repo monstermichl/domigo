@@ -3,21 +3,18 @@ package notesdocument_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdatabase"
-	"github.com/monstermichl/domigo/domino/notesdocument"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
 const TEST_ITEM_NAME = "test_item"
 
-var db notesdatabase.NotesDatabase
-var document notesdocument.NotesDocument
+var db domigo.NotesDatabase
+var document domigo.NotesDocument
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	db, _ = session.GetDatabase("", "GoInterface.nsf")
 	document, _ = db.CreateDocument()
 
@@ -331,7 +328,7 @@ func TestConvertToMIME(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYALLITEMS_METHOD.html */
 func TestCopyAllItems(t *testing.T) {
 	targetDoc, _ := db.CreateDocument()
-	err := document.CopyAllItems(targetDoc, true)
+	err := document.CopyAllItems(targetDoc)
 	require.Nil(t, err)
 }
 

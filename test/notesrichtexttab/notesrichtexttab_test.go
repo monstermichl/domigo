@@ -4,17 +4,15 @@ package notesrichtexttab_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesrichtexttab"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var richtexttab notesrichtexttab.NotesRichTextTab
+var richtexttab domigo.NotesRichTextTab
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	style, _ := session.CreateRichTextParagraphStyle()
 
 	style.SetTab(0)

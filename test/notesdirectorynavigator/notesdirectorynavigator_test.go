@@ -4,17 +4,15 @@ package notesdirectorynavigator_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdirectorynavigator"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var directorynavigator notesdirectorynavigator.NotesDirectoryNavigator
+var directorynavigator domigo.NotesDirectoryNavigator
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	directory, _ := session.GetDirectory()
 	directorynavigator, _ = directory.CreateNavigator()
 

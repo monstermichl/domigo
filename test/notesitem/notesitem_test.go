@@ -5,10 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/monstermichl/domigo/domino"
-	"github.com/monstermichl/domigo/domino/notesdatabase"
-	"github.com/monstermichl/domigo/domino/notesitem"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
@@ -18,14 +15,14 @@ const TEST_ITEM = "TestItem"
 const TEST_VALUE = "test value"
 const TEST_DATA_TYPE = "TestDataType"
 
-var testDataTypeValue = []domino.Byte{0, 1, 2, 3}
-var session notessession.NotesSession
-var database notesdatabase.NotesDatabase
-var item notesitem.NotesItem
+var testDataTypeValue = []domigo.Byte{0, 1, 2, 3}
+var session domigo.NotesSession
+var database domigo.NotesDatabase
+var item domigo.NotesItem
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = notessession.Initialize()
+	session, _ = domigo.Initialize()
 	database, _ = testhelpers.CreateTestDatabase(session)
 	doc, _ := database.CreateDocument()
 	item, _ = doc.ReplaceItemValue(TEST_ITEM, TEST_VALUE)
@@ -198,7 +195,7 @@ func TestType(t *testing.T) {
 	tp, err := item.Type()
 
 	require.Nil(t, err)
-	require.Equal(t, notesitem.DATATYPE_TEXT, tp)
+	require.Equal(t, domigo.NOTESITEM_TYPE_TEXT, tp)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VALUELENGTH_PROPERTY.html */
@@ -230,7 +227,7 @@ func TestAbstract(t *testing.T) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPENDTOTEXTLIST_METHOD.html */
 func TestAppendToTextList(t *testing.T) {
-	err := item.AppendToTextList([]domino.String{strings.Join([]string{TEST_VALUE, "2"}, "")})
+	err := item.AppendToTextList([]domigo.String{strings.Join([]string{TEST_VALUE, "2"}, "")})
 	require.Nil(t, err)
 }
 

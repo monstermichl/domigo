@@ -4,9 +4,7 @@ package notesdocumentcollection_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesdatabase"
-	"github.com/monstermichl/domigo/domino/notesdocumentcollection"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
@@ -14,12 +12,12 @@ import (
 
 const TEST_FOLDER_NAME = "test-folder"
 
-var database notesdatabase.NotesDatabase
-var documentcollection notesdocumentcollection.NotesDocumentCollection
+var database domigo.NotesDatabase
+var documentcollection domigo.NotesDocumentCollection
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	database, _ = testhelpers.CreateTestDatabase(session)
 	documentcollection, _ = database.CreateDocumentCollection()
 
@@ -75,36 +73,40 @@ func TestClone(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONTAINS_METHOD_COLLECTION.html */
 func TestContainsNoteID(t *testing.T) {
 	doc, err := database.CreateDocument()
+	defer doc.Release()
 	require.Nil(t, err)
 
 	id, err := doc.NoteID()
 	require.Nil(t, err)
 
-	err = documentcollection.ContainsNoteID(id)
+	_, err = documentcollection.Contains(id)
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONTAINS_METHOD_COLLECTION.html */
 func TestContainsNotesDocument(t *testing.T) {
 	doc, err := database.CreateDocument()
+	defer doc.Release()
 	require.Nil(t, err)
 
-	err = documentcollection.ContainsNotesDocument(doc)
+	_, err = documentcollection.Contains(doc)
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONTAINS_METHOD_COLLECTION.html */
 func TestContainsNotesDocumentCollection(t *testing.T) {
-	col, err := database.CreateDocumentCollection()
+	col, err := database.CreateDocument()
+	defer col.Release()
 	require.Nil(t, err)
 
-	err = documentcollection.ContainsNotesDocumentCollection(col)
+	_, err = documentcollection.Contains(col)
 	require.Nil(t, err)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEDOCUMENT_METHOD_7984_ABOUT.html */
 func TestDeleteDocument(t *testing.T) {
 	doc, err := database.CreateDocument()
+	defer doc.Release()
 	require.Nil(t, err)
 
 	err = documentcollection.AddDocument(doc)
@@ -123,6 +125,7 @@ func TestDeleteDocument(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENT_METHOD_DOCCOLL.html */
 func TestGetDocument(t *testing.T) {
 	doc, err := database.CreateDocument()
+	defer doc.Release()
 	require.Nil(t, err)
 
 	err = documentcollection.AddDocument(doc)
@@ -147,12 +150,14 @@ func TestGetLastDocument(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDOCUMENT_METHOD_COLLECTION.html */
 func TestGetNextDocument(t *testing.T) {
 	firstDoc, err := database.CreateDocument()
+	defer firstDoc.Release()
 	require.Nil(t, err)
 
 	err = documentcollection.AddDocument(firstDoc)
 	require.Nil(t, err)
 
 	secondDoc, err := database.CreateDocument()
+	defer secondDoc.Release()
 	require.Nil(t, err)
 
 	err = documentcollection.AddDocument(secondDoc)
@@ -171,12 +176,14 @@ func TestGetNthDocument(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVDOCUMENT_METHOD_COLLECTION.html */
 func TestGetPrevDocument(t *testing.T) {
 	firstDoc, err := database.CreateDocument()
+	defer firstDoc.Release()
 	require.Nil(t, err)
 
 	err = documentcollection.AddDocument(firstDoc)
 	require.Nil(t, err)
 
 	secondDoc, err := database.CreateDocument()
+	defer secondDoc.Release()
 	require.Nil(t, err)
 
 	err = documentcollection.AddDocument(secondDoc)
@@ -189,12 +196,13 @@ func TestGetPrevDocument(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERSECT_METHOD_COLLECTION.html */
 func TestIntersectNoteID(t *testing.T) {
 	doc, err := database.CreateDocument()
+	defer doc.Release()
 	require.Nil(t, err)
 
 	id, err := doc.NoteID()
 	require.Nil(t, err)
 
-	err = documentcollection.IntersectNoteID(id)
+	err = documentcollection.Intersect(id)
 	require.Nil(t, err)
 }
 
@@ -203,7 +211,7 @@ func TestIntersectNotesDocument(t *testing.T) {
 	doc, err := database.CreateDocument()
 	require.Nil(t, err)
 
-	err = documentcollection.IntersectNotesDocument(doc)
+	err = documentcollection.Intersect(doc)
 	require.Nil(t, err)
 }
 
@@ -212,7 +220,7 @@ func TestIntersectNotesDocumentCollection(t *testing.T) {
 	col, err := database.CreateDocumentCollection()
 	require.Nil(t, err)
 
-	err = documentcollection.IntersectNotesDocumentCollection(col)
+	err = documentcollection.Intersect(col)
 	require.Nil(t, err)
 }
 
@@ -236,7 +244,7 @@ func TestMergeNoteID(t *testing.T) {
 	id, err := doc.NoteID()
 	require.Nil(t, err)
 
-	err = documentcollection.MergeNoteID(id)
+	err = documentcollection.Merge(id)
 	require.Nil(t, err)
 }
 
@@ -245,7 +253,7 @@ func TestMergeNotesDocument(t *testing.T) {
 	doc, err := database.CreateDocument()
 	require.Nil(t, err)
 
-	err = documentcollection.MergeNotesDocument(doc)
+	err = documentcollection.Merge(doc)
 	require.Nil(t, err)
 }
 
@@ -254,7 +262,7 @@ func TestMergeNotesDocumentCollection(t *testing.T) {
 	col, err := database.CreateDocumentCollection()
 	require.Nil(t, err)
 
-	err = documentcollection.MergeNotesDocumentCollection(col)
+	err = documentcollection.Merge(col)
 	require.Nil(t, err)
 }
 
@@ -305,7 +313,7 @@ func TestSubtractNoteID(t *testing.T) {
 	id, err := doc.NoteID()
 	require.Nil(t, err)
 
-	err = documentcollection.SubtractNoteID(id)
+	err = documentcollection.Subtract(id)
 	require.Nil(t, err)
 }
 
@@ -314,7 +322,7 @@ func TestSubtractNotesDocument(t *testing.T) {
 	doc, err := database.CreateDocument()
 	require.Nil(t, err)
 
-	err = documentcollection.SubtractNotesDocument(doc)
+	err = documentcollection.Subtract(doc)
 	require.Nil(t, err)
 }
 
@@ -323,7 +331,7 @@ func TestSubtractNotesDocumentCollection(t *testing.T) {
 	col, err := database.CreateDocumentCollection()
 	require.Nil(t, err)
 
-	err = documentcollection.SubtractNotesDocumentCollection(col)
+	err = documentcollection.Subtract(col)
 	require.Nil(t, err)
 }
 

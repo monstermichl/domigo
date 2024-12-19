@@ -4,18 +4,17 @@ package notesadministrationprocess_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesadministrationprocess"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var administrationprocess notesadministrationprocess.NotesAdministrationProcess
+var administrationprocess domigo.NotesAdministrationProcess
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	db, _ := testhelpers.CreateTestDatabase(session)
 	administrationprocess, _ = session.CreateAdministrationProcess("")
 

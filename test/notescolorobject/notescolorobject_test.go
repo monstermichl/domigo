@@ -4,18 +4,17 @@ package notescolorobject_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notescolorobject"
-	"github.com/monstermichl/domigo/domino/notessession"
+	domigo "github.com/monstermichl/domigo/domino"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
 )
 
-var colorobject notescolorobject.NotesColorObject
+var colorobject domigo.NotesColorObject
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	db, _ := testhelpers.CreateTestDatabase(session)
 	colorobject, _ = session.CreateColorObject()
 

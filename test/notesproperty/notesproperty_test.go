@@ -5,17 +5,15 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/notesproperty"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var property notesproperty.NotesProperty
+var property domigo.NotesProperty
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	defer session.Release()
 
 	broker, err := session.GetPropertyBroker()

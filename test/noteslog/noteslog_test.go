@@ -4,17 +4,15 @@ package noteslog_test
 import (
 	"testing"
 
-	"github.com/monstermichl/domigo/domino/noteslog"
-	"github.com/monstermichl/domigo/domino/notessession"
-
+	domigo "github.com/monstermichl/domigo/domino"
 	"github.com/stretchr/testify/require"
 )
 
-var log noteslog.NotesLog
+var log domigo.NotesLog
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := notessession.Initialize()
+	session, _ := domigo.Initialize()
 	log, _ = session.CreateLog("test")
 
 	defer session.Release()
