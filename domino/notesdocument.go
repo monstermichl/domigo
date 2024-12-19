@@ -487,7 +487,7 @@ func (d NotesDocument) GetItemValueCustomDataBytes(itemName String, dataTypeName
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUEDATETIMEARRAY_METHOD.html */
 /* TODO: Find out how to handle different return value types. */
 func (d NotesDocument) GetItemValueDateTimeArray(itemName String) ([]NotesDateTime, error) {
-	return com.GetObjectArrayProperty(d.com(), NewNotesDateTime, "GetItemValueDateTimeArray")
+	return com.CallObjectArrayMethod(d.com(), NewNotesDateTime, "GetItemValueDateTimeArray")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMIMEENTITY_METHOD_DOC.html */

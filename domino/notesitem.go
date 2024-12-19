@@ -233,7 +233,7 @@ func (i NotesItem) GetValueCustomDataBytes(dataTypeName String) ([]Byte, error) 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETVALUEDATETIMEARRAY_METHOD.html */
 /* TODO: Check documentation, return type can vary... */
 func (i NotesItem) GetValueDateTimeArray() ([]NotesDateTime, error) {
-	return com.GetObjectArrayProperty(i.com(), NewNotesDateTime, "GetValueDateTimeArray")
+	return com.CallObjectArrayMethod(i.com(), NewNotesDateTime, "GetValueDateTimeArray")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMIMEENTITY_METHOD_NOTESITEM.html */

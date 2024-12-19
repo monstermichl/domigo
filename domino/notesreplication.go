@@ -148,7 +148,7 @@ func (r NotesReplication) GetEntry(source String, destination String, params ...
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRIES_METHOD.html */
 func (r NotesReplication) GetEntries() ([]NotesReplicationEntry, error) {
-	return com.GetObjectArrayProperty(r.com(), NewNotesReplicationEntry, "GetEntries")
+	return com.CallObjectArrayMethod(r.com(), NewNotesReplicationEntry, "GetEntries")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESET_METHOD_9955.html */
