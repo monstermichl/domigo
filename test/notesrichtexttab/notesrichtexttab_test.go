@@ -4,7 +4,7 @@ package notesrichtexttab_test
 import (
 	"testing"
 
-	domigo "github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo"
 	"github.com/stretchr/testify/require"
 )
 

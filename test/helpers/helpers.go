@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	domigo "github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo"
 )
 
 func TestDatabaseName() string {

@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	domigo "github.com/monstermichl/domigo/domino"
+	"github.com/monstermichl/domigo"
 	testhelpers "github.com/monstermichl/domigo/test/helpers"
 
 	"github.com/stretchr/testify/require"
