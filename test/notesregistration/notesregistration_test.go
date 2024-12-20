@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -12,14 +13,19 @@ var registration domigo.NotesRegistration
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	defer session.Release()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		registration, err = session.CreateRegistration()
+		defer registration.Release()
 
-	/* Don't run tests for now to not mess with some Notes stuff as NotesRegistration
-	   is not bound to a specific database. */
-
-	// registration, _ = session.CreateRegistration()
-	// m.Run()
+		if err != nil {
+			return "Registration could not be created", err
+		}
+		/* Don't run tests for now to not mess with some Notes stuff as NotesRegistration
+		   is not bound to a specific database. */
+		// m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

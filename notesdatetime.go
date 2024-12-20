@@ -52,19 +52,19 @@ func (d NotesDateTime) SetLocalTime(v String) error {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LSGMTTIME_PROPERTY.html */
-func (d NotesDateTime) LSGMTTime() (Variant, error) {
+func (d NotesDateTime) LSGMTTime() (Time, error) {
 	val, err := d.com().GetProperty("LSGMTTime")
-	return helpers.CastValue[Variant](val), err
+	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LSLOCALTIME_PROPERTY.html */
-func (d NotesDateTime) LSLocalTime() (Variant, error) {
+func (d NotesDateTime) LSLocalTime() (Time, error) {
 	val, err := d.com().GetProperty("LSLocalTime")
-	return helpers.CastValue[Variant](val), err
+	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LSLOCALTIME_PROPERTY.html */
-func (d NotesDateTime) SetLSLocalTime(v Variant) error {
+func (d NotesDateTime) SetLSLocalTime(v Time) error {
 	return d.com().PutProperty("LSLocalTime", v)
 }
 

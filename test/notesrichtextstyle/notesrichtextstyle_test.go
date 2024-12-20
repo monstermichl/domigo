@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -12,13 +13,16 @@ var richtextstyle domigo.NotesRichTextStyle
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	richtextstyle, _ = session.CreateRichTextStyle()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		richtextstyle, err = session.CreateRichTextStyle()
 
-	defer richtextstyle.Release()
-	defer session.Release()
-
-	m.Run()
+		if err != nil {
+			return "Style could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

@@ -2,7 +2,6 @@
 package notesoutlineentry_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -15,46 +14,24 @@ var outlineentry domigo.NotesOutlineEntry
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		outline, err := db.CreateOutline("test-outline")
+		defer outline.Release()
 
-	session, err := domigo.Initialize()
-	defer session.Release()
+		if err != nil {
+			return "Outline could not be created", err
+		}
 
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
+		outlineentry, err = outline.CreateEntry("testentry")
+		defer outlineentry.Release()
 
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
-
-	db, err := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
-
-	if err != nil {
-		info = "Database could not be created"
-		return
-	}
-
-	outline, err := db.CreateOutline("test-outline")
-	defer outline.Release()
-
-	if err != nil {
-		info = "Outline could not be created"
-		return
-	}
-
-	outlineentry, err = outline.CreateEntry("testentry")
-	defer outlineentry.Release()
-
-	if err != nil {
-		info = "Outline entry could not be created"
-		return
-	}
-	m.Run()
+		if err != nil {
+			return "Outline entry could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

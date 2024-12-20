@@ -15,16 +15,19 @@ var dominoquery domigo.NotesDominoQuery
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	dominoquery, _ := db.CreateDominoQuery()
+	testhelpers.Initialize(func(sessionTemp domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
 
-	defer dominoquery.Release()
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
+		session = sessionTemp
+		dominoquery, err := db.CreateDominoQuery()
+		defer dominoquery.Release()
 
-	m.Run()
+		if err != nil {
+			return "Domino query could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

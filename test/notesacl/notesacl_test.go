@@ -18,16 +18,16 @@ var acl domigo.NotesACL
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	defer session.Release()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		acl, err = db.ACL()
 
-	db, _ := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
-
-	acl, _ = db.ACL()
-
-	m.Run()
+		if err != nil {
+			return "ACL could not be retrieved", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

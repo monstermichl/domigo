@@ -15,20 +15,28 @@ var mimeentity domigo.NotesMIMEEntity
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	doc, _ := db.CreateDocument()
-	stream, _ = session.CreateStream()
-	mimeentity, _ = doc.CreateMIMEEntity()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		doc, err := db.CreateDocument()
+		defer doc.Release()
 
-	defer mimeentity.Release()
-	defer stream.Release()
-	defer doc.Release()
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
+		if err != nil {
+			return "Document could not be created", err
+		}
+		stream, err = session.CreateStream()
+		defer stream.Release()
 
-	m.Run()
+		if err != nil {
+			return "Stream could not be created", err
+		}
+		mimeentity, err = doc.CreateMIMEEntity()
+		defer mimeentity.Release()
+
+		if err != nil {
+			return "MIME entity could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

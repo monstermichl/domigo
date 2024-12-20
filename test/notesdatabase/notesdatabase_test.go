@@ -13,14 +13,11 @@ var database domigo.NotesDatabase
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	database, _ = testhelpers.CreateTestDatabase(session)
-
-	defer database.Release()
-	defer database.Remove()
-	defer session.Release()
-
-	m.Run()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		database = db
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -288,19 +285,9 @@ func TestIsLink(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* TODO: Access type for IsLocallyEncrypted could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISLOCALLYENCRYPTED_PROPERTY_DB.html */
 func TestIsLocallyEncrypted(t *testing.T) {
 	_, err := database.IsLocallyEncrypted()
-	require.Nil(t, err)
-}
-
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISLOCALLYENCRYPTED_PROPERTY_DB.html */
-func TestSetIsLocallyEncrypted(t *testing.T) {
-	s, err := database.IsLocallyEncrypted()
-	require.Nil(t, err)
-
-	err = database.SetIsLocallyEncrypted(s)
 	require.Nil(t, err)
 }
 
@@ -541,12 +528,6 @@ func TestCompact(t *testing.T) {
 // 	_, err := database.CompactWithOptions( /* TODO: Pass test values. */ )
 // 	require.Nil(t, err)
 // }
-
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATE_METHOD.html */
-func TestCreate(t *testing.T) {
-	err := database.Create("", "TestDB.nsf", false)
-	require.Nil(t, err)
-}
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATECOPY_METHOD.html */
 // func TestCreateCopy(t *testing.T) {

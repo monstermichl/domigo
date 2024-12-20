@@ -2,7 +2,6 @@
 package notesview_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -16,52 +15,27 @@ var view domigo.NotesView
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		err := db.SetIsDesignLockingEnabled(true)
 
-	session, err := domigo.Initialize()
-	defer session.Release()
+		if err != nil {
+			return "Design locking could not be enabled", err
+		}
+		document, err = testhelpers.CreateTestDocument(db)
+		defer document.Release()
 
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
+		if err != nil {
+			return "Document could not be saved", err
+		}
+		view, err = testhelpers.CreateTestView(db, []domigo.String{"Column 1", "Column 2", "Column 2"})
+		defer view.Release()
 
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
-
-	db, err := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
-
-	if err != nil {
-		info = "Database could not be created"
-		return
-	}
-
-	err = db.SetIsDesignLockingEnabled(true)
-
-	if err != nil {
-		info = "Design locking could not be enabled"
-		return
-	}
-
-	document, err = testhelpers.CreateTestDocument(db)
-
-	if err != nil {
-		info = "Document could not be saved"
-		return
-	}
-
-	view, err = testhelpers.CreateTestView(db, []domigo.String{"Column 1", "Column 2", "Column 2"})
-
-	if err != nil {
-		info = "View could not be created"
-		return
-	}
-
-	m.Run()
+		if err != nil {
+			return "View could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

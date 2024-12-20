@@ -14,15 +14,16 @@ var administrationprocess domigo.NotesAdministrationProcess
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	administrationprocess, _ = session.CreateAdministrationProcess("")
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		administrationprocess, err = session.CreateAdministrationProcess("")
 
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
-
-	m.Run()
+		if err != nil {
+			return "Administration process could not be retrieved", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

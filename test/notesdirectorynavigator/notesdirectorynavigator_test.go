@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -12,13 +13,22 @@ var directorynavigator domigo.NotesDirectoryNavigator
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	directory, _ := session.GetDirectory()
-	directorynavigator, _ = directory.CreateNavigator()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		directory, err := session.GetDirectory()
+		defer directory.Release()
 
-	defer session.Release()
+		if err != nil {
+			return "Directory could not be created", err
+		}
+		directorynavigator, err = directory.CreateNavigator()
 
-	m.Run()
+		if err != nil {
+			return "Navigator could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

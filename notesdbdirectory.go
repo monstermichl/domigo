@@ -7,7 +7,7 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-type NotesDbDirectoryFileType Integer
+type NotesDbDirectoryFileType = Integer
 
 const (
 	NOTESDBDIRECTORY_FILETYPE_DATABASE           NotesDbDirectoryFileType = 1247

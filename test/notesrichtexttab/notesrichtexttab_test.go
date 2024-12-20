@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -12,18 +13,32 @@ var richtexttab domigo.NotesRichTextTab
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	style, _ := session.CreateRichTextParagraphStyle()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		style, err := session.CreateRichTextParagraphStyle()
+		defer style.Release()
 
-	style.SetTab(0)
+		if err != nil {
+			return "RichText style could not be created", err
+		}
+		err = style.SetTab(0)
 
-	tabs, _ := style.Tabs()
-	richtexttab = tabs[0]
+		if err != nil {
+			return "Tab could not be set", err
+		}
+		tabs, err := style.Tabs()
 
-	defer richtexttab.Release()
-	defer session.Release()
+		if err != nil {
+			return "Tabs could not be retrieved", err
+		} else {
+			for _, t := range tabs {
+				defer t.Release()
+			}
+		}
+		richtexttab = tabs[0]
 
-	m.Run()
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

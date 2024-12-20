@@ -17,15 +17,19 @@ var outline domigo.NotesOutline
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	database, _ = testhelpers.CreateTestDatabase(session)
-	outline, _ = database.CreateOutline(TEST_OUTLINE_NAME)
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		database = db
 
-	defer database.Release()
-	defer database.Remove()
-	defer session.Release()
+		outline, err = database.CreateOutline(TEST_OUTLINE_NAME)
+		defer outline.Release()
 
-	m.Run()
+		if err != nil {
+			return "Outline could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

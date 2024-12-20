@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -13,12 +14,19 @@ var datetime domigo.NotesDateTime
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = domigo.Initialize()
-	datetime, _ = session.CreateDateTime("Today")
+	testhelpers.Initialize(func(sessionTemp domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
 
-	defer session.Release()
+		session = sessionTemp
+		datetime, err = session.CreateDateTime("Today")
+		defer session.Release()
 
-	m.Run()
+		if err != nil {
+			return "Date time could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

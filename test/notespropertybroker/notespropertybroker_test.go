@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -12,12 +13,17 @@ var propertybroker domigo.NotesPropertyBroker
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	propertybroker, _ = session.GetPropertyBroker()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		propertybroker, err = session.GetPropertyBroker()
+		defer propertybroker.Release()
 
-	defer session.Release()
-
-	m.Run()
+		if err != nil {
+			return "Property broker could not be retrieved", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

@@ -2,7 +2,6 @@
 package notescalendarentry_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -16,48 +15,26 @@ var calendarentry domigo.NotesCalendarEntry
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
-	var err error
+	testhelpers.Initialize(func(sessionTemp domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
 
-	session, err = domigo.Initialize()
-	defer session.Release()
+		session = sessionTemp
+		calendar, err := session.GetCalendar(db)
+		defer calendar.Release()
 
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
+		if err != nil {
+			return "Calendar could not be retrieved", err
+		}
 
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
+		calendarentry, err = calendar.CreateEntry("BEGIN:VCALENDAR;PRODID:-//xyz Corp//NONSGML PDA Calendar Version 1.0//EN;VERSION:2.0;EGIN:VEVENT;DTSTAMP:19960704T120000Z;UID:uid1@example.com;ORGANIZER:mailto:jsmith@example.com;DTSTART:19960918T143000Z;DTEND:19960920T220000Z;STATUS:CONFIRMED;CATEGORIES:CONFERENCE;SUMMARY:Networld+Interop Conference;DESCRIPTION:Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta, Georgia;END:VEVENT;END:VCALENDAR")
+		defer calendarentry.Release()
 
-	db, err := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
-
-	if err != nil {
-		info = "Database could not be created"
-		return
-	}
-
-	calendar, err := session.GetCalendar(db)
-	defer calendar.Release()
-
-	if err != nil {
-		info = "Calendar could not be retrieved"
-		return
-	}
-
-	calendarentry, err = calendar.CreateEntry("BEGIN:VCALENDAR;PRODID:-//xyz Corp//NONSGML PDA Calendar Version 1.0//EN;VERSION:2.0;EGIN:VEVENT;DTSTAMP:19960704T120000Z;UID:uid1@example.com;ORGANIZER:mailto:jsmith@example.com;DTSTART:19960918T143000Z;DTEND:19960920T220000Z;STATUS:CONFIRMED;CATEGORIES:CONFERENCE;SUMMARY:Networld+Interop Conference;DESCRIPTION:Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta, Georgia;END:VEVENT;END:VCALENDAR")
-	defer calendarentry.Release()
-
-	if err != nil {
-		info = "NotesCalendarEntry could not be created"
-		return
-	}
-
-	m.Run()
+		if err != nil {
+			return "NotesCalendarEntry could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

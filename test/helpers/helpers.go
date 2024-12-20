@@ -3,6 +3,7 @@ package testhelpers
 import (
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/monstermichl/domigo"
@@ -72,4 +73,37 @@ func CreateTestDocument(db domigo.NotesDatabase) (domigo.NotesDocument, error) {
 		_, err = document.Save(true, false)
 	}
 	return document, err
+}
+
+func Initialize(c func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error)) {
+	var info string
+
+	session, err := domigo.Initialize()
+	defer session.Release()
+
+	defer func() {
+		if err != nil {
+			fmt.Println(err)
+		}
+		info = strings.TrimSpace(info)
+
+		if info != "" {
+			fmt.Println(info)
+		}
+	}()
+
+	if err != nil {
+		info = "Session could not be initialized"
+		return
+	}
+
+	db, err := CreateTestDatabase(session)
+	defer db.Release()
+	defer db.Remove()
+
+	if err != nil {
+		info = "Database could not be created"
+		return
+	}
+	info, err = c(session, db)
 }

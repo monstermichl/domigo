@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -11,14 +12,28 @@ var notesName domigo.NotesName
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ := session.GetDatabase("", "GoInterface.nsf")
-	aclTmp, _ := db.ACL()
-	aclEntry, _ := aclTmp.GetFirstEntry()
-	notesName, _ = aclEntry.NameObject()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		aclTmp, err := db.ACL()
+		defer aclTmp.Release()
 
-	m.Run()
-	session.Release()
+		if err != nil {
+			return "ACL could not be retrieved", err
+		}
+		aclEntry, err := aclTmp.GetFirstEntry()
+		defer aclEntry.Release()
+
+		if err != nil {
+			return "ACL entry could not be retrieved", err
+		}
+		notesName, err = aclEntry.NameObject()
+		defer notesName.Release()
+
+		if err != nil {
+			return "Name object could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 func TestAbbreviated(t *testing.T) {
 	_, err := notesName.Abbreviated()

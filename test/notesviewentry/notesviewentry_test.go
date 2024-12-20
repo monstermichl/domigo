@@ -17,86 +17,50 @@ var viewentry domigo.NotesViewEntry
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		document, err := db.CreateDocument()
+		defer document.Release()
 
-	session, err := domigo.Initialize()
-	defer session.Release()
+		if err != nil {
+			return "Document could not becreated", err
+		}
+		_, err = document.ReplaceItemValue("testField", fmt.Sprint(time.Now().Unix()))
 
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
+		if err != nil {
+			return "Test value could not be set", err
+		}
+		_, err = document.Save(true, false)
 
-	if err != nil {
-		info = "Session could not beinitialized"
-		return
-	}
+		if err != nil {
+			return "Document could not be saved", err
+		}
+		view, err := db.GetView("TestView")
+		defer view.Release()
 
-	db, err := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
+		if err != nil {
+			return "View could not beretrieved", err
+		}
+		viewentries, err := view.AllEntries()
+		defer viewentries.Release()
 
-	if err != nil {
-		info = "Database could not becreated"
-		return
-	}
+		if err != nil {
+			return "View entries could not be retrieved", err
+		}
+		count, err := viewentries.Count()
 
-	document, err := db.CreateDocument()
-	defer document.Release()
+		if err != nil {
+			return "View entries count could not be retrieved", err
+		} else if count <= 0 {
+			return "No view entries found", err
+		}
+		viewentry, err = viewentries.GetFirstEntry()
 
-	if err != nil {
-		info = "Document could not becreated"
-		return
-	}
-
-	_, err = document.ReplaceItemValue("testField", fmt.Sprint(time.Now().Unix()))
-
-	if err != nil {
-		info = "Test value could not be set"
-		return
-	}
-
-	_, err = document.Save(true, false)
-
-	if err != nil {
-		info = "Document could not be saved"
-		return
-	}
-
-	view, err := db.GetView("TestView")
-	defer view.Release()
-
-	if err != nil {
-		info = "View could not beretrieved"
-		return
-	}
-
-	viewentries, err := view.AllEntries()
-	defer viewentries.Release()
-
-	if err != nil {
-		info = "View entries could not be retrieved"
-		return
-	}
-
-	count, err := viewentries.Count()
-
-	if err != nil {
-		info = "View entries count could not be retrieved"
-		return
-	} else if count <= 0 {
-		info = "No view entries found"
-		return
-	}
-
-	viewentry, err = viewentries.GetFirstEntry()
-
-	if err != nil {
-		info = "View entry could not be retrieved"
-		return
-	}
-
-	m.Run()
+		if err != nil {
+			return "View entry could not be retrieved", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

@@ -22,18 +22,28 @@ var item domigo.NotesItem
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = domigo.Initialize()
-	database, _ = testhelpers.CreateTestDatabase(session)
-	doc, _ := database.CreateDocument()
-	item, _ = doc.ReplaceItemValue(TEST_ITEM, TEST_VALUE)
+	testhelpers.Initialize(func(sessionTemp domigo.NotesSession, dbTemp domigo.NotesDatabase) (string, error) {
+		var err error
 
-	defer item.Release()
-	defer doc.Release()
-	defer database.Release()
-	defer database.Remove()
-	defer session.Release()
+		session = sessionTemp
+		database = dbTemp
+	
+		doc, err := database.CreateDocument()
+		defer doc.Release()
 
-	m.Run()
+		if err != nil {
+			return "Document could not be created", err
+		}
+
+		item, err = doc.ReplaceItemValue(TEST_ITEM, TEST_VALUE)
+		defer item.Release()
+
+		if err != nil {
+			return "Item value could not be set", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

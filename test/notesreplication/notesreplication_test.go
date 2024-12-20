@@ -2,7 +2,6 @@
 package notesreplication_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -15,39 +14,17 @@ var replication domigo.NotesReplication
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		replication, err = db.ReplicationInfo()
+		defer replication.Release()
 
-	session, err := domigo.Initialize()
-	defer session.Release()
-
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
-
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
-
-	db, err := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
-
-	if err != nil {
-		info = "Database could not be created"
-		return
-	}
-
-	replication, _ = db.ReplicationInfo()
-	defer replication.Release()
-
-	if err != nil {
-		info = "NotesReplication could not be created"
-		return
-	}
-
-	m.Run()
+		if err != nil {
+			return "Replaction could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

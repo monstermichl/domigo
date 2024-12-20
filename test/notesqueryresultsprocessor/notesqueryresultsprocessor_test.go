@@ -2,7 +2,6 @@
 package notesqueryresultsprocessor_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -16,39 +15,19 @@ var queryresultsprocessor domigo.NotesQueryResultsProcessor
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		database = db
+		
+		queryresultsprocessor, err = database.GetQueryResultsProcessor()
+		defer queryresultsprocessor.Release()
 
-	session, err := domigo.Initialize()
-	defer session.Release()
-
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
-
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
-
-	database, err = testhelpers.CreateTestDatabase(session)
-	defer database.Release()
-	defer database.Remove()
-
-	if err != nil {
-		info = "Database could not be created"
-		return
-	}
-
-	queryresultsprocessor, err = database.GetQueryResultsProcessor()
-	defer queryresultsprocessor.Release()
-
-	if err != nil {
-		info = "NotesQueryResultsProcessor could not be created"
-		return
-	}
-
-	m.Run()
+		if err != nil {
+			return "NotesQueryResultsProcessor could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

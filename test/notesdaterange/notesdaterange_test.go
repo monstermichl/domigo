@@ -14,15 +14,37 @@ var daterange domigo.NotesDateRange
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	daterange, _ = session.CreateDateRange()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		daterange, err = session.CreateDateRange()
+		defer daterange.Release()
 
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
+		if err != nil {
+			return "Date range could not be created", err
+		}
+		start, err := session.CreateDateTime("Yesterday")
 
-	m.Run()
+		if err != nil {
+			return "Start could not be created", err
+		}
+		stop, err := session.CreateDateTime("Today")
+
+		if err != nil {
+			return "Stop could not be created", err
+		}
+		err = daterange.SetStartDateTime(start)
+
+		if err != nil {
+			return "Start could not be set", err
+		}
+		err = daterange.SetEndDateTime(stop)
+
+		if err != nil {
+			return "End could not be set", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

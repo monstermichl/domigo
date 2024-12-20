@@ -15,24 +15,31 @@ var embeddedobject domigo.NotesEmbeddedObject
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	defer session.Release()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		doc, err := db.CreateDocument()
+		defer doc.Release()
 
-	db, _ := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
+		if err != nil {
+			return "Document could not be created", err
+		}
+	
+		rti, err := doc.CreateRichTextItem("RTI")
+		defer rti.Release()
 
-	doc, _ := db.CreateDocument()
-	defer doc.Release()
+		if err != nil {
+			return "Richtext item could not be created", err
+		}
 
-	rti, _ := doc.CreateRichTextItem("RTI")
-	defer rti.Release()
+		path, err := filepath.Abs("test.md")
+		embeddedobject, _ = rti.EmbedObject(domigo.NOTESEMBEDDEDOBJECT_EMBED_ATTACHMENT, "", path)
+		defer embeddedobject.Release()
 
-	path, _ := filepath.Abs("test.md")
-	embeddedobject, _ = rti.EmbedObject(domigo.NOTESEMBEDDEDOBJECT_EMBED_ATTACHMENT, "", path)
-	defer embeddedobject.Release()
-
-	m.Run()
+		if err != nil {
+			return "Embedded object could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

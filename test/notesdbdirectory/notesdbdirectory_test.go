@@ -2,7 +2,6 @@
 package notesdbdirectory_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -15,30 +14,17 @@ var dbdirectory domigo.NotesDbDirectory
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		dbdirectory, _ = session.GetDbDirectory("")
+		defer dbdirectory.Release()
 
-	session, err := domigo.Initialize()
-	defer session.Release()
-
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
-
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
-
-	dbdirectory, _ = session.GetDbDirectory("")
-	defer dbdirectory.Release()
-
-	if err != nil {
-		info = "NotesDbDirectory could not be created"
-		return
-	}
-
-	m.Run()
+		if err != nil {
+			return "NotesDbDirectory could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

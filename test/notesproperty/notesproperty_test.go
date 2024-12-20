@@ -2,10 +2,10 @@
 package notesproperty_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -13,18 +13,22 @@ var property domigo.NotesProperty
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	defer session.Release()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		broker, err := session.GetPropertyBroker()
+		defer broker.Release()
 
-	broker, err := session.GetPropertyBroker()
+		if err != nil {
+			return "Broker could not be retrieved. Canceling tests...", err
+		}
+		property, err = broker.GetProperty("Subject")
+		defer property.Release()
 
-	if err != nil {
-		fmt.Println("Broker could not be retrieved. Canceling tests...")
-		return
-	}
-	property, _ = broker.GetProperty("Subject")
-
-	m.Run()
+		if err != nil {
+			return "Property could not be retrieved", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

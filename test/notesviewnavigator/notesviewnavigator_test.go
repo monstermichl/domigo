@@ -2,7 +2,6 @@
 package notesviewnavigator_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -17,79 +16,46 @@ var viewnavigator domigo.NotesViewNavigator
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		document, err = testhelpers.CreateTestDocument(db)
 
-	session, err := domigo.Initialize()
-	defer session.Release()
+		if err != nil {
+			return "Document could not be saved", err
+		}
+		view, err := testhelpers.CreateTestView(db, []domigo.String{"Column 1", "Column 2", "Column 2"})
 
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
+		if err != nil {
+			return "View could not be created", err
+		}
+		entries, err := view.AllEntries()
+		defer entries.Release()
 
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
+		if err != nil {
+			return "Entries could not be retrieved", err
+		}
+		count, err := entries.Count()
 
-	db, err := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
+		if err != nil {
+			return "View entries count could not be retrieved", err
+		} else if count <= 0 {
+			return "No view entries found", err
+		}
+		entry, err = entries.GetFirstEntry()
+		defer entry.Release()
 
-	if err != nil {
-		info = "Database could not be created"
-		return
-	}
+		if err != nil {
+			return "First entry could not be retrieved", err
+		}
+		viewnavigator, err = view.CreateViewNav()
+		defer viewnavigator.Release()
 
-	document, err = testhelpers.CreateTestDocument(db)
-
-	if err != nil {
-		info = "Document could not be saved"
-		return
-	}
-
-	view, err := testhelpers.CreateTestView(db, []domigo.String{"Column 1", "Column 2", "Column 2"})
-
-	if err != nil {
-		info = "View could not be created"
-		return
-	}
-
-	entries, err := view.AllEntries()
-	defer entries.Release()
-
-	if err != nil {
-		info = "Entries could not be retrieved"
-		return
-	}
-
-	count, err := entries.Count()
-
-	if err != nil {
-		info = "View entries count could not be retrieved"
-		return
-	} else if count <= 0 {
-		info = "No view entries found"
-		return
-	}
-
-	entry, err = entries.GetFirstEntry()
-	defer entry.Release()
-
-	if err != nil {
-		info = "First entry could not be retrieved"
-		return
-	}
-
-	viewnavigator, err = view.CreateViewNav()
-	defer viewnavigator.Release()
-
-	if err != nil {
-		info = "NotesViewNavigator could not be created"
-		return
-	}
-
-	m.Run()
+		if err != nil {
+			return "NotesViewNavigator could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

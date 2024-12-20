@@ -17,15 +17,19 @@ var documentcollection domigo.NotesDocumentCollection
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	database, _ = testhelpers.CreateTestDatabase(session)
-	documentcollection, _ = database.CreateDocumentCollection()
+	testhelpers.Initialize(func(session domigo.NotesSession, dbTemp domigo.NotesDatabase) (string, error) {
+		var err error
 
-	defer database.Release()
-	defer database.Remove()
-	defer session.Release()
+		database = dbTemp
+		documentcollection, err = database.CreateDocumentCollection()
+		defer documentcollection.Release()
 
-	m.Run()
+		if err != nil {
+			return "Document collection could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

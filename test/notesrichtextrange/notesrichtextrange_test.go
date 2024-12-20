@@ -15,18 +15,28 @@ var richtextrange domigo.NotesRichTextRange
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	doc, _ := db.CreateDocument()
-	richtextitem, _ = doc.CreateRichTextItem("TestItem")
-	richtextrange, _ = richtextitem.CreateRange()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		doc, err := db.CreateDocument()
+		defer doc.Release()
 
-	defer richtextrange.Release()
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
+		if err != nil {
+			return "Document could not be created", err
+		}
+		richtextitem, err = doc.CreateRichTextItem("TestItem")
+		defer richtextitem.Release()
 
-	m.Run()
+		if err != nil {
+			return "RichText item could not be created", err
+		}
+		richtextrange, err = richtextitem.CreateRange()
+		defer richtextrange.Release()
+
+		if err != nil {
+			return "Range could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

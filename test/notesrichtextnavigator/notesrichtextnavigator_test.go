@@ -14,18 +14,28 @@ var richtextnavigator domigo.NotesRichTextNavigator
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	doc, _ := db.CreateDocument()
-	richtextitem, _ := doc.CreateRichTextItem("TestItem")
-	richtextnavigator, _ = richtextitem.CreateNavigator()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		doc, err := db.CreateDocument()
+		defer doc.Release()
 
-	defer richtextnavigator.Release()
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
+		if err != nil {
+			return "Document could not be created", err
+		}
+		richtextitem, err := doc.CreateRichTextItem("TestItem")
+		defer richtextitem.Release()
 
-	m.Run()
+		if err != nil {
+			return "RichText item could not be created", err
+		}
+		richtextnavigator, err = richtextitem.CreateNavigator()
+		defer richtextnavigator.Release()
+
+		if err != nil {
+			return "RichText navigator could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

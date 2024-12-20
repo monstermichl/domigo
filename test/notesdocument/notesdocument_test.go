@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -14,12 +15,19 @@ var document domigo.NotesDocument
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ = session.GetDatabase("", "GoInterface.nsf")
-	document, _ = db.CreateDocument()
+	testhelpers.Initialize(func(session domigo.NotesSession, dbTemp domigo.NotesDatabase) (string, error) {
+		var err error
 
-	m.Run()
-	session.Release()
+		db = dbTemp
+		document, err = db.CreateDocument()
+		defer document.Release()
+
+		if err != nil {
+			return "Document could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

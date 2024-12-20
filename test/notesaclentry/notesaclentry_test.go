@@ -18,18 +18,24 @@ var aclentry domigo.NotesACLEntry
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	acl, _ := db.ACL()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		acl, err := db.ACL()
+		defer acl.Release()
 
-	acl.AddRole(TEST_ROLE)
-	aclentry, _ = acl.CreateACLEntry(TEST_ENTRY_NAME, TEST_ENTRY_LEVEL)
+		if err != nil {
+			return "ACL could not be retrieved", err
+		}
+		acl.AddRole(TEST_ROLE)
+		aclentry, err = acl.CreateACLEntry(TEST_ENTRY_NAME, TEST_ENTRY_LEVEL)
+		defer aclentry.Release()
 
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
-
-	m.Run()
+		if err != nil {
+			return "ACL entry could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

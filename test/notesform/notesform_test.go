@@ -14,6 +14,36 @@ var form domigo.NotesForm
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		forms, err := db.Forms()
+
+		if err != nil {
+			return "Forms could not be retrieved", err
+		}
+
+		for _, f := range forms {
+			defer f.Release()
+		}
+		err = db.SetIsDesignLockingEnabled(true)
+
+		if err != nil {
+			return "Design locking could not be enabled", err
+		}
+
+		for _, f := range forms {
+			name, err := f.Name()
+
+			if err != nil {
+				return "Name could not be retrieved", err
+			}
+
+			if name == "TestForm" {
+				form = f
+			}
+		}
+		m.Run()
+		return "", nil
+	})
 	session, _ := domigo.Initialize()
 	db, _ := testhelpers.CreateTestDatabase(session)
 	forms, _ := db.Forms()

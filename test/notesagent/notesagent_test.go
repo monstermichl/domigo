@@ -2,7 +2,6 @@
 package notesagent_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -15,53 +14,29 @@ var agent domigo.NotesAgent
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		err = db.SetIsDesignLockingEnabled(true)
 
-	session, err := domigo.Initialize()
-	defer session.Release()
+		if err != nil {
+			return "Design locking could not be enabled", err
+		}
+		agents, err := db.Agents()
 
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
+		if err != nil {
+			return "Agents could not be retrieved", err
+		} else if len(agents) == 0 {
+			return "No agents found", err
+		}
 
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
+		for _, a := range agents {
+			defer a.Release()
+		}
+		agent = agents[0]
 
-	db, err := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
-
-	if err != nil {
-		info = "Database could not be created"
-		return
-	}
-	err = db.SetIsDesignLockingEnabled(true)
-
-	if err != nil {
-		info = "Design locking could not be enabled"
-		return
-	}
-	agents, _ := db.Agents()
-
-	if err != nil {
-		info = "Agents could not be retrieved"
-		return
-	}
-
-	if len(agents) == 0 {
-		info = "No agents found"
-		return
-	}
-
-	for _, a := range agents {
-		defer a.Release()
-	}
-	agent = agents[0]
-
-	m.Run()
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

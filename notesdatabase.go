@@ -2,6 +2,8 @@
 package domigo
 
 import (
+	"errors"
+
 	"github.com/monstermichl/domigo/internal/com"
 	"github.com/monstermichl/domigo/internal/helpers"
 
@@ -234,16 +236,10 @@ func (d NotesDatabase) IsLink() (Boolean, error) {
 	return helpers.CastValue[Boolean](val), err
 }
 
-/* TODO: Access type for IsLocallyEncrypted could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISLOCALLYENCRYPTED_PROPERTY_DB.html */
 func (d NotesDatabase) IsLocallyEncrypted() (Boolean, error) {
 	val, err := d.com().GetProperty("IsLocallyEncrypted")
 	return helpers.CastValue[Boolean](val), err
-}
-
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISLOCALLYENCRYPTED_PROPERTY_DB.html */
-func (d NotesDatabase) SetIsLocallyEncrypted(v Boolean) error {
-	return d.com().PutProperty("IsLocallyEncrypted", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISMULTIDBSEARCH_PROPERTY.html */
@@ -497,18 +493,7 @@ func WithNotesDatabaseCreateMaxsize(maxsize Byte) notesDatabaseCreateParam {
 }
 
 func (d NotesDatabase) Create(server String, dbfile String, openFlag Boolean, params ...notesDatabaseCreateParam) error {
-	paramsStruct := &notesDatabaseCreateParams{}
-	paramsOrdered := []interface{}{server, dbfile, openFlag}
-
-	for _, p := range params {
-		p(paramsStruct)
-	}
-
-	if paramsStruct.maxsize != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.maxsize)
-	}
-	_, err := d.com().CallMethod("Create", paramsOrdered...)
-	return err
+	return errors.New("this method is supported in LotusScript® only. For COM, use CreateDatabase in NotesDbDirectory (see https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATE_METHOD.html)")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATECOPY_METHOD.html */

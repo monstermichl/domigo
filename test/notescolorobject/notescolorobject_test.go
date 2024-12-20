@@ -14,15 +14,16 @@ var colorobject domigo.NotesColorObject
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	colorobject, _ = session.CreateColorObject()
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
+		colorobject, err = session.CreateColorObject()
 
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
-
-	m.Run()
+		if err != nil {
+			return "Color object could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

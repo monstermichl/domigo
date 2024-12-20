@@ -15,16 +15,24 @@ var newsletter domigo.NotesNewsletter
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ := domigo.Initialize()
-	db, _ = testhelpers.CreateTestDatabase(session)
-	collection, _ := db.CreateDocumentCollection()
-	newsletter, _ = session.CreateNewsletter(collection)
+	testhelpers.Initialize(func(session domigo.NotesSession, dbTemp domigo.NotesDatabase) (string, error) {
+		db = dbTemp
 
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
+		collection, err := db.CreateDocumentCollection()
+		defer collection.Release()
 
-	m.Run()
+		if err != nil {
+			return "Document collection could not be created", err
+		}
+		newsletter, err = session.CreateNewsletter(collection)
+		defer newsletter.Release()
+
+		if err != nil {
+			return "Newsletter could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

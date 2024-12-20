@@ -2,7 +2,6 @@
 package notescalendar_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -17,55 +16,32 @@ var calendar domigo.NotesCalendar
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	var info string
+	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		var err error
 
-	session, err := domigo.Initialize()
-	defer session.Release()
+		start, err = session.CreateDateTime("Yesterday")
+		defer start.Release()
 
-	defer func() {
-		fmt.Println(err)
-		fmt.Println(info)
-	}()
+		if err != nil {
+			return "Start date could not be created", err
+		}
 
-	if err != nil {
-		info = "Session could not be initialized"
-		return
-	}
+		end, err = session.CreateDateTime("Today")
+		defer end.Release()
 
-	db, err := testhelpers.CreateTestDatabase(session)
-	defer db.Release()
-	defer db.Remove()
+		if err != nil {
+			return "End date could not be created", err
+		}
 
-	if err != nil {
-		info = "Database could not be created"
-		return
-	}
+		calendar, err = session.GetCalendar(db)
+		defer calendar.Release()
 
-	start, err = session.CreateDateTime("Yesterday")
-	defer start.Release()
-
-	if err != nil {
-		info = "Start date could not be created"
-		return
-	}
-
-	end, err = session.CreateDateTime("Today")
-	defer end.Release()
-
-	if err != nil {
-		info = "End date could not be created"
-		return
-	}
-
-	calendar, err = session.GetCalendar(db)
-	defer calendar.Release()
-
-	if err != nil {
-		info = "NotesCalendar could not be created"
-		return
-	}
-
-	m.Run()
+		if err != nil {
+			return "NotesCalendar could not be created", err
+		}
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Properties --------------------------------- */

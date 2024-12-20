@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/monstermichl/domigo"
+	testhelpers "github.com/monstermichl/domigo/test/helpers"
 	"github.com/stretchr/testify/require"
 )
 
@@ -11,9 +12,11 @@ var session domigo.NotesSession
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	session, _ = domigo.Initialize()
-	m.Run()
-	session.Release()
+	testhelpers.Initialize(func(sessionTemp domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		session = sessionTemp
+		m.Run()
+		return "", nil
+	})
 }
 
 /* --------------------------------- Methods ------------------------------------ */
