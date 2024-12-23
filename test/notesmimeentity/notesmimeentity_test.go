@@ -206,12 +206,6 @@ func TestGetSomeHeaders(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_MIMEENTITY.html */
-func TestRemove(t *testing.T) {
-	err := mimeentity.Remove()
-	require.Nil(t, err)
-}
-
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCONTENTFROMBYTES_METHOD_MIMEENTITY.html */
 func TestSetContentFromBytes(t *testing.T) {
 	err := mimeentity.SetContentFromBytes(stream, "text/plain", domigo.NOTESMIMEENTITY_ENC_BASE64)
@@ -221,5 +215,11 @@ func TestSetContentFromBytes(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCONTENTFROMTEXT_METHOD_MIMEENTITY.html */
 func TestSetContentFromText(t *testing.T) {
 	err := mimeentity.SetContentFromText(stream, "text/plain", domigo.NOTESMIMEENTITY_ENC_BASE64)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_MIMEENTITY.html */
+func TestRemove(t *testing.T) {
+	err := mimeentity.Remove()
 	require.Nil(t, err)
 }

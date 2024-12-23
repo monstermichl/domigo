@@ -166,12 +166,6 @@ func TestRenameRole(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEACLENTRY_METHOD_ACL_COM.html */
-// func TestRemoveACLEntry(t *testing.T) {
-// 	err := acl.RemoveACLEntry(TEST_ENTRY_NAME)
-// 	require.Nil(t, err)
-// }
-
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEROLE_METHOD.html */
 // func TestDeleteRole(t *testing.T) {
 // 	err := acl.DeleteRole(TEST_ROLE)
@@ -181,5 +175,11 @@ func TestRenameRole(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVE_METHOD_ACL.html */
 func TestSave(t *testing.T) {
 	err := acl.Save()
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEACLENTRY_METHOD_ACL_COM.html */
+func TestRemoveACLEntry(t *testing.T) {
+	err := acl.RemoveACLEntry(TEST_ENTRY_NAME)
 	require.Nil(t, err)
 }

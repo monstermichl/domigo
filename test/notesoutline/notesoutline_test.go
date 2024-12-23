@@ -27,6 +27,11 @@ func TestMain(m *testing.M) {
 		if err != nil {
 			return "Outline could not be created", err
 		}
+		err = outline.Save()
+
+		if err != nil {
+			return "Outline could not be saved", err
+		}
 		m.Run()
 		return "", nil
 	})

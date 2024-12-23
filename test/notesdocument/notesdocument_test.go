@@ -10,15 +10,22 @@ import (
 
 const TEST_ITEM_NAME = "test_item"
 
+var session domigo.NotesSession
 var db domigo.NotesDatabase
 var document domigo.NotesDocument
 
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
-	testhelpers.Initialize(func(session domigo.NotesSession, dbTemp domigo.NotesDatabase) (string, error) {
+	testhelpers.Initialize(func(sessionTemp domigo.NotesSession, dbTemp domigo.NotesDatabase) (string, error) {
 		var err error
 
+		session = sessionTemp
 		db = dbTemp
+		err = db.SetIsDocumentLockingEnabled(true)
+
+		if err != nil {
+			return "Document locking could not be enabled", err
+		}
 		document, err = db.CreateDocument()
 		defer document.Release()
 
@@ -395,10 +402,17 @@ func TestCopyAllItems(t *testing.T) {
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUEDATETIMEARRAY_METHOD.html */
-// func TestGetItemValueDateTimeArray(t *testing.T) {
-// 	_, err := document.GetItemValueDateTimeArray( /* TODO: Pass test values. */ )
-// 	require.Nil(t, err)
-// }
+func TestGetItemValueDateTimeArray(t *testing.T) {
+	dt, err := session.CreateDateTime("Yesterday")
+	defer dt.Release()
+	require.Nil(t, err)
+
+	_, err = document.ReplaceItemValue("TestItem", dt)
+	require.Nil(t, err)
+
+	_, err = document.GetItemValueDateTimeArray("TestItem")
+	require.Nil(t, err)
+}
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMIMEENTITY_METHOD_DOC.html */
 // func TestGetMIMEEntity(t *testing.T) {
@@ -460,12 +474,6 @@ func TestCopyAllItems(t *testing.T) {
 // 	require.Nil(t, err)
 // }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_DOC.html */
-// func TestRemove(t *testing.T) {
-// 	_, err := document.Remove( /* TODO: Pass test values. */ )
-// 	require.Nil(t, err)
-// }
-
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEFROMFOLDER_METHOD.html */
 // func TestRemoveFromFolder(t *testing.T) {
 // 	err := document.RemoveFromFolder( /* TODO: Pass test values. */ )
@@ -523,5 +531,11 @@ func TestSign(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_DOC.html */
 func TestUnLock(t *testing.T) {
 	err := document.UnLock()
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_DOC.html */
+func TestRemove(t *testing.T) {
+	_, err := document.Remove(false)
 	require.Nil(t, err)
 }

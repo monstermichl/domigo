@@ -77,18 +77,6 @@ func TestClone(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDANDREPLACE_METHOD_RTRANGE.html */
-func TestFindAndReplace(t *testing.T) {
-	_, err := richtextrange.FindAndReplace("Test", "Test")
-	require.Nil(t, err)
-}
-
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_RTRANGE.html */
-func TestRemove(t *testing.T) {
-	err := richtextrange.Remove()
-	require.Nil(t, err)
-}
-
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESET_METHOD_RTRANGE.html */
 func TestReset(t *testing.T) {
 	err := richtextrange.Reset()
@@ -112,3 +100,15 @@ func TestReset(t *testing.T) {
 // 	err := richtextrange.SetStyle( /* TODO: Pass test values. */ )
 // 	require.Nil(t, err)
 // }
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDANDREPLACE_METHOD_RTRANGE.html */
+func TestFindAndReplace(t *testing.T) {
+	_, err := richtextrange.FindAndReplace("Test", "Test")
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_RTRANGE.html */
+func TestRemove(t *testing.T) {
+	err := richtextrange.Remove()
+	require.Nil(t, err)
+}

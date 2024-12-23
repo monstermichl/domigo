@@ -2,6 +2,7 @@
 package notesform_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/monstermichl/domigo"
@@ -15,6 +16,7 @@ var form domigo.NotesForm
 /* https://pkg.go.dev/testing#hdr-Main */
 func TestMain(m *testing.M) {
 	testhelpers.Initialize(func(session domigo.NotesSession, db domigo.NotesDatabase) (string, error) {
+		const TEST_FORM = "TestForm"
 		forms, err := db.Forms()
 
 		if err != nil {
@@ -37,35 +39,17 @@ func TestMain(m *testing.M) {
 				return "Name could not be retrieved", err
 			}
 
-			if name == "TestForm" {
+			if name == TEST_FORM {
 				form = f
 			}
+		}
+
+		if !form.IsReady() {
+			return "", fmt.Errorf("%s could not be found", TEST_FORM)
 		}
 		m.Run()
 		return "", nil
 	})
-	session, _ := domigo.Initialize()
-	db, _ := testhelpers.CreateTestDatabase(session)
-	forms, _ := db.Forms()
-
-	db.SetIsDesignLockingEnabled(true)
-
-	for _, f := range forms {
-		name, _ := f.Name()
-
-		if name == "TestForm" {
-			form = f
-		} else {
-			f.Release()
-		}
-	}
-
-	defer form.Release()
-	defer db.Release()
-	defer db.Remove()
-	defer session.Release()
-
-	m.Run()
 }
 
 /* --------------------------------- Properties --------------------------------- */

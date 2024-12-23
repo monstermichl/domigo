@@ -799,12 +799,6 @@ func TestOpenURLDb(t *testing.T) {
 // 	require.Nil(t, err)
 // }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_DB.html */
-// func TestRemove(t *testing.T) {
-// 	err := database.Remove() /* TODO: Test later. */
-// 	require.Nil(t, err)
-// }
-
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEFTINDEX_METHOD_DB.html */
 func TestRemoveFTIndex(t *testing.T) {
 	err := database.RemoveFTIndex()
@@ -886,5 +880,11 @@ func TestTransactionRollback(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEFTINDEX_METHOD.html */
 func TestUpdateFTIndex(t *testing.T) {
 	err := database.UpdateFTIndex(false)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_DB.html */
+func TestRemove(t *testing.T) {
+	err := database.Remove()
 	require.Nil(t, err)
 }

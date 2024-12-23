@@ -20,7 +20,7 @@ func TestMain(m *testing.M) {
 		defer dbdirectory.Release()
 
 		if err != nil {
-			return "NotesDbDirectory could not be created", err
+			return "Db directory could not be retrieved", err
 		}
 		m.Run()
 		return "", nil

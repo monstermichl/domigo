@@ -99,12 +99,6 @@ func TestRead(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_CALENTRY.html */
-func TestRemove(t *testing.T) {
-	err := calendarentry.Remove("Removing whatever")
-	require.Nil(t, err)
-}
-
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEINVITEES_METHOD_CALENTRY.html */
 func TestRemoveInvitees(t *testing.T) {
 	err := calendarentry.RemoveInvitees([]domigo.String{"noone@test.com"})
@@ -126,5 +120,11 @@ func TestTentativelyAccept(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATE_METHOD_CALENTRY.html */
 func TestUpdate(t *testing.T) {
 	err := calendarentry.Update("BEGIN:VCALENDAR;PRODID:-//xyz Corp//NONSGML PDA Calendar Version 1.0//EN;VERSION:2.0;EGIN:VEVENT;DTSTAMP:19960704T120000Z;UID:uid1@example.com;ORGANIZER:mailto:jsmith@example.com;DTSTART:19960918T143000Z;DTEND:19960920T220000Z;STATUS:CONFIRMED;CATEGORIES:CONFERENCE;SUMMARY:Networld+Interop Conference;DESCRIPTION:Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta, Georgia;END:VEVENT;END:VCALENDAR")
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_CALENTRY.html */
+func TestRemove(t *testing.T) {
+	err := calendarentry.Remove("Removing whatever")
 	require.Nil(t, err)
 }

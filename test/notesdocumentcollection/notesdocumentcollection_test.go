@@ -279,21 +279,6 @@ func TestPutAllInFolder(t *testing.T) {
 	require.Nil(t, err)
 }
 
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEALL_METHOD.html */
-func TestRemoveAll(t *testing.T) {
-	err := documentcollection.RemoveAll(false)
-	require.Nil(t, err)
-}
-
-/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEALLFROMFOLDER_METHOD.html */
-func TestRemoveAllFromFolder(t *testing.T) {
-	err := database.EnableFolder(TEST_FOLDER_NAME)
-	require.Nil(t, err)
-
-	err = documentcollection.RemoveAllFromFolder(TEST_FOLDER_NAME)
-	require.Nil(t, err)
-}
-
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STAMPALL_METHOD.html */
 func TestStampAll(t *testing.T) {
 	err := documentcollection.StampAll("name", "test")
@@ -342,5 +327,20 @@ func TestSubtractNotesDocumentCollection(t *testing.T) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEALL_METHOD.html */
 func TestUpdateAll(t *testing.T) {
 	err := documentcollection.UpdateAll()
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEALLFROMFOLDER_METHOD.html */
+func TestRemoveAllFromFolder(t *testing.T) {
+	err := database.EnableFolder(TEST_FOLDER_NAME)
+	require.Nil(t, err)
+
+	err = documentcollection.RemoveAllFromFolder(TEST_FOLDER_NAME)
+	require.Nil(t, err)
+}
+
+/* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEALL_METHOD.html */
+func TestRemoveAll(t *testing.T) {
+	err := documentcollection.RemoveAll(false)
 	require.Nil(t, err)
 }
