@@ -26,8 +26,6 @@ def get_go_params(params: List[NotesParameter], is_call) -> List[str]:
         name = p.name
 
         if is_call:
-            if p.type.type == NotesType.OBJECT and not p.type.is_array:
-                name = f'{name}.com().Dispatch()'  # Make sure to pass the dispatch pointer, not the object.
             s = name
         else:
             s = f'{name} {get_go_type(p.type)[0]}'
