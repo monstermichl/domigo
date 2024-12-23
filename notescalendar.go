@@ -105,7 +105,7 @@ func WithNotesCalendarGetEntriesMaxReturn(maxReturn Long) notesCalendarGetEntrie
 
 func (c NotesCalendar) GetEntries(start NotesDateTime, end NotesDateTime, params ...notesCalendarGetEntriesParam) (NotesCalendarEntry, error) {
 	paramsStruct := &notesCalendarGetEntriesParams{}
-	paramsOrdered := []interface{}{start.com().Dispatch(), end.com().Dispatch()}
+	paramsOrdered := []interface{}{start, end}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -164,9 +164,9 @@ func (c NotesCalendar) GetNewInvitations(params ...notesCalendarGetNewInvitation
 	}
 
 	if paramsStruct.start != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.start.com().Dispatch())
+		paramsOrdered = append(paramsOrdered, *paramsStruct.start)
 		if paramsStruct.since != nil {
-			paramsOrdered = append(paramsOrdered, *paramsStruct.since.com().Dispatch())
+			paramsOrdered = append(paramsOrdered, *paramsStruct.since)
 		}
 	}
 	return com.CallObjectArrayMethod(c.com(), NewNotesCalendarNotice, "GetNewInvitations", paramsOrdered...)
@@ -204,7 +204,7 @@ func WithNotesCalendarReadRangeMaxReturn(maxReturn Long) notesCalendarReadRangeP
 
 func (c NotesCalendar) ReadRange(start NotesDateTime, end NotesDateTime, params ...notesCalendarReadRangeParam) (String, error) {
 	paramsStruct := &notesCalendarReadRangeParams{}
-	paramsOrdered := []interface{}{start.com().Dispatch(), end.com().Dispatch()}
+	paramsOrdered := []interface{}{start, end}
 
 	for _, p := range params {
 		p(paramsStruct)

@@ -990,7 +990,7 @@ func (d NotesDatabase) GetModifiedDocuments(params ...notesDatabaseGetModifiedDo
 	}
 
 	if paramsStruct.since != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.since.com().Dispatch())
+		paramsOrdered = append(paramsOrdered, *paramsStruct.since)
 		if paramsStruct.noteClass != nil {
 			paramsOrdered = append(paramsOrdered, *paramsStruct.noteClass)
 		}
@@ -1000,7 +1000,7 @@ func (d NotesDatabase) GetModifiedDocuments(params ...notesDatabaseGetModifiedDo
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMODIFIEDDOCUMENTWITHOPTIONS_METHOD_DATABASE.html */
 func (d NotesDatabase) GetModifiedDocumentsWithOptions(modifiedSince NotesDateTime, modifiedUntil NotesDateTime, options Integer) (NotesNoteCollection, error) {
-	return callComObjectMethod(d, NewNotesNoteCollection, "GetModifiedDocumentsWithOptions", modifiedSince.com().Dispatch(), modifiedUntil.com().Dispatch(), options)
+	return callComObjectMethod(d, NewNotesNoteCollection, "GetModifiedDocumentsWithOptions", modifiedSince, modifiedUntil, options)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNAMEDDOCUMENT_METHOD.html */
@@ -1208,7 +1208,7 @@ func (d NotesDatabase) OpenByReplicaID(server String, replicaID String) (Boolean
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENIFMODIFIED_METHOD.html */
 func (d NotesDatabase) OpenIfModified(server String, dbfile String, notesDateTime NotesDateTime) (Boolean, error) {
-	return callComMethod[Boolean](d, "OpenIfModified", server, dbfile, notesDateTime.com().Dispatch())
+	return callComMethod[Boolean](d, "OpenIfModified", server, dbfile, notesDateTime)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENMAIL_METHOD.html */
@@ -1263,7 +1263,7 @@ func (d NotesDatabase) RevokeAccess(name String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SEARCH_METHOD.html */
 func (d NotesDatabase) Search(formula String, notesDateTime NotesDateTime, maxDocs Integer) (NotesDocumentCollection, error) {
-	return callComObjectMethod(d, NewNotesDocumentCollection, "Search", formula, notesDateTime.com().Dispatch(), maxDocs)
+	return callComObjectMethod(d, NewNotesDocumentCollection, "Search", formula, notesDateTime, maxDocs)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETOPTION_METHOD_DB.html */
@@ -1273,7 +1273,7 @@ func (d NotesDatabase) SetOption(optionName Integer, flag any) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETUSERIDFORDECRYPT_DATABASE.html */
 func (d NotesDatabase) SetUserIDForDecrypt(uid NotesUserID, idFile string, password string) error {
-	return callComVoidMethod(d, "SetUserIDForDecrypt", uid.com().Dispatch(), idFile, password)
+	return callComVoidMethod(d, "SetUserIDForDecrypt", uid, idFile, password)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIGN_METHOD_DB.html */
@@ -1434,7 +1434,7 @@ func (d NotesDatabase) UnprocessedFTSearchRange(query String, maxdocs Integer, p
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNPROCESSEDSEARCH_METHOD.html */
 func (d NotesDatabase) UnprocessedSearch(formula String, notesDateTime NotesDateTime, maxDocs Integer) (NotesDocumentCollection, error) {
-	return callComObjectMethod(d, NewNotesDocumentCollection, "UnprocessedSearch", formula, notesDateTime.com().Dispatch(), maxDocs)
+	return callComObjectMethod(d, NewNotesDocumentCollection, "UnprocessedSearch", formula, notesDateTime, maxDocs)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEFTINDEX_METHOD.html */

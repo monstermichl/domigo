@@ -58,7 +58,7 @@ func (i NotesItem) DateTimeValue() (NotesDateTime, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DATETIMEVALUE_PROPERTY.html */
 func (i NotesItem) SetDateTimeValue(v NotesDateTime) error {
-	return putComProperty(i, "DateTimeValue", v.com().Dispatch())
+	return putComProperty(i, "DateTimeValue", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISAUTHORS_PROPERTY.html */
@@ -203,7 +203,7 @@ func (i NotesItem) Contains(value any) (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYITEMTODOCUMENT_METHOD.html */
 func (i NotesItem) CopyItemToDocument(document NotesDocument, newName String) (NotesItem, error) {
-	return callComObjectMethod(i, NewNotesItem, "CopyItemToDocument", document.com().Dispatch(), newName)
+	return callComObjectMethod(i, NewNotesItem, "CopyItemToDocument", document, newName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETVALUECUSTOMDATABYTES_METHOD_ITEM.html */

@@ -112,7 +112,7 @@ func (a NotesACL) GetFirstEntry() (NotesACLEntry, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTENTRY_METHOD.html */
 func (a NotesACL) GetNextEntry(entry NotesACLEntry) (NotesACLEntry, error) {
-	return callComObjectMethod(a, NewNotesACLEntry, "GetNextEntry", entry.com().Dispatch())
+	return callComObjectMethod(a, NewNotesACLEntry, "GetNextEntry", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEACLENTRY_METHOD_ACL_COM.html */

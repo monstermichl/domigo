@@ -47,7 +47,7 @@ func (v NotesViewNavigator) ParentView() (NotesView, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCHILD_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetChild(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetChild", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetChild", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCURRENT_METHOD_VIEWNAV.html */
@@ -57,7 +57,7 @@ func (v NotesViewNavigator) GetCurrent() (NotesViewEntry, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetEntry(entry notesStruct) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetEntry", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetEntry", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRST_METHOD_VIEWNAV.html */
@@ -82,22 +82,22 @@ func (v NotesViewNavigator) GetLastDocument() (NotesViewEntry, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXT_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetNext(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetNext", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetNext", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTCATEGORY_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetNextCategory(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetNextCategory", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetNextCategory", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDOCUMENT_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetNextDocument(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetNextDocument", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetNextDocument", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTSIBLING_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetNextSibling(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetNextSibling", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetNextSibling", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTH_METHOD_VIEWNAV.html */
@@ -107,7 +107,7 @@ func (v NotesViewNavigator) GetNth(index Long) (NotesViewEntry, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARENT_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetParent(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetParent", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetParent", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPOS_METHOD_VIEWNAV.html */
@@ -117,32 +117,32 @@ func (v NotesViewNavigator) GetPos(position String, separator String) (NotesView
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREV_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetPrev(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetPrev", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetPrev", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVCATEGORY_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetPrevCategory(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevCategory", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevCategory", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVDOCUMENT_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetPrevDocument(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevDocument", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevDocument", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVSIBLING_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GetPrevSibling(entry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevSibling", entry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevSibling", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOCHILD_METHOD_NOTESVIEWNAV.html */
 func (v NotesViewNavigator) GotoChild(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoChild", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoChild", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOENTRY_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoEntry(objUnknown notesStruct) error {
-	return callComVoidMethod(v, "GotoEntry", objUnknown.com().Dispatch())
+	return callComVoidMethod(v, "GotoEntry", objUnknown)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOFIRST_METHOD_VIEWNAV.html */
@@ -167,27 +167,27 @@ func (v NotesViewNavigator) GotoLastDocument() error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTONEXT_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoNext(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoNext", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoNext", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTONEXTCATEGORY_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoNextCategory(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoNextCategory", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoNextCategory", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTONEXTDOCUMENT_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoNextDocument(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoNextDocument", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoNextDocument", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTONEXTSIBLING_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoNextSibling(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoNextSibling", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoNextSibling", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOPARENT_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoParent(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoParent", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoParent", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOPOS_METHOD_VIEWNAV.html */
@@ -197,22 +197,22 @@ func (v NotesViewNavigator) GotoPos(pos String, separator String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOPREV_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoPrev(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoPrev", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoPrev", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOPREVCATEGORY_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoPrevCategory(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoPrevCategory", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoPrevCategory", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOPREVDOCUMENT_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoPrevDocument(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoPrevDocument", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoPrevDocument", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GOTOPREVSIBLING_METHOD_VIEWNAV.html */
 func (v NotesViewNavigator) GotoPrevSibling(entry NotesViewEntry) error {
-	return callComVoidMethod(v, "GotoPrevSibling", entry.com().Dispatch())
+	return callComVoidMethod(v, "GotoPrevSibling", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MARKALLREAD_VIEWNAV.html */

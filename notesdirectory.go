@@ -139,7 +139,7 @@ func (d NotesDirectory) GetMailInfo(username String, params ...notesDirectoryGet
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOOKUPALLNAMES_METHOD_DIRECTORY.html */
 func (d NotesDirectory) LookupAllNames(view NotesView, items []String) (NotesDirectoryNavigator, error) {
-	return callComObjectMethod(d, NewNotesDirectoryNavigator, "LookupAllNames", view.com().Dispatch(), items)
+	return callComObjectMethod(d, NewNotesDirectoryNavigator, "LookupAllNames", view, items)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOOKUPNAMES_METHOD_DIRECTORY.html */

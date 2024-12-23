@@ -106,7 +106,7 @@ func (d NotesDbDirectory) OpenDatabaseByReplicaID(rid String) (NotesDatabase, er
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENDATABASEIFMODIFIED_METHOD_DBDIRECTORY_COM.html */
 func (d NotesDbDirectory) OpenDatabaseIfModified(dbfile String, notesDateTime NotesDateTime) (NotesDatabase, error) {
-	return callComObjectMethod(d, NewNotesDatabase, "OpenDatabaseIfModified", dbfile, notesDateTime.com().Dispatch())
+	return callComObjectMethod(d, NewNotesDatabase, "OpenDatabaseIfModified", dbfile, notesDateTime)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENMAILDATABASE_METHOD_DBDIRECTORY_COM.html */

@@ -27,7 +27,7 @@ func NewNotesSession(dispatchPtr *ole.IDispatch) NotesSession {
 	return NotesSession{NewNotesStruct(dispatchPtr)}
 }
 
-func initialize(params ...interface{}) (NotesSession, error) {
+func initialize(params ...any) (NotesSession, error) {
 	var session NotesSession
 	com, err := com.CreateObject("Lotus.NotesSession")
 
@@ -65,7 +65,7 @@ func WithNotesSessionInitializePassword(password String) notesSessionInitializeP
 
 func Initialize(params ...notesSessionInitializeParam) (NotesSession, error) {
 	s := &notesSessionInitializeParams{}
-	paramsOrdered := []interface{}{}
+	paramsOrdered := []any{}
 
 	for _, p := range params {
 		p(s)
@@ -92,7 +92,7 @@ func WithNotesSessionInitializeUsingNotesUserNamePassword(password String) notes
 
 func InitializeUsingNotesUserName(name String, params ...notesSessionInitializeUsingNotesUserNameParam) (NotesSession, error) {
 	s := &notesSessionInitializeUsingNotesUserNameParams{}
-	paramsOrdered := []interface{}{name}
+	paramsOrdered := []any{name}
 
 	for _, p := range params {
 		p(s)
@@ -274,7 +274,7 @@ func (s NotesSession) CreateDateTime(dateTime String) (NotesDateTime, error) {
 
 // func (s NotesSession) CreateDXLExporter(params ...notesSessionCreateDXLExporterParam) (Object, error) {
 //     paramsStruct := &notesSessionCreateDXLExporterParams{}
-//     paramsOrdered := []interface{}{}
+//     paramsOrdered := []any{}
 
 //     for _, p := range params {
 //         p(paramsStruct)
@@ -314,7 +314,7 @@ func (s NotesSession) CreateDateTime(dateTime String) (NotesDateTime, error) {
 
 // func (s NotesSession) CreateDXLImporter(params ...notesSessionCreateDXLImporterParam) (Object, error) {
 //     paramsStruct := &notesSessionCreateDXLImporterParams{}
-//     paramsOrdered := []interface{}{}
+//     paramsOrdered := []any{}
 
 //     for _, p := range params {
 //         p(paramsStruct)
@@ -351,7 +351,7 @@ func WithNotesSessionCreateNameLanguage(language String) notesSessionCreateNameP
 
 func (s NotesSession) CreateName(name String, params ...notesSessionCreateNameParam) (NotesName, error) {
 	paramsStruct := &notesSessionCreateNameParams{}
-	paramsOrdered := []interface{}{name}
+	paramsOrdered := []any{name}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -365,7 +365,7 @@ func (s NotesSession) CreateName(name String, params ...notesSessionCreateNamePa
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATENEWSLETTER_METHOD.html */
 func (s NotesSession) CreateNewsletter(notesDocumentCollection NotesDocumentCollection) (NotesNewsletter, error) {
-	return callComObjectMethod(s, NewNotesNewsletter, "CreateNewsletter", notesDocumentCollection.com().Dispatch())
+	return callComObjectMethod(s, NewNotesNewsletter, "CreateNewsletter", notesDocumentCollection)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEREGISTRATION_METHOD_SESSION_COM.html */
@@ -406,7 +406,7 @@ func (s NotesSession) CreateRichTextStyle() (NotesRichTextStyle, error) {
 
 // func (s NotesSession) CreateSAXParser(params ...notesSessionCreateSAXParserParam) (Object, error) {
 //     paramsStruct := &notesSessionCreateSAXParserParams{}
-//     paramsOrdered := []interface{}{}
+//     paramsOrdered := []any{}
 
 //     for _, p := range params {
 //         p(paramsStruct)
@@ -457,7 +457,7 @@ func (s NotesSession) CreateStream() (NotesStream, error) {
 
 // func (s NotesSession) CreateXSLTransformer(params ...notesSessionCreateXSLTransformerParam) (Object, error) {
 //     paramsStruct := &notesSessionCreateXSLTransformerParams{}
-//     paramsOrdered := []interface{}{}
+//     paramsOrdered := []any{}
 
 //     for _, p := range params {
 //         p(paramsStruct)
@@ -478,7 +478,7 @@ func (s NotesSession) CreateStream() (NotesStream, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EVALUATE_METHOD_SESSION_COM.html */
 func (s NotesSession) Evaluate(formula String, doc NotesDocument) (Variant, error) {
-	return callComMethod[Variant](s, "Evaluate", formula, doc.com().Dispatch())
+	return callComMethod[Variant](s, "Evaluate", formula, doc)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FREERESOURCESEARCH_METHOD.html */
@@ -531,7 +531,7 @@ func WithNotesSessionFreeResourceSearchOutputversion(Outputversion Integer) note
 
 func (s NotesSession) FreeResourceSearch(Start NotesDateTime, End NotesDateTime, Site String, Type Integer, params ...notesSessionFreeResourceSearchParam) ([]String, error) {
 	paramsStruct := &notesSessionFreeResourceSearchParams{}
-	paramsOrdered := []interface{}{Start.com().Dispatch(), End.com().Dispatch(), Site, Type}
+	paramsOrdered := []any{Start, End, Site, Type}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -573,7 +573,7 @@ func WithNotesSessionFreeTimeSearchFirstfit(firstfit Boolean) notesSessionFreeTi
 
 func (s NotesSession) FreeTimeSearch(window NotesDateRange, duration Integer, names []String, params ...notesSessionFreeTimeSearchParam) (NotesDateRange, error) {
 	paramsStruct := &notesSessionFreeTimeSearchParams{}
-	paramsOrdered := []interface{}{window.com().Dispatch(), duration, names}
+	paramsOrdered := []any{window, duration, names}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -600,7 +600,7 @@ func WithNotesSessionGetDatabaseCreateonfail(createonfail Boolean) notesSessionG
 
 func (s NotesSession) GetDatabase(server String, dbfile String, params ...notesSessionGetDatabaseParam) (NotesDatabase, error) {
 	paramsStruct := &notesSessionGetDatabaseParams{}
-	paramsOrdered := []interface{}{server, dbfile}
+	paramsOrdered := []any{server, dbfile}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -614,7 +614,7 @@ func (s NotesSession) GetDatabase(server String, dbfile String, params ...notesS
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCALENDAR_METHOD.html */
 func (s NotesSession) GetCalendar(mailDatabase NotesDatabase) (NotesCalendar, error) {
-	return callComObjectMethod(s, NewNotesCalendar, "GetCalendar", mailDatabase.com().Dispatch())
+	return callComObjectMethod(s, NewNotesCalendar, "GetCalendar", mailDatabase)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDBDIRECTORY_METHOD.html */
@@ -637,7 +637,7 @@ func WithNotesSessionGetDirectoryServerName(serverName String) notesSessionGetDi
 
 func (s NotesSession) GetDirectory(params ...notesSessionGetDirectoryParam) (NotesDirectory, error) {
 	paramsStruct := &notesSessionGetDirectoryParams{}
-	paramsOrdered := []interface{}{}
+	paramsOrdered := []any{}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -664,7 +664,7 @@ func WithNotesSessionGetEnvironmentStringSystem(system Boolean) notesSessionGetE
 
 func (s NotesSession) GetEnvironmentString(name String, params ...notesSessionGetEnvironmentStringParam) (String, error) {
 	paramsStruct := &notesSessionGetEnvironmentStringParams{}
-	paramsOrdered := []interface{}{name}
+	paramsOrdered := []any{name}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -691,7 +691,7 @@ func WithNotesSessionGetEnvironmentValueSystem(system Boolean) notesSessionGetEn
 
 func (s NotesSession) GetEnvironmentValue(name String, params ...notesSessionGetEnvironmentValueParam) (any, error) {
 	paramsStruct := &notesSessionGetEnvironmentValueParams{}
-	paramsOrdered := []interface{}{name}
+	paramsOrdered := []any{name}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -730,7 +730,7 @@ func WithNotesSessionGetUserPolicySettingsReserved(reserved String) notesSession
 
 func (s NotesSession) GetUserPolicySettings(server String, name String, policyType NotesSessionPolicy, params ...notesSessionGetUserPolicySettingsParam) (NotesDocument, error) {
 	paramsStruct := &notesSessionGetUserPolicySettingsParams{}
-	paramsOrdered := []interface{}{server, name, policyType}
+	paramsOrdered := []any{server, name, policyType}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -765,7 +765,7 @@ func WithNotesSessionResetUserPasswordDownloadcount(downloadcount Integer) notes
 
 func (s NotesSession) ResetUserPassword(servername String, username String, password String, params ...notesSessionResetUserPasswordParam) error {
 	paramsStruct := &notesSessionResetUserPasswordParams{}
-	paramsOrdered := []interface{}{servername, username, password}
+	paramsOrdered := []any{servername, username, password}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -802,7 +802,7 @@ func WithNotesSessionSetEnvironmentVarIssystemvar(issystemvar Boolean) notesSess
 
 func (s NotesSession) SetEnvironmentVar(name String, valueV Variant, params ...notesSessionSetEnvironmentVarParam) error {
 	paramsStruct := &notesSessionSetEnvironmentVarParams{}
-	paramsOrdered := []interface{}{name, valueV}
+	paramsOrdered := []any{name, valueV}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -816,7 +816,7 @@ func (s NotesSession) SetEnvironmentVar(name String, valueV Variant, params ...n
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEPROCESSEDDOC_METHOD.html */
 func (s NotesSession) UpdateProcessedDoc(notesDocument NotesDocument) error {
-	return callComVoidMethod(s, "UpdateProcessedDoc", notesDocument.com().Dispatch())
+	return callComVoidMethod(s, "UpdateProcessedDoc", notesDocument)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USEDOUBLEASPOINTER_METHOD_SESSION.html */

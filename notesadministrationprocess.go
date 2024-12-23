@@ -77,7 +77,7 @@ func (a NotesAdministrationProcess) AddGroupMembers(group String, members []Stri
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDINTERNETCERTIFICATETOUSER_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) AddInternetCertificateToUser(user String, keyringfile String, keyringpassword String, expiration NotesDateTime) (String, error) {
-	return callComMethod[String](a, "AddInternetCertificateToUser", user, keyringfile, keyringpassword, expiration.com().Dispatch())
+	return callComMethod[String](a, "AddInternetCertificateToUser", user, keyringfile, keyringpassword, expiration)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDSERVERTOCLUSTER_METHOD_ADMINP.html */

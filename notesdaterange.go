@@ -21,7 +21,7 @@ func (d NotesDateRange) EndDateTime() (NotesDateTime, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENDDATETIME_PROPERTY.html */
 func (d NotesDateRange) SetEndDateTime(v NotesDateTime) error {
-	return putComProperty(d, "EndDateTime", v.com().Dispatch())
+	return putComProperty(d, "EndDateTime", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_DATERANGE_COM.html */
@@ -36,7 +36,7 @@ func (d NotesDateRange) StartDateTime() (NotesDateTime, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STARTDATETIME_PROPERTY.html */
 func (d NotesDateRange) SetStartDateTime(v NotesDateTime) error {
-	return putComProperty(d, "StartDateTime", v.com().Dispatch())
+	return putComProperty(d, "StartDateTime", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXT_PROPERTY_RANG.html */

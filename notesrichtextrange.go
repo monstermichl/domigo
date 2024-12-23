@@ -116,15 +116,15 @@ func (r NotesRichTextRange) Reset(params ...notesRichTextRangeResetParam) error 
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETBEGIN_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) SetBegin(element notesStruct) error {
-	return callComVoidMethod(r, "SetBegin", element.com().Dispatch())
+	return callComVoidMethod(r, "SetBegin", element)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETEND_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) SetEnd(element notesStruct) error {
-	return callComVoidMethod(r, "SetEnd", element.com().Dispatch())
+	return callComVoidMethod(r, "SetEnd", element)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETSTYLE_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) SetStyle(style NotesRichTextStyle) error {
-	return callComVoidMethod(r, "SetStyle", style.com().Dispatch())
+	return callComVoidMethod(r, "SetStyle", style)
 }

@@ -235,10 +235,10 @@ func (r NotesRichTextNavigator) SetCharOffset(offset Integer) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETPOSITION_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) SetPosition(element notesStruct) error {
-	return callComVoidMethod(r, "SetPosition", element.com().Dispatch())
+	return callComVoidMethod(r, "SetPosition", element)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETPOSITIONATEND_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) SetPositionAtEnd(element notesStruct) error {
-	return callComVoidMethod(r, "SetPositionAtEnd", element.com().Dispatch())
+	return callComVoidMethod(r, "SetPositionAtEnd", element)
 }

@@ -20,9 +20,9 @@ func NewNotesView(dispatchPtr *ole.IDispatch) NotesView {
 func (v NotesView) checkKey(key any) (any, error) {
 	if helpers.CheckTypeNames(key, []string{"string, number"}) != nil || helpers.CheckSliceTypeNames(key, []string{"string", "number"}) != nil {
 		if casted, ok := key.(NotesDateTime); ok {
-			key = casted.com().Dispatch()
+			key = casted
 		} else if casted, ok := key.(NotesDateRange); ok {
-			key = casted.com().Dispatch()
+			key = casted
 		} else {
 			return key, errors.New("key must be string, integer, long, double, string slice, number slice, NotesDateTime slice or NotesDateRange slice")
 		}
@@ -641,7 +641,7 @@ func (v NotesView) GetAllUnreadEntries(params ...notesViewGetAllUnreadEntriesPar
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCHILD_METHOD.html */
 func (v NotesView) GetChild(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetChild", document.com().Dispatch())
+	return callComObjectMethod(v, NewNotesDocument, "GetChild", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCOLUMN_METHOD_NOTESVIEW_CLASS.html */
@@ -725,12 +725,12 @@ func (v NotesView) GetLastDocument() (NotesDocument, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetNextDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetNextDocument", document.com().Dispatch())
+	return callComObjectMethod(v, NewNotesDocument, "GetNextDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTSIBLING_METHOD.html */
 func (v NotesView) GetNextSibling(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetNextSibling", document.com().Dispatch())
+	return callComObjectMethod(v, NewNotesDocument, "GetNextSibling", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHDOCUMENT_METHOD_VIEW.html */
@@ -740,17 +740,17 @@ func (v NotesView) GetNthDocument(index Long) (NotesDocument, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARENTDOCUMENT_METHOD.html */
 func (v NotesView) GetParentDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetParentDocument", document.com().Dispatch())
+	return callComObjectMethod(v, NewNotesDocument, "GetParentDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetPrevDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetPrevDocument", document.com().Dispatch())
+	return callComObjectMethod(v, NewNotesDocument, "GetPrevDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVSIBLING_METHOD.html */
 func (v NotesView) GetPrevSibling(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetPrevSibling", document.com().Dispatch())
+	return callComObjectMethod(v, NewNotesDocument, "GetPrevSibling", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCK_METHOD_VIEW.html */

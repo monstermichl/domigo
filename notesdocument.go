@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"fmt"
-
 	"github.com/monstermichl/domigo/internal/com"
 
 	ole "github.com/go-ole/go-ole"
@@ -349,7 +347,7 @@ func WithNotesDocumentCopyAllItemsReplace(replace Boolean) notesDocumentCopyAllI
 
 func (d NotesDocument) CopyAllItems(notesDocument NotesDocument, params ...notesDocumentCopyAllItemsParam) error {
 	paramsStruct := &notesDocumentCopyAllItemsParams{}
-	paramsOrdered := []interface{}{notesDocument.com().Dispatch()}
+	paramsOrdered := []interface{}{notesDocument}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -363,12 +361,12 @@ func (d NotesDocument) CopyAllItems(notesDocument NotesDocument, params ...notes
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYITEM_METHOD.html */
 func (d NotesDocument) CopyItem(item NotesItem, newName String) (NotesItem, error) {
-	return callComObjectMethod(d, NewNotesItem, "CopyItem", item.com().Dispatch(), newName)
+	return callComObjectMethod(d, NewNotesItem, "CopyItem", item, newName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYTODATABASE_METHOD.html */
 func (d NotesDocument) CopyToDatabase(notesDatabase NotesDatabase) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "CopyToDatabase", notesDatabase.com().Dispatch())
+	return callComObjectMethod(d, NewNotesDocument, "CopyToDatabase", notesDatabase)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEMIMEENTITY_METHOD_DOC.html */
@@ -436,16 +434,6 @@ func (d NotesDocument) GetItemValueCustomDataBytes(itemName String, dataTypeName
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUEDATETIMEARRAY_METHOD.html */
 /* TODO: Find out how to handle different return value types. */
 func (d NotesDocument) GetItemValueDateTimeArray(itemName String) ([]NotesDateTime, error) {
-	dispatchPtrs, err := callComObjectArrayMethod(d, "GetItemValueDateTimeArray", itemName)
-	// vals := []any{}
-
-	if err != nil {
-		return []NotesDateTime{}, err
-	}
-
-	for _, ptr := range dispatchPtrs {
-		fmt.Println(ptr)
-	}
 	return com.CallObjectArrayMethod(d.com(), NewNotesDateTime, "GetItemValueDateTimeArray")
 }
 
@@ -579,7 +567,7 @@ func (d NotesDocument) LockProvisional(params ...notesDocumentLockProvisionalPar
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAKERESPONSE_METHOD.html */
 func (d NotesDocument) MakeResponse(document NotesDocument) error {
-	return callComVoidMethod(d, "MakeResponse", document.com().Dispatch())
+	return callComVoidMethod(d, "MakeResponse", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MARKREAD_DOCUMENT.html */
@@ -685,7 +673,7 @@ func (d NotesDocument) RemovePermanently(force Boolean) (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RENDERTORTITEM_METHOD.html */
 func (d NotesDocument) RenderToRTItem(notesRichTextItem NotesRichTextItem) (Boolean, error) {
-	return callComMethod[Boolean](d, "RenderToRTItem", notesRichTextItem.com().Dispatch())
+	return callComMethod[Boolean](d, "RenderToRTItem", notesRichTextItem)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLACEITEMVALUE_METHOD.html */

@@ -264,10 +264,10 @@ func (d NotesDateTime) SetNow() error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEDIFFERENCE_METHOD.html */
 func (d NotesDateTime) TimeDifference(notesDateTime NotesDateTime) (Long, error) {
-	return callComMethod[Long](d, "TimeDifference", notesDateTime.com().Dispatch())
+	return callComMethod[Long](d, "TimeDifference", notesDateTime)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEDIFFERENCEDOUBLE_METHOD.html */
 func (d NotesDateTime) TimeDifferenceDouble(notesDateTime NotesDateTime) (Double, error) {
-	return callComMethod[Double](d, "TimeDifferenceDouble", notesDateTime.com().Dispatch())
+	return callComMethod[Double](d, "TimeDifferenceDouble", notesDateTime)
 }

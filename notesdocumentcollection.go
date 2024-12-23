@@ -61,7 +61,7 @@ func WithNotesDocumentCollectionAddDocumentCheckDups(checkDups Boolean) notesDoc
 
 func (d NotesDocumentCollection) AddDocument(document NotesDocument, params ...notesDocumentCollectionAddDocumentParam) error {
 	paramsStruct := &notesDocumentCollectionAddDocumentParams{}
-	paramsOrdered := []interface{}{document.com().Dispatch()}
+	paramsOrdered := []interface{}{document}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -91,7 +91,7 @@ func (d NotesDocumentCollection) Contains(inputNotes any) (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEDOCUMENT_METHOD_7984_ABOUT.html */
 func (d NotesDocumentCollection) DeleteDocument(document NotesDocument) error {
-	return callComVoidMethod(d, "DeleteDocument", document.com().Dispatch())
+	return callComVoidMethod(d, "DeleteDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCH_METHOD_COLLECTION.html */
@@ -101,7 +101,7 @@ func (d NotesDocumentCollection) FTSearch(query String, maxDocs Integer) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENT_METHOD_DOCCOLL.html */
 func (d NotesDocumentCollection) GetDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetDocument", document.com().Dispatch())
+	return callComObjectMethod(d, NewNotesDocument, "GetDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTDOCUMENT_METHOD_COLLECTION.html */
@@ -116,7 +116,7 @@ func (d NotesDocumentCollection) GetLastDocument() (NotesDocument, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetNextDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetNextDocument", document.com().Dispatch())
+	return callComObjectMethod(d, NewNotesDocument, "GetNextDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHDOCUMENT_METHOD_COLLECTION.html */
@@ -126,7 +126,7 @@ func (d NotesDocumentCollection) GetNthDocument(n Long) (NotesDocument, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetPrevDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetPrevDocument", document.com().Dispatch())
+	return callComObjectMethod(d, NewNotesDocument, "GetPrevDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERSECT_METHOD_COLLECTION.html */
@@ -249,7 +249,7 @@ func (d NotesDocumentCollection) StampAll(itemname String, value any) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STAMPALLMULTI_METHOD_DOCCOL.html */
 func (d NotesDocumentCollection) StampAllMulti(document NotesDocument) error {
-	return callComVoidMethod(d, "StampAllMulti", document.com().Dispatch())
+	return callComVoidMethod(d, "StampAllMulti", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SUBTRACT_METHOD_COLLECTION.html */

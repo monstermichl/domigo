@@ -146,7 +146,7 @@ func WithNotesMIMEEntityGetContentAsBytesDecoded(decoded Boolean) notesMIMEEntit
 
 func (m NotesMIMEEntity) GetContentAsBytes(stream NotesStream, params ...notesMIMEEntityGetContentAsBytesParam) error {
 	paramsStruct := &notesMIMEEntityGetContentAsBytesParams{}
-	paramsOrdered := []interface{}{stream.com().Dispatch()}
+	paramsOrdered := []interface{}{stream}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -173,7 +173,7 @@ func WithNotesMIMEEntityGetContentAsTextDecoded(decoded Boolean) notesMIMEEntity
 
 func (m NotesMIMEEntity) GetContentAsText(stream NotesStream, params ...notesMIMEEntityGetContentAsTextParam) error {
 	paramsStruct := &notesMIMEEntityGetContentAsTextParams{}
-	paramsOrdered := []interface{}{stream.com().Dispatch()}
+	paramsOrdered := []interface{}{stream}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -207,7 +207,7 @@ func WithNotesMIMEEntityGetEntityAsTextInclusive(inclusive Boolean) notesMIMEEnt
 
 func (m NotesMIMEEntity) GetEntityAsText(stream NotesStream, params ...notesMIMEEntityGetEntityAsTextParam) error {
 	paramsStruct := &notesMIMEEntityGetEntityAsTextParams{}
-	paramsOrdered := []interface{}{stream.com().Dispatch()}
+	paramsOrdered := []interface{}{stream}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -367,10 +367,10 @@ func (m NotesMIMEEntity) Remove() error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCONTENTFROMBYTES_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) SetContentFromBytes(stream NotesStream, contentType String, encoding NotesMIMEEntityEncoding) error {
-	return callComVoidMethod(m, "SetContentFromBytes", stream.com().Dispatch(), contentType, encoding)
+	return callComVoidMethod(m, "SetContentFromBytes", stream, contentType, encoding)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCONTENTFROMTEXT_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) SetContentFromText(stream NotesStream, contentType String, encoding NotesMIMEEntityEncoding) error {
-	return callComVoidMethod(m, "SetContentFromText", stream.com().Dispatch(), contentType, encoding)
+	return callComVoidMethod(m, "SetContentFromText", stream, contentType, encoding)
 }

@@ -45,7 +45,7 @@ func WithNotesViewEntryCollectionAddEntryCheckDups(checkDups Boolean) notesViewE
 
 func (v NotesViewEntryCollection) AddEntry(addentry NotesViewEntry, params ...notesViewEntryCollectionAddEntryParam) error {
 	paramsStruct := &notesViewEntryCollectionAddEntryParams{}
-	paramsOrdered := []interface{}{addentry.com().Dispatch()}
+	paramsOrdered := []interface{}{addentry}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -70,7 +70,7 @@ func (v NotesViewEntryCollection) Contains(inputNotes any) (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEENTRY_METHOD_2345.html */
 func (v NotesViewEntryCollection) DeleteEntry(deleteentry NotesViewEntry) error {
-	return callComVoidMethod(v, "DeleteEntry", deleteentry.com().Dispatch())
+	return callComVoidMethod(v, "DeleteEntry", deleteentry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCH_METHOD_6772.html */
@@ -96,7 +96,7 @@ func (v NotesViewEntryCollection) GetLastEntry() (NotesViewEntry, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTENTRY_6168.html */
 func (v NotesViewEntryCollection) GetNextEntry(currententry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetNextEntry", currententry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetNextEntry", currententry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHENTRY_METHOD_4753.html */
@@ -106,7 +106,7 @@ func (v NotesViewEntryCollection) GetNthEntry(index Long) (NotesViewEntry, error
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVENTRY_METHOD_2018.html */
 func (v NotesViewEntryCollection) GetPrevEntry(currententry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevEntry", currententry.com().Dispatch())
+	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevEntry", currententry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERSECT_METHOD_VIEWENTRYCOLLECTION.html */
@@ -239,7 +239,7 @@ func (v NotesViewEntryCollection) StampAll(itemname String, value any) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STAMPALLMULTI_METHOD.html */
 func (v NotesViewEntryCollection) StampAllMulti(document NotesDocument) error {
-	return callComVoidMethod(v, "StampAllMulti", document.com().Dispatch())
+	return callComVoidMethod(v, "StampAllMulti", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SUBTRACT_METHOD_VIEWENTRYCOLLECTION.html */

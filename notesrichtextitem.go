@@ -81,7 +81,7 @@ func (r NotesRichTextItem) AddPageBreak(params ...notesRichTextItemAddPageBreakP
 	}
 
 	if paramsStruct.notesRichTextParagraphStyle != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.notesRichTextParagraphStyle.com().Dispatch())
+		paramsOrdered = append(paramsOrdered, *paramsStruct.notesRichTextParagraphStyle)
 	}
 	return callComVoidMethod(r, "AddPageBreak", paramsOrdered...)
 }
@@ -128,7 +128,7 @@ func WithNotesRichTextItemAppendDocLinkHotSpotText(HotSpotText String) notesRich
 
 func (r NotesRichTextItem) AppendDocLink(linkTo notesStruct, comment String, params ...notesRichTextItemAppendDocLinkParam) error {
 	paramsStruct := &notesRichTextItemAppendDocLinkParams{}
-	paramsOrdered := []interface{}{linkTo.com().Dispatch(), comment}
+	paramsOrdered := []interface{}{linkTo, comment}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -142,17 +142,17 @@ func (r NotesRichTextItem) AppendDocLink(linkTo notesStruct, comment String, par
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDPARAGRAPHSTYLE_METHOD_1636_ABOUT.html */
 func (r NotesRichTextItem) AppendParagraphStyle(notesRichTextParagraphStyle NotesRichTextParagraphStyle) error {
-	return callComVoidMethod(r, "AppendParagraphStyle", notesRichTextParagraphStyle.com().Dispatch())
+	return callComVoidMethod(r, "AppendParagraphStyle", notesRichTextParagraphStyle)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDRTITEM_METHOD.html */
 func (r NotesRichTextItem) AppendRTItem(notesRichTextItem NotesRichTextItem) error {
-	return callComVoidMethod(r, "AppendRTItem", notesRichTextItem.com().Dispatch())
+	return callComVoidMethod(r, "AppendRTItem", notesRichTextItem)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDSTYLE_METHOD.html */
 func (r NotesRichTextItem) AppendStyle(notesRichTextStyle NotesRichTextStyle) error {
-	return callComVoidMethod(r, "AppendStyle", notesRichTextStyle.com().Dispatch())
+	return callComVoidMethod(r, "AppendStyle", notesRichTextStyle)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDTABLE_METHOD_RTITEM.html */
@@ -222,7 +222,7 @@ func WithNotesRichTextItemBeginInsertAfter(after Boolean) notesRichTextItemBegin
 
 func (r NotesRichTextItem) BeginInsert(element notesStruct, params ...notesRichTextItemBeginInsertParam) error {
 	paramsStruct := &notesRichTextItemBeginInsertParams{}
-	paramsOrdered := []interface{}{element.com().Dispatch()}
+	paramsOrdered := []interface{}{element}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -270,9 +270,9 @@ func (r NotesRichTextItem) BeginSection(title String, params ...notesRichTextIte
 	}
 
 	if paramsStruct.titleStyle != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.titleStyle.com().Dispatch())
+		paramsOrdered = append(paramsOrdered, *paramsStruct.titleStyle)
 		if paramsStruct.barColor != nil {
-			paramsOrdered = append(paramsOrdered, *paramsStruct.barColor.com().Dispatch())
+			paramsOrdered = append(paramsOrdered, *paramsStruct.barColor)
 			if paramsStruct.expand != nil {
 				paramsOrdered = append(paramsOrdered, *paramsStruct.expand)
 			}

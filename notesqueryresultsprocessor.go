@@ -109,7 +109,7 @@ func (q NotesQueryResultsProcessor) AddColumn(name String, params ...notesQueryR
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDDOMINOQUERY_METHOD.html */
 func (q NotesQueryResultsProcessor) AddDominoQuery(query NotesDominoQuery, queryString String, referenceName String) error {
-	return callComVoidMethod(q, "AddDominoQuery", query.com().Dispatch(), queryString, referenceName)
+	return callComVoidMethod(q, "AddDominoQuery", query, queryString, referenceName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDFORMULA_METHOD.html */

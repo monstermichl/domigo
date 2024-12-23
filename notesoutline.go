@@ -79,14 +79,14 @@ func WithNotesOutlineAddEntryAsChild(AsChild Boolean) notesOutlineAddEntryParam 
 
 func (o NotesOutline) AddEntry(newEntry NotesOutlineEntry, params ...notesOutlineAddEntryParam) error {
 	paramsStruct := &notesOutlineAddEntryParams{}
-	paramsOrdered := []interface{}{newEntry.com().Dispatch()}
+	paramsOrdered := []interface{}{newEntry}
 
 	for _, p := range params {
 		p(paramsStruct)
 	}
 
 	if paramsStruct.refEntry != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.refEntry.com().Dispatch())
+		paramsOrdered = append(paramsOrdered, *paramsStruct.refEntry)
 		if paramsStruct.moveAfter != nil {
 			paramsOrdered = append(paramsOrdered, *paramsStruct.moveAfter)
 			if paramsStruct.AsChild != nil {
@@ -137,7 +137,7 @@ func (o NotesOutline) CreateEntry(name String, params ...notesOutlineCreateEntry
 	if paramsStruct.refentry == nil {
 		paramsOrdered = append(paramsOrdered, nil)
 	} else {
-		paramsOrdered = append(paramsOrdered, paramsStruct.refentry.com().Dispatch())
+		paramsOrdered = append(paramsOrdered, paramsStruct.refentry)
 	}
 
 	if paramsStruct.addAfter != nil {
@@ -178,14 +178,14 @@ func WithNotesOutlineCreateEntryFromAsChild(asChild Boolean) notesOutlineCreateE
 
 func (o NotesOutline) CreateEntryFrom(entry NotesOutlineEntry, params ...notesOutlineCreateEntryFromParam) (NotesOutlineEntry, error) {
 	paramsStruct := &notesOutlineCreateEntryFromParams{}
-	paramsOrdered := []interface{}{entry.com().Dispatch()}
+	paramsOrdered := []interface{}{entry}
 
 	for _, p := range params {
 		p(paramsStruct)
 	}
 
 	if paramsStruct.refentry != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.refentry.com().Dispatch())
+		paramsOrdered = append(paramsOrdered, *paramsStruct.refentry)
 		if paramsStruct.addAfter != nil {
 			paramsOrdered = append(paramsOrdered, *paramsStruct.addAfter)
 			if paramsStruct.asChild != nil {
@@ -198,7 +198,7 @@ func (o NotesOutline) CreateEntryFrom(entry NotesOutlineEntry, params ...notesOu
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCHILD_METHOD_NOTESOUTLINE.html */
 func (o NotesOutline) GetChild(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetChild", entry.com().Dispatch())
+	return callComObjectMethod(o, NewNotesOutlineEntry, "GetChild", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRST_METHOD_OUTLINE.html */
@@ -213,27 +213,27 @@ func (o NotesOutline) GetLast() (NotesOutlineEntry, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXT_METHOD_OUTLINE.html */
 func (o NotesOutline) GetNext(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetNext", entry.com().Dispatch())
+	return callComObjectMethod(o, NewNotesOutlineEntry, "GetNext", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTSIBLING_METHOD_OUTLINE.html */
 func (o NotesOutline) GetNextSibling(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetNextSibling", entry.com().Dispatch())
+	return callComObjectMethod(o, NewNotesOutlineEntry, "GetNextSibling", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARENT_METHOD_OUTLINE.html */
 func (o NotesOutline) GetParent(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetParent", entry.com().Dispatch())
+	return callComObjectMethod(o, NewNotesOutlineEntry, "GetParent", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREV_METHOD_OUTLINE.html */
 func (o NotesOutline) GetPrev(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetPrev", entry.com().Dispatch())
+	return callComObjectMethod(o, NewNotesOutlineEntry, "GetPrev", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVSIBLING_METHOD_OUTLINE.html */
 func (o NotesOutline) GetPrevSibling(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetPrevSibling", entry.com().Dispatch())
+	return callComObjectMethod(o, NewNotesOutlineEntry, "GetPrevSibling", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MOVEENTRY_METHOD_OUTLINE.html */
@@ -258,7 +258,7 @@ func WithNotesOutlineMoveEntryAsChild(AsChild Boolean) notesOutlineMoveEntryPara
 
 func (o NotesOutline) MoveEntry(currentEntry NotesOutlineEntry, refEntry NotesOutlineEntry, params ...notesOutlineMoveEntryParam) error {
 	paramsStruct := &notesOutlineMoveEntryParams{}
-	paramsOrdered := []interface{}{currentEntry.com().Dispatch(), refEntry.com().Dispatch()}
+	paramsOrdered := []interface{}{currentEntry, refEntry}
 
 	for _, p := range params {
 		p(paramsStruct)
@@ -275,7 +275,7 @@ func (o NotesOutline) MoveEntry(currentEntry NotesOutlineEntry, refEntry NotesOu
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEENTRY_METHOD_OUTLINE.html */
 func (o NotesOutline) RemoveEntry(currentEntry NotesOutlineEntry) error {
-	return callComVoidMethod(o, "RemoveEntry", currentEntry.com().Dispatch())
+	return callComVoidMethod(o, "RemoveEntry", currentEntry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVE_METHOD_OUTLINE.html */

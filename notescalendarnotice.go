@@ -63,9 +63,9 @@ func (c NotesCalendarNotice) Counter(comments String, params ...notesCalendarNot
 	}
 
 	if paramsStruct.start != nil {
-		paramsOrdered = append(paramsOrdered, *paramsStruct.start.com().Dispatch())
+		paramsOrdered = append(paramsOrdered, *paramsStruct.start)
 		if paramsStruct.end != nil {
-			paramsOrdered = append(paramsOrdered, *paramsStruct.end.com().Dispatch())
+			paramsOrdered = append(paramsOrdered, *paramsStruct.end)
 		}
 	}
 	return callComVoidMethod(c, "Counter", paramsOrdered...)

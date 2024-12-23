@@ -142,7 +142,7 @@ func WithNotesCalendarEntryCounterRecurId(recurId String) notesCalendarEntryCoun
 
 func (c NotesCalendarEntry) Counter(comments String, start NotesDateTime, end NotesDateTime, params ...notesCalendarEntryCounterParam) error {
 	paramsStruct := &notesCalendarEntryCounterParams{}
-	paramsOrdered := []interface{}{comments, start.com().Dispatch(), end.com().Dispatch()}
+	paramsOrdered := []interface{}{comments, start, end}
 
 	for _, p := range params {
 		p(paramsStruct)

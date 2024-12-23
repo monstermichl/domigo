@@ -52,10 +52,10 @@ func (n NotesNewsletter) SetSubjectItemName(v String) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMATDOCUMENT_METHOD.html */
 func (n NotesNewsletter) FormatDocument(notesDatabase NotesDatabase, documentNumber Integer) (NotesDocument, error) {
-	return callComObjectMethod(n, NewNotesDocument, "FormatDocument", notesDatabase.com().Dispatch(), documentNumber)
+	return callComObjectMethod(n, NewNotesDocument, "FormatDocument", notesDatabase, documentNumber)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMATMSGWITHDOCLINKS_METHOD.html */
 func (n NotesNewsletter) FormatMsgWithDoclinks(notesDatabase NotesDatabase) (NotesDocument, error) {
-	return callComObjectMethod(n, NewNotesDocument, "FormatMsgWithDoclinks", notesDatabase.com().Dispatch())
+	return callComObjectMethod(n, NewNotesDocument, "FormatMsgWithDoclinks", notesDatabase)
 }

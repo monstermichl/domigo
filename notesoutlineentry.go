@@ -187,12 +187,12 @@ func (o NotesOutlineEntry) SetAction(formula String) (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETNAMEDELEMENT_METHOD_OUTLINEENTRY.html */
 func (o NotesOutlineEntry) SetNamedElement(notesDatabase NotesDatabase, elementName String, entryclass Long) (Boolean, error) {
-	return callComMethod[Boolean](o, "SetNamedElement", notesDatabase.com().Dispatch(), elementName, entryclass)
+	return callComMethod[Boolean](o, "SetNamedElement", notesDatabase, elementName, entryclass)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETNOTELINK_METHOD_OUTLINEENTRY.html */
 func (o NotesOutlineEntry) SetNoteLink(notesDatabase NotesDatabase, notesView NotesView, notesDocument NotesDocument, Obj notesStruct) (Boolean, error) {
-	return callComMethod[Boolean](o, "SetNoteLink", notesDatabase.com().Dispatch(), notesView.com().Dispatch(), notesDocument.com().Dispatch(), Obj.com().Dispatch())
+	return callComMethod[Boolean](o, "SetNoteLink", notesDatabase, notesView, notesDocument, Obj)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETURL_METHOD_OUTLINEENTRY.html */
