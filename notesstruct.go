@@ -1,6 +1,7 @@
 package domigo
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 
@@ -32,14 +33,18 @@ func GetNotesStruct(val any) (NotesStruct, error) {
 	var err error
 	var s NotesStruct
 
-	v := reflect.ValueOf(val)
-	fieldName := reflect.TypeOf(NotesStruct{}).Name()
-	field := v.FieldByName(fieldName)
+	if reflect.TypeOf(val).Kind() == reflect.Struct {
+		v := reflect.ValueOf(val)
+		fieldName := reflect.TypeOf(NotesStruct{}).Name()
+		field := v.FieldByName(fieldName)
 
-	if !field.IsValid() {
-		err = fmt.Errorf("no %s field found", fieldName)
+		if !field.IsValid() {
+			err = fmt.Errorf("no %s field found", fieldName)
+		} else {
+			s = field.Interface().(NotesStruct)
+		}
 	} else {
-		s = field.Interface().(NotesStruct)
+		err = errors.New("value is not a struct")
 	}
 	return s, err
 }
