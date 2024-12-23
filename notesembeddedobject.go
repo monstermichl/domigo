@@ -7,7 +7,7 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-type NotesEmbeddedObjectEmbedType Long
+type NotesEmbeddedObjectEmbedType = Long
 
 const (
 	NOTESEMBEDDEDOBJECT_EMBED_ATTACHMENT NotesEmbeddedObjectEmbedType = 1454

@@ -8,7 +8,7 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-type NotesMIMEEntityEncoding Long
+type NotesMIMEEntityEncoding = Long
 
 const (
 	NOTESMIMEENTITY_ENC_BASE64           NotesMIMEEntityEncoding = 1727

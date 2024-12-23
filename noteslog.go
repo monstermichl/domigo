@@ -7,7 +7,7 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-type NotesLogEventType Long
+type NotesLogEventType = Long
 
 const (
 	NOTESLOG_EV_ALARM    NotesLogEventType = 8
@@ -22,7 +22,7 @@ const (
 	NOTESLOG_EV_UPDATE   NotesLogEventType = 9
 )
 
-type NotesLogSeverity Long
+type NotesLogSeverity = Long
 
 const (
 	SEV_FAILURE  NotesLogSeverity = 2
