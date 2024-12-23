@@ -3,7 +3,6 @@ package domigo
 
 import (
 	"github.com/monstermichl/domigo/internal/com"
-	"github.com/monstermichl/domigo/internal/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )
@@ -74,8 +73,7 @@ func (c NotesCalendarEntry) AddInvitees(requiredNames []String, optionalNames []
 			}
 		}
 	}
-	_, err := callComMethod(c, "AddInvitees", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "AddInvitees", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CANCEL_METHOD_CALENTRY.html */
@@ -112,8 +110,7 @@ func (c NotesCalendarEntry) Cancel(comments String, params ...notesCalendarEntry
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	_, err := callComMethod(c, "Cancel", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "Cancel", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COUNTER_METHOD_CALENTRY.html */
@@ -160,8 +157,7 @@ func (c NotesCalendarEntry) Counter(comments String, start NotesDateTime, end No
 			}
 		}
 	}
-	_, err := callComMethod(c, "Counter", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "Counter", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DECLINE_METHOD_CALENTRY.html */
@@ -208,8 +204,7 @@ func (c NotesCalendarEntry) Decline(comments String, params ...notesCalendarEntr
 			}
 		}
 	}
-	_, err := callComMethod(c, "Decline", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "Decline", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELEGATE_METHOD_CALENTRY.html */
@@ -256,8 +251,7 @@ func (c NotesCalendarEntry) Delegate(commentsToOrganizer String, delegateTo Stri
 			}
 		}
 	}
-	_, err := callComMethod(c, "Delegate", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "Delegate", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETASDOCUMENT_METHOD_CALENTRY.html */
@@ -294,8 +288,7 @@ func (c NotesCalendarEntry) GetAsDocument(params ...notesCalendarEntryGetAsDocum
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	dispatchPtr, err := callComObjectMethod(c, "GetAsDocument", paramsOrdered...)
-	return NewNotesDocument(dispatchPtr), err
+	return callComObjectMethod(c, NewNotesDocument, "GetAsDocument", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNOTICES_METHOD_CALENTRY.html */
@@ -357,8 +350,7 @@ func (c NotesCalendarEntry) ModifyInvitees(requiredNames []String, optionalNames
 			}
 		}
 	}
-	_, err := callComMethod(c, "ModifyInvitees", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "ModifyInvitees", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READ_METHOD_CALENTRY.html */
@@ -385,8 +377,7 @@ func (c NotesCalendarEntry) Read(params ...notesCalendarEntryReadParam) (String,
 	if paramsStruct.recurId != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 	}
-	val, err := callComMethod(c, "Read", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](c, "Read", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_CALENTRY.html */
@@ -423,8 +414,7 @@ func (c NotesCalendarEntry) Remove(comments String, params ...notesCalendarEntry
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	_, err := callComMethod(c, "Remove", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "Remove", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEINVITEES_METHOD_CALENTRY.html */
@@ -481,14 +471,12 @@ func (c NotesCalendarEntry) RemoveInvitees(names []String, params ...notesCalend
 			}
 		}
 	}
-	_, err := callComMethod(c, "RemoveInvitees", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "RemoveInvitees", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REQUESTINFO_METHOD_CALENTRY.html */
 func (c NotesCalendarEntry) RequestInfo(comments String) error {
-	_, err := callComMethod(c, "RequestInfo", comments)
-	return err
+	return callComVoidMethod(c, "RequestInfo", comments)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TENTATIVELYACCEPT_METHOD_CALENTRY.html */
@@ -525,8 +513,7 @@ func (c NotesCalendarEntry) TentativelyAccept(comments String, params ...notesCa
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	_, err := callComMethod(c, "TentativelyAccept", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "TentativelyAccept", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATE_METHOD_CALENTRY.html */
@@ -573,6 +560,5 @@ func (c NotesCalendarEntry) Update(icalentry String, params ...notesCalendarEntr
 			}
 		}
 	}
-	_, err := callComMethod(c, "Update", paramsOrdered...)
-	return err
+	return callComVoidMethod(c, "Update", paramsOrdered...)
 }

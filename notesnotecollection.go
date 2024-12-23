@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,26 +16,22 @@ func NewNotesNoteCollection(dispatchPtr *ole.IDispatch) NotesNoteCollection {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COUNT_PROPERTY_NOTECOLLECTION.html */
 func (n NotesNoteCollection) Count() (Long, error) {
-	val, err := getComProperty(n, "Count")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](n, "Count")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTBUILDTIME_PROPERTY_NC.html */
 func (n NotesNoteCollection) LastBuildTime() (NotesDateTime, error) {
-	dispatchPtr, err := getComObjectProperty(n, "LastBuildTime")
-	return NewNotesDateTime(dispatchPtr), err
+	return getComObjectProperty(n, NewNotesDateTime, "LastBuildTime")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_NOTECOLLECTION.html */
 func (n NotesNoteCollection) Parent() (NotesNoteCollection, error) {
-	dispatchPtr, err := getComObjectProperty(n, "Parent")
-	return NewNotesNoteCollection(dispatchPtr), err
+	return getComObjectProperty(n, NewNotesNoteCollection, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTACL_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectACL() (Boolean, error) {
-	val, err := getComProperty(n, "SelectACL")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectACL")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTACL_PROPERTY_NC.html */
@@ -47,8 +41,7 @@ func (n NotesNoteCollection) SetSelectACL(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTACTIONS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectActions() (Boolean, error) {
-	val, err := getComProperty(n, "SelectActions")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectActions")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTACTIONS_PROPERTY_NC.html */
@@ -58,8 +51,7 @@ func (n NotesNoteCollection) SetSelectActions(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTAGENTS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectAgents() (Boolean, error) {
-	val, err := getComProperty(n, "SelectAgents")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectAgents")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTAGENTS_PROPERTY_NC.html */
@@ -69,8 +61,7 @@ func (n NotesNoteCollection) SetSelectAgents(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTDATABASESCRIPT_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectDatabaseScript() (Boolean, error) {
-	val, err := getComProperty(n, "SelectDatabaseScript")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectDatabaseScript")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTDATABASESCRIPT_PROPERTY_NC.html */
@@ -80,8 +71,7 @@ func (n NotesNoteCollection) SetSelectDatabaseScript(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTDATACONNECTIONS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectDataConnections() (Boolean, error) {
-	val, err := getComProperty(n, "SelectDataConnections")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectDataConnections")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTDATACONNECTIONS_PROPERTY_NC.html */
@@ -91,8 +81,7 @@ func (n NotesNoteCollection) SetSelectDataConnections(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTDOCUMENTS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectDocuments() (Boolean, error) {
-	val, err := getComProperty(n, "SelectDocuments")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectDocuments")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTDOCUMENTS_PROPERTY_NC.html */
@@ -102,8 +91,7 @@ func (n NotesNoteCollection) SetSelectDocuments(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTFOLDERS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectFolders() (Boolean, error) {
-	val, err := getComProperty(n, "SelectFolders")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectFolders")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTFOLDERS_PROPERTY_NC.html */
@@ -113,8 +101,7 @@ func (n NotesNoteCollection) SetSelectFolders(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTFORMS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectForms() (Boolean, error) {
-	val, err := getComProperty(n, "SelectForms")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectForms")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTFORMS_PROPERTY_NC.html */
@@ -124,8 +111,7 @@ func (n NotesNoteCollection) SetSelectForms(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTFRAMESETS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectFrameSets() (Boolean, error) {
-	val, err := getComProperty(n, "SelectFrameSets")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectFrameSets")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTFRAMESETS_PROPERTY_NC.html */
@@ -135,8 +121,7 @@ func (n NotesNoteCollection) SetSelectFrameSets(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTHELPABOUT_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectHelpAbout() (Boolean, error) {
-	val, err := getComProperty(n, "SelectHelpAbout")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectHelpAbout")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTHELPABOUT_PROPERTY_NC.html */
@@ -146,8 +131,7 @@ func (n NotesNoteCollection) SetSelectHelpAbout(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTHELPINDEX_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectHelpIndex() (Boolean, error) {
-	val, err := getComProperty(n, "SelectHelpIndex")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectHelpIndex")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTHELPINDEX_PROPERTY_NC.html */
@@ -157,8 +141,7 @@ func (n NotesNoteCollection) SetSelectHelpIndex(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTHELPUSING_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectHelpUsing() (Boolean, error) {
-	val, err := getComProperty(n, "SelectHelpUsing")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectHelpUsing")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTHELPUSING_PROPERTY_NC.html */
@@ -168,8 +151,7 @@ func (n NotesNoteCollection) SetSelectHelpUsing(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTICON_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectIcon() (Boolean, error) {
-	val, err := getComProperty(n, "SelectIcon")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectIcon")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTICON_PROPERTY_NC.html */
@@ -179,8 +161,7 @@ func (n NotesNoteCollection) SetSelectIcon(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTIMAGERESOURCES_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectImageResources() (Boolean, error) {
-	val, err := getComProperty(n, "SelectImageResources")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectImageResources")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTIMAGERESOURCES_PROPERTY_NC.html */
@@ -190,8 +171,7 @@ func (n NotesNoteCollection) SetSelectImageResources(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTIONFORMULA_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectionFormula() (String, error) {
-	val, err := getComProperty(n, "SelectionFormula")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](n, "SelectionFormula")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTIONFORMULA_PROPERTY_NC.html */
@@ -201,8 +181,7 @@ func (n NotesNoteCollection) SetSelectionFormula(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTJAVARESOURCES_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectJavaResources() (Boolean, error) {
-	val, err := getComProperty(n, "SelectJavaResources")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectJavaResources")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTJAVARESOURCES_PROPERTY_NC.html */
@@ -212,8 +191,7 @@ func (n NotesNoteCollection) SetSelectJavaResources(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTMISCCODEELEMENTS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectMiscCodeElements() (Boolean, error) {
-	val, err := getComProperty(n, "SelectMiscCodeElements")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectMiscCodeElements")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTMISCCODEELEMENTS_PROPERTY_NC.html */
@@ -223,8 +201,7 @@ func (n NotesNoteCollection) SetSelectMiscCodeElements(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTMISCFORMATELEMENTS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectMiscFormatElements() (Boolean, error) {
-	val, err := getComProperty(n, "SelectMiscFormatElements")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectMiscFormatElements")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTMISCFORMATELEMENTS_PROPERTY_NC.html */
@@ -234,8 +211,7 @@ func (n NotesNoteCollection) SetSelectMiscFormatElements(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTMISCINDEXELEMENTS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectMiscIndexElements() (Boolean, error) {
-	val, err := getComProperty(n, "SelectMiscIndexElements")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectMiscIndexElements")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTMISCINDEXELEMENTS_PROPERTY_NC.html */
@@ -245,8 +221,7 @@ func (n NotesNoteCollection) SetSelectMiscIndexElements(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTNAVIGATORS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectNavigators() (Boolean, error) {
-	val, err := getComProperty(n, "SelectNavigators")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectNavigators")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTNAVIGATORS_PROPERTY_NC.html */
@@ -256,8 +231,7 @@ func (n NotesNoteCollection) SetSelectNavigators(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTOUTLINES_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectOutlines() (Boolean, error) {
-	val, err := getComProperty(n, "SelectOutlines")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectOutlines")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTOUTLINES_PROPERTY_NC.html */
@@ -267,8 +241,7 @@ func (n NotesNoteCollection) SetSelectOutlines(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTPAGES_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectPages() (Boolean, error) {
-	val, err := getComProperty(n, "SelectPages")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectPages")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTPAGES_PROPERTY_NC.html */
@@ -278,8 +251,7 @@ func (n NotesNoteCollection) SetSelectPages(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTPROFILES_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectProfiles() (Boolean, error) {
-	val, err := getComProperty(n, "SelectProfiles")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectProfiles")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTPROFILES_PROPERTY_NC.html */
@@ -289,8 +261,7 @@ func (n NotesNoteCollection) SetSelectProfiles(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTREPLICATIONFORMULAS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectReplicationFormulas() (Boolean, error) {
-	val, err := getComProperty(n, "SelectReplicationFormulas")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectReplicationFormulas")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTREPLICATIONFORMULAS_PROPERTY_NC.html */
@@ -300,8 +271,7 @@ func (n NotesNoteCollection) SetSelectReplicationFormulas(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTSCRIPTLIBRARIES_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectScriptLibraries() (Boolean, error) {
-	val, err := getComProperty(n, "SelectScriptLibraries")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectScriptLibraries")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTSCRIPTLIBRARIES_PROPERTY_NC.html */
@@ -311,8 +281,7 @@ func (n NotesNoteCollection) SetSelectScriptLibraries(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTSHAREDFIELDS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectSharedFields() (Boolean, error) {
-	val, err := getComProperty(n, "SelectSharedFields")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectSharedFields")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTSHAREDFIELDS_PROPERTY_NC.html */
@@ -322,8 +291,7 @@ func (n NotesNoteCollection) SetSelectSharedFields(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTSTYLESHEETRESOURCES_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectStyleSheetResources() (Boolean, error) {
-	val, err := getComProperty(n, "SelectStyleSheetResources")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectStyleSheetResources")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTSTYLESHEETRESOURCES_PROPERTY_NC.html */
@@ -333,8 +301,7 @@ func (n NotesNoteCollection) SetSelectStyleSheetResources(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTSUBFORMS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectSubforms() (Boolean, error) {
-	val, err := getComProperty(n, "SelectSubforms")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectSubforms")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTSUBFORMS_PROPERTY_NC.html */
@@ -344,8 +311,7 @@ func (n NotesNoteCollection) SetSelectSubforms(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTVIEWS_PROPERTY_NC.html */
 func (n NotesNoteCollection) SelectViews() (Boolean, error) {
-	val, err := getComProperty(n, "SelectViews")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](n, "SelectViews")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTVIEWS_PROPERTY_NC.html */
@@ -355,8 +321,7 @@ func (n NotesNoteCollection) SetSelectViews(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SINCETIME_PROPERTY_NC.html */
 func (n NotesNoteCollection) SinceTime() (NotesDateTime, error) {
-	dispatchPtr, err := getComObjectProperty(n, "SinceTime")
-	return NewNotesDateTime(dispatchPtr), err
+	return getComObjectProperty(n, NewNotesDateTime, "SinceTime")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SINCETIME_PROPERTY_NC.html */
@@ -367,84 +332,70 @@ func (n NotesNoteCollection) SetSinceTime(v NotesDateTime) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADD_METHOD_NOTECOLLECTION.html */
 func (n NotesNoteCollection) Add(additionSpecifier Variant) error {
-	_, err := callComMethod(n, "Add", additionSpecifier)
-	return err
+	return callComVoidMethod(n, "Add", additionSpecifier)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BUILDCOLLECTION_METHOD_NC.html */
 func (n NotesNoteCollection) BuildCollection() error {
-	_, err := callComMethod(n, "BuildCollection")
-	return err
+	return callComVoidMethod(n, "BuildCollection")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLEARCOLLECTION_METHOD_NC.html */
 func (n NotesNoteCollection) ClearCollection() error {
-	_, err := callComMethod(n, "ClearCollection")
-	return err
+	return callComVoidMethod(n, "ClearCollection")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTNOTEID_METHOD_NC.html */
 func (n NotesNoteCollection) GetFirstNoteID() (String, error) {
-	val, err := callComMethod(n, "GetFirstNoteID")
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](n, "GetFirstNoteID")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTNOTEID_METHOD_NC.html */
 func (n NotesNoteCollection) GetNextNoteID(noteID String) (String, error) {
-	val, err := callComMethod(n, "GetNextNoteID", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](n, "GetNextNoteID", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERSECT_METHOD_NOTECOLLECTION.html */
 func (n NotesNoteCollection) Intersect(intersectionSpecifier Variant) error {
-	_, err := callComMethod(n, "Intersect", intersectionSpecifier)
-	return err
+	return callComVoidMethod(n, "Intersect", intersectionSpecifier)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_NOTECOLLECTION.html */
 func (n NotesNoteCollection) Remove(removalSpecifier Variant) error {
-	_, err := callComMethod(n, "Remove", removalSpecifier)
-	return err
+	return callComVoidMethod(n, "Remove", removalSpecifier)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTALLADMINNOTES_METHOD_NC.html */
 func (n NotesNoteCollection) SelectAllAdminNotes(selectorValue Boolean) error {
-	_, err := callComMethod(n, "SelectAllAdminNotes", selectorValue)
-	return err
+	return callComVoidMethod(n, "SelectAllAdminNotes", selectorValue)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTALLCODEELEMENTS_METHOD_NC.html */
 func (n NotesNoteCollection) SelectAllCodeElements(selectorValue Boolean) error {
-	_, err := callComMethod(n, "SelectAllCodeElements", selectorValue)
-	return err
+	return callComVoidMethod(n, "SelectAllCodeElements", selectorValue)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTALLDATANOTES_METHOD_NC.html */
 func (n NotesNoteCollection) SelectAllDataNotes(selectorValue Boolean) error {
-	_, err := callComMethod(n, "SelectAllDataNotes", selectorValue)
-	return err
+	return callComVoidMethod(n, "SelectAllDataNotes", selectorValue)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTALLDESIGNELEMENTS_METHOD_NC.html */
 func (n NotesNoteCollection) SelectAllDesignElements(selectorValue Boolean) error {
-	_, err := callComMethod(n, "SelectAllDesignElements", selectorValue)
-	return err
+	return callComVoidMethod(n, "SelectAllDesignElements", selectorValue)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTALLFORMATELEMENTS_METHOD_NC.html */
 func (n NotesNoteCollection) SelectAllFormatElements(selectorValue Boolean) error {
-	_, err := callComMethod(n, "SelectAllFormatElements", selectorValue)
-	return err
+	return callComVoidMethod(n, "SelectAllFormatElements", selectorValue)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTALLINDEXELEMENTS_METHOD_NC.html */
 func (n NotesNoteCollection) SelectAllIndexElements(selectorValue Boolean) error {
-	_, err := callComMethod(n, "SelectAllIndexElements", selectorValue)
-	return err
+	return callComVoidMethod(n, "SelectAllIndexElements", selectorValue)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTALLNOTES_METHOD_NC.html */
 func (n NotesNoteCollection) SelectAllNotes(selectorValue Boolean) error {
-	_, err := callComMethod(n, "SelectAllNotes", selectorValue)
-	return err
+	return callComVoidMethod(n, "SelectAllNotes", selectorValue)
 }

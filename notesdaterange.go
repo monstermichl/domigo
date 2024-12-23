@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,8 +16,7 @@ func NewNotesDateRange(dispatchPtr *ole.IDispatch) NotesDateRange {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENDDATETIME_PROPERTY.html */
 func (d NotesDateRange) EndDateTime() (NotesDateTime, error) {
-	dispatchPtr, err := getComObjectProperty(d, "EndDateTime")
-	return NewNotesDateTime(dispatchPtr), err
+	return getComObjectProperty(d, NewNotesDateTime, "EndDateTime")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENDDATETIME_PROPERTY.html */
@@ -29,14 +26,12 @@ func (d NotesDateRange) SetEndDateTime(v NotesDateTime) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_DATERANGE_COM.html */
 func (d NotesDateRange) Parent() (NotesSession, error) {
-	dispatchPtr, err := getComObjectProperty(d, "Parent")
-	return NewNotesSession(dispatchPtr), err
+	return getComObjectProperty(d, NewNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STARTDATETIME_PROPERTY.html */
 func (d NotesDateRange) StartDateTime() (NotesDateTime, error) {
-	dispatchPtr, err := getComObjectProperty(d, "StartDateTime")
-	return NewNotesDateTime(dispatchPtr), err
+	return getComObjectProperty(d, NewNotesDateTime, "StartDateTime")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STARTDATETIME_PROPERTY.html */
@@ -46,8 +41,7 @@ func (d NotesDateRange) SetStartDateTime(v NotesDateTime) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXT_PROPERTY_RANG.html */
 func (d NotesDateRange) Text() (String, error) {
-	val, err := getComProperty(d, "Text")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](d, "Text")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXT_PROPERTY_RANG.html */

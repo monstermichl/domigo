@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,8 +16,7 @@ func NewNotesQueryResultsProcessor(dispatchPtr *ole.IDispatch) NotesQueryResults
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXENTRIES_PROPERTY.html */
 func (q NotesQueryResultsProcessor) MaxEntries() (Long, error) {
-	val, err := getComProperty(q, "MaxEntries")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](q, "MaxEntries")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXENTRIES_PROPERTY.html */
@@ -29,8 +26,7 @@ func (q NotesQueryResultsProcessor) SetMaxEntries(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEOUTSECQRP_PROPERTY.html */
 func (q NotesQueryResultsProcessor) TimeOutSec() (Integer, error) {
-	val, err := getComProperty(q, "TimeOutSec")
-	return helpers.CastValue[Integer](val), err
+	return getComProperty[Integer](q, "TimeOutSec")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEOUTSECQRP_PROPERTY.html */
@@ -41,8 +37,7 @@ func (q NotesQueryResultsProcessor) SetTimeOutSec(v Integer) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDCOLLECTION_METHOD.html */
 func (q NotesQueryResultsProcessor) AddCollection(Collection Variant, ReferenceName String) error {
-	_, err := callComMethod(q, "AddCollection", Collection, ReferenceName)
-	return err
+	return callComVoidMethod(q, "AddCollection", Collection, ReferenceName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDCOLUMN_METHOD.html */
@@ -109,26 +104,22 @@ func (q NotesQueryResultsProcessor) AddColumn(name String, params ...notesQueryR
 			}
 		}
 	}
-	_, err := callComMethod(q, "AddColumn", paramsOrdered...)
-	return err
+	return callComVoidMethod(q, "AddColumn", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDDOMINOQUERY_METHOD.html */
 func (q NotesQueryResultsProcessor) AddDominoQuery(query NotesDominoQuery, queryString String, referenceName String) error {
-	_, err := callComMethod(q, "AddDominoQuery", query.com().Dispatch(), queryString, referenceName)
-	return err
+	return callComVoidMethod(q, "AddDominoQuery", query.com().Dispatch(), queryString, referenceName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDFORMULA_METHOD.html */
 func (q NotesQueryResultsProcessor) AddFormula(formula String, columnName String, referenceName String) error {
-	_, err := callComMethod(q, "AddFormula", formula, columnName, referenceName)
-	return err
+	return callComVoidMethod(q, "AddFormula", formula, columnName, referenceName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXECUTETOJSON_METHOD.html */
 func (q NotesQueryResultsProcessor) ExecuteToJSON() (String, error) {
-	val, err := callComMethod(q, "ExecuteToJSON")
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](q, "ExecuteToJSON")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXECUTETOVIEW_METHOD.html */
@@ -189,6 +180,5 @@ func (q NotesQueryResultsProcessor) ExecuteToView(name String, params ...notesQu
 			}
 		}
 	}
-	_, err := callComMethod(q, "ExecuteToView", paramsOrdered...)
-	return err
+	return callComVoidMethod(q, "ExecuteToView", paramsOrdered...)
 }

@@ -8,7 +8,6 @@ import (
 
 	ole "github.com/go-ole/go-ole"
 	"github.com/go-ole/go-ole/oleutil"
-	"github.com/monstermichl/domigo/internal/helpers"
 )
 
 type Com struct {
@@ -188,8 +187,7 @@ func (c Com) arrayActionInternal(fn func(name string, params ...interface{}) (*o
 }
 
 func (c Com) objectArrayActionInternal(fn func(name string, params ...interface{}) ([]interface{}, error), name string, params ...interface{}) ([]*ole.IDispatch, error) {
-	array, err := fn(name, params...)
-	return helpers.CastSlice[*ole.IDispatch](array), err
+	return fn(name, helpers, params...)
 }
 
 func (c Com) getPropertyInternal(name string, params ...interface{}) (*ole.VARIANT, error) {

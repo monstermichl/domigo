@@ -3,7 +3,6 @@ package domigo
 
 import (
 	"github.com/monstermichl/domigo/internal/com"
-	"github.com/monstermichl/domigo/internal/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )
@@ -25,14 +24,12 @@ func (p NotesPropertyBroker) InputPropertyContext() ([]NotesProperty, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_CLEARPROPERTY_METHOD.html */
 func (p NotesPropertyBroker) ClearProperty(name String) error {
-	_, err := callComMethod(p, "ClearProperty", name)
-	return err
+	return callComVoidMethod(p, "ClearProperty", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_GETPROPERTY_METHOD.html */
 func (p NotesPropertyBroker) GetProperty(name String) (NotesProperty, error) {
-	dispatchPtr, err := callComObjectMethod(p, "GetProperty", name)
-	return NewNotesProperty(dispatchPtr), err
+	return callComObjectMethod(p, NewNotesProperty, "GetProperty", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_GETPROPERTYVALUE_METHOD.html */
@@ -42,18 +39,15 @@ func (p NotesPropertyBroker) GetPropertyValue(name String) (any, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_HASPROPERTY_METHOD.html */
 func (p NotesPropertyBroker) HasProperty(Name String) (Boolean, error) {
-	val, err := callComMethod(p, "HasProperty", Name)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](p, "HasProperty", Name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_PUBLISH_METHOD.html */
 func (p NotesPropertyBroker) Publish() error {
-	_, err := callComMethod(p, "Publish")
-	return err
+	return callComVoidMethod(p, "Publish")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_SETPROPERTYVALUE_METHOD.html */
 func (p NotesPropertyBroker) SetPropertyValue(name String, value String) (NotesProperty, error) {
-	dispatchPtr, err := callComObjectMethod(p, "SetPropertyValue", name, value)
-	return NewNotesProperty(dispatchPtr), err
+	return callComObjectMethod(p, NewNotesProperty, "SetPropertyValue", name, value)
 }

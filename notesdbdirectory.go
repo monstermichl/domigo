@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -28,14 +26,12 @@ func NewNotesDbDirectory(dispatchPtr *ole.IDispatch) NotesDbDirectory {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_DIRECTORY.html */
 func (d NotesDbDirectory) Name() (String, error) {
-	val, err := getComProperty(d, "Name")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](d, "Name")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_DBDIRECTORY_COM.html */
 func (d NotesDbDirectory) Parent() (NotesSession, error) {
-	dispatchPtr, err := getComObjectProperty(d, "Parent")
-	return NewNotesSession(dispatchPtr), err
+	return getComObjectProperty(d, NewNotesSession, "Parent")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -63,20 +59,17 @@ func (d NotesDbDirectory) CreateDatabase(dbfile String, params ...notesDbDirecto
 	if paramsStruct.open != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.open)
 	}
-	dispatchPtr, err := callComObjectMethod(d, "CreateDatabase", paramsOrdered...)
-	return NewNotesDatabase(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDatabase, "CreateDatabase", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTDATABASE_METHOD.html */
 func (d NotesDbDirectory) GetFirstDatabase(fileType NotesDbDirectoryFileType) (NotesDatabase, error) {
-	dispatchPtr, err := callComObjectMethod(d, "GetFirstDatabase", fileType)
-	return NewNotesDatabase(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDatabase, "GetFirstDatabase", fileType)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDATABASE_METHOD.html */
 func (d NotesDbDirectory) GetNextDatabase() (NotesDatabase, error) {
-	dispatchPtr, err := callComObjectMethod(d, "GetNextDatabase")
-	return NewNotesDatabase(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDatabase, "GetNextDatabase")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENDATABASE_METHOD_DBDIRECTORY_COM.html */
@@ -103,24 +96,20 @@ func (d NotesDbDirectory) OpenDatabase(dbfile String, params ...notesDbDirectory
 	if paramsStruct.open != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.open)
 	}
-	dispatchPtr, err := callComObjectMethod(d, "OpenDatabase", paramsOrdered...)
-	return NewNotesDatabase(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDatabase, "OpenDatabase", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENDATABASEBYREPLICAID_METHOD_DBDIRECTORY_COM.html */
 func (d NotesDbDirectory) OpenDatabaseByReplicaID(rid String) (NotesDatabase, error) {
-	dispatchPtr, err := callComObjectMethod(d, "OpenDatabaseByReplicaID", rid)
-	return NewNotesDatabase(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDatabase, "OpenDatabaseByReplicaID", rid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENDATABASEIFMODIFIED_METHOD_DBDIRECTORY_COM.html */
 func (d NotesDbDirectory) OpenDatabaseIfModified(dbfile String, notesDateTime NotesDateTime) (NotesDatabase, error) {
-	dispatchPtr, err := callComObjectMethod(d, "OpenDatabaseIfModified", dbfile, notesDateTime.com().Dispatch())
-	return NewNotesDatabase(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDatabase, "OpenDatabaseIfModified", dbfile, notesDateTime.com().Dispatch())
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENMAILDATABASE_METHOD_DBDIRECTORY_COM.html */
 func (d NotesDbDirectory) OpenMailDatabase() (NotesDatabase, error) {
-	dispatchPtr, err := callComObjectMethod(d, "OpenMailDatabase")
-	return NewNotesDatabase(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDatabase, "OpenMailDatabase")
 }

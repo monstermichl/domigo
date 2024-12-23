@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,39 +16,33 @@ func NewNotesRichTextRange(dispatchPtr *ole.IDispatch) NotesRichTextRange {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAVIGATOR_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) Navigator() (NotesRichTextNavigator, error) {
-	dispatchPtr, err := getComObjectProperty(r, "Navigator")
-	return NewNotesRichTextNavigator(dispatchPtr), err
+	return getComObjectProperty(r, NewNotesRichTextNavigator, "Navigator")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STYLE_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) Style() (NotesRichTextStyle, error) {
-	dispatchPtr, err := getComObjectProperty(r, "Style")
-	return NewNotesRichTextStyle(dispatchPtr), err
+	return getComObjectProperty(r, NewNotesRichTextStyle, "Style")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXTPARAGRAPH_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) TextParagraph() (String, error) {
-	val, err := getComProperty(r, "TextParagraph")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](r, "TextParagraph")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXTRUN_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) TextRun() (String, error) {
-	val, err := getComProperty(r, "TextRun")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](r, "TextRun")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TYPE_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) Type() (Long, error) {
-	val, err := getComProperty(r, "Type")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](r, "Type")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLONE_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) Clone() (NotesRichTextRange, error) {
-	dispatchPtr, err := callComObjectMethod(r, "Clone")
-	return NewNotesRichTextRange(dispatchPtr), err
+	return callComObjectMethod(r, NewNotesRichTextRange, "Clone")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDANDREPLACE_METHOD_RTRANGE.html */
@@ -77,14 +69,12 @@ func (r NotesRichTextRange) FindAndReplace(target String, replacement String, pa
 	if paramsStruct.options != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.options)
 	}
-	val, err := callComMethod(r, "FindAndReplace", paramsOrdered...)
-	return helpers.CastValue[Long](val), err
+	return callComMethod[Long](r, "FindAndReplace", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) Remove() error {
-	_, err := callComMethod(r, "Remove")
-	return err
+	return callComVoidMethod(r, "Remove")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESET_METHOD_RTRANGE.html */
@@ -121,24 +111,20 @@ func (r NotesRichTextRange) Reset(params ...notesRichTextRangeResetParam) error 
 			paramsOrdered = append(paramsOrdered, *paramsStruct.end)
 		}
 	}
-	_, err := callComMethod(r, "Reset", paramsOrdered...)
-	return err
+	return callComVoidMethod(r, "Reset", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETBEGIN_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) SetBegin(element notesStruct) error {
-	_, err := callComMethod(r, "SetBegin", element.com().Dispatch())
-	return err
+	return callComVoidMethod(r, "SetBegin", element.com().Dispatch())
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETEND_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) SetEnd(element notesStruct) error {
-	_, err := callComMethod(r, "SetEnd", element.com().Dispatch())
-	return err
+	return callComVoidMethod(r, "SetEnd", element.com().Dispatch())
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETSTYLE_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) SetStyle(style NotesRichTextStyle) error {
-	_, err := callComMethod(r, "SetStyle", style.com().Dispatch())
-	return err
+	return callComVoidMethod(r, "SetStyle", style.com().Dispatch())
 }

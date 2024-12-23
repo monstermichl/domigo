@@ -18,8 +18,7 @@ func NewNotesDominoQuery(dispatchPtr *ole.IDispatch) NotesDominoQuery {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSCANDOCS_PROPERTY_NDQ.html#reference_a4g_r13_cgb */
 func (d NotesDominoQuery) MaxScanDocs() (Long, error) {
-	val, err := getComProperty(d, "MaxScanDocs")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](d, "MaxScanDocs")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSCANDOCS_PROPERTY_NDQ.html#reference_a4g_r13_cgb */
@@ -29,8 +28,7 @@ func (d NotesDominoQuery) SetMaxScanDocs(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSCANENTRIES_PROPERTY_NDQ.html#reference_yyx_cd3_cgb */
 func (d NotesDominoQuery) MaxScanEntries() (Long, error) {
-	val, err := getComProperty(d, "MaxScanEntries")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](d, "MaxScanEntries")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSCANENTRIES_PROPERTY_NDQ.html#reference_yyx_cd3_cgb */
@@ -40,8 +38,7 @@ func (d NotesDominoQuery) SetMaxScanEntries(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOVIEWS_PROPERTY_NDQ.html#reference_o3c_kf3_cgb */
 func (d NotesDominoQuery) NoViews() (Boolean, error) {
-	val, err := getComProperty(d, "NoViews")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "NoViews")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOVIEWS_PROPERTY_NDQ.html#reference_o3c_kf3_cgb */
@@ -51,8 +48,7 @@ func (d NotesDominoQuery) SetNoViews(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REBUILDDESIGNCATALOG_PROPERTY_NDQ.html#reference_pdc_hyy_ljb */
 func (d NotesDominoQuery) RebuildDesignCatalog() (Boolean, error) {
-	val, err := getComProperty(d, "RebuildDesignCatalog")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "RebuildDesignCatalog")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REBUILDDESIGNCATALOG_PROPERTY_NDQ.html#reference_pdc_hyy_ljb */
@@ -62,8 +58,7 @@ func (d NotesDominoQuery) SetRebuildDesignCatalog(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHDESIGNCATALOG_PROPERTY_NDQ.html#reference_vvz_3zy_ljb */
 func (d NotesDominoQuery) RefreshDesignCatalog() (Boolean, error) {
-	val, err := getComProperty(d, "RefreshDesignCatalog")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "RefreshDesignCatalog")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHDESIGNCATALOG_PROPERTY_NDQ.html#reference_vvz_3zy_ljb */
@@ -73,8 +68,7 @@ func (d NotesDominoQuery) SetRefreshDesignCatalog(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHFULLTEXT_PROPERTY_NDQ.html#reference_wzg_d1z_ljb */
 func (d NotesDominoQuery) RefreshFullText() (Boolean, error) {
-	val, err := getComProperty(d, "RefreshFullText")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "RefreshFullText")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHFULLTEXT_PROPERTY_NDQ.html#reference_wzg_d1z_ljb */
@@ -84,8 +78,7 @@ func (d NotesDominoQuery) SetRefreshFullText(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHVIEWS_PROPERTY_NDQ.html#reference_enn_rx3_cgb */
 func (d NotesDominoQuery) RefreshViews() (Boolean, error) {
-	val, err := getComProperty(d, "RefreshViews")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "RefreshViews")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESHVIEWS_PROPERTY_NDQ.html#reference_enn_rx3_cgb */
@@ -95,8 +88,7 @@ func (d NotesDominoQuery) SetRefreshViews(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DESIGNDOCUMENTSONLY_PROPERTY_NDQ.html */
 func (d NotesDominoQuery) DesignDocumentsOnly() (Boolean, error) {
-	val, err := getComProperty(d, "DesignDocumentsOnly")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "DesignDocumentsOnly")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DESIGNDOCUMENTSONLY_PROPERTY_NDQ.html */
@@ -106,8 +98,7 @@ func (d NotesDominoQuery) SetDesignDocumentsOnly(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEOUTSEC_PROPERTY_NDQ.html#reference_qwv_123_cgb */
 func (d NotesDominoQuery) TimeoutSec() (Integer, error) {
-	val, err := getComProperty(d, "TimeoutSec")
-	return helpers.CastValue[Integer](val), err
+	return getComProperty[Integer](d, "TimeoutSec")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEOUTSEC_PROPERTY_NDQ.html#reference_qwv_123_cgb */
@@ -161,26 +152,22 @@ func (d NotesDominoQuery) Execute(query String, params ...notesDominoQueryExecut
 		}
 	}
 
-	dispatchPtr, err := callComObjectMethod(d, "Execute", paramsOrdered...)
-	return NewNotesDocumentCollection(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDocumentCollection, "Execute", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXPLAIN_METHOD_NDQ.html#reference_jkw_wcj_cgb */
 func (d NotesDominoQuery) Explain(query String) (String, error) {
-	val, err := callComMethod(d, "Explain", query)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](d, "Explain", query)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARSE_METHOD_NDQ.html#reference_rqs_m2j_cgb */
 func (d NotesDominoQuery) Parse(query String) (String, error) {
-	val, err := callComMethod(d, "Parse", query)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](d, "Parse", query)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESETNAMEDVARIABLES_METHOD_NDQ.html#reference_rz2_thj_cgb */
 func (d NotesDominoQuery) ResetNamedVariables() error {
-	_, err := callComMethod(d, "ResetNamedVariables")
-	return err
+	return callComVoidMethod(d, "ResetNamedVariables")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETNAMEDVARIABLE_METHOD_NDQ.html#reference_h2j_fgj_cgb */
@@ -229,8 +216,7 @@ func (d NotesDominoQuery) CreateIndex(indexName String, field []String, params .
 			paramsOrdered = append(paramsOrdered, *paramsStruct.noBuild)
 		}
 	}
-	_, err := callComMethod(d, "CreateIndex", paramsOrdered...)
-	return err
+	return callComVoidMethod(d, "CreateIndex", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LISTINDEXES_METHOD_NDQ.html#reference_rkj_2rw_ljb */
@@ -242,6 +228,5 @@ func (d NotesDominoQuery) CreateIndex(indexName String, field []String, params .
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEINDEX_METHOD_NDQ.html#reference_uqw_grw_ljb */
 func (d NotesDominoQuery) RemoveIndex(indexName String) error {
-	_, err := callComMethod(d, "RemoveIndex", indexName)
-	return err
+	return callComVoidMethod(d, "RemoveIndex", indexName)
 }

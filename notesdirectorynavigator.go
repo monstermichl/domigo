@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,81 +16,68 @@ func NewNotesDirectoryNavigator(dispatchPtr *ole.IDispatch) NotesDirectoryNaviga
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTITEM_PROPERTY_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) CurrentItem() (String, error) {
-	val, err := getComProperty(d, "CurrentItem")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](d, "CurrentItem")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTMATCH_PROPERTY_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) CurrentMatch() (Long, error) {
-	val, err := getComProperty(d, "CurrentMatch")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](d, "CurrentMatch")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTMATCHES_PROPERTY_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) CurrentMatches() (Long, error) {
-	val, err := getComProperty(d, "CurrentMatches")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](d, "CurrentMatches")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTNAME_PROPERTY_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) CurrentName() (String, error) {
-	val, err := getComProperty(d, "CurrentName")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](d, "CurrentName")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTVIEW_PROPERTY_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) CurrentView() (String, error) {
-	val, err := getComProperty(d, "CurrentView")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](d, "CurrentView")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MATCHLOCATED_PROPERTY_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) MatchLocated() (Boolean, error) {
-	val, err := getComProperty(d, "MatchLocated")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "MatchLocated")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAMELOCATED_PROPERTY_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) NameLocated() (Boolean, error) {
-	val, err := getComProperty(d, "NameLocated")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "NameLocated")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDFIRSTMATCH_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) FindFirstMatch() (Boolean, error) {
-	val, err := callComMethod(d, "FindFirstMatch")
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](d, "FindFirstMatch")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDFIRSTNAME_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) FindFirstName() (Long, error) {
-	val, err := callComMethod(d, "FindFirstName")
-	return helpers.CastValue[Long](val), err
+	return callComMethod[Long](d, "FindFirstName")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDNEXTMATCH_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) FindNextMatch() (Boolean, error) {
-	val, err := callComMethod(d, "FindNextMatch")
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](d, "FindNextMatch")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDNEXTNAME_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) FindNextName() (Long, error) {
-	val, err := callComMethod(d, "FindNextName")
-	return helpers.CastValue[Long](val), err
+	return callComMethod[Long](d, "FindNextName")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDNTHMATCH_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) FindNthMatch(n Integer) (Boolean, error) {
-	val, err := callComMethod(d, "FindNthMatch", n)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](d, "FindNthMatch", n)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDNTHNAME_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) FindNthName(n Integer) (Long, error) {
-	val, err := callComMethod(d, "FindNthName", n)
-	return helpers.CastValue[Long](val), err
+	return callComMethod[Long](d, "FindNthName", n)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTITEMVALUE_METHOD_DIRECTORYNAVIGATOR.html */

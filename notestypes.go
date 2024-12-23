@@ -16,3 +16,7 @@ type Currency = float64
 type String = string
 type Variant = uint128.Uint128
 type Time = time.Time
+
+type primitiveType interface {
+	Boolean | Byte | Integer | Long | Single | Double | String | Variant | Time
+}

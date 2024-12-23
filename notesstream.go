@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,38 +16,32 @@ func NewNotesStream(dispatchPtr *ole.IDispatch) NotesStream {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BYTES_PROPERTY_STREAM.html */
 func (s NotesStream) Bytes() (Long, error) {
-	val, err := getComProperty(s, "Bytes")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](s, "Bytes")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CHARSET_PROPERTY_STREAM.html */
 func (s NotesStream) Charset() (String, error) {
-	val, err := getComProperty(s, "Charset")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](s, "Charset")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISEOS_PROPERTY_STREAM.html */
 func (s NotesStream) IsEOS() (Boolean, error) {
-	val, err := getComProperty(s, "IsEOS")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](s, "IsEOS")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISREADONLY_PROPERTY_STREAM.html */
 func (s NotesStream) IsReadOnly() (Boolean, error) {
-	val, err := getComProperty(s, "IsReadOnly")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](s, "IsReadOnly")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_STREAM.html */
 func (s NotesStream) Parent() (NotesSession, error) {
-	dispatchPtr, err := getComObjectProperty(s, "Parent")
-	return NewNotesSession(dispatchPtr), err
+	return getComObjectProperty(s, NewNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POSITION_PROPERTY_STREAM.html */
 func (s NotesStream) Position() (Long, error) {
-	val, err := getComProperty(s, "Position")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](s, "Position")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POSITION_PROPERTY_STREAM.html */
@@ -60,8 +52,7 @@ func (s NotesStream) SetPosition(v Long) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLOSE_METHOD_STREAM.html */
 func (s NotesStream) Close() error {
-	_, err := callComMethod(s, "Close")
-	return err
+	return callComVoidMethod(s, "Close")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPEN_METHOD_STREAM.html */
@@ -88,8 +79,7 @@ func (s NotesStream) Open(pathname String, params ...notesStreamOpenParam) (Bool
 	if paramsStruct.charset != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.charset)
 	}
-	val, err := callComMethod(s, "Open", paramsOrdered...)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](s, "Open", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READ_METHOD_STREAM.html */
@@ -116,8 +106,7 @@ func (s NotesStream) Read(params ...notesStreamReadParam) ([]Byte, error) {
 	if paramsStruct.length != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.length)
 	}
-	vals, err := callComArrayMethod(s, "Read", paramsOrdered...)
-	return helpers.CastSlice[Byte](vals), err
+	return callComArrayMethod[Byte](s, "Read", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READTEXT_METHOD_STREAM.html */
@@ -154,20 +143,17 @@ func (s NotesStream) ReadText(params ...notesStreamReadTextParam) (String, error
 			paramsOrdered = append(paramsOrdered, *paramsStruct.eol)
 		}
 	}
-	val, err := callComMethod(s, "ReadText", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](s, "ReadText", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TRUNCATE_METHOD_STREAM.html */
 func (s NotesStream) Truncate() error {
-	_, err := callComMethod(s, "Truncate")
-	return err
+	return callComVoidMethod(s, "Truncate")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_WRITE_METHOD_STREAM.html */
 func (s NotesStream) Write(buffer []Byte) (Byte, error) {
-	val, err := callComMethod(s, "Write", buffer)
-	return helpers.CastValue[Byte](val), err
+	return callComMethod[Byte](s, "Write", buffer)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_WRITETEXT_METHOD_STREAM.html */
@@ -194,6 +180,5 @@ func (s NotesStream) WriteText(text String, params ...notesStreamWriteTextParam)
 	if paramsStruct.eol != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.eol)
 	}
-	val, err := callComMethod(s, "WriteText", paramsOrdered...)
-	return helpers.CastValue[Byte](val), err
+	return callComMethod[Byte](s, "WriteText", paramsOrdered...)
 }

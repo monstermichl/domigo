@@ -3,7 +3,6 @@ package domigo
 
 import (
 	"github.com/monstermichl/domigo/internal/com"
-	"github.com/monstermichl/domigo/internal/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )
@@ -54,8 +53,7 @@ func NewNotesItem(dispatchPtr *ole.IDispatch) NotesItem {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DATETIMEVALUE_PROPERTY.html */
 func (i NotesItem) DateTimeValue() (NotesDateTime, error) {
-	dispatchPtr, err := getComObjectProperty(i, "DateTimeValue")
-	return NewNotesDateTime(dispatchPtr), err
+	return getComObjectProperty(i, NewNotesDateTime, "DateTimeValue")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DATETIMEVALUE_PROPERTY.html */
@@ -65,8 +63,7 @@ func (i NotesItem) SetDateTimeValue(v NotesDateTime) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISAUTHORS_PROPERTY.html */
 func (i NotesItem) IsAuthors() (Boolean, error) {
-	val, err := getComProperty(i, "IsAuthors")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](i, "IsAuthors")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISAUTHORS_PROPERTY.html */
@@ -76,8 +73,7 @@ func (i NotesItem) SetIsAuthors(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISENCRYPTED_PROPERTY.html */
 func (i NotesItem) IsEncrypted() (Boolean, error) {
-	val, err := getComProperty(i, "IsEncrypted")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](i, "IsEncrypted")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISENCRYPTED_PROPERTY.html */
@@ -87,8 +83,7 @@ func (i NotesItem) SetIsEncrypted(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNAMES_PROPERTY.html */
 func (i NotesItem) IsNames() (Boolean, error) {
-	val, err := getComProperty(i, "IsNames")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](i, "IsNames")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNAMES_PROPERTY.html */
@@ -98,8 +93,7 @@ func (i NotesItem) SetIsNames(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPROTECTED_PROPERTY.html */
 func (i NotesItem) IsProtected() (Boolean, error) {
-	val, err := getComProperty(i, "IsProtected")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](i, "IsProtected")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPROTECTED_PROPERTY.html */
@@ -109,8 +103,7 @@ func (i NotesItem) SetIsProtected(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISREADERS_PROPERTY.html */
 func (i NotesItem) IsReaders() (Boolean, error) {
-	val, err := getComProperty(i, "IsReaders")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](i, "IsReaders")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISREADERS_PROPERTY.html */
@@ -120,8 +113,7 @@ func (i NotesItem) SetIsReaders(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSIGNED_PROPERTY_ITEM.html */
 func (i NotesItem) IsSigned() (Boolean, error) {
-	val, err := getComProperty(i, "IsSigned")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](i, "IsSigned")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSIGNED_PROPERTY_ITEM.html */
@@ -131,8 +123,7 @@ func (i NotesItem) SetIsSigned(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSUMMARY_PROPERTY.html */
 func (i NotesItem) IsSummary() (Boolean, error) {
-	val, err := getComProperty(i, "IsSummary")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](i, "IsSummary")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSUMMARY_PROPERTY.html */
@@ -142,26 +133,22 @@ func (i NotesItem) SetIsSummary(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTMODIFIED_PROPERTY_ITEM.html */
 func (i NotesItem) LastModified() (Time, error) {
-	val, err := getComProperty(i, "LastModified")
-	return helpers.CastValue[Time](val), err
+	return getComProperty[Time](i, "LastModified")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_ITEM.html */
 func (i NotesItem) Name() (String, error) {
-	val, err := getComProperty(i, "Name")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](i, "Name")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_ITEM.html */
 func (i NotesItem) Parent() (NotesDocument, error) {
-	dispatchPtr, err := getComObjectProperty(i, "Parent")
-	return NewNotesDocument(dispatchPtr), err
+	return getComObjectProperty(i, NewNotesDocument, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVETODISK_PROPERTY.html */
 func (i NotesItem) SaveToDisk() (Boolean, error) {
-	val, err := getComProperty(i, "SaveToDisk")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](i, "SaveToDisk")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVETODISK_PROPERTY.html */
@@ -171,20 +158,17 @@ func (i NotesItem) SetSaveToDisk(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXT_PROPERTY.html */
 func (i NotesItem) Text() (String, error) {
-	val, err := getComProperty(i, "Text")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](i, "Text")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TYPE_PROPERTY_ITEM.html */
 func (i NotesItem) Type() (NotesItemDataType, error) {
-	val, err := getComProperty(i, "Type")
-	return helpers.CastValue[NotesItemDataType](val), err
+	return getComProperty[NotesItemDataType](i, "Type")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VALUELENGTH_PROPERTY.html */
 func (i NotesItem) ValueLength() (Long, error) {
-	val, err := getComProperty(i, "ValueLength")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](i, "ValueLength")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VALUES_PROPERTY.html */
@@ -204,32 +188,27 @@ func (i NotesItem) SetValues(v any) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ABSTRACT_METHOD.html */
 func (i NotesItem) Abstract(maxAbstract Long, dropVowels Boolean, useDictionary Boolean) (String, error) {
-	val, err := callComMethod(i, "Abstract", maxAbstract, dropVowels, useDictionary)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](i, "Abstract", maxAbstract, dropVowels, useDictionary)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPENDTOTEXTLIST_METHOD.html */
 func (i NotesItem) AppendToTextList(newValues []String) error {
-	_, err := callComMethod(i, "AppendToTextList", newValues)
-	return err
+	return callComVoidMethod(i, "AppendToTextList", newValues)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONTAINS_METHOD.html */
 func (i NotesItem) Contains(value any) (Boolean, error) {
-	val, err := callComMethod(i, "Contains", value)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](i, "Contains", value)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYITEMTODOCUMENT_METHOD.html */
 func (i NotesItem) CopyItemToDocument(document NotesDocument, newName String) (NotesItem, error) {
-	dispatchPtr, err := callComObjectMethod(i, "CopyItemToDocument", document.com().Dispatch(), newName)
-	return NewNotesItem(dispatchPtr), err
+	return callComObjectMethod(i, NewNotesItem, "CopyItemToDocument", document.com().Dispatch(), newName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETVALUECUSTOMDATABYTES_METHOD_ITEM.html */
 func (i NotesItem) GetValueCustomDataBytes(dataTypeName String) ([]Byte, error) {
-	vals, err := callComArrayMethod(i, "GetValueCustomDataBytes", dataTypeName)
-	return helpers.CastSlice[Byte](vals), err
+	return callComArrayMethod[Byte](i, "GetValueCustomDataBytes", dataTypeName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETVALUEDATETIMEARRAY_METHOD.html */
@@ -240,18 +219,15 @@ func (i NotesItem) GetValueDateTimeArray() ([]NotesDateTime, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMIMEENTITY_METHOD_NOTESITEM.html */
 func (i NotesItem) GetMIMEEntity() (NotesMIMEEntity, error) {
-	dispatchPtr, err := callComObjectMethod(i, "GetMIMEEntity")
-	return NewNotesMIMEEntity(dispatchPtr), err
+	return callComObjectMethod(i, NewNotesMIMEEntity, "GetMIMEEntity")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_ITEM.html */
 func (i NotesItem) Remove() error {
-	_, err := callComMethod(i, "Remove")
-	return err
+	return callComVoidMethod(i, "Remove")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETVALUECUSTOMDATABYTES_METHOD_ITEM.html */
 func (i NotesItem) SetValueCustomDataBytes(dataTypeName String, byteArray []Byte) error {
-	_, err := callComMethod(i, "SetValueCustomDataBytes", dataTypeName, byteArray)
-	return err
+	return callComVoidMethod(i, "SetValueCustomDataBytes", dataTypeName, byteArray)
 }

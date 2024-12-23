@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,8 +16,7 @@ func NewNotesACLEntry(dispatchPtr *ole.IDispatch) NotesACLEntry {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISAUTHORNOCREATE_PROPERTY.html */
 func (a NotesACLEntry) CanCreateDocuments() (Boolean, error) {
-	val, err := getComProperty(a, "CanCreateDocuments")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "CanCreateDocuments")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISAUTHORNOCREATE_PROPERTY.html */
@@ -29,8 +26,7 @@ func (a NotesACLEntry) SetCanCreateDocuments(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CANCREATELSORJAVAAGENT_PROPERTY_6760.html */
 func (a NotesACLEntry) CanCreateLSOrJavaAgent() (Boolean, error) {
-	val, err := getComProperty(a, "CanCreateLSOrJavaAgent")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "CanCreateLSOrJavaAgent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CANCREATELSORJAVAAGENT_PROPERTY_6760.html */
@@ -40,8 +36,7 @@ func (a NotesACLEntry) SetCanCreateLSOrJavaAgent(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEPRIVATEAGENT_PROPERTY.html */
 func (a NotesACLEntry) CanCreatePersonalAgent() (Boolean, error) {
-	val, err := getComProperty(a, "CanCreatePersonalAgent")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "CanCreatePersonalAgent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEPRIVATEAGENT_PROPERTY.html */
@@ -51,8 +46,7 @@ func (a NotesACLEntry) SetCanCreatePersonalAgent(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEPRIVATEFOLDER_PROPERTY.html */
 func (a NotesACLEntry) CanCreatePersonalFolder() (Boolean, error) {
-	val, err := getComProperty(a, "CanCreatePersonalFolder")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "CanCreatePersonalFolder")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEPRIVATEFOLDER_PROPERTY.html */
@@ -62,8 +56,7 @@ func (a NotesACLEntry) SetCanCreatePersonalFolder(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CANCREATESHAREDFOLDER_PROPERTY_7622.html */
 func (a NotesACLEntry) CanCreateSharedFolder() (Boolean, error) {
-	val, err := getComProperty(a, "CanCreateSharedFolder")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "CanCreateSharedFolder")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CANCREATESHAREDFOLDER_PROPERTY_7622.html */
@@ -73,8 +66,7 @@ func (a NotesACLEntry) SetCanCreateSharedFolder(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNODELETE_PROPERTY.html */
 func (a NotesACLEntry) CanDeleteDocuments() (Boolean, error) {
-	val, err := getComProperty(a, "CanDeleteDocuments")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "CanDeleteDocuments")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNODELETE_PROPERTY.html */
@@ -84,8 +76,7 @@ func (a NotesACLEntry) SetCanDeleteDocuments(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CANREPLICATEORCOPYDOCUMENTS_PROPERTY_ACLENTRY.html */
 func (a NotesACLEntry) CanReplicateOrCopyDocuments() (Boolean, error) {
-	val, err := getComProperty(a, "CanReplicateOrCopyDocuments")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "CanReplicateOrCopyDocuments")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CANREPLICATEORCOPYDOCUMENTS_PROPERTY_ACLENTRY.html */
@@ -95,8 +86,7 @@ func (a NotesACLEntry) SetCanReplicateOrCopyDocuments(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISADMINREADERAUTHOR_PROPERTY_88.html */
 func (a NotesACLEntry) IsAdminReaderAuthor() (Boolean, error) {
-	val, err := getComProperty(a, "IsAdminReaderAuthor")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "IsAdminReaderAuthor")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISADMINREADERAUTHOR_PROPERTY_88.html */
@@ -106,8 +96,7 @@ func (a NotesACLEntry) SetIsAdminReaderAuthor(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISADMINSERVER_PROPERTY_2946.html */
 func (a NotesACLEntry) IsAdminServer() (Boolean, error) {
-	val, err := getComProperty(a, "IsAdminServer")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "IsAdminServer")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISADMINSERVER_PROPERTY_2946.html */
@@ -117,8 +106,7 @@ func (a NotesACLEntry) SetIsAdminServer(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISGROUP_PROPERTY_4731.html */
 func (a NotesACLEntry) IsGroup() (Boolean, error) {
-	val, err := getComProperty(a, "IsGroup")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "IsGroup")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISGROUP_PROPERTY_4731.html */
@@ -128,8 +116,7 @@ func (a NotesACLEntry) SetIsGroup(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPERSON_PROPERTY_651.html */
 func (a NotesACLEntry) IsPerson() (Boolean, error) {
-	val, err := getComProperty(a, "IsPerson")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "IsPerson")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPERSON_PROPERTY_651.html */
@@ -139,8 +126,7 @@ func (a NotesACLEntry) SetIsPerson(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPUBLICREADER_PROPERTY.html */
 func (a NotesACLEntry) IsPublicReader() (Boolean, error) {
-	val, err := getComProperty(a, "IsPublicReader")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "IsPublicReader")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPUBLICREADER_PROPERTY.html */
@@ -150,8 +136,7 @@ func (a NotesACLEntry) SetIsPublicReader(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPUBLICWRITER_PROPERTY.html */
 func (a NotesACLEntry) IsPublicWriter() (Boolean, error) {
-	val, err := getComProperty(a, "IsPublicWriter")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "IsPublicWriter")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPUBLICWRITER_PROPERTY.html */
@@ -161,8 +146,7 @@ func (a NotesACLEntry) SetIsPublicWriter(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSERVER_PROPERTY_1888.html */
 func (a NotesACLEntry) IsServer() (Boolean, error) {
-	val, err := getComProperty(a, "IsServer")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "IsServer")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSERVER_PROPERTY_1888.html */
@@ -172,8 +156,7 @@ func (a NotesACLEntry) SetIsServer(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LEVEL_PROPERTY.html */
 func (a NotesACLEntry) Level() (Long, error) {
-	val, err := getComProperty(a, "Level")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](a, "Level")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LEVEL_PROPERTY.html */
@@ -183,8 +166,7 @@ func (a NotesACLEntry) SetLevel(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_ACLENTRY.html */
 func (a NotesACLEntry) Name() (String, error) {
-	val, err := getComProperty(a, "Name")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](a, "Name")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_ACLENTRY.html */
@@ -194,26 +176,22 @@ func (a NotesACLEntry) SetName(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAMEOBJECT_PROPERTY.html */
 func (a NotesACLEntry) NameObject() (NotesName, error) {
-	dispatchPtr, err := getComObjectProperty(a, "NameObject")
-	return NewNotesName(dispatchPtr), err
+	return getComObjectProperty(a, NewNotesName, "NameObject")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_ACLENTRY.html */
 func (a NotesACLEntry) Parent() (NotesACL, error) {
-	dispatchPtr, err := getComObjectProperty(a, "Parent")
-	return NewNotesACL(dispatchPtr), err
+	return getComObjectProperty(a, NewNotesACL, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROLES_PROPERTY_ACLENTRY.html */
 func (a NotesACLEntry) Roles() ([]String, error) {
-	vals, err := getComArrayProperty(a, "Roles")
-	return helpers.CastSlice[String](vals), err
+	return getComArrayProperty[String](a, "Roles")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERTYPE_PROPERTY_ACLENTRY.html */
 func (a NotesACLEntry) UserType() (Long, error) {
-	val, err := getComProperty(a, "UserType")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](a, "UserType")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERTYPE_PROPERTY_ACLENTRY.html */
@@ -224,24 +202,20 @@ func (a NotesACLEntry) SetUserType(v Long) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DISABLEROLE_METHOD.html */
 func (a NotesACLEntry) DisableRole(name String) error {
-	_, err := callComMethod(a, "DisableRole", name)
-	return err
+	return callComVoidMethod(a, "DisableRole", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENABLEROLE_METHOD.html */
 func (a NotesACLEntry) EnableRole(name String) error {
-	_, err := callComMethod(a, "EnableRole", name)
-	return err
+	return callComVoidMethod(a, "EnableRole", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISROLEENABLED_METHOD.html */
 func (a NotesACLEntry) IsRoleEnabled(name String) (Boolean, error) {
-	val, err := callComMethod(a, "IsRoleEnabled", name)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](a, "IsRoleEnabled", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_ACLENTRY.html */
 func (a NotesACLEntry) Remove() error {
-	_, err := callComMethod(a, "Remove")
-	return err
+	return callComVoidMethod(a, "Remove")
 }

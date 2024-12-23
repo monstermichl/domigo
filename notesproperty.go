@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,44 +16,37 @@ func NewNotesProperty(dispatchPtr *ole.IDispatch) NotesProperty {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_DESCRIPTION_PROPERTY.html */
 func (p NotesProperty) Description() (String, error) {
-	val, err := getComProperty(p, "Description")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](p, "Description")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_ISINPUT_PROPERTY.html */
 func (p NotesProperty) IsInput() (Boolean, error) {
-	val, err := getComProperty(p, "IsInput")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](p, "IsInput")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_NAME_PROPERTY.html */
 func (p NotesProperty) Name() (String, error) {
-	val, err := getComProperty(p, "Name")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](p, "Name")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_NAMESPACE_PROPERTY.html */
 func (p NotesProperty) NameSpace() (String, error) {
-	val, err := getComProperty(p, "NameSpace")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](p, "NameSpace")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_TITLE_PROPERTY.html */
 func (p NotesProperty) Title() (String, error) {
-	val, err := getComProperty(p, "Title")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](p, "Title")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_TYPENAME_PROPERTY.html */
 func (p NotesProperty) Typename() (String, error) {
-	val, err := getComProperty(p, "Typename")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](p, "Typename")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_VALUES_PROPERTY.html */
 func (p NotesProperty) Values() ([]Integer, error) {
-	vals, err := getComArrayProperty(p, "Values")
-	return helpers.CastSlice[Integer](vals), err
+	return getComArrayProperty[Integer](p, "Values")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_VALUES_PROPERTY.html */
@@ -66,12 +57,10 @@ func (p NotesProperty) SetValues(v []Integer) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_CLEAR_METHOD.html */
 func (p NotesProperty) Clear() error {
-	_, err := callComMethod(p, "Clear")
-	return err
+	return callComVoidMethod(p, "Clear")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESPROPERTY_PUBLISH_METHOD.html */
 func (p NotesProperty) Publish() error {
-	_, err := callComMethod(p, "Publish")
-	return err
+	return callComVoidMethod(p, "Publish")
 }

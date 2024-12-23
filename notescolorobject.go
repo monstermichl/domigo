@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,32 +16,27 @@ func NewNotesColorObject(dispatchPtr *ole.IDispatch) NotesColorObject {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BLUE_PROPERTY_COLOR.html */
 func (c NotesColorObject) Blue() (Long, error) {
-	val, err := getComProperty(c, "Blue")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "Blue")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GREEN_PROPERTY_COLOR.html */
 func (c NotesColorObject) Green() (Long, error) {
-	val, err := getComProperty(c, "Green")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "Green")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HUE_PROPERTY_COLOR.html */
 func (c NotesColorObject) Hue() (Long, error) {
-	val, err := getComProperty(c, "Hue")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "Hue")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LUMINANCE_PROPERTY_COLOR.html */
 func (c NotesColorObject) Luminance() (Long, error) {
-	val, err := getComProperty(c, "Luminance")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "Luminance")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESCOLOR_PROPERTY_COLOR.html */
 func (c NotesColorObject) NotesColor() (Long, error) {
-	val, err := getComProperty(c, "NotesColor")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "NotesColor")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESCOLOR_PROPERTY_COLOR.html */
@@ -53,25 +46,21 @@ func (c NotesColorObject) SetNotesColor(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RED_PROPERTY_COLOR.html */
 func (c NotesColorObject) Red() (Long, error) {
-	val, err := getComProperty(c, "Red")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "Red")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SATURATION_PROPERTY_COLOR.html */
 func (c NotesColorObject) Saturation() (Long, error) {
-	val, err := getComProperty(c, "Saturation")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "Saturation")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETHSL_METHOD_COLOR.html */
 func (c NotesColorObject) SetHSL(hue Long, saturation Long, luminance Long) (Long, error) {
-	val, err := callComMethod(c, "SetHSL", hue, saturation, luminance)
-	return helpers.CastValue[Long](val), err
+	return callComMethod[Long](c, "SetHSL", hue, saturation, luminance)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETRGB_METHOD_COLOR.html */
 func (c NotesColorObject) SetRGB(red Long, green Long, blue Long) (Long, error) {
-	val, err := callComMethod(c, "SetRGB", red, green, blue)
-	return helpers.CastValue[Long](val), err
+	return callComMethod[Long](c, "SetRGB", red, green, blue)
 }

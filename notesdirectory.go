@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,26 +16,22 @@ func NewNotesDirectory(dispatchPtr *ole.IDispatch) NotesDirectory {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_AVAILABLEITEMS_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) AvailableItems() ([]Variant, error) {
-	vals, err := getComArrayProperty(d, "AvailableItems")
-	return helpers.CastSlice[Variant](vals), err
+	return getComArrayProperty[Variant](d, "AvailableItems")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_AVAILABLENAMES_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) AvailableNames() ([]Variant, error) {
-	vals, err := getComArrayProperty(d, "AvailableNames")
-	return helpers.CastSlice[Variant](vals), err
+	return getComArrayProperty[Variant](d, "AvailableNames")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_AVAILABLEVIEW_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) AvailableView() (String, error) {
-	val, err := getComProperty(d, "AvailableView")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](d, "AvailableView")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GROUPAUTHORIZATIONONLY_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) GroupAuthorizationOnly() (Boolean, error) {
-	val, err := getComProperty(d, "GroupAuthorizationOnly")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "GroupAuthorizationOnly")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GROUPAUTHORIZATIONONLY_PROPERTY_DIRECTORY.html */
@@ -47,8 +41,7 @@ func (d NotesDirectory) SetGroupAuthorizationOnly(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LIMITMATCHES_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) LimitMatches() (Boolean, error) {
-	val, err := getComProperty(d, "LimitMatches")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "LimitMatches")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LIMITMATCHES_PROPERTY_DIRECTORY.html */
@@ -58,14 +51,12 @@ func (d NotesDirectory) SetLimitMatches(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARTIALMATCHES_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) PartialMatches() (Boolean, error) {
-	val, err := getComProperty(d, "PartialMatches")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "PartialMatches")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SEARCHALLDIRECTORIES_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) SearchAllDirectories() (Boolean, error) {
-	val, err := getComProperty(d, "SearchAllDirectories")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "SearchAllDirectories")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SEARCHALLDIRECTORIES_PROPERTY_DIRECTORY.html */
@@ -75,14 +66,12 @@ func (d NotesDirectory) SetSearchAllDirectories(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SERVER_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) Server() (String, error) {
-	val, err := getComProperty(d, "Server")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](d, "Server")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TRUSTEDONLY_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) TrustedOnly() (Boolean, error) {
-	val, err := getComProperty(d, "TrustedOnly")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "TrustedOnly")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TRUSTEDONLY_PROPERTY_DIRECTORY.html */
@@ -92,8 +81,7 @@ func (d NotesDirectory) SetTrustedOnly(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USECONTEXTSERVER_PROPERTY_DIRECTORY.html */
 func (d NotesDirectory) UseContextServer() (Boolean, error) {
-	val, err := getComProperty(d, "UseContextServer")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](d, "UseContextServer")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USECONTEXTSERVER_PROPERTY_DIRECTORY.html */
@@ -104,14 +92,12 @@ func (d NotesDirectory) SetUseContextServer(v Boolean) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATENAVIGATOR_METHOD_DIRECTORY.html */
 func (d NotesDirectory) CreateNavigator() (NotesDirectoryNavigator, error) {
-	dispatchPtr, err := callComObjectMethod(d, "CreateNavigator")
-	return NewNotesDirectoryNavigator(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDirectoryNavigator, "CreateNavigator")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FREELOOKUPBUFFER_METHOD_DIRECTORY.html */
 func (d NotesDirectory) FreeLookupBuffer() error {
-	_, err := callComMethod(d, "FreeLookupBuffer")
-	return err
+	return callComVoidMethod(d, "FreeLookupBuffer")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMAILINFO_METHOD_DIRECTORY.html */
@@ -148,14 +134,12 @@ func (d NotesDirectory) GetMailInfo(username String, params ...notesDirectoryGet
 			paramsOrdered = append(paramsOrdered, *paramsStruct.errorOnMultipleMatches)
 		}
 	}
-	vals, err := callComArrayMethod(d, "GetMailInfo", paramsOrdered...)
-	return helpers.CastSlice[String](vals), err
+	return callComArrayMethod[String](d, "GetMailInfo", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOOKUPALLNAMES_METHOD_DIRECTORY.html */
 func (d NotesDirectory) LookupAllNames(view NotesView, items []String) (NotesDirectoryNavigator, error) {
-	dispatchPtr, err := callComObjectMethod(d, "LookupAllNames", view.com().Dispatch(), items)
-	return NewNotesDirectoryNavigator(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDirectoryNavigator, "LookupAllNames", view.com().Dispatch(), items)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOOKUPNAMES_METHOD_DIRECTORY.html */
@@ -182,6 +166,5 @@ func (d NotesDirectory) LookupNames(view NotesView, names []String, items []Stri
 	if paramsStruct.partialmatches != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.partialmatches)
 	}
-	dispatchPtr, err := callComObjectMethod(d, "LookupNames", paramsOrdered...)
-	return NewNotesDirectoryNavigator(dispatchPtr), err
+	return callComObjectMethod(d, NewNotesDirectoryNavigator, "LookupNames", paramsOrdered...)
 }

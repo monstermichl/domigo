@@ -17,10 +17,6 @@ type notesStruct interface {
 	com() com.Com
 }
 
-type primitiveType interface {
-	bool | string | int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | uintptr | float32 | float64
-}
-
 type NotesStruct struct {
 	c com.Com
 }
@@ -72,6 +68,11 @@ func callComObjectArrayMethod[T notesStruct](s notesStruct, modifyFn com.ModifyF
 func callComMethod[T primitiveType](s notesStruct, name string, params ...interface{}) (T, error) {
 	val, err := s.com().CallMethod(name, params...)
 	return helpers.CastValue[T](val), err
+}
+
+func callComVoidMethod(s notesStruct, name string, params ...interface{}) error {
+	_, err := s.com().CallMethod(name, params...)
+	return err
 }
 
 func callComObjectMethod[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...interface{}) (T, error) {

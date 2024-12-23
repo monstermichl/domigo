@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -27,19 +25,16 @@ func NewNotesRichTextTab(dispatchPtr *ole.IDispatch) NotesRichTextTab {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POSITION_PROPERTY_4695.html */
 func (r NotesRichTextTab) Position() (Long, error) {
-	val, err := getComProperty(r, "Position")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](r, "Position")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TYPE_PROPERTY_7073.html */
 func (r NotesRichTextTab) Type() (NotesRichTextTabType, error) {
-	val, err := getComProperty(r, "Type")
-	return helpers.CastValue[NotesRichTextTabType](val), err
+	return getComProperty[NotesRichTextTabType](r, "Type")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLEAR_METHOD_1029.html */
 func (r NotesRichTextTab) Clear() error {
-	_, err := callComMethod(r, "Clear")
-	return err
+	return callComVoidMethod(r, "Clear")
 }

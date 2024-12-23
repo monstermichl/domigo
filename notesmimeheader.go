@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,14 +16,12 @@ func NewNotesMIMEHeader(dispatchPtr *ole.IDispatch) NotesMIMEHeader {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HEADERNAME_PROPERTY_MIMEHEADER.html */
 func (m NotesMIMEHeader) HeaderName() (String, error) {
-	val, err := getComProperty(m, "HeaderName")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](m, "HeaderName")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_MIMEHEADER.html */
 func (m NotesMIMEHeader) Parent() (NotesMIMEEntity, error) {
-	dispatchPtr, err := getComObjectProperty(m, "Parent")
-	return NewNotesMIMEEntity(dispatchPtr), err
+	return getComObjectProperty(m, NewNotesMIMEEntity, "Parent")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -53,8 +49,7 @@ func (m NotesMIMEHeader) AddValText(valueText String, params ...notesMIMEHeaderA
 	if paramsStruct.charSet != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.charSet)
 	}
-	val, err := callComMethod(m, "AddValText", paramsOrdered...)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](m, "AddValText", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETHEADERVAL_METHOD_MIMEHEADER.html */
@@ -91,8 +86,7 @@ func (m NotesMIMEHeader) GetHeaderVal(params ...notesMIMEHeaderGetHeaderValParam
 			paramsOrdered = append(paramsOrdered, *paramsStruct.decoded)
 		}
 	}
-	val, err := callComMethod(m, "GetHeaderVal", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](m, "GetHeaderVal", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETHEADERVALANDPARAMS_METHOD_MIMEHEADER.html */
@@ -129,8 +123,7 @@ func (m NotesMIMEHeader) GetHeaderValAndParams(params ...notesMIMEHeaderGetHeade
 			paramsOrdered = append(paramsOrdered, *paramsStruct.decoded)
 		}
 	}
-	val, err := callComMethod(m, "GetHeaderValAndParams", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](m, "GetHeaderValAndParams", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARAMVAL_METHOD_MIMEHEADER.html */
@@ -157,30 +150,25 @@ func (m NotesMIMEHeader) GetParamVal(paramName String, params ...notesMIMEHeader
 	if paramsStruct.folded != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.folded)
 	}
-	val, err := callComMethod(m, "GetParamVal", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](m, "GetParamVal", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_MIMEHEADER.html */
 func (m NotesMIMEHeader) Remove() error {
-	_, err := callComMethod(m, "Remove")
-	return err
+	return callComVoidMethod(m, "Remove")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETHEADERVAL_METHOD_MIMEHEADER.html */
 func (m NotesMIMEHeader) SetHeaderVal(headerValue String) (Boolean, error) {
-	val, err := callComMethod(m, "SetHeaderVal", headerValue)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](m, "SetHeaderVal", headerValue)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETHEADERVALANDPARAMS_METHOD_MIMEHEADER.html */
 func (m NotesMIMEHeader) SetHeaderValAndParams(headerParamValue String) (Boolean, error) {
-	val, err := callComMethod(m, "SetHeaderValAndParams", headerParamValue)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](m, "SetHeaderValAndParams", headerParamValue)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETPARAMVAL_METHOD_MIMEHEADER.html */
 func (m NotesMIMEHeader) SetParamVal(parameterName String, parameterValue String) (Boolean, error) {
-	val, err := callComMethod(m, "SetParamVal", parameterName, parameterValue)
-	return helpers.CastValue[Boolean](val), err
+	return callComMethod[Boolean](m, "SetParamVal", parameterName, parameterValue)
 }

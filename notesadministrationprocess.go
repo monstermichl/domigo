@@ -2,8 +2,6 @@
 package domigo
 
 import (
-	"github.com/monstermichl/domigo/internal/helpers"
-
 	ole "github.com/go-ole/go-ole"
 )
 
@@ -18,8 +16,7 @@ func NewNotesAdministrationProcess(dispatchPtr *ole.IDispatch) NotesAdministrati
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFICATEAUTHORITYORG_PROPERTY_ADMINP.html */
 func (a NotesAdministrationProcess) CertificateAuthorityOrg() (String, error) {
-	val, err := getComProperty(a, "CertificateAuthorityOrg")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](a, "CertificateAuthorityOrg")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFICATEAUTHORITYORG_PROPERTY_ADMINP.html */
@@ -29,8 +26,7 @@ func (a NotesAdministrationProcess) SetCertificateAuthorityOrg(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFICATEEXPIRATION_PROPERTY_ADMINP.html */
 func (a NotesAdministrationProcess) CertificateExpiration() (NotesDateTime, error) {
-	dispatchPtr, err := getComObjectProperty(a, "CertificateExpiration")
-	return NewNotesDateTime(dispatchPtr), err
+	return getComObjectProperty(a, NewNotesDateTime, "CertificateExpiration")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFICATEEXPIRATION_PROPERTY_ADMINP.html */
@@ -40,8 +36,7 @@ func (a NotesAdministrationProcess) SetCertificateExpiration(v NotesDateTime) er
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFIERFILE_PROPERTY_ADMINP.html */
 func (a NotesAdministrationProcess) CertifierFile() (String, error) {
-	val, err := getComProperty(a, "CertifierFile")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](a, "CertifierFile")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFIERFILE_PROPERTY_ADMINP.html */
@@ -51,8 +46,7 @@ func (a NotesAdministrationProcess) SetCertifierFile(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFIERPASSWORD_PROPERTY_ADMINP.html */
 func (a NotesAdministrationProcess) CertifierPassword() (String, error) {
-	val, err := getComProperty(a, "CertifierPassword")
-	return helpers.CastValue[String](val), err
+	return getComProperty[String](a, "CertifierPassword")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFIERPASSWORD_PROPERTY_ADMINP.html */
@@ -62,14 +56,12 @@ func (a NotesAdministrationProcess) SetCertifierPassword(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCERTIFICATEAUTHORITYAVAILABLE_PROPERTY_ADMINP.html */
 func (a NotesAdministrationProcess) IsCertificateAuthorityAvailable() (Boolean, error) {
-	val, err := getComProperty(a, "IsCertificateAuthorityAvailable")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "IsCertificateAuthorityAvailable")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USECERTIFICATEAUTHORITY_PROPERTY_ADMINP.html */
 func (a NotesAdministrationProcess) UseCertificateAuthority() (Boolean, error) {
-	val, err := getComProperty(a, "UseCertificateAuthority")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](a, "UseCertificateAuthority")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USECERTIFICATEAUTHORITY_PROPERTY_ADMINP.html */
@@ -80,92 +72,77 @@ func (a NotesAdministrationProcess) SetUseCertificateAuthority(v Boolean) error 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDGROUPMEMBERS_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) AddGroupMembers(group String, members []String) (String, error) {
-	val, err := callComMethod(a, "AddGroupMembers", group, members)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "AddGroupMembers", group, members)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDINTERNETCERTIFICATETOUSER_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) AddInternetCertificateToUser(user String, keyringfile String, keyringpassword String, expiration NotesDateTime) (String, error) {
-	val, err := callComMethod(a, "AddInternetCertificateToUser", user, keyringfile, keyringpassword, expiration.com().Dispatch())
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "AddInternetCertificateToUser", user, keyringfile, keyringpassword, expiration.com().Dispatch())
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDSERVERTOCLUSTER_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) AddServerToCluster(server String, cluster String) (String, error) {
-	val, err := callComMethod(a, "AddServerToCluster", server, cluster)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "AddServerToCluster", server, cluster)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVEDELETEPERSONINDIRECTORY_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveDeletePersonInDirectory(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveDeletePersonInDirectory", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveDeletePersonInDirectory", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVEDELETEPERSONINDIRECTORY_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveDeleteServerInDirectory(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveDeleteServerInDirectory", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveDeleteServerInDirectory", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVEDESIGNELEMENTDELETION_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveDesignElementDeletion(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveDesignElementDeletion", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveDesignElementDeletion", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVEHOSTEDORGSTORAGEDELETION_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveHostedOrgStorageDeletion(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveHostedOrgStorageDeletion", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveHostedOrgStorageDeletion", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVEMAILFILEDELETION_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveMailFileDeletion(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveMailFileDeletion", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveMailFileDeletion", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVEMOVEDREPLICADELETION_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveMovedReplicaDeletion(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveMovedReplicaDeletion", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveMovedReplicaDeletion", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVENAMECHANGERETRACTION_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveNameChangeRetraction(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveNameChangeRetraction", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveNameChangeRetraction", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVERENAMEPERSONINDIRECTORY_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveRenamePersonInDirectory(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveRenamePersonInDirectory", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveRenamePersonInDirectory", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVERENAMEPERSONINDIRECTORY_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveRenameServerInDirectory(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveRenameServerInDirectory", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveRenameServerInDirectory", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVEREPLICADELETION_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveReplicaDeletion(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveReplicaDeletion", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveReplicaDeletion", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPROVERESOURCEDELETION_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ApproveResourceDeletion(noteID String) (String, error) {
-	val, err := callComMethod(a, "ApproveResourceDeletion", noteID)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ApproveResourceDeletion", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CHANGEHTTPPASSWORD_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) ChangeHTTPPassword(username String, oldpassword String, newpassword String) (String, error) {
-	val, err := callComMethod(a, "ChangeHTTPPassword", username, oldpassword, newpassword)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ChangeHTTPPassword", username, oldpassword, newpassword)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONFIGUREMAILAGENT_METHOD_ADMINP.html */
@@ -202,8 +179,7 @@ func (a NotesAdministrationProcess) ConfigureMailAgent(username String, agentnam
 			paramsOrdered = append(paramsOrdered, *paramsStruct.enable)
 		}
 	}
-	val, err := callComMethod(a, "ConfigureMailAgent", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "ConfigureMailAgent", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEREPLICA_METHOD_ADMINP.html */
@@ -250,14 +226,12 @@ func (a NotesAdministrationProcess) CreateReplica(sourceserver String, sourcedbf
 			}
 		}
 	}
-	val, err := callComMethod(a, "CreateReplica", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "CreateReplica", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELEGATEMAILFILE_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) Delegatemailfile(Mailfileowner String, Publicreaders []String, Publicwriters []String, Otherreaders Variant, Otherwriters []String, Othereditors []String, Otherdeleters []String, Removefromacl Variant, Mailfilename String, Mailserver String) (String, error) {
-	val, err := callComMethod(a, "Delegatemailfile", Mailfileowner, Publicreaders, Publicwriters, Otherreaders, Otherwriters, Othereditors, Otherdeleters, Mailfileowner, Mailfileowner, Removefromacl, Mailfilename, Mailserver)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "Delegatemailfile", Mailfileowner, Publicreaders, Publicwriters, Otherreaders, Otherwriters, Othereditors, Otherdeleters, Mailfileowner, Mailfileowner, Removefromacl, Mailfilename, Mailserver)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEGROUP_METHOD_ADMINP.html */
@@ -284,20 +258,17 @@ func (a NotesAdministrationProcess) DeleteGroup(groupname String, immediate Bool
 	if paramsStruct.deletewindowsgroup != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.deletewindowsgroup)
 	}
-	_, err := callComMethod(a, "DeleteGroup", paramsOrdered...)
-	return err
+	return callComVoidMethod(a, "DeleteGroup", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEREPLICAS_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) DeleteReplicas(servername String, filename String) (String, error) {
-	val, err := callComMethod(a, "DeleteReplicas", servername, filename)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "DeleteReplicas", servername, filename)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETESERVER_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) DeleteServer(servername String, immediate Boolean) (String, error) {
-	val, err := callComMethod(a, "DeleteServer", servername, immediate)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "DeleteServer", servername, immediate)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEUSER_METHOD_ADMINP.html */
@@ -334,26 +305,22 @@ func (a NotesAdministrationProcess) DeleteUser(username String, immediate Boolea
 			paramsOrdered = append(paramsOrdered, *paramsStruct.deletewindowsuser)
 		}
 	}
-	val, err := callComMethod(a, "DeleteUser", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "DeleteUser", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDGROUPINDOMAIN_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) FindGroupInDomain(group String) (String, error) {
-	val, err := callComMethod(a, "FindGroupInDomain", group)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "FindGroupInDomain", group)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDSERVERINDOMAIN_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) FindServerInDomain(server String) (String, error) {
-	val, err := callComMethod(a, "FindServerInDomain", server)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "FindServerInDomain", server)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDUSERINDOMAIN_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) FindUserInDomain(user String) (String, error) {
-	val, err := callComMethod(a, "FindUserInDomain", user)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "FindUserInDomain", user)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MOVEMAILUSER_METHOD_ADMINP.html */
@@ -400,8 +367,7 @@ func (a NotesAdministrationProcess) MoveMailUser(username String, newhomeserver 
 			}
 		}
 	}
-	val, err := callComMethod(a, "MoveMailUser", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "MoveMailUser", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MOVEREPLICA_METHOD_ADMINP.html */
@@ -448,14 +414,12 @@ func (a NotesAdministrationProcess) MoveReplica(sourceserver String, sourcedbfil
 			}
 		}
 	}
-	val, err := callComMethod(a, "MoveReplica", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "MoveReplica", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MOVEROAMINGUSER_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) MoveRoamingUser(username String, destserver String, destserverpath String) (String, error) {
-	val, err := callComMethod(a, "MoveRoamingUser", username, destserver, destserverpath)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "MoveRoamingUser", username, destserver, destserverpath)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MOVEUSERINHIERARCHYCOMPLETE_METHOD_ADMINP.html */
@@ -552,8 +516,7 @@ func (a NotesAdministrationProcess) MoveUserInHierarchyComplete(requestnoteid St
 			}
 		}
 	}
-	val, err := callComMethod(a, "MoveUserInHierarchyComplete", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "MoveUserInHierarchyComplete", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MOVEUSERINHIERARCHYREQUEST_METHOD_ADMINP.html */
@@ -580,32 +543,27 @@ func (a NotesAdministrationProcess) MoveUserInHierarchyRequest(username String, 
 	if paramsStruct.allowprimarynamechange != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.allowprimarynamechange)
 	}
-	val, err := callComMethod(a, "MoveUserInHierarchyRequest", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "MoveUserInHierarchyRequest", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RECERTIFYSERVER_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) RecertifyServer(server String) (String, error) {
-	val, err := callComMethod(a, "RecertifyServer", server)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "RecertifyServer", server)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RECERTIFYUSER_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) RecertifyUser(username String) (String, error) {
-	val, err := callComMethod(a, "RecertifyUser", username)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "RecertifyUser", username)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVESERVERFROMCLUSTER_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) RemoveServerFromCluster(server String) error {
-	_, err := callComMethod(a, "RemoveServerFromCluster", server)
-	return err
+	return callComVoidMethod(a, "RemoveServerFromCluster", server)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RENAMEGROUP_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) RenameGroup(group String, newgroup String) (String, error) {
-	val, err := callComMethod(a, "RenameGroup", group, newgroup)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "RenameGroup", group, newgroup)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RENAMENOTESUSER_METHOD_ADMINP.html */
@@ -702,8 +660,7 @@ func (a NotesAdministrationProcess) RenameNotesUser(username String, params ...n
 			}
 		}
 	}
-	val, err := callComMethod(a, "RenameNotesUser", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "RenameNotesUser", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RENAMEWEBUSER_METHOD_ADMINP.html */
@@ -770,20 +727,17 @@ func (a NotesAdministrationProcess) RenameWebUser(username String, newfullname S
 			}
 		}
 	}
-	val, err := callComMethod(a, "RenameWebUser", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "RenameWebUser", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETENABLEOUTLOOKSUPPORT_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) SetEnableOutlookSupport(Servername String) (String, error) {
-	val, err := callComMethod(a, "SetEnableOutlookSupport", Servername)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "SetEnableOutlookSupport", Servername)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETSERVERDIRECTORYASSISTANCESETTINGS_METHOD_ADMINP.html */
 func (a NotesAdministrationProcess) SetServerDirectoryAssistanceSettings(server String, dbfile String) (String, error) {
-	val, err := callComMethod(a, "SetServerDirectoryAssistanceSettings", server, dbfile)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "SetServerDirectoryAssistanceSettings", server, dbfile)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETUSERPASSWORDSETTINGS_METHOD_ADMINP.html */
@@ -840,8 +794,7 @@ func (a NotesAdministrationProcess) SetUserPasswordSettings(username String, par
 			}
 		}
 	}
-	val, err := callComMethod(a, "SetUserPasswordSettings", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "SetUserPasswordSettings", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIGNDATABASEWITHSERVERID_METHOD_ADMINP.html */
@@ -868,8 +821,7 @@ func (a NotesAdministrationProcess) SignDatabaseWithServerID(server String, dbfi
 	if paramsStruct.updateonly != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.updateonly)
 	}
-	val, err := callComMethod(a, "SignDatabaseWithServerID", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "SignDatabaseWithServerID", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPGRADEUSERTOHIERARCHICAL_METHOD_ADMINP.html */
@@ -926,6 +878,5 @@ func (a NotesAdministrationProcess) UpgradeUserToHierarchical(username String, p
 			}
 		}
 	}
-	val, err := callComMethod(a, "UpgradeUserToHierarchical", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](a, "UpgradeUserToHierarchical", paramsOrdered...)
 }

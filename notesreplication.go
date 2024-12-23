@@ -3,7 +3,6 @@ package domigo
 
 import (
 	"github.com/monstermichl/domigo/internal/com"
-	"github.com/monstermichl/domigo/internal/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )
@@ -19,8 +18,7 @@ func NewNotesReplication(dispatchPtr *ole.IDispatch) NotesReplication {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ABSTRACT_PROPERTY_2067.html */
 func (r NotesReplication) Abstract() (Boolean, error) {
-	val, err := getComProperty(r, "Abstract")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](r, "Abstract")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ABSTRACT_PROPERTY_2067.html */
@@ -30,14 +28,12 @@ func (r NotesReplication) SetAbstract(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFDATE_PROPERTY_296.html */
 func (r NotesReplication) CutoffDate() (Time, error) {
-	val, err := getComProperty(r, "CutoffDate")
-	return helpers.CastValue[Time](val), err
+	return getComProperty[Time](r, "CutoffDate")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFDELETE_PROPERTY_8613.html */
 func (r NotesReplication) CutoffDelete() (Boolean, error) {
-	val, err := getComProperty(r, "CutoffDelete")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](r, "CutoffDelete")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFDELETE_PROPERTY_8613.html */
@@ -47,8 +43,7 @@ func (r NotesReplication) SetCutoffDelete(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFINTERVAL_PROPERTY_6968.html */
 func (r NotesReplication) CutoffInterval() (Long, error) {
-	val, err := getComProperty(r, "CutoffInterval")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](r, "CutoffInterval")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CUTOFFINTERVAL_PROPERTY_6968.html */
@@ -58,8 +53,7 @@ func (r NotesReplication) SetCutoffInterval(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DISABLED_PROPERTY_7391.html */
 func (r NotesReplication) Disabled() (Boolean, error) {
-	val, err := getComProperty(r, "Disabled")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](r, "Disabled")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DISABLED_PROPERTY_7391.html */
@@ -69,8 +63,7 @@ func (r NotesReplication) SetDisabled(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DONTSENDLOCALSECURITYUPDATES_PROPERTY_REP.html */
 func (r NotesReplication) DontSendLocalSecurityUpdates() (Boolean, error) {
-	val, err := getComProperty(r, "DontSendLocalSecurityUpdates")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](r, "DontSendLocalSecurityUpdates")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DONTSENDLOCALSECURITYUPDATES_PROPERTY_REP.html */
@@ -80,8 +73,7 @@ func (r NotesReplication) SetDontSendLocalSecurityUpdates(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_IGNOREDELETES_PROPERTY_9218.html */
 func (r NotesReplication) IgnoreDeletes() (Boolean, error) {
-	val, err := getComProperty(r, "IgnoreDeletes")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](r, "IgnoreDeletes")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_IGNOREDELETES_PROPERTY_9218.html */
@@ -91,8 +83,7 @@ func (r NotesReplication) SetIgnoreDeletes(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_IGNOREDESTDELETES_PROPERTY_3069.html */
 func (r NotesReplication) IgnoreDestDeletes() (Boolean, error) {
-	val, err := getComProperty(r, "IgnoreDestDeletes")
-	return helpers.CastValue[Boolean](val), err
+	return getComProperty[Boolean](r, "IgnoreDestDeletes")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_IGNOREDESTDELETES_PROPERTY_3069.html */
@@ -102,8 +93,7 @@ func (r NotesReplication) SetIgnoreDestDeletes(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PRIORITY_PROPERTY_6071.html */
 func (r NotesReplication) Priority() (Long, error) {
-	val, err := getComProperty(r, "Priority")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](r, "Priority")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PRIORITY_PROPERTY_6071.html */
@@ -114,8 +104,7 @@ func (r NotesReplication) SetPriority(v Long) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLEARHISTORY_METHOD_8188.html */
 func (r NotesReplication) ClearHistory() error {
-	_, err := callComMethod(r, "ClearHistory")
-	return err
+	return callComVoidMethod(r, "ClearHistory")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD_REP.html */
@@ -142,8 +131,7 @@ func (r NotesReplication) GetEntry(source String, destination String, params ...
 	if paramsStruct.createflag != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.createflag)
 	}
-	dispatchPtr, err := callComObjectMethod(r, "GetEntry", paramsOrdered...)
-	return NewNotesReplicationEntry(dispatchPtr), err
+	return callComObjectMethod(r, NewNotesReplicationEntry, "GetEntry", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRIES_METHOD.html */
@@ -153,12 +141,10 @@ func (r NotesReplication) GetEntries() ([]NotesReplicationEntry, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESET_METHOD_9955.html */
 func (r NotesReplication) Reset() error {
-	_, err := callComMethod(r, "Reset")
-	return err
+	return callComVoidMethod(r, "Reset")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVE_METHOD_3588.html */
 func (r NotesReplication) Save() error {
-	_, err := callComMethod(r, "Save")
-	return err
+	return callComVoidMethod(r, "Save")
 }

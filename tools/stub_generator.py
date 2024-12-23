@@ -216,24 +216,16 @@ def method_stubs(class_name: str, methods: List[NotesMethod]) -> Tuple[List[str]
 
         if notes_type == NotesType.OBJECT:
             if is_array:
-                stubs.extend([
-                    f'    return callComObjectArrayMethod({receiver}, New{go_cast_type}, "{name}"{call_params})',
-                ])
+                call = f'callComObjectArrayMethod({receiver}, New{go_cast_type}, "{name}"{call_params})',
             else:
-                stubs.extend([
-                    f'    return callComObjectMethod({receiver}, New{go_cast_type}, "{name}"{call_params})',
-                ])
+                call = f'callComObjectMethod({receiver}, New{go_cast_type}, "{name}"{call_params})',
         elif notes_type == NotesType.VOID:
-            stubs.extend([
-                f'    _, err := callComMethod({receiver}, "{name}"{call_params})',
-                '    return err',
-            ])
+            call = f'callComVoidMethod({receiver}, "{name}"{call_params})',
         else:
-            stubs.extend([
-                f'    return callCom{"Array" if is_array else ""}Method[{go_cast_type}]({receiver}, "{name}"{call_params})',
-            ])
+            call = f'callCom{"Array" if is_array else ""}Method[{go_cast_type}]({receiver}, "{name}"{call_params})',
 
         stubs.extend([
+            f'    return {call}'
             '}',
             '',
         ])

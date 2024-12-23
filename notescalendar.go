@@ -4,7 +4,6 @@ package domigo
 import (
 	ole "github.com/go-ole/go-ole"
 	"github.com/monstermichl/domigo/internal/com"
-	"github.com/monstermichl/domigo/internal/helpers"
 )
 
 type NotesCalendar struct {
@@ -18,14 +17,12 @@ func NewNotesCalendar(dispatchPtr *ole.IDispatch) NotesCalendar {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENTRIESPROCESSED_PROPERTY_CAL.html */
 func (c NotesCalendar) EntriesProcessed() (Long, error) {
-	val, err := getComProperty(c, "EntriesProcessed")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "EntriesProcessed")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READRANGEMASK1_PROPERTY_CAL.html */
 func (c NotesCalendar) ReadRangeMask1() (Long, error) {
-	val, err := getComProperty(c, "ReadRangeMask1")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "ReadRangeMask1")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READRANGEMASK1_PROPERTY_CAL.html */
@@ -35,8 +32,7 @@ func (c NotesCalendar) SetReadRangeMask1(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READRANGEMASK2_PROPERTY_CAL.html */
 func (c NotesCalendar) ReadRangeMask2() (Long, error) {
-	val, err := getComProperty(c, "ReadRangeMask2")
-	return helpers.CastValue[Long](val), err
+	return getComProperty[Long](c, "ReadRangeMask2")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READRANGEMASK2_PROPERTY_CAL.html */
@@ -46,8 +42,7 @@ func (c NotesCalendar) SetReadRangeMask2(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READXLOTUSPROPSOUTPUTLEVEL_PROPERTY_CAL.html */
 func (c NotesCalendar) ReadXLotusPropsOutputLevel() (Integer, error) {
-	val, err := getComProperty(c, "ReadXLotusPropsOutputLevel")
-	return helpers.CastValue[Integer](val), err
+	return getComProperty[Integer](c, "ReadXLotusPropsOutputLevel")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READXLOTUSPROPSOUTPUTLEVEL_PROPERTY_CAL.html */
@@ -57,8 +52,7 @@ func (c NotesCalendar) SetReadXLotusPropsOutputLevel(v Integer) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNTILTIME_PROPERTY_CAL.html */
 func (c NotesCalendar) UntilTime() (NotesDateTime, error) {
-	dispatchPtr, err := getComObjectProperty(c, "UntilTime")
-	return NewNotesDateTime(dispatchPtr), err
+	return getComObjectProperty(c, NewNotesDateTime, "UntilTime")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -86,8 +80,7 @@ func (c NotesCalendar) CreateEntry(icalEntry String, params ...notesCalendarCrea
 	if paramsStruct.flags != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.flags)
 	}
-	dispatchPtr, err := callComObjectMethod(c, "CreateEntry", paramsOrdered...)
-	return NewNotesCalendarEntry(dispatchPtr), err
+	return callComObjectMethod(c, NewNotesCalendarEntry, "CreateEntry", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRIES_METHOD_CAL.html */
@@ -124,26 +117,22 @@ func (c NotesCalendar) GetEntries(start NotesDateTime, end NotesDateTime, params
 			paramsOrdered = append(paramsOrdered, *paramsStruct.maxReturn)
 		}
 	}
-	dispatchPtr, err := callComObjectMethod(c, "GetEntries", paramsOrdered...)
-	return NewNotesCalendarEntry(dispatchPtr), err
+	return callComObjectMethod(c, NewNotesCalendarEntry, "GetEntries", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD_CAL.html */
 func (c NotesCalendar) GetEntry(uid String) (NotesCalendarEntry, error) {
-	dispatchPtr, err := callComObjectMethod(c, "GetEntry", uid)
-	return NewNotesCalendarEntry(dispatchPtr), err
+	return callComObjectMethod(c, NewNotesCalendarEntry, "GetEntry", uid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRYBYNOTEID_METHOD_CAL.html */
 func (c NotesCalendar) GetEntryByNoteID(noteid String) (NotesCalendarEntry, error) {
-	dispatchPtr, err := callComObjectMethod(c, "GetEntryByNoteID", noteid)
-	return NewNotesCalendarEntry(dispatchPtr), err
+	return callComObjectMethod(c, NewNotesCalendarEntry, "GetEntryByNoteID", noteid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRYBYUNID_METHOD_CAL.html */
 func (c NotesCalendar) GetEntryByUNID(unid String) (NotesCalendarEntry, error) {
-	dispatchPtr, err := callComObjectMethod(c, "GetEntryByUNID", unid)
-	return NewNotesCalendarEntry(dispatchPtr), err
+	return callComObjectMethod(c, NewNotesCalendarEntry, "GetEntryByUNID", unid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEWINVITATIONS_METHOD_CAL.html */
@@ -185,14 +174,12 @@ func (c NotesCalendar) GetNewInvitations(params ...notesCalendarGetNewInvitation
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNOTICEBYUNID_METHOD_CAL.html */
 func (c NotesCalendar) GetNoticeByUNID(unid String) (NotesCalendarNotice, error) {
-	dispatchPtr, err := callComObjectMethod(c, "GetNoticeByUNID", unid)
-	return NewNotesCalendarNotice(dispatchPtr), err
+	return callComObjectMethod(c, NewNotesCalendarNotice, "GetNoticeByUNID", unid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETRECURRENCEID_METHOD_CAL.html */
 func (c NotesCalendar) GetRecurrenceID() (String, error) {
-	val, err := callComMethod(c, "GetRecurrenceID")
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](c, "GetRecurrenceID")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READRANGE_METHOD_CAL.html */
@@ -229,6 +216,5 @@ func (c NotesCalendar) ReadRange(start NotesDateTime, end NotesDateTime, params 
 			paramsOrdered = append(paramsOrdered, *paramsStruct.maxReturn)
 		}
 	}
-	val, err := callComMethod(c, "ReadRange", paramsOrdered...)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](c, "ReadRange", paramsOrdered...)
 }

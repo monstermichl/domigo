@@ -3,7 +3,6 @@ package domigo
 
 import (
 	"github.com/monstermichl/domigo/internal/com"
-	"github.com/monstermichl/domigo/internal/helpers"
 
 	ole "github.com/go-ole/go-ole"
 )
@@ -57,8 +56,7 @@ func (r NotesRichTextItem) AddNewLine(params ...notesRichTextItemAddNewLineParam
 			paramsOrdered = append(paramsOrdered, *paramsStruct.forceParagraph)
 		}
 	}
-	_, err := callComMethod(r, "AddNewLine", paramsOrdered...)
-	return err
+	return callComVoidMethod(r, "AddNewLine", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_ADDPAGEBREAK_METHOD_290_ABOUT.html */
@@ -85,8 +83,7 @@ func (r NotesRichTextItem) AddPageBreak(params ...notesRichTextItemAddPageBreakP
 	if paramsStruct.notesRichTextParagraphStyle != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.notesRichTextParagraphStyle.com().Dispatch())
 	}
-	_, err := callComMethod(r, "AddPageBreak", paramsOrdered...)
-	return err
+	return callComVoidMethod(r, "AddPageBreak", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_ADDTAB_METHOD.html */
@@ -113,8 +110,7 @@ func (r NotesRichTextItem) AddTab(params ...notesRichTextItemAddTabParam) error 
 	if paramsStruct.n != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.n)
 	}
-	_, err := callComMethod(r, "AddTab", paramsOrdered...)
-	return err
+	return callComVoidMethod(r, "AddTab", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDDOCLINK_METHOD.html */
@@ -141,26 +137,22 @@ func (r NotesRichTextItem) AppendDocLink(linkTo notesStruct, comment String, par
 	if paramsStruct.HotSpotText != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.HotSpotText)
 	}
-	_, err := callComMethod(r, "AppendDocLink", paramsOrdered...)
-	return err
+	return callComVoidMethod(r, "AppendDocLink", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDPARAGRAPHSTYLE_METHOD_1636_ABOUT.html */
 func (r NotesRichTextItem) AppendParagraphStyle(notesRichTextParagraphStyle NotesRichTextParagraphStyle) error {
-	_, err := callComMethod(r, "AppendParagraphStyle", notesRichTextParagraphStyle.com().Dispatch())
-	return err
+	return callComVoidMethod(r, "AppendParagraphStyle", notesRichTextParagraphStyle.com().Dispatch())
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDRTITEM_METHOD.html */
 func (r NotesRichTextItem) AppendRTItem(notesRichTextItem NotesRichTextItem) error {
-	_, err := callComMethod(r, "AppendRTItem", notesRichTextItem.com().Dispatch())
-	return err
+	return callComVoidMethod(r, "AppendRTItem", notesRichTextItem.com().Dispatch())
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDSTYLE_METHOD.html */
 func (r NotesRichTextItem) AppendStyle(notesRichTextStyle NotesRichTextStyle) error {
-	_, err := callComMethod(r, "AppendStyle", notesRichTextStyle.com().Dispatch())
-	return err
+	return callComVoidMethod(r, "AppendStyle", notesRichTextStyle.com().Dispatch())
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDTABLE_METHOD_RTITEM.html */
@@ -207,14 +199,12 @@ func (r NotesRichTextItem) AppendTable(rows Integer, columns Integer, params ...
 			}
 		}
 	}
-	_, err := callComMethod(r, "AppendTable", paramsOrdered...)
-	return err
+	return callComVoidMethod(r, "AppendTable", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_APPENDTEXT_METHOD.html */
 func (r NotesRichTextItem) AppendText(text String) error {
-	_, err := callComMethod(r, "AppendText", text)
-	return err
+	return callComVoidMethod(r, "AppendText", text)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_BEGININSERT_METHOD_RTITEM.html */
@@ -241,8 +231,7 @@ func (r NotesRichTextItem) BeginInsert(element notesStruct, params ...notesRichT
 	if paramsStruct.after != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.after)
 	}
-	_, err := callComMethod(r, "BeginInsert", paramsOrdered...)
-	return err
+	return callComVoidMethod(r, "BeginInsert", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_BEGINSECTION_METHOD_RTITEM.html */
@@ -289,32 +278,27 @@ func (r NotesRichTextItem) BeginSection(title String, params ...notesRichTextIte
 			}
 		}
 	}
-	_, err := callComMethod(r, "BeginSection", paramsOrdered...)
-	return err
+	return callComVoidMethod(r, "BeginSection", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_COMPACT_METHOD_RTITEM.html */
 func (r NotesRichTextItem) Compact() error {
-	_, err := callComMethod(r, "Compact")
-	return err
+	return callComVoidMethod(r, "Compact")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_CONVERTOHTML_METHOD_NOTESRICHTEXTITEM.html */
 func (r NotesRichTextItem) Converttohtml() error {
-	_, err := callComMethod(r, "Converttohtml")
-	return err
+	return callComVoidMethod(r, "Converttohtml")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_CREATENAVIGATOR_METHOD_RTITEM.html */
 func (r NotesRichTextItem) CreateNavigator() (NotesRichTextNavigator, error) {
-	dispatchPtr, err := callComObjectMethod(r, "CreateNavigator")
-	return NewNotesRichTextNavigator(dispatchPtr), err
+	return callComObjectMethod(r, NewNotesRichTextNavigator, "CreateNavigator")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_CREATERANGE_METHOD_RTITEM.html */
 func (r NotesRichTextItem) CreateRange() (NotesRichTextRange, error) {
-	dispatchPtr, err := callComObjectMethod(r, "CreateRange")
-	return NewNotesRichTextRange(dispatchPtr), err
+	return callComObjectMethod(r, NewNotesRichTextRange, "CreateRange")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_EMBEDOBJECT_METHOD.html */
@@ -341,38 +325,32 @@ func (r NotesRichTextItem) EmbedObject(embedType NotesEmbeddedObjectEmbedType, c
 	if paramsStruct.name != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
 	}
-	dispatchPtr, err := callComObjectMethod(r, "EmbedObject", paramsOrdered...)
-	return NewNotesEmbeddedObject(dispatchPtr), err
+	return callComObjectMethod(r, NewNotesEmbeddedObject, "EmbedObject", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_ENDINSERT_METHOD_RTITEM.html */
 func (r NotesRichTextItem) EndInsert() error {
-	_, err := callComMethod(r, "EndInsert")
-	return err
+	return callComVoidMethod(r, "EndInsert")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_ENDSECTION_METHOD_RTITEM.html */
 func (r NotesRichTextItem) EndSection() error {
-	_, err := callComMethod(r, "EndSection")
-	return err
+	return callComVoidMethod(r, "EndSection")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_GETEMBEDDEDOBJECT_METHOD.html */
 func (r NotesRichTextItem) GetEmbeddedObject(name String) (NotesEmbeddedObject, error) {
-	dispatchPtr, err := callComObjectMethod(r, "GetEmbeddedObject", name)
-	return NewNotesEmbeddedObject(dispatchPtr), err
+	return callComObjectMethod(r, NewNotesEmbeddedObject, "GetEmbeddedObject", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_GETFORMATTEDTEXT_METHOD.html */
 func (r NotesRichTextItem) GetFormattedText(tabstrip Boolean, lineLength Integer) (String, error) {
-	val, err := callComMethod(r, "GetFormattedText", tabstrip, lineLength)
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](r, "GetFormattedText", tabstrip, lineLength)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_GETHTMLREFERENCES_METHOD_NOTESRICHTEXTITEM.html */
 func (r NotesRichTextItem) GetHTMLReferences() (Variant, error) {
-	val, err := callComMethod(r, "GetHTMLReferences")
-	return helpers.CastValue[Variant](val), err
+	return callComMethod[Variant](r, "GetHTMLReferences")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_GETNOTESFONT_METHOD_RTITEM.html */
@@ -399,18 +377,15 @@ func (r NotesRichTextItem) GetNotesFont(faceName String, params ...notesRichText
 	if paramsStruct.addOnFail != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.addOnFail)
 	}
-	val, err := callComMethod(r, "GetNotesFont", paramsOrdered...)
-	return helpers.CastValue[Long](val), err
+	return callComMethod[Long](r, "GetNotesFont", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_GETUNFORMATTEDTEXT_METHOD.html */
 func (r NotesRichTextItem) GetUnformattedText() (String, error) {
-	val, err := callComMethod(r, "GetUnformattedText")
-	return helpers.CastValue[String](val), err
+	return callComMethod[String](r, "GetUnformattedText")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_UPDATE_METHOD_RTITEM.html */
 func (r NotesRichTextItem) Update() error {
-	_, err := callComMethod(r, "Update")
-	return err
+	return callComVoidMethod(r, "Update")
 }
