@@ -50,13 +50,22 @@ func CreateObject(id string) (Com, error) {
 	return New(dispatchPtr), err
 }
 
-/* TODO: Find out if there's a better way... */
-func GetObjectArrayProperty[T any](c Com, modifyFn ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
-	return objectArrayActionInternal(c.GetObjectArrayProperty, modifyFn, name, params...)
+func GetObjectProperty[T any](c Com, createFn ModifyFunc[T], name string, params ...interface{}) (T, error) {
+	dispatchPtr, err := c.objectActionInternal(c.getPropertyInternal, name, params...)
+	return createFn(dispatchPtr), err
 }
 
-func CallObjectArrayMethod[T any](c Com, modifyFn ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
-	return objectArrayActionInternal(c.CallObjectArrayMethod, modifyFn, name, params...)
+func CallObjectMethod[T any](c Com, createFn ModifyFunc[T], name string, params ...interface{}) (T, error) {
+	dispatchPtr, err := c.objectActionInternal(c.callMethodInternal, name, params...)
+	return createFn(dispatchPtr), err
+}
+
+func GetObjectArrayProperty[T any](c Com, createFn ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
+	return objectArrayActionInternal(c.GetObjectArrayProperty, createFn, name, params...)
+}
+
+func CallObjectArrayMethod[T any](c Com, createFn ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
+	return objectArrayActionInternal(c.CallObjectArrayMethod, createFn, name, params...)
 }
 
 func (c Com) Dispatch() *ole.IDispatch {
