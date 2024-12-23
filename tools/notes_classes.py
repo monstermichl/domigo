@@ -371,7 +371,7 @@ def get_section(soup: BeautifulSoup, title_pattern: str, base_url='') -> Section
 
 
 def get_name_and_description(soup: BeautifulSoup) -> Tuple[str, str]:
-    name = re.match('\w+', soup.h1.text.strip()).group(0).strip()
+    name = re.match(r'\w+', soup.h1.text.strip()).group(0).strip()
     description = evaluate_tag_text(soup.find('p', {'class': 'topic/shortdesc'})).strip()
 
     return name, description
