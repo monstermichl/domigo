@@ -82,15 +82,15 @@ func (d NotesDirectoryNavigator) FindNthName(n Integer) (Long, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTITEMVALUE_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) GetFirstItemValue() (any, error) {
-	return callComMethod(d, "GetFirstItemValue")
+	return callComAnyMethod(d, "GetFirstItemValue")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTITEMVALUE_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) GetNextItemValue() (any, error) {
-	return callComMethod(d, "GetNextItemValue")
+	return callComAnyMethod(d, "GetNextItemValue")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHITEMVALUE_METHOD_DIRECTORYNAVIGATOR.html */
 func (d NotesDirectoryNavigator) GetNthItemValue(n Integer) (any, error) {
-	return callComMethod(d, "GetNthItemValue", n)
+	return callComAnyMethod(d, "GetNthItemValue", n)
 }

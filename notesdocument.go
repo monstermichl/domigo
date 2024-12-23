@@ -3,7 +3,6 @@ package domigo
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/monstermichl/domigo/internal/com"
 
@@ -27,12 +26,12 @@ func (d NotesDocument) Authors() ([]String, error) {
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNVALUES_PROPERTY.html */
 /* TODO: Wrap values into struct. */
 func (d NotesDocument) ColumnValues() ([]any, error) {
-	return getComArrayProperty(d, "ColumnValues")
+	return getComAnyArrayProperty(d, "ColumnValues")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATED_PROPERTY_DOC.html */
-func (d NotesDocument) Created() (time.Time, error) {
-	return getComProperty(d, helpers, "Created")
+func (d NotesDocument) Created() (Time, error) {
+	return getComProperty[Time](d, "Created")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EMBEDDEDOBJECTS_PROPERTY_DOC.html */
@@ -426,7 +425,7 @@ func (d NotesDocument) GetFirstItem(name String) (NotesItem, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUE_METHOD.html */
 func (d NotesDocument) GetItemValue(itemName String) (any, error) {
-	return callComMethod(d, "GetItemValue", itemName)
+	return callComAnyMethod(d, "GetItemValue", itemName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUECUSTOMDATABYTES_METHOD_DOC.html */

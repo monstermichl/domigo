@@ -175,7 +175,7 @@ func (i NotesItem) ValueLength() (Long, error) {
 /* TODO: Handle different types. */
 /* TODO: Wrap values into struct. */
 func (i NotesItem) Values() (any, error) {
-	return getComArrayProperty(i, "Values")
+	return getComAnyArrayProperty(i, "Values")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VALUES_PROPERTY.html */

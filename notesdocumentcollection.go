@@ -137,8 +137,7 @@ func (d NotesDocumentCollection) Intersect(inputNotes any) error {
 	if err != nil {
 		return err
 	}
-	_, err = callComMethod(d, "Intersect", inputNotes)
-	return err
+	return callComVoidMethod(d, "Intersect", inputNotes)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MARKALLREAD_DOCCOLLECTION.html */
@@ -203,8 +202,7 @@ func (d NotesDocumentCollection) Merge(inputNotes any) error {
 	if err != nil {
 		return err
 	}
-	_, err = callComMethod(d, "Merge", inputNotes)
-	return err
+	return callComVoidMethod(d, "Merge", inputNotes)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PUTALLINFOLDER_METHOD.html */
@@ -262,8 +260,7 @@ func (d NotesDocumentCollection) Subtract(inputNotes any) error {
 	if err != nil {
 		return err
 	}
-	_, err = callComMethod(d, "Subtract", inputNotes)
-	return err
+	return callComVoidMethod(d, "Subtract", inputNotes)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEALL_METHOD.html */

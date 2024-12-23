@@ -110,7 +110,7 @@ func (e NotesEmbeddedObject) Verbs() ([]String, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ACTIVATE_METHOD.html */
 func (e NotesEmbeddedObject) Activate(show Boolean) (*ole.IDispatch, error) {
-	return callComObjectMethod(e, "Activate", show)
+	return e.com().CallObjectMethod("Activate", show)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DOVERB_METHOD.html */

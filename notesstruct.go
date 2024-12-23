@@ -70,6 +70,10 @@ func callComMethod[T primitiveType](s notesStruct, name string, params ...interf
 	return helpers.CastValue[T](val), err
 }
 
+func callComAnyMethod(s notesStruct, name string, params ...interface{}) (any, error) {
+	return s.com().CallMethod(name, params...)
+}
+
 func callComVoidMethod(s notesStruct, name string, params ...interface{}) error {
 	_, err := s.com().CallMethod(name, params...)
 	return err
@@ -84,9 +88,17 @@ func callComArrayMethod[T primitiveType](s notesStruct, name string, params ...i
 	return helpers.CastSlice[T](vals), err
 }
 
+func callComAnyArrayMethod(s notesStruct, name string, params ...interface{}) (any, error) {
+	return s.com().CallArrayMethod(name, params...)
+}
+
 func getComProperty[T primitiveType](s notesStruct, name string, params ...interface{}) (T, error) {
 	val, err := s.com().GetProperty(name, params...)
 	return helpers.CastValue[T](val), err
+}
+
+func getComAnyProperty(s notesStruct, name string, params ...interface{}) (any, error) {
+	return s.com().GetProperty(name, params...)
 }
 
 func getComObjectProperty[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...interface{}) (T, error) {
@@ -97,6 +109,10 @@ func getComObjectProperty[T notesStruct](s notesStruct, createFn com.ModifyFunc[
 func getComArrayProperty[T primitiveType](s notesStruct, name string, params ...interface{}) ([]T, error) {
 	vals, err := s.com().GetArrayProperty(name, params...)
 	return helpers.CastSlice[T](vals), err
+}
+
+func getComAnyArrayProperty(s notesStruct, name string, params ...interface{}) ([]any, error) {
+	return s.com().GetArrayProperty(name, params...)
 }
 
 func putComProperty(s notesStruct, name string, params ...interface{}) error {

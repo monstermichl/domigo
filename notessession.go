@@ -42,7 +42,7 @@ func initialize(params ...interface{}) (NotesSession, error) {
 		return session, errors.New("session could not be initialized")
 	}
 	session = NewNotesSession(com.Dispatch())
-	_, err = callComObjectMethod(session, "Initialize", params...)
+	err = callComVoidMethod(session, "Initialize", params...)
 
 	if err != nil {
 		return session, errors.New("session could not be initialized")
@@ -700,7 +700,7 @@ func (s NotesSession) GetEnvironmentValue(name String, params ...notesSessionGet
 	if paramsStruct.system != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.system)
 	}
-	return callComMethod(s, "GetEnvironmentValue", paramsOrdered...)
+	return callComAnyMethod(s, "GetEnvironmentValue", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPROPERTYBROKER_METHOD.html */

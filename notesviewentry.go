@@ -26,7 +26,7 @@ func (v NotesViewEntry) ColumnIndentLevel() (Long, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNVALUES_PROPERTY_5887.html */
 func (v NotesViewEntry) ColumnValues() ([]any, error) {
-	return getComArrayProperty(v, "ColumnValues")
+	return getComAnyArrayProperty(v, "ColumnValues")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DESCENDANTCOUNT_PROPERTY_2777.html */

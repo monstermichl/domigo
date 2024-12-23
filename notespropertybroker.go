@@ -34,7 +34,7 @@ func (p NotesPropertyBroker) GetProperty(name String) (NotesProperty, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_GETPROPERTYVALUE_METHOD.html */
 func (p NotesPropertyBroker) GetPropertyValue(name String) (any, error) {
-	return callComMethod(p, "GetPropertyValue", name)
+	return callComAnyMethod(p, "GetPropertyValue", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_HASPROPERTY_METHOD.html */

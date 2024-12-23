@@ -5,7 +5,7 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-type NotesRichTextTabType Long
+type NotesRichTextTabType = Long
 
 const (
 	NOTESRICHTEXTTAB_TAB_CENTER  NotesRichTextTabType = 3

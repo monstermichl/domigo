@@ -178,8 +178,7 @@ func (d NotesDominoQuery) SetNamedVariable(variableName String, value any) error
 	if err != nil {
 
 	}
-	_, err = callComMethod(d, "SetNamedVariable", variableName, value)
-	return err
+	return callComVoidMethod(d, "SetNamedVariable", variableName, value)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEINDEX_METHOD_NDQ.html#reference_mvq_brw_ljb */
