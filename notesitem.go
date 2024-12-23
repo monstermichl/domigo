@@ -8,7 +8,7 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-type NotesItemDataType Long
+type NotesItemDataType = Long
 
 const (
 	NOTESITEM_TYPE_ACTIONCD       NotesItemDataType = 16
@@ -189,13 +189,15 @@ func (i NotesItem) ValueLength() (Long, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VALUES_PROPERTY.html */
 /* TODO: Handle different types. */
+/* TODO: Wrap values into struct. */
 func (i NotesItem) Values() (any, error) {
 	return i.com().GetArrayProperty("Values")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VALUES_PROPERTY.html */
+/* TODO: Handle different types. */
+	/* TODO: Wrap values into struct. */
 func (i NotesItem) SetValues(v any) error {
-	/* TODO: Handle different types. */
 	return i.com().PutProperty("Values", v)
 }
 
