@@ -30,9 +30,9 @@ func (d NotesDocument) ColumnValues() ([]Variant, error) {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATED_PROPERTY_DOC.html */
-func (d NotesDocument) Created() (Variant, error) {
+func (d NotesDocument) Created() (time.Time, error) {
 	val, err := d.com().GetProperty("Created")
-	return helpers.CastValue[Variant](val), err
+	return helpers.CastValue[time.Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EMBEDDEDOBJECTS_PROPERTY_DOC.html */
