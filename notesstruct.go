@@ -137,6 +137,8 @@ func convertParams(params ...any) []any {
 	for i, param := range params {
 		if s, err := getNotesStruct(param); err == nil {
 			params[i] = s.com().Dispatch()
+		} else if reflect.TypeOf(param).Kind() == reflect.Slice {
+			params[i] = convertParams(param.([]any)...)
 		}
 	}
 	return params
