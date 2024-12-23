@@ -25,7 +25,95 @@ func NewNotesStruct(dispatchPtr *ole.IDispatch) NotesStruct {
 	return NotesStruct{com.New(dispatchPtr)}
 }
 
-func GetNotesStruct(val any) (NotesStruct, error) {
+func (s NotesStruct) Release() {
+	s.c.Release()
+}
+
+func (s NotesStruct) IsReady() bool {
+	return s.com().IsReady()
+}
+
+func (s NotesStruct) com() com.Com {
+	return s.c
+}
+
+func getComObjectArrayProperty[T notesStruct](s notesStruct, modifyFn com.ModifyFunc[T], name string, params ...any) ([]T, error) {
+	params = convertParams(params)
+	return com.GetObjectArrayProperty(s.com(), modifyFn, name, params...)
+}
+
+func callComObjectArrayMethod[T notesStruct](s notesStruct, modifyFn com.ModifyFunc[T], name string, params ...any) ([]T, error) {
+	params = convertParams(params)
+	return com.CallObjectArrayMethod(s.com(), modifyFn, name, params...)
+}
+
+func callComMethod[T primitiveType](s notesStruct, name string, params ...any) (T, error) {
+	params = convertParams(params)
+	val, err := s.com().CallMethod(name, params...)
+	return helpers.CastValue[T](val), err
+}
+
+func callComAnyMethod(s notesStruct, name string, params ...any) (any, error) {
+	params = convertParams(params)
+	return s.com().CallMethod(name, params...)
+}
+
+func callComVoidMethod(s notesStruct, name string, params ...any) error {
+	params = convertParams(params)
+	_, err := s.com().CallMethod(name, params...)
+	return err
+}
+
+func callComObjectMethod[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...any) (T, error) {
+	params = convertParams(params)
+	return com.CallObjectMethod[T](s.com(), createFn, name, params...)
+}
+
+func callComArrayMethod[T primitiveType](s notesStruct, name string, params ...any) ([]T, error) {
+	params = convertParams(params)
+	vals, err := s.com().CallArrayMethod(name, params...)
+	return helpers.CastSlice[T](vals), err
+}
+
+func callComAnyArrayMethod(s notesStruct, name string, params ...any) (any, error) {
+	params = convertParams(params)
+	return s.com().CallArrayMethod(name, params...)
+}
+
+func getComProperty[T primitiveType](s notesStruct, name string, params ...any) (T, error) {
+	params = convertParams(params)
+	val, err := s.com().GetProperty(name, params...)
+	return helpers.CastValue[T](val), err
+}
+
+func getComAnyProperty(s notesStruct, name string, params ...any) (any, error) {
+	params = convertParams(params)
+	return s.com().GetProperty(name, params...)
+}
+
+func getComObjectProperty[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...any) (T, error) {
+	params = convertParams(params)
+	dispatchPtr, err := s.com().GetObjectProperty(name, params...)
+	return createFn(dispatchPtr), err
+}
+
+func getComArrayProperty[T primitiveType](s notesStruct, name string, params ...any) ([]T, error) {
+	params = convertParams(params)
+	vals, err := s.com().GetArrayProperty(name, params...)
+	return helpers.CastSlice[T](vals), err
+}
+
+func getComAnyArrayProperty(s notesStruct, name string, params ...any) ([]any, error) {
+	params = convertParams(params)
+	return s.com().GetArrayProperty(name, params...)
+}
+
+func putComProperty(s notesStruct, name string, params ...any) error {
+	params = convertParams(params)
+	return s.com().PutProperty(name, params...)
+}
+
+func getNotesStruct(val any) (NotesStruct, error) {
 	var err error
 	var s NotesStruct
 
@@ -45,78 +133,13 @@ func GetNotesStruct(val any) (NotesStruct, error) {
 	return s, err
 }
 
-func (s NotesStruct) Release() {
-	s.c.Release()
-}
-
-func (s NotesStruct) IsReady() bool {
-	return s.com().IsReady()
-}
-
-func (s NotesStruct) com() com.Com {
-	return s.c
-}
-
-func getComObjectArrayProperty[T notesStruct](s notesStruct, modifyFn com.ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
-	return com.GetObjectArrayProperty(s.com(), modifyFn, name, params...)
-}
-
-func callComObjectArrayMethod[T notesStruct](s notesStruct, modifyFn com.ModifyFunc[T], name string, params ...interface{}) ([]T, error) {
-	return com.CallObjectArrayMethod(s.com(), modifyFn, name, params...)
-}
-
-func callComMethod[T primitiveType](s notesStruct, name string, params ...interface{}) (T, error) {
-	val, err := s.com().CallMethod(name, params...)
-	return helpers.CastValue[T](val), err
-}
-
-func callComAnyMethod(s notesStruct, name string, params ...interface{}) (any, error) {
-	return s.com().CallMethod(name, params...)
-}
-
-func callComVoidMethod(s notesStruct, name string, params ...interface{}) error {
-	_, err := s.com().CallMethod(name, params...)
-	return err
-}
-
-func callComObjectMethod[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...interface{}) (T, error) {
-	return com.CallObjectMethod[T](s.com(), createFn, name, params...)
-}
-
-func callComArrayMethod[T primitiveType](s notesStruct, name string, params ...interface{}) ([]T, error) {
-	vals, err := s.com().CallArrayMethod(name, params...)
-	return helpers.CastSlice[T](vals), err
-}
-
-func callComAnyArrayMethod(s notesStruct, name string, params ...interface{}) (any, error) {
-	return s.com().CallArrayMethod(name, params...)
-}
-
-func getComProperty[T primitiveType](s notesStruct, name string, params ...interface{}) (T, error) {
-	val, err := s.com().GetProperty(name, params...)
-	return helpers.CastValue[T](val), err
-}
-
-func getComAnyProperty(s notesStruct, name string, params ...interface{}) (any, error) {
-	return s.com().GetProperty(name, params...)
-}
-
-func getComObjectProperty[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...interface{}) (T, error) {
-	dispatchPtr, err := s.com().GetObjectProperty(name, params...)
-	return createFn(dispatchPtr), err
-}
-
-func getComArrayProperty[T primitiveType](s notesStruct, name string, params ...interface{}) ([]T, error) {
-	vals, err := s.com().GetArrayProperty(name, params...)
-	return helpers.CastSlice[T](vals), err
-}
-
-func getComAnyArrayProperty(s notesStruct, name string, params ...interface{}) ([]any, error) {
-	return s.com().GetArrayProperty(name, params...)
-}
-
-func putComProperty(s notesStruct, name string, params ...interface{}) error {
-	return s.com().PutProperty(name, params...)
+func convertParams(params ...any) []any {
+	for i, param := range params {
+		if s, err := getNotesStruct(param); err == nil {
+			params[i] = s.com().Dispatch()
+		}
+	}
+	return params
 }
 
 /* https://dusted.codes/using-go-generics-to-pass-struct-slices-for-interface-slices */

@@ -690,12 +690,6 @@ func (d NotesDocument) RenderToRTItem(notesRichTextItem NotesRichTextItem) (Bool
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLACEITEMVALUE_METHOD.html */
 func (d NotesDocument) ReplaceItemValue(itemName String, value any) (NotesItem, error) {
-	s, err := GetNotesStruct(value)
-
-	if err == nil {
-		fmt.Println("casted", s)
-		value = s.com().Dispatch()
-	}
 	return callComObjectMethod(d, NewNotesItem, "ReplaceItemValue", itemName, value)
 }
 
