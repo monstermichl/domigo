@@ -71,6 +71,10 @@ func (c Com) Release() {
 	}
 }
 
+func (c Com) IsReady() bool {
+	return c.checkPreconditions() == nil
+}
+
 func (c Com) CallMethod(name string, params ...interface{}) (interface{}, error) {
 	return c.valueActionInternal(c.callMethodInternal, name, params...)
 }

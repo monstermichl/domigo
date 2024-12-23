@@ -8,6 +8,7 @@ import (
 
 type notesStruct interface {
 	Release()
+	IsReady() bool
 	com() com.Com
 }
 
@@ -21,6 +22,10 @@ func NewNotesStruct(dispatchPtr *ole.IDispatch) NotesStruct {
 
 func (s NotesStruct) Release() {
 	s.c.Release()
+}
+
+func (s NotesStruct) IsReady() bool {
+	return s.com().IsReady()
 }
 
 func (s NotesStruct) com() com.Com {
