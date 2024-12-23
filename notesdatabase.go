@@ -21,13 +21,13 @@ func NewNotesDatabase(dispatchPtr *ole.IDispatch) NotesDatabase {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ACL_PROPERTY.html */
 func (d NotesDatabase) ACL() (NotesACL, error) {
-	dispatchPtr, err := d.com().GetObjectProperty("ACL")
+	dispatchPtr, err := getComObjectProperty(d, "ACL")
 	return NewNotesACL(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ACLACTIVITYLOG_PROPERTY_DB.html */
 func (d NotesDatabase) ACLActivityLog() ([]String, error) {
-	vals, err := d.com().GetArrayProperty("ACLActivityLog")
+	vals, err := getComArrayProperty(d, "ACLActivityLog")
 	return helpers.CastSlice[String](vals), err
 }
 
@@ -38,89 +38,89 @@ func (d NotesDatabase) Agents() ([]NotesAgent, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALLDOCUMENTS_PROPERTY.html */
 func (d NotesDatabase) AllDocuments() (NotesDocumentCollection, error) {
-	dispatchPtr, err := d.com().GetObjectProperty("AllDocuments")
+	dispatchPtr, err := getComObjectProperty(d, "AllDocuments")
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CATEGORIES_PROPERTY.html */
 func (d NotesDatabase) Categories() (String, error) {
-	val, err := d.com().GetProperty("Categories")
+	val, err := getComProperty(d, "Categories")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CATEGORIES_PROPERTY.html */
 func (d NotesDatabase) SetCategories(v String) error {
-	return d.com().PutProperty("Categories", v)
+	return putComProperty(d, "Categories", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATED_PROPERTY_DB.html */
 func (d NotesDatabase) Created() (Time, error) {
-	val, err := d.com().GetProperty("Created")
+	val, err := getComProperty(d, "Created")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTACCESSLEVEL_PROPERTY.html */
 func (d NotesDatabase) CurrentAccessLevel() (Long, error) {
-	val, err := d.com().GetProperty("CurrentAccessLevel")
+	val, err := getComProperty(d, "CurrentAccessLevel")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELAYUPDATES_PROPERTY.html */
 func (d NotesDatabase) DelayUpdates() (Boolean, error) {
-	val, err := d.com().GetProperty("DelayUpdates")
+	val, err := getComProperty(d, "DelayUpdates")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELAYUPDATES_PROPERTY.html */
 func (d NotesDatabase) SetDelayUpdates(v Boolean) error {
-	return d.com().PutProperty("DelayUpdates", v)
+	return putComProperty(d, "DelayUpdates", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DESIGNTEMPLATENAME_PROPERTY.html */
 func (d NotesDatabase) DesignTemplateName() (String, error) {
-	val, err := d.com().GetProperty("DesignTemplateName")
+	val, err := getComProperty(d, "DesignTemplateName")
 	return helpers.CastValue[String](val), err
 }
 
 /* TODO: Access type for EncryptionStrength could not be evaluated, check yourself if getter/setter is needed. */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPTIONSTRENGTH_PROPERTY_DB.html */
 func (d NotesDatabase) EncryptionStrength() (Integer, error) {
-	val, err := d.com().GetProperty("EncryptionStrength")
+	val, err := getComProperty(d, "EncryptionStrength")
 	return helpers.CastValue[Integer](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPTIONSTRENGTH_PROPERTY_DB.html */
 func (d NotesDatabase) SetEncryptionStrength(v Integer) error {
-	return d.com().PutProperty("EncryptionStrength", v)
+	return putComProperty(d, "EncryptionStrength", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FILEFORMAT_PROPERTY_DB.html */
 func (d NotesDatabase) FileFormat() (Long, error) {
-	val, err := d.com().GetProperty("FileFormat")
+	val, err := getComProperty(d, "FileFormat")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FILENAME_PROPERTY.html */
 func (d NotesDatabase) FileName() (String, error) {
-	val, err := d.com().GetProperty("FileName")
+	val, err := getComProperty(d, "FileName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FILEPATH_PROPERTY.html */
 func (d NotesDatabase) FilePath() (String, error) {
-	val, err := d.com().GetProperty("FilePath")
+	val, err := getComProperty(d, "FilePath")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FOLDERREFERENCESENABLED_PROPERTY_4434_ABOUT.html */
 func (d NotesDatabase) FolderReferencesEnabled() (Boolean, error) {
-	val, err := d.com().GetProperty("FolderReferencesEnabled")
+	val, err := getComProperty(d, "FolderReferencesEnabled")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FOLDERREFERENCESENABLED_PROPERTY_4434_ABOUT.html */
 func (d NotesDatabase) SetFolderReferencesEnabled(v Boolean) error {
-	return d.com().PutProperty("FolderReferencesEnabled", v)
+	return putComProperty(d, "FolderReferencesEnabled", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMS_PROPERTY.html */
@@ -130,312 +130,312 @@ func (d NotesDatabase) Forms() ([]NotesForm, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTINDEXFREQUENCY_PROPERTY_DB.html */
 func (d NotesDatabase) FTIndexFrequency() (Long, error) {
-	val, err := d.com().GetProperty("FTIndexFrequency")
+	val, err := getComProperty(d, "FTIndexFrequency")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTINDEXFREQUENCY_PROPERTY_DB.html */
 func (d NotesDatabase) SetFTIndexFrequency(v Long) error {
-	return d.com().PutProperty("FTIndexFrequency", v)
+	return putComProperty(d, "FTIndexFrequency", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_DATABASE_COM.html */
 func (d NotesDatabase) HttpURL() (String, error) {
-	val, err := d.com().GetProperty("HttpURL")
+	val, err := getComProperty(d, "HttpURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCLUSTERREPLICATION_PROPERTY_DB.html */
 func (d NotesDatabase) IsClusterReplication() (Boolean, error) {
-	val, err := d.com().GetProperty("IsClusterReplication")
+	val, err := getComProperty(d, "IsClusterReplication")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCLUSTERREPLICATION_PROPERTY_DB.html */
 func (d NotesDatabase) SetIsClusterReplication(v Boolean) error {
-	return d.com().PutProperty("IsClusterReplication", v)
+	return putComProperty(d, "IsClusterReplication", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCONFIGURATIONDIRECTORY_PROPERTY_DB.html */
 func (d NotesDatabase) IsConfigurationDirectory() (Boolean, error) {
-	val, err := d.com().GetProperty("IsConfigurationDirectory")
+	val, err := getComProperty(d, "IsConfigurationDirectory")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCURRENTACCESSPUBLICREADER_PROPERTY_DB.html */
 func (d NotesDatabase) IsCurrentAccessPublicReader() (Boolean, error) {
-	val, err := d.com().GetProperty("IsCurrentAccessPublicReader")
+	val, err := getComProperty(d, "IsCurrentAccessPublicReader")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCURRENTACCESSPUBLICWRITER_PROPERTY_DB.html */
 func (d NotesDatabase) IsCurrentAccessPublicWriter() (Boolean, error) {
-	val, err := d.com().GetProperty("IsCurrentAccessPublicWriter")
+	val, err := getComProperty(d, "IsCurrentAccessPublicWriter")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDESIGNLOCKINGENABLED_PROPERTY_DB.html */
 func (d NotesDatabase) IsDesignLockingEnabled() (Boolean, error) {
-	val, err := d.com().GetProperty("IsDesignLockingEnabled")
+	val, err := getComProperty(d, "IsDesignLockingEnabled")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDESIGNLOCKINGENABLED_PROPERTY_DB.html */
 func (d NotesDatabase) SetIsDesignLockingEnabled(v Boolean) error {
-	return d.com().PutProperty("IsDesignLockingEnabled", v)
+	return putComProperty(d, "IsDesignLockingEnabled", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDIRECTORYCATALOG_DB.html */
 func (d NotesDatabase) IsDirectoryCatalog() (Boolean, error) {
-	val, err := d.com().GetProperty("IsDirectoryCatalog")
+	val, err := getComProperty(d, "IsDirectoryCatalog")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDOCUMENTLOCKINGENABLED_PROPERTY_DB.html */
 func (d NotesDatabase) IsDocumentLockingEnabled() (Boolean, error) {
-	val, err := d.com().GetProperty("IsDocumentLockingEnabled")
+	val, err := getComProperty(d, "IsDocumentLockingEnabled")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDOCUMENTLOCKINGENABLED_PROPERTY_DB.html */
 func (d NotesDatabase) SetIsDocumentLockingEnabled(v Boolean) error {
-	return d.com().PutProperty("IsDocumentLockingEnabled", v)
+	return putComProperty(d, "IsDocumentLockingEnabled", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISFTINDEXED_PROPERTY.html */
 func (d NotesDatabase) IsFTIndexed() (Boolean, error) {
-	val, err := d.com().GetProperty("IsFTIndexed")
+	val, err := getComProperty(d, "IsFTIndexed")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISINMULTIDBINDEXING_PROPERTY_DB.html */
 func (d NotesDatabase) IsInMultiDbIndexing() (Boolean, error) {
-	val, err := d.com().GetProperty("IsInMultiDbIndexing")
+	val, err := getComProperty(d, "IsInMultiDbIndexing")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISINMULTIDBINDEXING_PROPERTY_DB.html */
 func (d NotesDatabase) SetIsInMultiDbIndexing(v Boolean) error {
-	return d.com().PutProperty("IsInMultiDbIndexing", v)
+	return putComProperty(d, "IsInMultiDbIndexing", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISINSERVICE_PROPERTY_DB.html */
 func (d NotesDatabase) IsInService() (Boolean, error) {
-	val, err := d.com().GetProperty("IsInService")
+	val, err := getComProperty(d, "IsInService")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISINSERVICE_PROPERTY_DB.html */
 func (d NotesDatabase) SetIsInService(v Boolean) error {
-	return d.com().PutProperty("IsInService", v)
+	return putComProperty(d, "IsInService", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISLINK_PROPERTY_DB.html */
 func (d NotesDatabase) IsLink() (Boolean, error) {
-	val, err := d.com().GetProperty("IsLink")
+	val, err := getComProperty(d, "IsLink")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISLOCALLYENCRYPTED_PROPERTY_DB.html */
 func (d NotesDatabase) IsLocallyEncrypted() (Boolean, error) {
-	val, err := d.com().GetProperty("IsLocallyEncrypted")
+	val, err := getComProperty(d, "IsLocallyEncrypted")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISMULTIDBSEARCH_PROPERTY.html */
 func (d NotesDatabase) IsMultiDbSearch() (Boolean, error) {
-	val, err := d.com().GetProperty("IsMultiDbSearch")
+	val, err := getComProperty(d, "IsMultiDbSearch")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISOPEN_PROPERTY.html */
 func (d NotesDatabase) IsOpen() (Boolean, error) {
-	val, err := d.com().GetProperty("IsOpen")
+	val, err := getComProperty(d, "IsOpen")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPENDINGDELETE_PROPERTY_DB.html */
 func (d NotesDatabase) IsPendingDelete() (Boolean, error) {
-	val, err := d.com().GetProperty("IsPendingDelete")
+	val, err := getComProperty(d, "IsPendingDelete")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPRIVATEADDRESSBOOK_PROPERTY.html */
 func (d NotesDatabase) IsPrivateAddressBook() (Boolean, error) {
-	val, err := d.com().GetProperty("IsPrivateAddressBook")
+	val, err := getComProperty(d, "IsPrivateAddressBook")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPUBLICADDRESSBOOK_PROPERTY.html */
 func (d NotesDatabase) IsPublicAddressBook() (Boolean, error) {
-	val, err := d.com().GetProperty("IsPublicAddressBook")
+	val, err := getComProperty(d, "IsPublicAddressBook")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTFIXUP_PROPERTY_DB.html */
 func (d NotesDatabase) LastFixup() (NotesDateTime, error) {
-	dispatchPtr, err := d.com().GetObjectProperty("LastFixup")
+	dispatchPtr, err := getComObjectProperty(d, "LastFixup")
 	return NewNotesDateTime(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTFTINDEXED_PROPERTY.html */
 func (d NotesDatabase) LastFTIndexed() (Time, error) {
-	val, err := d.com().GetProperty("LastFTIndexed")
+	val, err := getComProperty(d, "LastFTIndexed")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTMODIFIED_PROPERTY_DB.html */
 func (d NotesDatabase) LastModified() (Time, error) {
-	val, err := d.com().GetProperty("LastModified")
+	val, err := getComProperty(d, "LastModified")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LIMITREVISIONS_PROPERTY_DB.html */
 func (d NotesDatabase) LimitRevisions() (Double, error) {
-	val, err := d.com().GetProperty("LimitRevisions")
+	val, err := getComProperty(d, "LimitRevisions")
 	return helpers.CastValue[Double](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LIMITREVISIONS_PROPERTY_DB.html */
 func (d NotesDatabase) SetLimitRevisions(v Double) error {
-	return d.com().PutProperty("LimitRevisions", v)
+	return putComProperty(d, "LimitRevisions", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LIMITUPDATEDBY_PROPERTY_DB.html */
 func (d NotesDatabase) LimitUpdatedBy() (Double, error) {
-	val, err := d.com().GetProperty("LimitUpdatedBy")
+	val, err := getComProperty(d, "LimitUpdatedBy")
 	return helpers.CastValue[Double](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LIMITUPDATEDBY_PROPERTY_DB.html */
 func (d NotesDatabase) SetLimitUpdatedBy(v Double) error {
-	return d.com().PutProperty("LimitUpdatedBy", v)
+	return putComProperty(d, "LimitUpdatedBy", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LISTINDBCATALOG_PROPERTY_DB.html */
 func (d NotesDatabase) ListInDbCatalog() (Boolean, error) {
-	val, err := d.com().GetProperty("ListInDbCatalog")
+	val, err := getComProperty(d, "ListInDbCatalog")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LISTINDBCATALOG_PROPERTY_DB.html */
 func (d NotesDatabase) SetListInDbCatalog(v Boolean) error {
-	return d.com().PutProperty("ListInDbCatalog", v)
+	return putComProperty(d, "ListInDbCatalog", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MANAGERS_PROPERTY.html */
 func (d NotesDatabase) Managers() ([]String, error) {
-	vals, err := d.com().GetArrayProperty("Managers")
+	vals, err := getComArrayProperty(d, "Managers")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAXSIZE_PROPERTY_6579_ABOUT.html */
 func (d NotesDatabase) MaxSize() (Double, error) {
-	val, err := d.com().GetProperty("MaxSize")
+	val, err := getComProperty(d, "MaxSize")
 	return helpers.CastValue[Double](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESURL_PROPERTY_DATABASE_COM.html */
 func (d NotesDatabase) NotesURL() (String, error) {
-	val, err := d.com().GetProperty("NotesURL")
+	val, err := getComProperty(d, "NotesURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_DB.html */
 func (d NotesDatabase) Parent() (NotesSession, error) {
-	dispatchPtr, err := d.com().GetObjectProperty("Parent")
+	dispatchPtr, err := getComObjectProperty(d, "Parent")
 	return NewNotesSession(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PERCENTUSED_PROPERTY.html */
 func (d NotesDatabase) PercentUsed() (Double, error) {
-	val, err := d.com().GetProperty("PercentUsed")
+	val, err := getComProperty(d, "PercentUsed")
 	return helpers.CastValue[Double](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLICAID_PROPERTY.html */
 func (d NotesDatabase) ReplicaID() (String, error) {
-	val, err := d.com().GetProperty("ReplicaID")
+	val, err := getComProperty(d, "ReplicaID")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLICATIONINFO_PROPERTY_7679_ABOUT.html */
 func (d NotesDatabase) ReplicationInfo() (NotesReplication, error) {
-	dispatchPtr, err := d.com().GetObjectProperty("ReplicationInfo")
+	dispatchPtr, err := getComObjectProperty(d, "ReplicationInfo")
 	return NewNotesReplication(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SERVER_PROPERTY.html */
 func (d NotesDatabase) Server() (String, error) {
-	val, err := d.com().GetProperty("Server")
+	val, err := getComProperty(d, "Server")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIZE_PROPERTY_DB.html */
 func (d NotesDatabase) Size() (Double, error) {
-	val, err := d.com().GetProperty("Size")
+	val, err := getComProperty(d, "Size")
 	return helpers.CastValue[Double](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIZEQUOTA_PROPERTY.html */
 func (d NotesDatabase) SizeQuota() (Long, error) {
-	val, err := d.com().GetProperty("SizeQuota")
+	val, err := getComProperty(d, "SizeQuota")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIZEQUOTA_PROPERTY.html */
 func (d NotesDatabase) SetSizeQuota(v Long) error {
-	return d.com().PutProperty("SizeQuota", v)
+	return putComProperty(d, "SizeQuota", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIZEWARNING_PROPERTY_DB.html */
 func (d NotesDatabase) SizeWarning() (Long, error) {
-	val, err := d.com().GetProperty("SizeWarning")
+	val, err := getComProperty(d, "SizeWarning")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIZEWARNING_PROPERTY_DB.html */
 func (d NotesDatabase) SetSizeWarning(v Long) error {
-	return d.com().PutProperty("SizeWarning", v)
+	return putComProperty(d, "SizeWarning", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEMPLATENAME_PROPERTY.html */
 func (d NotesDatabase) TemplateName() (String, error) {
-	val, err := d.com().GetProperty("TemplateName")
+	val, err := getComProperty(d, "TemplateName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TITLE_PROPERTY_DB.html */
 func (d NotesDatabase) Title() (String, error) {
-	val, err := d.com().GetProperty("Title")
+	val, err := getComProperty(d, "Title")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TITLE_PROPERTY_DB.html */
 func (d NotesDatabase) SetTitle(v String) error {
-	return d.com().PutProperty("Title", v)
+	return putComProperty(d, "Title", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TYPE_PROPERTY_DB.html */
 func (d NotesDatabase) Type() (Long, error) {
-	val, err := d.com().GetProperty("Type")
+	val, err := getComProperty(d, "Type")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNDELETEEXPIRETIME_PROPERTY_DB.html */
 func (d NotesDatabase) UndeleteExpireTime() (Long, error) {
-	val, err := d.com().GetProperty("UndeleteExpireTime")
+	val, err := getComProperty(d, "UndeleteExpireTime")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNDELETEEXPIRETIME_PROPERTY_DB.html */
 func (d NotesDatabase) SetUndeleteExpireTime(v Long) error {
-	return d.com().PutProperty("UndeleteExpireTime", v)
+	return putComProperty(d, "UndeleteExpireTime", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNPROCESSEDDOCUMENTS_PROPERTY.html */
 func (d NotesDatabase) UnprocessedDocuments() (NotesDocumentCollection, error) {
-	dispatchPtr, err := d.com().GetObjectProperty("UnprocessedDocuments")
+	dispatchPtr, err := getComObjectProperty(d, "UnprocessedDocuments")
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
@@ -447,7 +447,7 @@ func (d NotesDatabase) Views() ([]NotesView, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COMPACT_METHOD.html */
 func (d NotesDatabase) Compact() (Long, error) {
-	val, err := d.com().CallMethod("Compact")
+	val, err := callComMethod(d, "Compact")
 	return helpers.CastValue[Long](val), err
 }
 
@@ -475,7 +475,7 @@ func (d NotesDatabase) CompactWithOptions(options any, params ...notesDatabaseCo
 	if paramsStruct.spaceThreshold != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.spaceThreshold)
 	}
-	val, err := d.com().CallMethod("CompactWithOptions", paramsOrdered...)
+	val, err := callComMethod(d, "CompactWithOptions", paramsOrdered...)
 	return helpers.CastValue[Long](val), err
 }
 
@@ -520,25 +520,25 @@ func (d NotesDatabase) CreateCopy(newServer String, newDbFile String, params ...
 	if paramsStruct.maxsize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.maxsize)
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("CreateCopy", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "CreateCopy", paramsOrdered...)
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDOCUMENT_METHOD.html */
 func (d NotesDatabase) CreateDocument() (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("CreateDocument")
+	dispatchPtr, err := callComObjectMethod(d, "CreateDocument")
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDOCUMENTCOLLECTION_METHOD.html */
 func (d NotesDatabase) CreateDocumentCollection() (NotesDocumentCollection, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("CreateDocumentCollection")
+	dispatchPtr, err := callComObjectMethod(d, "CreateDocumentCollection")
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDOMINOQUERY_METHOD.html */
 func (d NotesDatabase) CreateDominoQuery() (NotesDominoQuery, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("CreateDominoQuery")
+	dispatchPtr, err := callComObjectMethod(d, "CreateDominoQuery")
 	return NewNotesDominoQuery(dispatchPtr), err
 }
 
@@ -566,19 +566,19 @@ func (d NotesDatabase) CreateFromTemplate(newServer String, newDbFile String, in
 	if paramsStruct.maxsize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.maxsize)
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("CreateFromTemplate", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "CreateFromTemplate", paramsOrdered...)
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEFTINDEX_METHOD_DB.html */
 func (d NotesDatabase) CreateFTIndex(options Long, recreate Boolean) error {
-	_, err := d.com().CallMethod("CreateFTIndex", options, recreate)
+	_, err := callComMethod(d, "CreateFTIndex", options, recreate)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATENOTECOLLECTION_METHOD_DATABASE.html */
 func (d NotesDatabase) CreateNoteCollection(selectAllFlag Boolean) (NotesNoteCollection, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("CreateNoteCollection", selectAllFlag)
+	dispatchPtr, err := callComObjectMethod(d, "CreateNoteCollection", selectAllFlag)
 	return NewNotesNoteCollection(dispatchPtr), err
 }
 
@@ -606,13 +606,13 @@ func (d NotesDatabase) CreateOutline(outlinename String, params ...notesDatabase
 	if paramsStruct.defaultOutline != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.defaultOutline)
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("CreateOutline", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "CreateOutline", paramsOrdered...)
 	return NewNotesOutline(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEREPLICA_METHOD.html */
 func (d NotesDatabase) CreateReplica(newServer String, newDbFile String) (NotesDatabase, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("CreateReplica", newServer, newDbFile)
+	dispatchPtr, err := callComObjectMethod(d, "CreateReplica", newServer, newDbFile)
 	return NewNotesDatabase(dispatchPtr), err
 }
 
@@ -670,25 +670,25 @@ func (d NotesDatabase) CreateView(params ...notesDatabaseCreateViewParam) (Notes
 			}
 		}
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("CreateView", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "CreateView", paramsOrdered...)
 	return NewNotesView(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DECRYPT_METHOD_DATABASE.html */
 func (d NotesDatabase) Decrypt(def Boolean) error {
-	_, err := d.com().CallMethod("Decrypt", def)
+	_, err := callComMethod(d, "Decrypt", def)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENABLEFOLDER_METHOD_DATABASE.html */
 func (d NotesDatabase) EnableFolder(foldername String) error {
-	_, err := d.com().CallMethod("EnableFolder", foldername)
+	_, err := callComMethod(d, "EnableFolder", foldername)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPT_METHOD_DATABASE.html */
 func (d NotesDatabase) Encrypt(encryptionStrength Integer, def Boolean) error {
-	_, err := d.com().CallMethod("Encrypt", encryptionStrength, def)
+	_, err := callComMethod(d, "Encrypt", encryptionStrength, def)
 	return err
 }
 
@@ -716,7 +716,7 @@ func (d NotesDatabase) Fixup(params ...notesDatabaseFixupParam) error {
 	if paramsStruct.options != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.options)
 	}
-	_, err := d.com().CallMethod("Fixup", paramsOrdered...)
+	_, err := callComMethod(d, "Fixup", paramsOrdered...)
 	return err
 }
 
@@ -774,7 +774,7 @@ func (d NotesDatabase) FTDomainSearch(query String, maxDocs Integer, entryform S
 			}
 		}
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("FTDomainSearch", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "FTDomainSearch", paramsOrdered...)
 	return NewNotesDocument(dispatchPtr), err
 }
 
@@ -812,7 +812,7 @@ func (d NotesDatabase) FTSearch(query String, maxdocs Integer, params ...notesDa
 			paramsOrdered = append(paramsOrdered, *paramsStruct.otheroptions)
 		}
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("FTSearch", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "FTSearch", paramsOrdered...)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
@@ -860,13 +860,13 @@ func (d NotesDatabase) FTSearchRange(query String, maxdocs Integer, params ...no
 			}
 		}
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("FTSearchRange", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "FTSearchRange", paramsOrdered...)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETAGENT_METHOD.html */
 func (d NotesDatabase) GetAgent(agentName String) (NotesAgent, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetAgent", agentName)
+	dispatchPtr, err := callComObjectMethod(d, "GetAgent", agentName)
 	return NewNotesAgent(dispatchPtr), err
 }
 
@@ -894,7 +894,7 @@ func (d NotesDatabase) GetAllReadDocuments(params ...notesDatabaseGetAllReadDocu
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("GetAllReadDocuments", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "GetAllReadDocuments", paramsOrdered...)
 	return NewNotesNoteCollection(dispatchPtr), err
 }
 
@@ -922,19 +922,19 @@ func (d NotesDatabase) GetAllUnreadDocuments(params ...notesDatabaseGetAllUnread
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("GetAllUnreadDocuments", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "GetAllUnreadDocuments", paramsOrdered...)
 	return NewNotesNoteCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENTBYID_METHOD.html */
 func (d NotesDatabase) GetDocumentByID(noteID String) (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetDocumentByID", noteID)
+	dispatchPtr, err := callComObjectMethod(d, "GetDocumentByID", noteID)
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENTBYUNID_METHOD.html */
 func (d NotesDatabase) GetDocumentByUNID(unid String) (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetDocumentByUNID", unid)
+	dispatchPtr, err := callComObjectMethod(d, "GetDocumentByUNID", unid)
 	return NewNotesDocument(dispatchPtr), err
 }
 
@@ -1032,13 +1032,13 @@ func (d NotesDatabase) GetDocumentByURL(URL String, params ...notesDatabaseGetDo
 			}
 		}
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("GetDocumentByURL", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "GetDocumentByURL", paramsOrdered...)
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFORM_METHOD.html */
 func (d NotesDatabase) GetForm(name String) (NotesForm, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetForm", name)
+	dispatchPtr, err := callComObjectMethod(d, "GetForm", name)
 	return NewNotesForm(dispatchPtr), err
 }
 
@@ -1076,19 +1076,19 @@ func (d NotesDatabase) GetModifiedDocuments(params ...notesDatabaseGetModifiedDo
 			paramsOrdered = append(paramsOrdered, *paramsStruct.noteClass)
 		}
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("GetModifiedDocuments", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "GetModifiedDocuments", paramsOrdered...)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMODIFIEDDOCUMENTWITHOPTIONS_METHOD_DATABASE.html */
 func (d NotesDatabase) GetModifiedDocumentsWithOptions(modifiedSince NotesDateTime, modifiedUntil NotesDateTime, options Integer) (NotesNoteCollection, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetModifiedDocumentsWithOptions", modifiedSince.com().Dispatch(), modifiedUntil.com().Dispatch(), options)
+	dispatchPtr, err := callComObjectMethod(d, "GetModifiedDocumentsWithOptions", modifiedSince.com().Dispatch(), modifiedUntil.com().Dispatch(), options)
 	return NewNotesNoteCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNAMEDDOCUMENT_METHOD.html */
 func (d NotesDatabase) GetNamedDocument() error {
-	_, err := d.com().CallMethod("GetNamedDocument")
+	_, err := callComMethod(d, "GetNamedDocument")
 	return err
 }
 
@@ -1116,19 +1116,19 @@ func (d NotesDatabase) GetNamedDocCollection(params ...notesDatabaseGetNamedDocC
 	if paramsStruct.name != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
 	}
-	_, err := d.com().CallMethod("GetNamedDocCollection", paramsOrdered...)
+	_, err := callComMethod(d, "GetNamedDocCollection", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETOPTION_METHOD_DB.html */
 func (d NotesDatabase) GetOption(optionName Integer) (Boolean, error) {
-	val, err := d.com().CallMethod("GetOption", optionName)
+	val, err := callComMethod(d, "GetOption", optionName)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETOUTLINE_METHOD_DATABASE.html */
 func (d NotesDatabase) GetOutline(outlinename String) (NotesOutline, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetOutline", outlinename)
+	dispatchPtr, err := callComObjectMethod(d, "GetOutline", outlinename)
 	return NewNotesOutline(dispatchPtr), err
 }
 
@@ -1156,7 +1156,7 @@ func (d NotesDatabase) GetProfileDocCollection(params ...notesDatabaseGetProfile
 	if paramsStruct.profilename != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.profilename)
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("GetProfileDocCollection", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "GetProfileDocCollection", paramsOrdered...)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
@@ -1184,13 +1184,13 @@ func (d NotesDatabase) GetProfileDocument(profilename String, params ...notesDat
 	if paramsStruct.uniqueKey != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.uniqueKey)
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("GetProfileDocument", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "GetProfileDocument", paramsOrdered...)
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETQUERYRESULTSPROCESSOR_METHOD.html */
 func (d NotesDatabase) GetQueryResultsProcessor() (NotesQueryResultsProcessor, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetQueryResultsProcessor")
+	dispatchPtr, err := callComObjectMethod(d, "GetQueryResultsProcessor")
 	return NewNotesQueryResultsProcessor(dispatchPtr), err
 }
 
@@ -1268,121 +1268,121 @@ func (d NotesDatabase) GetURLHeaderInfo(params ...notesDatabaseGetURLHeaderInfoP
 			}
 		}
 	}
-	val, err := d.com().CallMethod("GetURLHeaderInfo", paramsOrdered...)
+	val, err := callComMethod(d, "GetURLHeaderInfo", paramsOrdered...)
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETVIEW_METHOD.html */
 func (d NotesDatabase) GetView(viewName String) (NotesView, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetView", viewName)
+	dispatchPtr, err := callComObjectMethod(d, "GetView", viewName)
 	return NewNotesView(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GRANTACCESS_METHOD.html */
 func (d NotesDatabase) GrantAccess(name String, level Integer) error {
-	_, err := d.com().CallMethod("GrantAccess", name, level)
+	_, err := callComMethod(d, "GrantAccess", name, level)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MARKFORDELETE_METHOD_DB.html */
 func (d NotesDatabase) MarkForDelete() error {
-	_, err := d.com().CallMethod("MarkForDelete")
+	_, err := callComMethod(d, "MarkForDelete")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPEN_METHOD.html */
 func (d NotesDatabase) Open(server String, dbfile String) (Boolean, error) {
-	val, err := d.com().CallMethod("Open", server, dbfile)
+	val, err := callComMethod(d, "Open", server, dbfile)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENBYREPLICAID_METHOD.html */
 func (d NotesDatabase) OpenByReplicaID(server String, replicaID String) (Boolean, error) {
-	val, err := d.com().CallMethod("OpenByReplicaID", server, replicaID)
+	val, err := callComMethod(d, "OpenByReplicaID", server, replicaID)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENIFMODIFIED_METHOD.html */
 func (d NotesDatabase) OpenIfModified(server String, dbfile String, notesDateTime NotesDateTime) (Boolean, error) {
-	val, err := d.com().CallMethod("OpenIfModified", server, dbfile, notesDateTime.com().Dispatch())
+	val, err := callComMethod(d, "OpenIfModified", server, dbfile, notesDateTime.com().Dispatch())
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENMAIL_METHOD.html */
 func (d NotesDatabase) OpenMail() error {
-	_, err := d.com().CallMethod("OpenMail")
+	_, err := callComMethod(d, "OpenMail")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENURLDB_METHOD.html */
 func (d NotesDatabase) OpenURLDb() (Boolean, error) {
-	val, err := d.com().CallMethod("OpenURLDb")
+	val, err := callComMethod(d, "OpenURLDb")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENWITHFAILOVER_METHOD.html */
 func (d NotesDatabase) OpenWithFailover(server String, dbfile String) (Boolean, error) {
-	val, err := d.com().CallMethod("OpenWithFailover", server, dbfile)
+	val, err := callComMethod(d, "OpenWithFailover", server, dbfile)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_QUERYACCESS_METHOD.html */
 func (d NotesDatabase) QueryAccess(name String) (Integer, error) {
-	val, err := d.com().CallMethod("QueryAccess", name)
+	val, err := callComMethod(d, "QueryAccess", name)
 	return helpers.CastValue[Integer](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_QUERYACCESSPRIVILEGES_METHOD_DB.html */
 func (d NotesDatabase) QueryAccessPrivileges(name String) (Long, error) {
-	val, err := d.com().CallMethod("QueryAccessPrivileges", name)
+	val, err := callComMethod(d, "QueryAccessPrivileges", name)
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_QUERYACCESSROLES_METHOD_DB.html */
 func (d NotesDatabase) QueryAccessRoles(name String) ([]String, error) {
-	vals, err := d.com().CallArrayMethod("QueryAccessRoles", name)
+	vals, err := callComArrayMethod(d, "QueryAccessRoles", name)
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_DB.html */
 func (d NotesDatabase) Remove() error {
-	_, err := d.com().CallMethod("Remove")
+	_, err := callComMethod(d, "Remove")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEFTINDEX_METHOD_DB.html */
 func (d NotesDatabase) RemoveFTIndex() error {
-	_, err := d.com().CallMethod("RemoveFTIndex")
+	_, err := callComMethod(d, "RemoveFTIndex")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLICATE_METHOD.html */
 func (d NotesDatabase) Replicate(serverName String) (Boolean, error) {
-	val, err := d.com().CallMethod("Replicate", serverName)
+	val, err := callComMethod(d, "Replicate", serverName)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REVOKEACCESS_METHOD.html */
 func (d NotesDatabase) RevokeAccess(name String) error {
-	_, err := d.com().CallMethod("RevokeAccess", name)
+	_, err := callComMethod(d, "RevokeAccess", name)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SEARCH_METHOD.html */
 func (d NotesDatabase) Search(formula String, notesDateTime NotesDateTime, maxDocs Integer) (NotesDocumentCollection, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("Search", formula, notesDateTime.com().Dispatch(), maxDocs)
+	dispatchPtr, err := callComObjectMethod(d, "Search", formula, notesDateTime.com().Dispatch(), maxDocs)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETOPTION_METHOD_DB.html */
 func (d NotesDatabase) SetOption(optionName Integer, flag any) error {
-	_, err := d.com().CallMethod("SetOption", optionName, flag)
+	_, err := callComMethod(d, "SetOption", optionName, flag)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETUSERIDFORDECRYPT_DATABASE.html */
 func (d NotesDatabase) SetUserIDForDecrypt(uid NotesUserID, idFile string, password string) error {
-	_, err := d.com().CallMethod("SetUserIDForDecrypt", uid.com().Dispatch(), idFile, password)
+	_, err := callComMethod(d, "SetUserIDForDecrypt", uid.com().Dispatch(), idFile, password)
 	return err
 }
 
@@ -1440,25 +1440,25 @@ func (d NotesDatabase) Sign(params ...notesDatabaseSignParam) error {
 			}
 		}
 	}
-	_, err := d.com().CallMethod("Sign", paramsOrdered...)
+	_, err := callComMethod(d, "Sign", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TRANSACTIONBEGIN_METHOD.html */
 func (d NotesDatabase) TransactionBegin() error {
-	_, err := d.com().CallMethod("TransactionBegin")
+	_, err := callComMethod(d, "TransactionBegin")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TRANSACTIONCOMMIT_METHOD.html */
 func (d NotesDatabase) TransactionCommit() error {
-	_, err := d.com().CallMethod("TransactionCommit")
+	_, err := callComMethod(d, "TransactionCommit")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TRANSACTIONROLLBACK_METHOD.html */
 func (d NotesDatabase) TransactionRollback() error {
-	_, err := d.com().CallMethod("TransactionRollback")
+	_, err := callComMethod(d, "TransactionRollback")
 	return err
 }
 
@@ -1496,7 +1496,7 @@ func (d NotesDatabase) UnprocessedFTSearch(query String, maxdocs Integer, params
 			paramsOrdered = append(paramsOrdered, *paramsStruct.otheroptions)
 		}
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("UnprocessedFTSearch", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "UnprocessedFTSearch", paramsOrdered...)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
@@ -1544,18 +1544,18 @@ func (d NotesDatabase) UnprocessedFTSearchRange(query String, maxdocs Integer, p
 			}
 		}
 	}
-	dispatchPtr, err := d.com().CallObjectMethod("UnprocessedFTSearchRange", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(d, "UnprocessedFTSearchRange", paramsOrdered...)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNPROCESSEDSEARCH_METHOD.html */
 func (d NotesDatabase) UnprocessedSearch(formula String, notesDateTime NotesDateTime, maxDocs Integer) (NotesDocumentCollection, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("UnprocessedSearch", formula, notesDateTime.com().Dispatch(), maxDocs)
+	dispatchPtr, err := callComObjectMethod(d, "UnprocessedSearch", formula, notesDateTime.com().Dispatch(), maxDocs)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEFTINDEX_METHOD.html */
 func (d NotesDatabase) UpdateFTIndex(createFlag Boolean) error {
-	_, err := d.com().CallMethod("UpdateFTIndex", createFlag)
+	_, err := callComMethod(d, "UpdateFTIndex", createFlag)
 	return err
 }

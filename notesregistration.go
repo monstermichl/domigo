@@ -18,464 +18,464 @@ func NewNotesRegistration(dispatchPtr *ole.IDispatch) NotesRegistration {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALTORGUNIT_PROPERTY_NOTESREGISTRATION.html */
 func (r NotesRegistration) AltOrgUnit() ([]String, error) {
-	vals, err := r.com().GetArrayProperty("AltOrgUnit")
+	vals, err := getComArrayProperty(r, "AltOrgUnit")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALTORGUNIT_PROPERTY_NOTESREGISTRATION.html */
 func (r NotesRegistration) SetAltOrgUnit(v []String) error {
-	return r.com().PutProperty("AltOrgUnit", v)
+	return putComProperty(r, "AltOrgUnit", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALTORGUNITLANG_PROPERTY_NOTESREGISTRATION.html */
 func (r NotesRegistration) AltOrgUnitLang() ([]String, error) {
-	vals, err := r.com().GetArrayProperty("AltOrgUnitLang")
+	vals, err := getComArrayProperty(r, "AltOrgUnitLang")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALTORGUNITLANG_PROPERTY_NOTESREGISTRATION.html */
 func (r NotesRegistration) SetAltOrgUnitLang(v []String) error {
-	return r.com().PutProperty("AltOrgUnitLang", v)
+	return putComProperty(r, "AltOrgUnitLang", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFIERIDFILE_PROPERTY.html */
 func (r NotesRegistration) CertifierIDFile() (String, error) {
-	val, err := r.com().GetProperty("CertifierIDFile")
+	val, err := getComProperty(r, "CertifierIDFile")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFIERIDFILE_PROPERTY.html */
 func (r NotesRegistration) SetCertifierIDFile(v String) error {
-	return r.com().PutProperty("CertifierIDFile", v)
+	return putComProperty(r, "CertifierIDFile", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFIERNAME_PROPERTY_REG.html */
 func (r NotesRegistration) CertifierName() (String, error) {
-	val, err := r.com().GetProperty("CertifierName")
+	val, err := getComProperty(r, "CertifierName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFIERNAME_PROPERTY_REG.html */
 func (r NotesRegistration) SetCertifierName(v String) error {
-	return r.com().PutProperty("CertifierName", v)
+	return putComProperty(r, "CertifierName", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEMAILDB_PROPERTY.html */
 func (r NotesRegistration) CreateMailDb() (Boolean, error) {
-	val, err := r.com().GetProperty("CreateMailDb")
+	val, err := getComProperty(r, "CreateMailDb")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEMAILDB_PROPERTY.html */
 func (r NotesRegistration) SetCreateMailDb(v Boolean) error {
-	return r.com().PutProperty("CreateMailDb", v)
+	return putComProperty(r, "CreateMailDb", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENFORCEUNIQUESHORTNAME_PROPERTY_REG.html */
 func (r NotesRegistration) EnforceUniqueShortName() (Boolean, error) {
-	val, err := r.com().GetProperty("EnforceUniqueShortName")
+	val, err := getComProperty(r, "EnforceUniqueShortName")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENFORCEUNIQUESHORTNAME_PROPERTY_REG.html */
 func (r NotesRegistration) SetEnforceUniqueShortName(v Boolean) error {
-	return r.com().PutProperty("EnforceUniqueShortName", v)
+	return putComProperty(r, "EnforceUniqueShortName", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXPIRATION_PROPERTY.html */
 func (r NotesRegistration) Expiration() (Time, error) {
-	val, err := r.com().GetProperty("Expiration")
+	val, err := getComProperty(r, "Expiration")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXPIRATION_PROPERTY.html */
 func (r NotesRegistration) SetExpiration(v Time) error {
-	return r.com().PutProperty("Expiration", v)
+	return putComProperty(r, "Expiration", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GROUPLIST_PROPERTY_REG.html */
 func (r NotesRegistration) GroupList() ([]String, error) {
-	vals, err := r.com().GetArrayProperty("GroupList")
+	vals, err := getComArrayProperty(r, "GroupList")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GROUPLIST_PROPERTY_REG.html */
 func (r NotesRegistration) SetGroupList(v []String) error {
-	return r.com().PutProperty("GroupList", v)
+	return putComProperty(r, "GroupList", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_IDTYPE_PROPERTY.html */
 func (r NotesRegistration) IDType() (Long, error) {
-	val, err := r.com().GetProperty("IDType")
+	val, err := getComProperty(r, "IDType")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_IDTYPE_PROPERTY.html */
 func (r NotesRegistration) SetIDType(v Long) error {
-	return r.com().PutProperty("IDType", v)
+	return putComProperty(r, "IDType", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNORTHAMERICAN_PROPERTY.html */
 func (r NotesRegistration) IsNorthAmerican() (Boolean, error) {
-	val, err := r.com().GetProperty("IsNorthAmerican")
+	val, err := getComProperty(r, "IsNorthAmerican")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISNORTHAMERICAN_PROPERTY.html */
 func (r NotesRegistration) SetIsNorthAmerican(v Boolean) error {
-	return r.com().PutProperty("IsNorthAmerican", v)
+	return putComProperty(r, "IsNorthAmerican", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISROAMINGUSER_PROPERTY_REG.html */
 func (r NotesRegistration) IsRoamingUser() (Boolean, error) {
-	val, err := r.com().GetProperty("IsRoamingUser")
+	val, err := getComProperty(r, "IsRoamingUser")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISROAMINGUSER_PROPERTY_REG.html */
 func (r NotesRegistration) SetIsRoamingUser(v Boolean) error {
-	return r.com().PutProperty("IsRoamingUser", v)
+	return putComProperty(r, "IsRoamingUser", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILACLMANAGER_PROPERTY_REG.html */
 func (r NotesRegistration) MailACLManager() (String, error) {
-	val, err := r.com().GetProperty("MailACLManager")
+	val, err := getComProperty(r, "MailACLManager")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILACLMANAGER_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailACLManager(v String) error {
-	return r.com().PutProperty("MailACLManager", v)
+	return putComProperty(r, "MailACLManager", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILCREATEFTINDEX_PROPERTY_REG.html */
 func (r NotesRegistration) MailCreateFTIndex() (Boolean, error) {
-	val, err := r.com().GetProperty("MailCreateFTIndex")
+	val, err := getComProperty(r, "MailCreateFTIndex")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILCREATEFTINDEX_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailCreateFTIndex(v Boolean) error {
-	return r.com().PutProperty("MailCreateFTIndex", v)
+	return putComProperty(r, "MailCreateFTIndex", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILINTERNETADDRESS_PROPERTY_REG.html */
 func (r NotesRegistration) MailInternetAddress() (String, error) {
-	val, err := r.com().GetProperty("MailInternetAddress")
+	val, err := getComProperty(r, "MailInternetAddress")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILINTERNETADDRESS_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailInternetAddress(v String) error {
-	return r.com().PutProperty("MailInternetAddress", v)
+	return putComProperty(r, "MailInternetAddress", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILOWNERACCESS_PROPERTY_REG.html */
 func (r NotesRegistration) MailOwnerAccess() (Long, error) {
-	val, err := r.com().GetProperty("MailOwnerAccess")
+	val, err := getComProperty(r, "MailOwnerAccess")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILOWNERACCESS_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailOwnerAccess(v Long) error {
-	return r.com().PutProperty("MailOwnerAccess", v)
+	return putComProperty(r, "MailOwnerAccess", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILQUOTASIZELIMIT_PROPERTY_REG.html */
 func (r NotesRegistration) MailQuotaSizeLimit() (Long, error) {
-	val, err := r.com().GetProperty("MailQuotaSizeLimit")
+	val, err := getComProperty(r, "MailQuotaSizeLimit")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILQUOTASIZELIMIT_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailQuotaSizeLimit(v Long) error {
-	return r.com().PutProperty("MailQuotaSizeLimit", v)
+	return putComProperty(r, "MailQuotaSizeLimit", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILQUOTAWARNINGTHRESHOLD_PROPERTY_REG.html */
 func (r NotesRegistration) MailQuotaWarningThreshold() (Long, error) {
-	val, err := r.com().GetProperty("MailQuotaWarningThreshold")
+	val, err := getComProperty(r, "MailQuotaWarningThreshold")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILQUOTAWARNINGTHRESHOLD_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailQuotaWarningThreshold(v Long) error {
-	return r.com().PutProperty("MailQuotaWarningThreshold", v)
+	return putComProperty(r, "MailQuotaWarningThreshold", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILREPLICASERVERS_PROPERTY_REG.html */
 func (r NotesRegistration) MailReplicaServers() ([]String, error) {
-	vals, err := r.com().GetArrayProperty("MailReplicaServers")
+	vals, err := getComArrayProperty(r, "MailReplicaServers")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILREPLICASERVERS_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailReplicaServers(v []String) error {
-	return r.com().PutProperty("MailReplicaServers", v)
+	return putComProperty(r, "MailReplicaServers", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILSYSTEM_PROPERTY_REG.html */
 func (r NotesRegistration) MailSystem() (Long, error) {
-	val, err := r.com().GetProperty("MailSystem")
+	val, err := getComProperty(r, "MailSystem")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILSYSTEM_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailSystem(v Long) error {
-	return r.com().PutProperty("MailSystem", v)
+	return putComProperty(r, "MailSystem", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILTEMPLATENAME_PROPERTY_REG.html */
 func (r NotesRegistration) MailTemplateName() (String, error) {
-	val, err := r.com().GetProperty("MailTemplateName")
+	val, err := getComProperty(r, "MailTemplateName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MAILTEMPLATENAME_PROPERTY_REG.html */
 func (r NotesRegistration) SetMailTemplateName(v String) error {
-	return r.com().PutProperty("MailTemplateName", v)
+	return putComProperty(r, "MailTemplateName", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MINPASSWORDLENGTH_PROPERTY.html */
 func (r NotesRegistration) MinPasswordLength() (Long, error) {
-	val, err := r.com().GetProperty("MinPasswordLength")
+	val, err := getComProperty(r, "MinPasswordLength")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MINPASSWORDLENGTH_PROPERTY.html */
 func (r NotesRegistration) SetMinPasswordLength(v Long) error {
-	return r.com().PutProperty("MinPasswordLength", v)
+	return putComProperty(r, "MinPasswordLength", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOIDFILE_PROPERTY_REG.html */
 func (r NotesRegistration) NoIDFile() (Boolean, error) {
-	val, err := r.com().GetProperty("NoIDFile")
+	val, err := getComProperty(r, "NoIDFile")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOIDFILE_PROPERTY_REG.html */
 func (r NotesRegistration) SetNoIDFile(v Boolean) error {
-	return r.com().PutProperty("NoIDFile", v)
+	return putComProperty(r, "NoIDFile", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ORGUNIT_PROPERTY.html */
 func (r NotesRegistration) OrgUnit() (String, error) {
-	val, err := r.com().GetProperty("OrgUnit")
+	val, err := getComProperty(r, "OrgUnit")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ORGUNIT_PROPERTY.html */
 func (r NotesRegistration) SetOrgUnit(v String) error {
-	return r.com().PutProperty("OrgUnit", v)
+	return putComProperty(r, "OrgUnit", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POLICYNAME_PROPERTY_REG.html */
 func (r NotesRegistration) PolicyName() (String, error) {
-	val, err := r.com().GetProperty("PolicyName")
+	val, err := getComProperty(r, "PolicyName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POLICYNAME_PROPERTY_REG.html */
 func (r NotesRegistration) SetPolicyName(v String) error {
-	return r.com().PutProperty("PolicyName", v)
+	return putComProperty(r, "PolicyName", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REGISTRATIONLOG_PROPERTY.html */
 func (r NotesRegistration) RegistrationLog() (String, error) {
-	val, err := r.com().GetProperty("RegistrationLog")
+	val, err := getComProperty(r, "RegistrationLog")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REGISTRATIONLOG_PROPERTY.html */
 func (r NotesRegistration) SetRegistrationLog(v String) error {
-	return r.com().PutProperty("RegistrationLog", v)
+	return putComProperty(r, "RegistrationLog", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REGISTRATIONSERVER_PROPERTY.html */
 func (r NotesRegistration) RegistrationServer() (String, error) {
-	val, err := r.com().GetProperty("RegistrationServer")
+	val, err := getComProperty(r, "RegistrationServer")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REGISTRATIONSERVER_PROPERTY.html */
 func (r NotesRegistration) SetRegistrationServer(v String) error {
-	return r.com().PutProperty("RegistrationServer", v)
+	return putComProperty(r, "RegistrationServer", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROAMINGCLEANUPPERIOD_PROPERTY_REG.html */
 func (r NotesRegistration) RoamingCleanupPeriod() (Long, error) {
-	val, err := r.com().GetProperty("RoamingCleanupPeriod")
+	val, err := getComProperty(r, "RoamingCleanupPeriod")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROAMINGCLEANUPPERIOD_PROPERTY_REG.html */
 func (r NotesRegistration) SetRoamingCleanupPeriod(v Long) error {
-	return r.com().PutProperty("RoamingCleanupPeriod", v)
+	return putComProperty(r, "RoamingCleanupPeriod", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROAMINGCLEANUPSETTING_PROPERTY_REG.html */
 func (r NotesRegistration) RoamingCleanupSetting() (Long, error) {
-	val, err := r.com().GetProperty("RoamingCleanupSetting")
+	val, err := getComProperty(r, "RoamingCleanupSetting")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROAMINGCLEANUPSETTING_PROPERTY_REG.html */
 func (r NotesRegistration) SetRoamingCleanupSetting(v Long) error {
-	return r.com().PutProperty("RoamingCleanupSetting", v)
+	return putComProperty(r, "RoamingCleanupSetting", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROAMINGSERVER_PROPERTY_REG.html */
 func (r NotesRegistration) RoamingServer() (String, error) {
-	val, err := r.com().GetProperty("RoamingServer")
+	val, err := getComProperty(r, "RoamingServer")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROAMINGSERVER_PROPERTY_REG.html */
 func (r NotesRegistration) SetRoamingServer(v String) error {
-	return r.com().PutProperty("RoamingServer", v)
+	return putComProperty(r, "RoamingServer", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROAMINGSUBDIR_PROPERTY_REG.html */
 func (r NotesRegistration) RoamingSubdir() (String, error) {
-	val, err := r.com().GetProperty("RoamingSubdir")
+	val, err := getComProperty(r, "RoamingSubdir")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROAMINGSUBDIR_PROPERTY_REG.html */
 func (r NotesRegistration) SetRoamingSubdir(v String) error {
-	return r.com().PutProperty("RoamingSubdir", v)
+	return putComProperty(r, "RoamingSubdir", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SHORTNAME_PROPERTY_REG.html */
 func (r NotesRegistration) ShortName() (String, error) {
-	val, err := r.com().GetProperty("ShortName")
+	val, err := getComProperty(r, "ShortName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SHORTNAME_PROPERTY_REG.html */
 func (r NotesRegistration) SetShortName(v String) error {
-	return r.com().PutProperty("ShortName", v)
+	return putComProperty(r, "ShortName", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STOREIDTOADDRESSBOOK_PROPERTY.html */
 func (r NotesRegistration) StoreIDInAddressBook() (Boolean, error) {
-	val, err := r.com().GetProperty("StoreIDInAddressBook")
+	val, err := getComProperty(r, "StoreIDInAddressBook")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STOREIDTOADDRESSBOOK_PROPERTY.html */
 func (r NotesRegistration) SetStoreIDInAddressBook(v Boolean) error {
-	return r.com().PutProperty("StoreIDInAddressBook", v)
+	return putComProperty(r, "StoreIDInAddressBook", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STOREIDINMAILFILE_PROPERTY_REG.html */
 func (r NotesRegistration) StoreIDInMailfile() (Boolean, error) {
-	val, err := r.com().GetProperty("StoreIDInMailfile")
+	val, err := getComProperty(r, "StoreIDInMailfile")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STOREIDINMAILFILE_PROPERTY_REG.html */
 func (r NotesRegistration) SetStoreIDInMailfile(v Boolean) error {
-	return r.com().PutProperty("StoreIDInMailfile", v)
+	return putComProperty(r, "StoreIDInMailfile", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SYNCHINTERNETPASSWORD_PROPERTY_REG.html */
 func (r NotesRegistration) SynchInternetPassword() (Boolean, error) {
-	val, err := r.com().GetProperty("SynchInternetPassword")
+	val, err := getComProperty(r, "SynchInternetPassword")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SYNCHINTERNETPASSWORD_PROPERTY_REG.html */
 func (r NotesRegistration) SetSynchInternetPassword(v Boolean) error {
-	return r.com().PutProperty("SynchInternetPassword", v)
+	return putComProperty(r, "SynchInternetPassword", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEADDRESSBOOK_PROPERTY.html */
 func (r NotesRegistration) UpdateAddressBook() (Boolean, error) {
-	val, err := r.com().GetProperty("UpdateAddressBook")
+	val, err := getComProperty(r, "UpdateAddressBook")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEADDRESSBOOK_PROPERTY.html */
 func (r NotesRegistration) SetUpdateAddressBook(v Boolean) error {
-	return r.com().PutProperty("UpdateAddressBook", v)
+	return putComProperty(r, "UpdateAddressBook", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USECERTIFICATEAUTHORITY_PROPERTY_REG.html */
 func (r NotesRegistration) UseCertificateAuthority() (Boolean, error) {
-	val, err := r.com().GetProperty("UseCertificateAuthority")
+	val, err := getComProperty(r, "UseCertificateAuthority")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USECERTIFICATEAUTHORITY_PROPERTY_REG.html */
 func (r NotesRegistration) SetUseCertificateAuthority(v Boolean) error {
-	return r.com().PutProperty("UseCertificateAuthority", v)
+	return putComProperty(r, "UseCertificateAuthority", v)
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDCERTIFIERTOADDRESSBOOK_METHOD.html */
 func (r NotesRegistration) AddCertifierToAddressBook(idfile String, certpw String, location String, comment String) error {
-	_, err := r.com().CallMethod("AddCertifierToAddressBook", idfile, certpw, location, comment)
+	_, err := callComMethod(r, "AddCertifierToAddressBook", idfile, certpw, location, comment)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDSERVERTOADDRESSBOOK_METHOD.html */
 func (r NotesRegistration) AddServerToAddressBook(idfile String, server String, domain String, userpw String, network String, adminname String, title String, location String, comment String) error {
-	_, err := r.com().CallMethod("AddServerToAddressBook", idfile, server, domain, userpw, network, adminname, title, location, comment)
+	_, err := callComMethod(r, "AddServerToAddressBook", idfile, server, domain, userpw, network, adminname, title, location, comment)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDUSERPROFILE_METHOD.html */
 func (r NotesRegistration) AddUserProfile(username String, profilename String) error {
-	_, err := r.com().CallMethod("AddUserProfile", username, profilename)
+	_, err := callComMethod(r, "AddUserProfile", username, profilename)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDUSERTOADDRESSBOOK_METHOD.html */
 func (r NotesRegistration) AddUserToAddressBook(idfile String, fullname String, lastname String, userpw String, firstname String, middle String, mailserver String, mailidpath String, fwdaddress String, location String, comment String) error {
-	_, err := r.com().CallMethod("AddUserToAddressBook", idfile, fullname, lastname, userpw, firstname, middle, mailserver, mailidpath, fwdaddress, location, comment)
+	_, err := callComMethod(r, "AddUserToAddressBook", idfile, fullname, lastname, userpw, firstname, middle, mailserver, mailidpath, fwdaddress, location, comment)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CROSSCERTIFY_METHOD.html */
 func (r NotesRegistration) CrossCertify(idfile String, certpw String, comment String) error {
-	_, err := r.com().CallMethod("CrossCertify", idfile, certpw, comment)
+	_, err := callComMethod(r, "CrossCertify", idfile, certpw, comment)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEIDONSERVER_METHOD.html */
 func (r NotesRegistration) DeleteIDOnServer(username String, isserverid Boolean) error {
-	_, err := r.com().CallMethod("DeleteIDOnServer", username, isserverid)
+	_, err := callComMethod(r, "DeleteIDOnServer", username, isserverid)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETIDFROMSERVER_METHOD.html */
 func (r NotesRegistration) GetIDFromServer(username String, filepath String, isserverid Boolean) error {
-	_, err := r.com().CallMethod("GetIDFromServer", username, filepath, isserverid)
+	_, err := callComMethod(r, "GetIDFromServer", username, filepath, isserverid)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETUSERINFO_METHOD.html */
 func (r NotesRegistration) GetUserInfo(username String, retMailServer String, retMailFile String, retMailDomain String, retMailSystem Integer, retProfile String) error {
-	_, err := r.com().CallMethod("GetUserInfo", username, retMailServer, retMailFile, retMailDomain, retMailSystem, retProfile)
+	_, err := callComMethod(r, "GetUserInfo", username, retMailServer, retMailFile, retMailDomain, retMailSystem, retProfile)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RECERTIFY_METHOD.html */
 func (r NotesRegistration) Recertify(idfile String, certpw String, comment String) error {
-	_, err := r.com().CallMethod("Recertify", idfile, certpw, comment)
+	_, err := callComMethod(r, "Recertify", idfile, certpw, comment)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REGISTERNEWCERTIFIER_METHOD.html */
 func (r NotesRegistration) RegisterNewCertifier(organization String, idfile String, certpw String, country String) error {
-	_, err := r.com().CallMethod("RegisterNewCertifier", organization, idfile, certpw, country)
+	_, err := callComMethod(r, "RegisterNewCertifier", organization, idfile, certpw, country)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REGISTERNEWSERVER_METHOD.html */
 func (r NotesRegistration) RegisterNewServer(server String, idfile String, domain String, servpw String, certpw String, location String, comment String, network String, adminname String, title String) error {
-	_, err := r.com().CallMethod("RegisterNewServer", server, idfile, domain, servpw, certpw, location, comment, network, adminname, title)
+	_, err := callComMethod(r, "RegisterNewServer", server, idfile, domain, servpw, certpw, location, comment, network, adminname, title)
 	return err
 }
 
@@ -603,12 +603,12 @@ func (r NotesRegistration) RegisterNewUser(lastName String, idFile String, mailS
 			}
 		}
 	}
-	_, err := r.com().CallMethod("RegisterNewUser", paramsOrdered...)
+	_, err := callComMethod(r, "RegisterNewUser", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SWITCHTOID_METHOD.html */
 func (r NotesRegistration) SwitchToID(idfile String, userpw String) error {
-	_, err := r.com().CallMethod("SwitchToID", idfile, userpw)
+	_, err := callComMethod(r, "SwitchToID", idfile, userpw)
 	return err
 }

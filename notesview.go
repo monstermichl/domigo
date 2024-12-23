@@ -33,256 +33,256 @@ func (v NotesView) checkKey(key any) (any, error) {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIASES_PROPERTY_VIEW.html */
 func (v NotesView) Aliases() ([]String, error) {
-	vals, err := v.com().GetArrayProperty("Aliases")
+	vals, err := getComArrayProperty(v, "Aliases")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIASES_PROPERTY_VIEW.html */
 func (v NotesView) SetAliases(aliases []String) error {
-	return v.com().PutProperty("Aliases", aliases)
+	return putComProperty(v, "Aliases", aliases)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLENTRIES_PROPERTY_6084.html */
 func (v NotesView) AllEntries() (NotesViewEntryCollection, error) {
-	dispatchPtr, err := v.com().GetObjectProperty("AllEntries")
+	dispatchPtr, err := getComObjectProperty(v, "AllEntries")
 	return NewNotesViewEntryCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_AUTOUPDATE_PROPERTY.html */
 func (v NotesView) AutoUpdate() (Boolean, error) {
-	val, err := v.com().GetProperty("AutoUpdate")
+	val, err := getComProperty(v, "AutoUpdate")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_AUTOUPDATE_PROPERTY.html */
 func (v NotesView) SetAutoUpdate(val Boolean) error {
-	return v.com().PutProperty("AutoUpdate", val)
+	return putComProperty(v, "AutoUpdate", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BACKGROUNDCOLOR_PROPERTY_4608.html */
 func (v NotesView) BackgroundColor() (Long, error) {
-	val, err := v.com().GetProperty("BackgroundColor")
+	val, err := getComProperty(v, "BackgroundColor")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BACKGROUNDCOLOR_PROPERTY_4608.html */
 func (v NotesView) SetBackgroundColor(val Long) error {
-	return v.com().PutProperty("BackgroundColor", val)
+	return putComProperty(v, "BackgroundColor", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNCOUNT_PROPERTY_7753.html */
 func (v NotesView) ColumnCount() (Long, error) {
-	val, err := v.com().GetProperty("ColumnCount")
+	val, err := getComProperty(v, "ColumnCount")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNNAMES_PROPERTY_NOTESVIEW_CLASS.html */
 func (v NotesView) ColumnNames() ([]String, error) {
-	vals, err := v.com().GetArrayProperty("ColumnNames")
+	vals, err := getComArrayProperty(v, "ColumnNames")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNS_PROPERTY.html */
 func (v NotesView) Columns() (NotesViewColumn, error) {
-	dispatchPtr, err := v.com().GetObjectProperty("Columns")
+	dispatchPtr, err := getComObjectProperty(v, "Columns")
 	return NewNotesViewColumn(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATED_PROPERTY_VIEW.html */
 func (v NotesView) Created() (Time, error) {
-	val, err := v.com().GetProperty("Created")
+	val, err := getComProperty(v, "Created")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENTRYCOUNT_PROPERTY_VIEW.html */
 func (v NotesView) EntryCount() (Long, error) {
-	val, err := v.com().GetProperty("EntryCount")
+	val, err := getComProperty(v, "EntryCount")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HEADERLINES_PROPERTY_1209.html */
 func (v NotesView) HeaderLines() (Long, error) {
-	val, err := v.com().GetProperty("HeaderLines")
+	val, err := getComProperty(v, "HeaderLines")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_NOTESVIEW_CLASS.html */
 func (v NotesView) HttpURL() (String, error) {
-	val, err := v.com().GetProperty("HttpURL")
+	val, err := getComProperty(v, "HttpURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCALENDAR_PROPERTY.html */
 func (v NotesView) IsCalendar() (Boolean, error) {
-	val, err := v.com().GetProperty("IsCalendar")
+	val, err := getComProperty(v, "IsCalendar")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCATEGORIZED_PROPERTY_2814.html */
 func (v NotesView) IsCategorized() (Boolean, error) {
-	val, err := v.com().GetProperty("IsCategorized")
+	val, err := getComProperty(v, "IsCategorized")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISCONFLICT_PROPERTY_1242.html */
 func (v NotesView) IsConflict() (Boolean, error) {
-	val, err := v.com().GetProperty("IsConflict")
+	val, err := getComProperty(v, "IsConflict")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDEFAULTVIEW_PROPERTY.html */
 func (v NotesView) IsDefaultView() (Boolean, error) {
-	val, err := v.com().GetProperty("IsDefaultView")
+	val, err := getComProperty(v, "IsDefaultView")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISDEFAULTVIEW_PROPERTY.html */
 func (v NotesView) SetIsDefaultView(val Boolean) error {
-	return v.com().PutProperty("IsDefaultView", val)
+	return putComProperty(v, "IsDefaultView", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISFOLDER_PROPERTY.html */
 func (v NotesView) IsFolder() (Boolean, error) {
-	val, err := v.com().GetProperty("IsFolder")
+	val, err := getComProperty(v, "IsFolder")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISHIERARCHICAL_PROPERTY_7038.html */
 func (v NotesView) IsHierarchical() (Boolean, error) {
-	val, err := v.com().GetProperty("IsHierarchical")
+	val, err := getComProperty(v, "IsHierarchical")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISMODIFIED_PROPERTY_6416.html */
 func (v NotesView) IsModified() (Boolean, error) {
-	val, err := v.com().GetProperty("IsModified")
+	val, err := getComProperty(v, "IsModified")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPRIVATE_PROPERTY_VIEW.html */
 func (v NotesView) IsPrivate() (Boolean, error) {
-	val, err := v.com().GetProperty("IsPrivate")
+	val, err := getComProperty(v, "IsPrivate")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPROHIBITDESIGNREFRESH_PROPERTY_VIEW.html */
 func (v NotesView) IsProhibitDesignRefresh() (Boolean, error) {
-	val, err := v.com().GetProperty("IsProhibitDesignRefresh")
+	val, err := getComProperty(v, "IsProhibitDesignRefresh")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISPROHIBITDESIGNREFRESH_PROPERTY_VIEW.html */
 func (v NotesView) SetIsProhibitDesignRefresh(val Boolean) error {
-	return v.com().PutProperty("IsProhibitDesignRefresh", val)
+	return putComProperty(v, "IsProhibitDesignRefresh", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTMODIFIED_PROPERTY_VIEW.html */
 func (v NotesView) LastModified() (Time, error) {
-	val, err := v.com().GetProperty("LastModified")
+	val, err := getComProperty(v, "LastModified")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCKHOLDERS_PROPERTY_VIEW.html */
 func (v NotesView) LockHolders() (String, error) {
-	val, err := v.com().GetProperty("LockHolders")
+	val, err := getComProperty(v, "LockHolders")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_VIEW.html */
 func (v NotesView) Name() (String, error) {
-	val, err := v.com().GetProperty("Name")
+	val, err := getComProperty(v, "Name")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_VIEW.html */
 func (v NotesView) SetName(val String) error {
-	return v.com().PutProperty("Name", val)
+	return putComProperty(v, "Name", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESURL_PROPERTY_NOTESVIEW_CLASS.html */
 func (v NotesView) NotesURL() (String, error) {
-	val, err := v.com().GetProperty("NotesURL")
+	val, err := getComProperty(v, "NotesURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_VIEW.html */
 func (v NotesView) Parent() (NotesDatabase, error) {
-	dispatchPtr, err := v.com().GetObjectProperty("Parent")
+	dispatchPtr, err := getComObjectProperty(v, "Parent")
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY_VIEW.html */
 func (v NotesView) ProtectReaders() (Boolean, error) {
-	val, err := v.com().GetProperty("ProtectReaders")
+	val, err := getComProperty(v, "ProtectReaders")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY_VIEW.html */
 func (v NotesView) SetProtectReaders(val Boolean) error {
-	return v.com().PutProperty("ProtectReaders", val)
+	return putComProperty(v, "ProtectReaders", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY_VIEW.html */
 func (v NotesView) Readers() ([]String, error) {
-	vals, err := v.com().GetArrayProperty("Readers")
+	vals, err := getComArrayProperty(v, "Readers")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READERS_PROPERTY_VIEW.html */
 func (v NotesView) SetReaders(readers []String) error {
-	return v.com().PutProperty("Readers", readers)
+	return putComProperty(v, "Readers", readers)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROWLINES_PROPERTY_4578.html */
 func (v NotesView) RowLines() (Long, error) {
-	val, err := v.com().GetProperty("RowLines")
+	val, err := getComProperty(v, "RowLines")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTIONFORMULA_PROPERTY_VIEW.html */
 func (v NotesView) SelectionFormula() (String, error) {
-	val, err := v.com().GetProperty("SelectionFormula")
+	val, err := getComProperty(v, "SelectionFormula")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTIONFORMULA_PROPERTY_VIEW.html */
 func (v NotesView) SetSelectionFormula(formula String) error {
-	return v.com().PutProperty("SelectionFormula", formula)
+	return putComProperty(v, "SelectionFormula", formula)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SPACING_PROPERTY_4165.html */
 func (v NotesView) Spacing() (Long, error) {
-	val, err := v.com().GetProperty("Spacing")
+	val, err := getComProperty(v, "Spacing")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SPACING_PROPERTY_4165.html */
 func (v NotesView) SetSpacing(val Long) error {
-	return v.com().PutProperty("Spacing", val)
+	return putComProperty(v, "Spacing", val)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TOPLEVELENTRYCOUNT_PROPERTY_6487.html */
 func (v NotesView) TopLevelEntryCount() (Long, error) {
-	val, err := v.com().GetProperty("TopLevelEntryCount")
+	val, err := getComProperty(v, "TopLevelEntryCount")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNIVERSALID_PROPERTY_VIEW.html */
 func (v NotesView) UniversalID() (String, error) {
-	val, err := v.com().GetProperty("UniversalID")
+	val, err := getComProperty(v, "UniversalID")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VIEWINHERITEDNAME_PROPERTY_VIEW.html */
 func (v NotesView) ViewInheritedName() (String, error) {
-	val, err := v.com().GetProperty("ViewInheritedName")
+	val, err := getComProperty(v, "ViewInheritedName")
 	return helpers.CastValue[String](val), err
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLEAR_METHOD_VIEW.html */
 func (v NotesView) Clear() error {
-	_, err := v.com().CallMethod("Clear")
+	_, err := callComMethod(v, "Clear")
 	return err
 }
 
@@ -311,7 +311,7 @@ func (v NotesView) CopyColumn(sourceColumn Integer, params ...notesViewCopyColum
 	if paramsStruct.destinationIndex != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.destinationIndex)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CopyColumn", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CopyColumn", paramsOrdered...)
 	return NewNotesViewColumn(dispatchPtr), err
 }
 
@@ -359,7 +359,7 @@ func (v NotesView) CreateColumn(params ...notesViewCreateColumnParam) (NotesView
 			}
 		}
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CreateColumn", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CreateColumn", paramsOrdered...)
 	return NewNotesViewColumn(dispatchPtr), err
 }
 
@@ -387,7 +387,7 @@ func (v NotesView) CreateViewNav(params ...notesViewCreateViewNavParam) (NotesVi
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CreateViewNav", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CreateViewNav", paramsOrdered...)
 	return NewNotesViewNavigator(dispatchPtr), err
 }
 
@@ -415,7 +415,7 @@ func (v NotesView) CreateViewNavFrom(navigatorObject Variant, params ...notesVie
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CreateViewNavFrom", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CreateViewNavFrom", paramsOrdered...)
 	return NewNotesViewNavigator(dispatchPtr), err
 }
 
@@ -443,7 +443,7 @@ func (v NotesView) CreateViewNavFromAllUnread(params ...notesViewCreateViewNavFr
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CreateViewNavFromAllUnread", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CreateViewNavFromAllUnread", paramsOrdered...)
 	return NewNotesViewNavigator(dispatchPtr), err
 }
 
@@ -471,7 +471,7 @@ func (v NotesView) CreateViewNavFromCategory(category String, params ...notesVie
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CreateViewNavFromCategory", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CreateViewNavFromCategory", paramsOrdered...)
 	return NewNotesViewNavigator(dispatchPtr), err
 }
 
@@ -499,7 +499,7 @@ func (v NotesView) CreateViewNavFromChildren(navigatorObject Variant, params ...
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CreateViewNavFromChildren", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CreateViewNavFromChildren", paramsOrdered...)
 	return NewNotesViewNavigator(dispatchPtr), err
 }
 
@@ -527,7 +527,7 @@ func (v NotesView) CreateViewNavFromDescendants(navigatorObject Variant, params 
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CreateViewNavFromDescendants", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CreateViewNavFromDescendants", paramsOrdered...)
 	return NewNotesViewNavigator(dispatchPtr), err
 }
 
@@ -555,13 +555,13 @@ func (v NotesView) CreateViewNavMaxLevel(level Long, params ...notesViewCreateVi
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("CreateViewNavMaxLevel", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "CreateViewNavMaxLevel", paramsOrdered...)
 	return NewNotesViewNavigator(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCH_METHOD_VIEW.html */
 func (v NotesView) FTSearch(query String, maxDocs Integer) (Long, error) {
-	val, err := v.com().CallMethod("FTSearch", query, maxDocs)
+	val, err := callComMethod(v, "FTSearch", query, maxDocs)
 	return helpers.CastValue[Long](val), err
 }
 
@@ -594,7 +594,7 @@ func (v NotesView) GetAllDocumentsByKey(key any, params ...notesViewGetAllDocume
 	if paramsStruct.exactMatch != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("GetAllDocumentsByKey", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "GetAllDocumentsByKey", paramsOrdered...)
 	return NewNotesDocumentCollection(dispatchPtr), err
 }
 
@@ -627,7 +627,7 @@ func (v NotesView) GetAllEntriesByKey(key any, params ...notesViewGetAllEntriesB
 	if paramsStruct.exactMatch != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("GetAllEntriesByKey", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "GetAllEntriesByKey", paramsOrdered...)
 	return NewNotesViewEntryCollection(dispatchPtr), err
 }
 
@@ -655,7 +655,7 @@ func (v NotesView) GetAllReadEntries(params ...notesViewGetAllReadEntriesParam) 
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("GetAllReadEntries", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "GetAllReadEntries", paramsOrdered...)
 	return NewNotesViewEntryCollection(dispatchPtr), err
 }
 
@@ -683,19 +683,19 @@ func (v NotesView) GetAllUnreadEntries(params ...notesViewGetAllUnreadEntriesPar
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("GetAllUnreadEntries", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "GetAllUnreadEntries", paramsOrdered...)
 	return NewNotesViewEntryCollection(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCHILD_METHOD.html */
 func (v NotesView) GetChild(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetChild", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(v, "GetChild", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCOLUMN_METHOD_NOTESVIEW_CLASS.html */
 func (v NotesView) GetColumn(columnNumber Long) (NotesViewColumn, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetColumn", columnNumber)
+	dispatchPtr, err := callComObjectMethod(v, "GetColumn", columnNumber)
 	return NewNotesViewColumn(dispatchPtr), err
 }
 
@@ -728,7 +728,7 @@ func (v NotesView) GetDocumentByKey(key any, params ...notesViewGetDocumentByKey
 	if paramsStruct.exactMatch != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("GetDocumentByKey", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "GetDocumentByKey", paramsOrdered...)
 	return NewNotesDocument(dispatchPtr), err
 }
 
@@ -761,55 +761,55 @@ func (v NotesView) GetEntryByKey(key any, params ...notesViewGetEntryByKeyParam)
 	if paramsStruct.exactMatch != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
 	}
-	dispatchPtr, err := v.com().CallObjectMethod("GetEntryByKey", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(v, "GetEntryByKey", paramsOrdered...)
 	return NewNotesViewEntry(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetFirstDocument() (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetFirstDocument")
+	dispatchPtr, err := callComObjectMethod(v, "GetFirstDocument")
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETLASTDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetLastDocument() (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetLastDocument")
+	dispatchPtr, err := callComObjectMethod(v, "GetLastDocument")
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetNextDocument(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetNextDocument", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(v, "GetNextDocument", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTSIBLING_METHOD.html */
 func (v NotesView) GetNextSibling(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetNextSibling", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(v, "GetNextSibling", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetNthDocument(index Long) (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetNthDocument", index)
+	dispatchPtr, err := callComObjectMethod(v, "GetNthDocument", index)
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARENTDOCUMENT_METHOD.html */
 func (v NotesView) GetParentDocument(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetParentDocument", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(v, "GetParentDocument", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetPrevDocument(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetPrevDocument", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(v, "GetPrevDocument", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVSIBLING_METHOD.html */
 func (v NotesView) GetPrevSibling(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := v.com().CallObjectMethod("GetPrevSibling", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(v, "GetPrevSibling", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
@@ -847,7 +847,7 @@ func (v NotesView) Lock(params ...notesViewLockParam) (Boolean, error) {
 			paramsOrdered = append(paramsOrdered, *paramsStruct.provisionalOK)
 		}
 	}
-	val, err := v.com().CallMethod("Lock", paramsOrdered...)
+	val, err := callComMethod(v, "Lock", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -875,7 +875,7 @@ func (v NotesView) LockProvisional(params ...notesViewLockProvisionalParam) (Boo
 	if paramsStruct.name != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
 	}
-	val, err := v.com().CallMethod("LockProvisional", paramsOrdered...)
+	val, err := callComMethod(v, "LockProvisional", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -903,7 +903,7 @@ func (v NotesView) MarkAllRead(params ...notesViewMarkAllReadParam) error {
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	_, err := v.com().CallMethod("MarkAllRead", paramsOrdered...)
+	_, err := callComMethod(v, "MarkAllRead", paramsOrdered...)
 	return err
 }
 
@@ -931,19 +931,19 @@ func (v NotesView) MarkAllUnread(params ...notesViewMarkAllUnreadParam) error {
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	_, err := v.com().CallMethod("MarkAllUnread", paramsOrdered...)
+	_, err := callComMethod(v, "MarkAllUnread", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REFRESH_METHOD_VIEW.html */
 func (v NotesView) Refresh() error {
-	_, err := v.com().CallMethod("Refresh")
+	_, err := callComMethod(v, "Refresh")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_VIEW.html */
 func (v NotesView) Remove() error {
-	_, err := v.com().CallMethod("Remove")
+	_, err := callComMethod(v, "Remove")
 	return err
 }
 
@@ -981,7 +981,7 @@ func (v NotesView) ResortView(params ...notesViewResortViewParam) error {
 			paramsOrdered = append(paramsOrdered, *paramsStruct.ascendingFlag)
 		}
 	}
-	_, err := v.com().CallMethod("ResortView", paramsOrdered...)
+	_, err := callComMethod(v, "ResortView", paramsOrdered...)
 	return err
 }
 
@@ -1011,12 +1011,12 @@ func (v NotesView) RemoveColumn(params ...notesViewRemoveColumnParam) error {
 	} else {
 		paramsOrdered = append(paramsOrdered, nil)
 	}
-	_, err := v.com().CallMethod("RemoveColumn", paramsOrdered...)
+	_, err := callComMethod(v, "RemoveColumn", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNLOCK_METHOD_VIEW.html */
 func (v NotesView) UnLock() error {
-	_, err := v.com().CallMethod("UnLock")
+	_, err := callComMethod(v, "UnLock")
 	return err
 }

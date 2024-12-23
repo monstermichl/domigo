@@ -26,90 +26,90 @@ func NewNotesRichTextParagraphStyle(dispatchPtr *ole.IDispatch) NotesRichTextPar
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIGNMENT_PROPERTY_6587.html */
 func (r NotesRichTextParagraphStyle) Alignment() (Long, error) {
-	val, err := r.com().GetProperty("Alignment")
+	val, err := getComProperty(r, "Alignment")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALIGNMENT_PROPERTY_6587.html */
 func (r NotesRichTextParagraphStyle) SetAlignment(v Long) error {
-	return r.com().PutProperty("Alignment", v)
+	return putComProperty(r, "Alignment", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FIRSTLINELEFTMARGIN_PROPERTY_4412.html */
 func (r NotesRichTextParagraphStyle) FirstLineLeftMargin() (Long, error) {
-	val, err := r.com().GetProperty("FirstLineLeftMargin")
+	val, err := getComProperty(r, "FirstLineLeftMargin")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FIRSTLINELEFTMARGIN_PROPERTY_4412.html */
 func (r NotesRichTextParagraphStyle) SetFirstLineLeftMargin(v Long) error {
-	return r.com().PutProperty("FirstLineLeftMargin", v)
+	return putComProperty(r, "FirstLineLeftMargin", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERLINESPACING_PROPERTY_9542.html */
 func (r NotesRichTextParagraphStyle) InterLineSpacing() (Long, error) {
-	val, err := r.com().GetProperty("InterLineSpacing")
+	val, err := getComProperty(r, "InterLineSpacing")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERLINESPACING_PROPERTY_9542.html */
 func (r NotesRichTextParagraphStyle) SetInterLineSpacing(v Long) error {
-	return r.com().PutProperty("InterLineSpacing", v)
+	return putComProperty(r, "InterLineSpacing", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LEFTMARGIN_PROPERTY_4793.html */
 func (r NotesRichTextParagraphStyle) LeftMargin() (Long, error) {
-	val, err := r.com().GetProperty("LeftMargin")
+	val, err := getComProperty(r, "LeftMargin")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LEFTMARGIN_PROPERTY_4793.html */
 func (r NotesRichTextParagraphStyle) SetLeftMargin(v Long) error {
-	return r.com().PutProperty("LeftMargin", v)
+	return putComProperty(r, "LeftMargin", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PAGINATION_PROPERTY_RTPARAGRAPHSTYLE.html */
 func (r NotesRichTextParagraphStyle) Pagination() (Long, error) {
-	val, err := r.com().GetProperty("Pagination")
+	val, err := getComProperty(r, "Pagination")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PAGINATION_PROPERTY_RTPARAGRAPHSTYLE.html */
 func (r NotesRichTextParagraphStyle) SetPagination(v Long) error {
-	return r.com().PutProperty("Pagination", v)
+	return putComProperty(r, "Pagination", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RIGHTMARGIN_PROPERTY_480.html */
 func (r NotesRichTextParagraphStyle) RightMargin() (Long, error) {
-	val, err := r.com().GetProperty("RightMargin")
+	val, err := getComProperty(r, "RightMargin")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RIGHTMARGIN_PROPERTY_480.html */
 func (r NotesRichTextParagraphStyle) SetRightMargin(v Long) error {
-	return r.com().PutProperty("RightMargin", v)
+	return putComProperty(r, "RightMargin", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SPACINGABOVE_PROPERTY_7663.html */
 func (r NotesRichTextParagraphStyle) SpacingAbove() (Long, error) {
-	val, err := r.com().GetProperty("SpacingAbove")
+	val, err := getComProperty(r, "SpacingAbove")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SPACINGABOVE_PROPERTY_7663.html */
 func (r NotesRichTextParagraphStyle) SetSpacingAbove(v Long) error {
-	return r.com().PutProperty("SpacingAbove", v)
+	return putComProperty(r, "SpacingAbove", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SPACINGBELOW_PROPERTY_8858.html */
 func (r NotesRichTextParagraphStyle) SpacingBelow() (Long, error) {
-	val, err := r.com().GetProperty("SpacingBelow")
+	val, err := getComProperty(r, "SpacingBelow")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SPACINGBELOW_PROPERTY_8858.html */
 func (r NotesRichTextParagraphStyle) SetSpacingBelow(v Long) error {
-	return r.com().PutProperty("SpacingBelow", v)
+	return putComProperty(r, "SpacingBelow", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TABS_PROPERTY_5218.html */
@@ -120,7 +120,7 @@ func (r NotesRichTextParagraphStyle) Tabs() ([]NotesRichTextTab, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLEARALLTABS_METHOD_3625.html */
 func (r NotesRichTextParagraphStyle) ClearAllTabs() error {
-	_, err := r.com().CallMethod("ClearAllTabs")
+	_, err := callComMethod(r, "ClearAllTabs")
 	return err
 }
 
@@ -148,7 +148,7 @@ func (r NotesRichTextParagraphStyle) SetTab(position Long, params ...notesRichTe
 	if paramsStruct.tabType != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.tabType)
 	}
-	_, err := r.com().CallMethod("SetTab", paramsOrdered...)
+	_, err := callComMethod(r, "SetTab", paramsOrdered...)
 	return err
 }
 
@@ -186,6 +186,6 @@ func (r NotesRichTextParagraphStyle) SetTabs(number Integer, startposition Long,
 			paramsOrdered = append(paramsOrdered, *paramsStruct.tabType)
 		}
 	}
-	_, err := r.com().CallMethod("SetTabs", paramsOrdered...)
+	_, err := callComMethod(r, "SetTabs", paramsOrdered...)
 	return err
 }

@@ -25,35 +25,35 @@ func (p NotesPropertyBroker) InputPropertyContext() ([]NotesProperty, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_CLEARPROPERTY_METHOD.html */
 func (p NotesPropertyBroker) ClearProperty(name String) error {
-	_, err := p.com().CallMethod("ClearProperty", name)
+	_, err := callComMethod(p, "ClearProperty", name)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_GETPROPERTY_METHOD.html */
 func (p NotesPropertyBroker) GetProperty(name String) (NotesProperty, error) {
-	dispatchPtr, err := p.com().CallObjectMethod("GetProperty", name)
+	dispatchPtr, err := callComObjectMethod(p, "GetProperty", name)
 	return NewNotesProperty(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_GETPROPERTYVALUE_METHOD.html */
 func (p NotesPropertyBroker) GetPropertyValue(name String) (any, error) {
-	return p.com().CallMethod("GetPropertyValue", name)
+	return callComMethod(p, "GetPropertyValue", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_HASPROPERTY_METHOD.html */
 func (p NotesPropertyBroker) HasProperty(Name String) (Boolean, error) {
-	val, err := p.com().CallMethod("HasProperty", Name)
+	val, err := callComMethod(p, "HasProperty", Name)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_PUBLISH_METHOD.html */
 func (p NotesPropertyBroker) Publish() error {
-	_, err := p.com().CallMethod("Publish")
+	_, err := callComMethod(p, "Publish")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_SETPROPERTYVALUE_METHOD.html */
 func (p NotesPropertyBroker) SetPropertyValue(name String, value String) (NotesProperty, error) {
-	dispatchPtr, err := p.com().CallObjectMethod("SetPropertyValue", name, value)
+	dispatchPtr, err := callComObjectMethod(p, "SetPropertyValue", name, value)
 	return NewNotesProperty(dispatchPtr), err
 }

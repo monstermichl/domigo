@@ -31,43 +31,43 @@ func NewNotesMIMEEntity(dispatchPtr *ole.IDispatch) NotesMIMEEntity {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BOUNDARYEND_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) BoundaryEnd() (String, error) {
-	val, err := m.com().GetProperty("BoundaryEnd")
+	val, err := getComProperty(m, "BoundaryEnd")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_BOUNDARYSTART_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) BoundaryStart() (String, error) {
-	val, err := m.com().GetProperty("BoundaryStart")
+	val, err := getComProperty(m, "BoundaryStart")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CHARSET_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) Charset() (String, error) {
-	val, err := m.com().GetProperty("Charset")
+	val, err := getComProperty(m, "Charset")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONTENTASTEXT_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) ContentAsText() (String, error) {
-	val, err := m.com().GetProperty("ContentAsText")
+	val, err := getComProperty(m, "ContentAsText")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONTENTSUBTYPE_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) ContentSubType() (String, error) {
-	val, err := m.com().GetProperty("ContentSubType")
+	val, err := getComProperty(m, "ContentSubType")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONTENTTYPE_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) ContentType() (String, error) {
-	val, err := m.com().GetProperty("ContentType")
+	val, err := getComProperty(m, "ContentType")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCODING_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) Encoding() (NotesMIMEEntityEncoding, error) {
-	val, err := m.com().GetProperty("Encoding")
+	val, err := getComProperty(m, "Encoding")
 	return helpers.CastValue[NotesMIMEEntityEncoding](val), err
 }
 
@@ -78,19 +78,19 @@ func (m NotesMIMEEntity) HeaderObjects() ([]NotesMIMEHeader, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HEADERS_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) Headers() (String, error) {
-	val, err := m.com().GetProperty("Headers")
+	val, err := getComProperty(m, "Headers")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PREAMBLE_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) Preamble() (String, error) {
-	val, err := m.com().GetProperty("Preamble")
+	val, err := getComProperty(m, "Preamble")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PREAMBLE_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) SetPreamble(v String) error {
-	return m.com().PutProperty("Preamble", v)
+	return putComProperty(m, "Preamble", v)
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -118,31 +118,31 @@ func (m NotesMIMEEntity) CreateChildEntity(params ...notesMIMEEntityCreateChildE
 	if paramsStruct.nextSibling != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.nextSibling)
 	}
-	dispatchPtr, err := m.com().CallObjectMethod("CreateChildEntity", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(m, "CreateChildEntity", paramsOrdered...)
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEHEADER_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) CreateHeader(headerName String) (NotesMIMEHeader, error) {
-	dispatchPtr, err := m.com().CallObjectMethod("CreateHeader", headerName)
+	dispatchPtr, err := callComObjectMethod(m, "CreateHeader", headerName)
 	return NewNotesMIMEHeader(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEPARENTENTITY_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) CreateParentEntity() (NotesMIMEEntity, error) {
-	dispatchPtr, err := m.com().CallObjectMethod("CreateParentEntity")
+	dispatchPtr, err := callComObjectMethod(m, "CreateParentEntity")
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DECODECONTENT_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) DecodeContent() error {
-	_, err := m.com().CallMethod("DecodeContent")
+	_, err := callComMethod(m, "DecodeContent")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCODECONTENT_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) EncodeContent(encoding NotesMIMEEntityEncoding) error {
-	_, err := m.com().CallMethod("EncodeContent", encoding)
+	_, err := callComMethod(m, "EncodeContent", encoding)
 	return err
 }
 
@@ -170,7 +170,7 @@ func (m NotesMIMEEntity) GetContentAsBytes(stream NotesStream, params ...notesMI
 	if paramsStruct.decoded != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.decoded)
 	}
-	_, err := m.com().CallMethod("GetContentAsBytes", paramsOrdered...)
+	_, err := callComMethod(m, "GetContentAsBytes", paramsOrdered...)
 	return err
 }
 
@@ -198,7 +198,7 @@ func (m NotesMIMEEntity) GetContentAsText(stream NotesStream, params ...notesMIM
 	if paramsStruct.decoded != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.decoded)
 	}
-	_, err := m.com().CallMethod("GetContentAsText", paramsOrdered...)
+	_, err := callComMethod(m, "GetContentAsText", paramsOrdered...)
 	return err
 }
 
@@ -236,13 +236,13 @@ func (m NotesMIMEEntity) GetEntityAsText(stream NotesStream, params ...notesMIME
 			paramsOrdered = append(paramsOrdered, *paramsStruct.inclusive)
 		}
 	}
-	_, err := m.com().CallMethod("GetEntityAsText", paramsOrdered...)
+	_, err := callComMethod(m, "GetEntityAsText", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTCHILDENTITY_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) GetFirstChildEntity() (NotesMIMEEntity, error) {
-	dispatchPtr, err := m.com().CallObjectMethod("GetFirstChildEntity")
+	dispatchPtr, err := callComObjectMethod(m, "GetFirstChildEntity")
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
@@ -270,13 +270,13 @@ func (m NotesMIMEEntity) GetNextEntity(params ...notesMIMEEntityGetNextEntityPar
 	if paramsStruct.search != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.search)
 	}
-	dispatchPtr, err := m.com().CallObjectMethod("GetNextEntity", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(m, "GetNextEntity", paramsOrdered...)
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTSIBLING_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) GetNextSibling() (NotesMIMEEntity, error) {
-	dispatchPtr, err := m.com().CallObjectMethod("GetNextSibling")
+	dispatchPtr, err := callComObjectMethod(m, "GetNextSibling")
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
@@ -304,13 +304,13 @@ func (m NotesMIMEEntity) GetNthHeader(headerName String, params ...notesMIMEEnti
 	if paramsStruct.instance != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.instance)
 	}
-	dispatchPtr, err := m.com().CallObjectMethod("GetNthHeader", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(m, "GetNthHeader", paramsOrdered...)
 	return NewNotesMIMEHeader(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARENTENTITY_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) GetParentEntity() (NotesMIMEEntity, error) {
-	dispatchPtr, err := m.com().CallObjectMethod("GetParentEntity")
+	dispatchPtr, err := callComObjectMethod(m, "GetParentEntity")
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
@@ -338,13 +338,13 @@ func (m NotesMIMEEntity) GetPrevEntity(params ...notesMIMEEntityGetPrevEntityPar
 	if paramsStruct.search != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.search)
 	}
-	dispatchPtr, err := m.com().CallObjectMethod("GetPrevEntity", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(m, "GetPrevEntity", paramsOrdered...)
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVSIBLING_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) GetPrevSibling() (NotesMIMEEntity, error) {
-	dispatchPtr, err := m.com().CallObjectMethod("GetPrevSibling")
+	dispatchPtr, err := callComObjectMethod(m, "GetPrevSibling")
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
@@ -382,24 +382,24 @@ func (m NotesMIMEEntity) GetSomeHeaders(params ...notesMIMEEntityGetSomeHeadersP
 			paramsOrdered = append(paramsOrdered, *paramsStruct.inclusive)
 		}
 	}
-	val, err := m.com().CallMethod("GetSomeHeaders", paramsOrdered...)
+	val, err := callComMethod(m, "GetSomeHeaders", paramsOrdered...)
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) Remove() error {
-	_, err := m.com().CallMethod("Remove")
+	_, err := callComMethod(m, "Remove")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCONTENTFROMBYTES_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) SetContentFromBytes(stream NotesStream, contentType String, encoding NotesMIMEEntityEncoding) error {
-	_, err := m.com().CallMethod("SetContentFromBytes", stream.com().Dispatch(), contentType, encoding)
+	_, err := callComMethod(m, "SetContentFromBytes", stream.com().Dispatch(), contentType, encoding)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCONTENTFROMTEXT_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) SetContentFromText(stream NotesStream, contentType String, encoding NotesMIMEEntityEncoding) error {
-	_, err := m.com().CallMethod("SetContentFromText", stream.com().Dispatch(), contentType, encoding)
+	_, err := callComMethod(m, "SetContentFromText", stream.com().Dispatch(), contentType, encoding)
 	return err
 }

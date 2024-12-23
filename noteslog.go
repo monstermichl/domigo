@@ -43,111 +43,111 @@ func NewNotesLog(dispatchPtr *ole.IDispatch) NotesLog {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOGACTIONS_PROPERTY.html */
 func (l NotesLog) LogActions() (Boolean, error) {
-	val, err := l.com().GetProperty("LogActions")
+	val, err := getComProperty(l, "LogActions")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOGACTIONS_PROPERTY.html */
 func (l NotesLog) SetLogActions(v Boolean) error {
-	return l.com().PutProperty("LogActions", v)
+	return putComProperty(l, "LogActions", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOGERRORS_PROPERTY.html */
 func (l NotesLog) LogErrors() (Boolean, error) {
-	val, err := l.com().GetProperty("LogErrors")
+	val, err := getComProperty(l, "LogErrors")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOGERRORS_PROPERTY.html */
 func (l NotesLog) SetLogErrors(v Boolean) error {
-	return l.com().PutProperty("LogErrors", v)
+	return putComProperty(l, "LogErrors", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NUMACTIONS_PROPERTY.html */
 func (l NotesLog) NumActions() (Long, error) {
-	val, err := l.com().GetProperty("NumActions")
+	val, err := getComProperty(l, "NumActions")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NUMERRORS_PROPERTY.html */
 func (l NotesLog) NumErrors() (Long, error) {
-	val, err := l.com().GetProperty("NumErrors")
+	val, err := getComProperty(l, "NumErrors")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OVERWRITEFILE_PROPERTY.html */
 func (l NotesLog) OverwriteFile() (Boolean, error) {
-	val, err := l.com().GetProperty("OverwriteFile")
+	val, err := getComProperty(l, "OverwriteFile")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OVERWRITEFILE_PROPERTY.html */
 func (l NotesLog) SetOverwriteFile(v Boolean) error {
-	return l.com().PutProperty("OverwriteFile", v)
+	return putComProperty(l, "OverwriteFile", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_LOG_COM.html */
 func (l NotesLog) Parent() (NotesSession, error) {
-	dispatchPtr, err := l.com().GetObjectProperty("Parent")
+	dispatchPtr, err := getComObjectProperty(l, "Parent")
 	return NewNotesSession(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROGRAMNAME_PROPERTY.html */
 func (l NotesLog) ProgramName() (String, error) {
-	val, err := l.com().GetProperty("ProgramName")
+	val, err := getComProperty(l, "ProgramName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROGRAMNAME_PROPERTY.html */
 func (l NotesLog) SetProgramName(v String) error {
-	return l.com().PutProperty("ProgramName", v)
+	return putComProperty(l, "ProgramName", v)
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLOSE_METHOD_LOG.html */
 func (l NotesLog) Close() error {
-	_, err := l.com().CallMethod("Close")
+	_, err := callComMethod(l, "Close")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOGACTION_METHOD.html */
 func (l NotesLog) LogAction(description String) error {
-	_, err := l.com().CallMethod("LogAction", description)
+	_, err := callComMethod(l, "LogAction", description)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOGERROR_METHOD.html */
 func (l NotesLog) LogError(code Integer, description String) error {
-	_, err := l.com().CallMethod("LogError", code, description)
+	_, err := callComMethod(l, "LogError", code, description)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOGEVENT_METHOD.html */
 func (l NotesLog) LogEvent(message String, queuename String, eventType NotesLogEventType, severity NotesLogSeverity) error {
-	_, err := l.com().CallMethod("LogEvent", message, queuename, eventType, severity)
+	_, err := callComMethod(l, "LogEvent", message, queuename, eventType, severity)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENAGENTLOG_METHOD.html */
 func (l NotesLog) OpenAgentLog() error {
-	_, err := l.com().CallMethod("OpenAgentLog")
+	_, err := callComMethod(l, "OpenAgentLog")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENFILELOG_METHOD.html */
 func (l NotesLog) OpenFileLog(path String) error {
-	_, err := l.com().CallMethod("OpenFileLog", path)
+	_, err := callComMethod(l, "OpenFileLog", path)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENMAILLOG_METHOD.html */
 func (l NotesLog) OpenMailLog(recipientsV []Single, subject String) error {
-	_, err := l.com().CallMethod("OpenMailLog", recipientsV, subject)
+	_, err := callComMethod(l, "OpenMailLog", recipientsV, subject)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OPENNOTESLOG_METHOD.html */
 func (l NotesLog) OpenNotesLog(server String, dbfile String) error {
-	_, err := l.com().CallMethod("OpenNotesLog", server, dbfile)
+	_, err := callComMethod(l, "OpenNotesLog", server, dbfile)
 	return err
 }

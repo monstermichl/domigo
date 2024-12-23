@@ -22,31 +22,31 @@ func (d NotesDocumentCollection) checkCombinableTypes(val any) error {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COUNT_PROPERTY.html */
 func (d NotesDocumentCollection) Count() (Long, error) {
-	val, err := d.com().GetProperty("Count")
+	val, err := getComProperty(d, "Count")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISSORTED_PROPERTY_COLLECTION.html */
 func (d NotesDocumentCollection) IsSorted() (Boolean, error) {
-	val, err := d.com().GetProperty("IsSorted")
+	val, err := getComProperty(d, "IsSorted")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_COLLECTION.html */
 func (d NotesDocumentCollection) Parent() (NotesDatabase, error) {
-	dispatchPtr, err := d.com().GetObjectProperty("Parent")
+	dispatchPtr, err := getComObjectProperty(d, "Parent")
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_QUERY_PROPERTY_COLLECTION.html */
 func (d NotesDocumentCollection) Query() (String, error) {
-	val, err := d.com().GetProperty("Query")
+	val, err := getComProperty(d, "Query")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNTILTIME_PROPERTY_COLLECTION.html */
 func (d NotesDocumentCollection) UntilTime() (NotesDateTime, error) {
-	dispatchPtr, err := d.com().GetObjectProperty("UntilTime")
+	dispatchPtr, err := getComObjectProperty(d, "UntilTime")
 	return NewNotesDateTime(dispatchPtr), err
 }
 
@@ -75,13 +75,13 @@ func (d NotesDocumentCollection) AddDocument(document NotesDocument, params ...n
 	if paramsStruct.checkDups != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.checkDups)
 	}
-	_, err := d.com().CallMethod("AddDocument", paramsOrdered...)
+	_, err := callComMethod(d, "AddDocument", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLONE_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) Clone() error {
-	_, err := d.com().CallMethod("Clone")
+	_, err := callComMethod(d, "Clone")
 	return err
 }
 
@@ -93,55 +93,55 @@ func (d NotesDocumentCollection) Contains(inputNotes any) (Boolean, error) {
 	if err != nil {
 		return false, err
 	}
-	val, err := d.com().CallMethod("Contains", inputNotes)
+	val, err := callComMethod(d, "Contains", inputNotes)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEDOCUMENT_METHOD_7984_ABOUT.html */
 func (d NotesDocumentCollection) DeleteDocument(document NotesDocument) error {
-	_, err := d.com().CallMethod("DeleteDocument", document.com().Dispatch())
+	_, err := callComMethod(d, "DeleteDocument", document.com().Dispatch())
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCH_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) FTSearch(query String, maxDocs Integer) error {
-	_, err := d.com().CallMethod("FTSearch", query, maxDocs)
+	_, err := callComMethod(d, "FTSearch", query, maxDocs)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENT_METHOD_DOCCOLL.html */
 func (d NotesDocumentCollection) GetDocument(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetDocument", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(d, "GetDocument", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetFirstDocument() (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetFirstDocument")
+	dispatchPtr, err := callComObjectMethod(d, "GetFirstDocument")
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETLASTDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetLastDocument() (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetLastDocument")
+	dispatchPtr, err := callComObjectMethod(d, "GetLastDocument")
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetNextDocument(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetNextDocument", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(d, "GetNextDocument", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetNthDocument(n Long) (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetNthDocument", n)
+	dispatchPtr, err := callComObjectMethod(d, "GetNthDocument", n)
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetPrevDocument(document NotesDocument) (NotesDocument, error) {
-	dispatchPtr, err := d.com().CallObjectMethod("GetPrevDocument", document.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(d, "GetPrevDocument", document.com().Dispatch())
 	return NewNotesDocument(dispatchPtr), err
 }
 
@@ -153,7 +153,7 @@ func (d NotesDocumentCollection) Intersect(inputNotes any) error {
 	if err != nil {
 		return err
 	}
-	_, err = d.com().CallMethod("Intersect", inputNotes)
+	_, err = callComMethod(d, "Intersect", inputNotes)
 	return err
 }
 
@@ -181,7 +181,7 @@ func (d NotesDocumentCollection) MarkAllRead(params ...notesDocumentCollectionMa
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	_, err := d.com().CallMethod("MarkAllRead", paramsOrdered...)
+	_, err := callComMethod(d, "MarkAllRead", paramsOrdered...)
 	return err
 }
 
@@ -209,7 +209,7 @@ func (d NotesDocumentCollection) MarkAllUnread(params ...notesDocumentCollection
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	_, err := d.com().CallMethod("MarkAllUnread", paramsOrdered...)
+	_, err := callComMethod(d, "MarkAllUnread", paramsOrdered...)
 	return err
 }
 
@@ -221,7 +221,7 @@ func (d NotesDocumentCollection) Merge(inputNotes any) error {
 	if err != nil {
 		return err
 	}
-	_, err = d.com().CallMethod("Merge", inputNotes)
+	_, err = callComMethod(d, "Merge", inputNotes)
 	return err
 }
 
@@ -249,31 +249,31 @@ func (d NotesDocumentCollection) PutAllInFolder(folderName String, params ...not
 	if paramsStruct.createonfail != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.createonfail)
 	}
-	_, err := d.com().CallMethod("PutAllInFolder", paramsOrdered...)
+	_, err := callComMethod(d, "PutAllInFolder", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEALL_METHOD.html */
 func (d NotesDocumentCollection) RemoveAll(force Boolean) error {
-	_, err := d.com().CallMethod("RemoveAll", force)
+	_, err := callComMethod(d, "RemoveAll", force)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEALLFROMFOLDER_METHOD.html */
 func (d NotesDocumentCollection) RemoveAllFromFolder(folderName String) error {
-	_, err := d.com().CallMethod("RemoveAllFromFolder", folderName)
+	_, err := callComMethod(d, "RemoveAllFromFolder", folderName)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STAMPALL_METHOD.html */
 func (d NotesDocumentCollection) StampAll(itemname String, value any) error {
-	_, err := d.com().CallMethod("StampAll", itemname, value)
+	_, err := callComMethod(d, "StampAll", itemname, value)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STAMPALLMULTI_METHOD_DOCCOL.html */
 func (d NotesDocumentCollection) StampAllMulti(document NotesDocument) error {
-	_, err := d.com().CallMethod("StampAllMulti", document.com().Dispatch())
+	_, err := callComMethod(d, "StampAllMulti", document.com().Dispatch())
 	return err
 }
 
@@ -285,12 +285,12 @@ func (d NotesDocumentCollection) Subtract(inputNotes any) error {
 	if err != nil {
 		return err
 	}
-	_, err = d.com().CallMethod("Subtract", inputNotes)
+	_, err = callComMethod(d, "Subtract", inputNotes)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEALL_METHOD.html */
 func (d NotesDocumentCollection) UpdateAll() error {
-	_, err := d.com().CallMethod("UpdateAll")
+	_, err := callComMethod(d, "UpdateAll")
 	return err
 }

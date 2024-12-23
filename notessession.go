@@ -43,7 +43,7 @@ func initialize(params ...interface{}) (NotesSession, error) {
 		return session, errors.New("session could not be initialized")
 	}
 	session = NewNotesSession(com.Dispatch())
-	_, err = session.com().CallObjectMethod("Initialize", params...)
+	_, err = callComObjectMethod(session, "Initialize", params...)
 
 	if err != nil {
 		return session, errors.New("session could not be initialized")
@@ -113,120 +113,120 @@ func (s NotesSession) AddressBooks() ([]NotesDatabase, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COMMONUSERNAME_PROPERTY.html */
 func (s NotesSession) CommonUserName() (String, error) {
-	val, err := s.com().GetProperty("CommonUserName")
+	val, err := getComProperty(s, "CommonUserName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONVERTMIME_PROPERTY.html */
 func (s NotesSession) ConvertMIME() (Boolean, error) {
-	val, err := s.com().GetProperty("ConvertMIME")
+	val, err := getComProperty(s, "ConvertMIME")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CONVERTMIME_PROPERTY.html */
 func (s NotesSession) SetConvertMIME(v Boolean) error {
-	return s.com().PutProperty("ConvertMIME", v)
+	return putComProperty(s, "ConvertMIME", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTAGENT_PROPERTY.html */
 func (s NotesSession) CurrentAgent() (NotesAgent, error) {
-	dispatchPtr, err := s.com().GetObjectProperty("CurrentAgent")
+	dispatchPtr, err := getComObjectProperty(s, "CurrentAgent")
 	return NewNotesAgent(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTDATABASE_PROPERTY.html */
 func (s NotesSession) CurrentDatabase() (NotesDatabase, error) {
-	dispatchPtr, err := s.com().GetObjectProperty("CurrentDatabase")
+	dispatchPtr, err := getComObjectProperty(s, "CurrentDatabase")
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DOCUMENTCONTEXT_PROPERTY.html */
 func (s NotesSession) DocumentContext() (NotesDocument, error) {
-	dispatchPtr, err := s.com().GetObjectProperty("DocumentContext")
+	dispatchPtr, err := getComObjectProperty(s, "DocumentContext")
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EFFECTIVEUSERNAME_PROPERTY.html */
 func (s NotesSession) EffectiveUserName() (String, error) {
-	val, err := s.com().GetProperty("EffectiveUserName")
+	val, err := getComProperty(s, "EffectiveUserName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HTTPURL_PROPERTY_SESSION_COM.html */
 func (s NotesSession) HttpURL() (String, error) {
-	val, err := s.com().GetProperty("HttpURL")
+	val, err := getComProperty(s, "HttpURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERNATIONAL_PROPERTY.html */
 func (s NotesSession) International() (Integer, error) {
-	val, err := s.com().GetProperty("International")
+	val, err := getComProperty(s, "International")
 	return helpers.CastValue[Integer](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISONSERVER_PROPERTY.html */
 func (s NotesSession) IsOnServer() (Boolean, error) {
-	val, err := s.com().GetProperty("IsOnServer")
+	val, err := getComProperty(s, "IsOnServer")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTEXITSTATUS_PROPERTY.html */
 func (s NotesSession) LastExitStatus() (Long, error) {
-	val, err := s.com().GetProperty("LastExitStatus")
+	val, err := getComProperty(s, "LastExitStatus")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTRUN_PROPERTY_SESSION.html */
 func (s NotesSession) LastRun() (Time, error) {
-	val, err := s.com().GetProperty("LastRun")
+	val, err := getComProperty(s, "LastRun")
 	return helpers.CastValue[Time](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESBUILDVERSION_PROPERTY_4714_ABOUT.html */
 func (s NotesSession) NotesBuildVersion() (Long, error) {
-	val, err := s.com().GetProperty("NotesBuildVersion")
+	val, err := getComProperty(s, "NotesBuildVersion")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESURL_PROPERTY_SESSION_COM.html */
 func (s NotesSession) NotesURL() (String, error) {
-	val, err := s.com().GetProperty("NotesURL")
+	val, err := getComProperty(s, "NotesURL")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESVERSION_PROPERTY.html */
 func (s NotesSession) NotesVersion() (String, error) {
-	val, err := s.com().GetProperty("NotesVersion")
+	val, err := getComProperty(s, "NotesVersion")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ORGDIRECTORYPATH_PROPERTY_SESSION.html */
 func (s NotesSession) OrgDirectoryPath() (String, error) {
-	val, err := s.com().GetProperty("OrgDirectoryPath")
+	val, err := getComProperty(s, "OrgDirectoryPath")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PLATFORM_PROPERTY.html */
 func (s NotesSession) Platform() (String, error) {
-	val, err := s.com().GetProperty("Platform")
+	val, err := getComProperty(s, "Platform")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVEDDATA_PROPERTY.html */
 func (s NotesSession) SavedData() (NotesDocument, error) {
-	dispatchPtr, err := s.com().GetObjectProperty("SavedData")
+	dispatchPtr, err := getComObjectProperty(s, "SavedData")
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SERVERNAME_PROPERTY_SESSION_COM.html */
 func (s NotesSession) ServerName() (String, error) {
-	val, err := s.com().GetProperty("ServerName")
+	val, err := getComProperty(s, "ServerName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_URLDATABASE_PROPERTY_SESSION_COM.html */
 func (s NotesSession) URLDatabase() (NotesDatabase, error) {
-	dispatchPtr, err := s.com().GetObjectProperty("URLDatabase")
+	dispatchPtr, err := getComObjectProperty(s, "URLDatabase")
 	return NewNotesDatabase(dispatchPtr), err
 }
 
@@ -237,7 +237,7 @@ func (s NotesSession) UserGroupNameList() ([]NotesName, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERNAME_PROPERTY.html */
 func (s NotesSession) UserName() (String, error) {
-	val, err := s.com().GetProperty("UserName")
+	val, err := getComProperty(s, "UserName")
 	return helpers.CastValue[String](val), err
 }
 
@@ -248,32 +248,32 @@ func (s NotesSession) UserNameList() ([]NotesName, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERNAMEOBJECT_PROPERTY_SESSION_COM.html */
 func (s NotesSession) UserNameObject() (NotesName, error) {
-	dispatchPtr, err := s.com().GetObjectProperty("UserNameObject")
+	dispatchPtr, err := getComObjectProperty(s, "UserNameObject")
 	return NewNotesName(dispatchPtr), err
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEADMINISTRATIONPROCESS_METHOD_SESSION.html */
 func (s NotesSession) CreateAdministrationProcess(server String) (NotesAdministrationProcess, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateAdministrationProcess", server)
+	dispatchPtr, err := callComObjectMethod(s, "CreateAdministrationProcess", server)
 	return NewNotesAdministrationProcess(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATECOLOROBJECT_METHOD_SESSION.html */
 func (s NotesSession) CreateColorObject() (NotesColorObject, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateColorObject")
+	dispatchPtr, err := callComObjectMethod(s, "CreateColorObject")
 	return NewNotesColorObject(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDATERANGE_METHOD.html */
 func (s NotesSession) CreateDateRange() (NotesDateRange, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateDateRange")
+	dispatchPtr, err := callComObjectMethod(s, "CreateDateRange")
 	return NewNotesDateRange(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDATETIME_METHOD.html */
 func (s NotesSession) CreateDateTime(dateTime String) (NotesDateTime, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateDateTime", dateTime)
+	dispatchPtr, err := callComObjectMethod(s, "CreateDateTime", dateTime)
 	return NewNotesDateTime(dispatchPtr), err
 }
 
@@ -313,7 +313,7 @@ func (s NotesSession) CreateDateTime(dateTime String) (NotesDateTime, error) {
 //                 paramsOrdered = append(paramsOrdered, *paramsStruct.output)
 //             }
 //     }
-//     dispatchPtr, err := s.com().CallObjectMethod("CreateDXLExporter", paramsOrdered...)
+//     dispatchPtr, err := CallComObjectMethod(s, "CreateDXLExporter", paramsOrdered...)
 //     return New(dispatchPtr), err
 // }
 
@@ -353,13 +353,13 @@ func (s NotesSession) CreateDateTime(dateTime String) (NotesDateTime, error) {
 //                 paramsOrdered = append(paramsOrdered, *paramsStruct.output)
 //             }
 //     }
-//     dispatchPtr, err := s.com().CallObjectMethod("CreateDXLImporter", paramsOrdered...)
+//     dispatchPtr, err := CallComObjectMethod(s, "CreateDXLImporter", paramsOrdered...)
 //     return New(dispatchPtr), err
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATELOG_METHOD.html */
 func (s NotesSession) CreateLog(programName String) (NotesLog, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateLog", programName)
+	dispatchPtr, err := callComObjectMethod(s, "CreateLog", programName)
 	return NewNotesLog(dispatchPtr), err
 }
 
@@ -387,31 +387,31 @@ func (s NotesSession) CreateName(name String, params ...notesSessionCreateNamePa
 	if paramsStruct.language != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.language)
 	}
-	dispatchPtr, err := s.com().CallObjectMethod("CreateName", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(s, "CreateName", paramsOrdered...)
 	return NewNotesName(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATENEWSLETTER_METHOD.html */
 func (s NotesSession) CreateNewsletter(notesDocumentCollection NotesDocumentCollection) (NotesNewsletter, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateNewsletter", notesDocumentCollection.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(s, "CreateNewsletter", notesDocumentCollection.com().Dispatch())
 	return NewNotesNewsletter(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEREGISTRATION_METHOD_SESSION_COM.html */
 func (s NotesSession) CreateRegistration() (NotesRegistration, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateRegistration")
+	dispatchPtr, err := callComObjectMethod(s, "CreateRegistration")
 	return NewNotesRegistration(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATERICHTEXTPARAGRAPHSTYLE_METHOD_8901_ABOUT.html */
 func (s NotesSession) CreateRichTextParagraphStyle() (NotesRichTextParagraphStyle, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateRichTextParagraphStyle")
+	dispatchPtr, err := callComObjectMethod(s, "CreateRichTextParagraphStyle")
 	return NewNotesRichTextParagraphStyle(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATERICHTEXTSTYLE_METHOD.html */
 func (s NotesSession) CreateRichTextStyle() (NotesRichTextStyle, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateRichTextStyle")
+	dispatchPtr, err := callComObjectMethod(s, "CreateRichTextStyle")
 	return NewNotesRichTextStyle(dispatchPtr), err
 }
 
@@ -450,13 +450,13 @@ func (s NotesSession) CreateRichTextStyle() (NotesRichTextStyle, error) {
 //                 paramsOrdered = append(paramsOrdered, *paramsStruct.output)
 //             }
 //     }
-//     dispatchPtr, err := s.com().CallObjectMethod("CreateSAXParser", paramsOrdered...)
+//     dispatchPtr, err := CallComObjectMethod(s, "CreateSAXParser", paramsOrdered...)
 //     return New(dispatchPtr), err
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATESTREAM_METHOD_SESSION.html */
 func (s NotesSession) CreateStream() (NotesStream, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("CreateStream")
+	dispatchPtr, err := callComObjectMethod(s, "CreateStream")
 	return NewNotesStream(dispatchPtr), err
 }
 
@@ -505,13 +505,13 @@ func (s NotesSession) CreateStream() (NotesStream, error) {
 //                         }
 //             }
 //     }
-//     dispatchPtr, err := s.com().CallObjectMethod("CreateXSLTransformer", paramsOrdered...)
+//     dispatchPtr, err := CallComObjectMethod(s, "CreateXSLTransformer", paramsOrdered...)
 //     return New(dispatchPtr), err
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EVALUATE_METHOD_SESSION_COM.html */
 func (s NotesSession) Evaluate(formula String, doc NotesDocument) (Variant, error) {
-	val, err := s.com().CallMethod("Evaluate", formula, doc.com().Dispatch())
+	val, err := callComMethod(s, "Evaluate", formula, doc.com().Dispatch())
 	return helpers.CastValue[Variant](val), err
 }
 
@@ -589,7 +589,7 @@ func (s NotesSession) FreeResourceSearch(Start NotesDateTime, End NotesDateTime,
 			}
 		}
 	}
-	vals, err := s.com().CallArrayMethod("FreeResourceSearch", paramsOrdered...)
+	vals, err := callComArrayMethod(s, "FreeResourceSearch", paramsOrdered...)
 	return helpers.CastSlice[String](vals), err
 }
 
@@ -617,7 +617,7 @@ func (s NotesSession) FreeTimeSearch(window NotesDateRange, duration Integer, na
 	if paramsStruct.firstfit != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.firstfit)
 	}
-	dispatchPtr, err := s.com().CallObjectMethod("FreeTimeSearch", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(s, "FreeTimeSearch", paramsOrdered...)
 	return NewNotesDateRange(dispatchPtr), err
 }
 
@@ -645,19 +645,19 @@ func (s NotesSession) GetDatabase(server String, dbfile String, params ...notesS
 	if paramsStruct.createonfail != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.createonfail)
 	}
-	dispatchPtr, err := s.com().CallObjectMethod("GetDatabase", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(s, "GetDatabase", paramsOrdered...)
 	return NewNotesDatabase(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCALENDAR_METHOD.html */
 func (s NotesSession) GetCalendar(mailDatabase NotesDatabase) (NotesCalendar, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("GetCalendar", mailDatabase.com().Dispatch())
+	dispatchPtr, err := callComObjectMethod(s, "GetCalendar", mailDatabase.com().Dispatch())
 	return NewNotesCalendar(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDBDIRECTORY_METHOD.html */
 func (s NotesSession) GetDbDirectory(serverName String) (NotesDbDirectory, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("GetDbDirectory", serverName)
+	dispatchPtr, err := callComObjectMethod(s, "GetDbDirectory", serverName)
 	return NewNotesDbDirectory(dispatchPtr), err
 }
 
@@ -685,7 +685,7 @@ func (s NotesSession) GetDirectory(params ...notesSessionGetDirectoryParam) (Not
 	if paramsStruct.serverName != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.serverName)
 	}
-	dispatchPtr, err := s.com().CallObjectMethod("GetDirectory", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(s, "GetDirectory", paramsOrdered...)
 	return NewNotesDirectory(dispatchPtr), err
 }
 
@@ -713,7 +713,7 @@ func (s NotesSession) GetEnvironmentString(name String, params ...notesSessionGe
 	if paramsStruct.system != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.system)
 	}
-	val, err := s.com().CallMethod("GetEnvironmentString", paramsOrdered...)
+	val, err := callComMethod(s, "GetEnvironmentString", paramsOrdered...)
 	return helpers.CastValue[String](val), err
 }
 
@@ -741,12 +741,12 @@ func (s NotesSession) GetEnvironmentValue(name String, params ...notesSessionGet
 	if paramsStruct.system != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.system)
 	}
-	return s.com().CallMethod("GetEnvironmentValue", paramsOrdered...)
+	return callComMethod(s, "GetEnvironmentValue", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPROPERTYBROKER_METHOD.html */
 func (s NotesSession) GetPropertyBroker() (NotesPropertyBroker, error) {
-	dispatchPtr, err := s.com().CallObjectMethod("GetPropertyBroker")
+	dispatchPtr, err := callComObjectMethod(s, "GetPropertyBroker")
 	return NewNotesPropertyBroker(dispatchPtr), err
 }
 
@@ -784,13 +784,13 @@ func (s NotesSession) GetUserPolicySettings(server String, name String, policyTy
 			paramsOrdered = append(paramsOrdered, *paramsStruct.reserved)
 		}
 	}
-	dispatchPtr, err := s.com().CallObjectMethod("GetUserPolicySettings", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(s, "GetUserPolicySettings", paramsOrdered...)
 	return NewNotesDocument(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HASHPASSWORD_METHOD_SESSION.html */
 func (s NotesSession) HashPassword(password String) (String, error) {
-	val, err := s.com().CallMethod("HashPassword", password)
+	val, err := callComMethod(s, "HashPassword", password)
 	return helpers.CastValue[String](val), err
 }
 
@@ -818,19 +818,19 @@ func (s NotesSession) ResetUserPassword(servername String, username String, pass
 	if paramsStruct.downloadcount != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.downloadcount)
 	}
-	_, err := s.com().CallMethod("ResetUserPassword", paramsOrdered...)
+	_, err := callComMethod(s, "ResetUserPassword", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESOLVE_METHOD_SESSION_COM.html */
 func (s NotesSession) Resolve(url String) error {
-	_, err := s.com().CallMethod("Resolve", url)
+	_, err := callComMethod(s, "Resolve", url)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SENDCONSOLECOMMAND_METHOD_SESSION.html */
 func (s NotesSession) SendConsoleCommand(serverName String, consoleCommand String) (String, error) {
-	val, err := s.com().CallMethod("SendConsoleCommand", serverName, consoleCommand)
+	val, err := callComMethod(s, "SendConsoleCommand", serverName, consoleCommand)
 	return helpers.CastValue[String](val), err
 }
 
@@ -858,24 +858,24 @@ func (s NotesSession) SetEnvironmentVar(name String, valueV Variant, params ...n
 	if paramsStruct.issystemvar != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.issystemvar)
 	}
-	_, err := s.com().CallMethod("SetEnvironmentVar", paramsOrdered...)
+	_, err := callComMethod(s, "SetEnvironmentVar", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEPROCESSEDDOC_METHOD.html */
 func (s NotesSession) UpdateProcessedDoc(notesDocument NotesDocument) error {
-	_, err := s.com().CallMethod("UpdateProcessedDoc", notesDocument.com().Dispatch())
+	_, err := callComMethod(s, "UpdateProcessedDoc", notesDocument.com().Dispatch())
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USEDOUBLEASPOINTER_METHOD_SESSION.html */
 func (s NotesSession) UseDoubleAsPointer() error {
-	_, err := s.com().CallMethod("UseDoubleAsPointer")
+	_, err := callComMethod(s, "UseDoubleAsPointer")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VERIFYPASSWORD_METHOD_SESSION.html */
 func (s NotesSession) VerifyPassword(password String, hashedPassword String) (Boolean, error) {
-	val, err := s.com().CallMethod("VerifyPassword", password, hashedPassword)
+	val, err := callComMethod(s, "VerifyPassword", password, hashedPassword)
 	return helpers.CastValue[Boolean](val), err
 }

@@ -26,123 +26,123 @@ func NewNotesEmbeddedObject(dispatchPtr *ole.IDispatch) NotesEmbeddedObject {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLASS_PROPERTY.html */
 func (e NotesEmbeddedObject) Class() (String, error) {
-	val, err := e.com().GetProperty("Class")
+	val, err := getComProperty(e, "Class")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FILECREATED_PROPERTY.html */
 func (e NotesEmbeddedObject) FileCreated() (String, error) {
-	val, err := e.com().GetProperty("FileCreated")
+	val, err := getComProperty(e, "FileCreated")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FILEENCODING_PROPERTY.html */
 func (e NotesEmbeddedObject) FileEncoding() (Integer, error) {
-	val, err := e.com().GetProperty("FileEncoding")
+	val, err := getComProperty(e, "FileEncoding")
 	return helpers.CastValue[Integer](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FILEMODIFIED_PROPERTY.html */
 func (e NotesEmbeddedObject) FileModified() (String, error) {
-	val, err := e.com().GetProperty("FileModified")
+	val, err := getComProperty(e, "FileModified")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FILESIZE_PROPERTY.html */
 func (e NotesEmbeddedObject) FileSize() (Long, error) {
-	val, err := e.com().GetProperty("FileSize")
+	val, err := getComProperty(e, "FileSize")
 	return helpers.CastValue[Long](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FITBELOWFIELDS_PROPERTY_EMBEDDEDOBJ.html */
 func (e NotesEmbeddedObject) FitBelowFields() (Boolean, error) {
-	val, err := e.com().GetProperty("FitBelowFields")
+	val, err := getComProperty(e, "FitBelowFields")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FITBELOWFIELDS_PROPERTY_EMBEDDEDOBJ.html */
 func (e NotesEmbeddedObject) SetFitBelowFields(v Boolean) error {
-	return e.com().PutProperty("FitBelowFields", v)
+	return putComProperty(e, "FitBelowFields", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FITTOWINDOW_PROPERTY_EMBEDDEDOBJ.html */
 func (e NotesEmbeddedObject) FitToWindow() (Boolean, error) {
-	val, err := e.com().GetProperty("FitToWindow")
+	val, err := getComProperty(e, "FitToWindow")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FITTOWINDOW_PROPERTY_EMBEDDEDOBJ.html */
 func (e NotesEmbeddedObject) SetFitToWindow(v Boolean) error {
-	return e.com().PutProperty("FitToWindow", v)
+	return putComProperty(e, "FitToWindow", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAME_PROPERTY_OBJECT.html */
 func (e NotesEmbeddedObject) Name() (String, error) {
-	val, err := e.com().GetProperty("Name")
+	val, err := getComProperty(e, "Name")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_OBJECT_PROPERTY.html */
 func (e NotesEmbeddedObject) Object() (Variant, error) {
-	val, err := e.com().GetProperty("Object")
+	val, err := getComProperty(e, "Object")
 	return helpers.CastValue[Variant](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_OBJECT.html */
 func (e NotesEmbeddedObject) Parent() (NotesRichTextItem, error) {
-	dispatchPtr, err := e.com().GetObjectProperty("Parent")
+	dispatchPtr, err := getComObjectProperty(e, "Parent")
 	return NewNotesRichTextItem(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RUNREADONLY_PROPERTY_EMBEDDEDOBJ.html */
 func (e NotesEmbeddedObject) RunReadOnly() (Boolean, error) {
-	val, err := e.com().GetProperty("RunReadOnly")
+	val, err := getComProperty(e, "RunReadOnly")
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RUNREADONLY_PROPERTY_EMBEDDEDOBJ.html */
 func (e NotesEmbeddedObject) SetRunReadOnly(v Boolean) error {
-	return e.com().PutProperty("RunReadOnly", v)
+	return putComProperty(e, "RunReadOnly", v)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SOURCE_PROPERTY.html */
 func (e NotesEmbeddedObject) Source() (String, error) {
-	val, err := e.com().GetProperty("Source")
+	val, err := getComProperty(e, "Source")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TYPE_PROPERTY_OBJECT.html */
 func (e NotesEmbeddedObject) Type() (NotesEmbeddedObjectEmbedType, error) {
-	val, err := e.com().GetProperty("Type")
+	val, err := getComProperty(e, "Type")
 	return helpers.CastValue[NotesEmbeddedObjectEmbedType](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VERBS_PROPERTY.html */
 func (e NotesEmbeddedObject) Verbs() ([]String, error) {
-	vals, err := e.com().GetArrayProperty("Verbs")
+	vals, err := getComArrayProperty(e, "Verbs")
 	return helpers.CastSlice[String](vals), err
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ACTIVATE_METHOD.html */
 func (e NotesEmbeddedObject) Activate(show Boolean) (*ole.IDispatch, error) {
-	return e.com().CallObjectMethod("Activate", show)
+	return callComObjectMethod(e, "Activate", show)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DOVERB_METHOD.html */
 func (e NotesEmbeddedObject) DoVerb(verb String) (Variant, error) {
-	val, err := e.com().CallMethod("DoVerb", verb)
+	val, err := callComMethod(e, "DoVerb", verb)
 	return helpers.CastValue[Variant](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXTRACTFILE_METHOD.html */
 func (e NotesEmbeddedObject) ExtractFile(path String) error {
-	_, err := e.com().CallMethod("ExtractFile", path)
+	_, err := callComMethod(e, "ExtractFile", path)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_OBJECT.html */
 func (e NotesEmbeddedObject) Remove() error {
-	_, err := e.com().CallMethod("Remove")
+	_, err := callComMethod(e, "Remove")
 	return err
 }

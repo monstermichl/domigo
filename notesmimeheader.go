@@ -18,13 +18,13 @@ func NewNotesMIMEHeader(dispatchPtr *ole.IDispatch) NotesMIMEHeader {
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HEADERNAME_PROPERTY_MIMEHEADER.html */
 func (m NotesMIMEHeader) HeaderName() (String, error) {
-	val, err := m.com().GetProperty("HeaderName")
+	val, err := getComProperty(m, "HeaderName")
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_MIMEHEADER.html */
 func (m NotesMIMEHeader) Parent() (NotesMIMEEntity, error) {
-	dispatchPtr, err := m.com().GetObjectProperty("Parent")
+	dispatchPtr, err := getComObjectProperty(m, "Parent")
 	return NewNotesMIMEEntity(dispatchPtr), err
 }
 
@@ -53,7 +53,7 @@ func (m NotesMIMEHeader) AddValText(valueText String, params ...notesMIMEHeaderA
 	if paramsStruct.charSet != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.charSet)
 	}
-	val, err := m.com().CallMethod("AddValText", paramsOrdered...)
+	val, err := callComMethod(m, "AddValText", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -91,7 +91,7 @@ func (m NotesMIMEHeader) GetHeaderVal(params ...notesMIMEHeaderGetHeaderValParam
 			paramsOrdered = append(paramsOrdered, *paramsStruct.decoded)
 		}
 	}
-	val, err := m.com().CallMethod("GetHeaderVal", paramsOrdered...)
+	val, err := callComMethod(m, "GetHeaderVal", paramsOrdered...)
 	return helpers.CastValue[String](val), err
 }
 
@@ -129,7 +129,7 @@ func (m NotesMIMEHeader) GetHeaderValAndParams(params ...notesMIMEHeaderGetHeade
 			paramsOrdered = append(paramsOrdered, *paramsStruct.decoded)
 		}
 	}
-	val, err := m.com().CallMethod("GetHeaderValAndParams", paramsOrdered...)
+	val, err := callComMethod(m, "GetHeaderValAndParams", paramsOrdered...)
 	return helpers.CastValue[String](val), err
 }
 
@@ -157,30 +157,30 @@ func (m NotesMIMEHeader) GetParamVal(paramName String, params ...notesMIMEHeader
 	if paramsStruct.folded != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.folded)
 	}
-	val, err := m.com().CallMethod("GetParamVal", paramsOrdered...)
+	val, err := callComMethod(m, "GetParamVal", paramsOrdered...)
 	return helpers.CastValue[String](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_MIMEHEADER.html */
 func (m NotesMIMEHeader) Remove() error {
-	_, err := m.com().CallMethod("Remove")
+	_, err := callComMethod(m, "Remove")
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETHEADERVAL_METHOD_MIMEHEADER.html */
 func (m NotesMIMEHeader) SetHeaderVal(headerValue String) (Boolean, error) {
-	val, err := m.com().CallMethod("SetHeaderVal", headerValue)
+	val, err := callComMethod(m, "SetHeaderVal", headerValue)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETHEADERVALANDPARAMS_METHOD_MIMEHEADER.html */
 func (m NotesMIMEHeader) SetHeaderValAndParams(headerParamValue String) (Boolean, error) {
-	val, err := m.com().CallMethod("SetHeaderValAndParams", headerParamValue)
+	val, err := callComMethod(m, "SetHeaderValAndParams", headerParamValue)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETPARAMVAL_METHOD_MIMEHEADER.html */
 func (m NotesMIMEHeader) SetParamVal(parameterName String, parameterValue String) (Boolean, error) {
-	val, err := m.com().CallMethod("SetParamVal", parameterName, parameterValue)
+	val, err := callComMethod(m, "SetParamVal", parameterName, parameterValue)
 	return helpers.CastValue[Boolean](val), err
 }

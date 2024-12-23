@@ -74,7 +74,7 @@ func (c NotesCalendarEntry) AddInvitees(requiredNames []String, optionalNames []
 			}
 		}
 	}
-	_, err := c.com().CallMethod("AddInvitees", paramsOrdered...)
+	_, err := callComMethod(c, "AddInvitees", paramsOrdered...)
 	return err
 }
 
@@ -112,7 +112,7 @@ func (c NotesCalendarEntry) Cancel(comments String, params ...notesCalendarEntry
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	_, err := c.com().CallMethod("Cancel", paramsOrdered...)
+	_, err := callComMethod(c, "Cancel", paramsOrdered...)
 	return err
 }
 
@@ -160,7 +160,7 @@ func (c NotesCalendarEntry) Counter(comments String, start NotesDateTime, end No
 			}
 		}
 	}
-	_, err := c.com().CallMethod("Counter", paramsOrdered...)
+	_, err := callComMethod(c, "Counter", paramsOrdered...)
 	return err
 }
 
@@ -208,7 +208,7 @@ func (c NotesCalendarEntry) Decline(comments String, params ...notesCalendarEntr
 			}
 		}
 	}
-	_, err := c.com().CallMethod("Decline", paramsOrdered...)
+	_, err := callComMethod(c, "Decline", paramsOrdered...)
 	return err
 }
 
@@ -256,7 +256,7 @@ func (c NotesCalendarEntry) Delegate(commentsToOrganizer String, delegateTo Stri
 			}
 		}
 	}
-	_, err := c.com().CallMethod("Delegate", paramsOrdered...)
+	_, err := callComMethod(c, "Delegate", paramsOrdered...)
 	return err
 }
 
@@ -294,7 +294,7 @@ func (c NotesCalendarEntry) GetAsDocument(params ...notesCalendarEntryGetAsDocum
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	dispatchPtr, err := c.com().CallObjectMethod("GetAsDocument", paramsOrdered...)
+	dispatchPtr, err := callComObjectMethod(c, "GetAsDocument", paramsOrdered...)
 	return NewNotesDocument(dispatchPtr), err
 }
 
@@ -357,7 +357,7 @@ func (c NotesCalendarEntry) ModifyInvitees(requiredNames []String, optionalNames
 			}
 		}
 	}
-	_, err := c.com().CallMethod("ModifyInvitees", paramsOrdered...)
+	_, err := callComMethod(c, "ModifyInvitees", paramsOrdered...)
 	return err
 }
 
@@ -385,7 +385,7 @@ func (c NotesCalendarEntry) Read(params ...notesCalendarEntryReadParam) (String,
 	if paramsStruct.recurId != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 	}
-	val, err := c.com().CallMethod("Read", paramsOrdered...)
+	val, err := callComMethod(c, "Read", paramsOrdered...)
 	return helpers.CastValue[String](val), err
 }
 
@@ -423,7 +423,7 @@ func (c NotesCalendarEntry) Remove(comments String, params ...notesCalendarEntry
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	_, err := c.com().CallMethod("Remove", paramsOrdered...)
+	_, err := callComMethod(c, "Remove", paramsOrdered...)
 	return err
 }
 
@@ -481,13 +481,13 @@ func (c NotesCalendarEntry) RemoveInvitees(names []String, params ...notesCalend
 			}
 		}
 	}
-	_, err := c.com().CallMethod("RemoveInvitees", paramsOrdered...)
+	_, err := callComMethod(c, "RemoveInvitees", paramsOrdered...)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REQUESTINFO_METHOD_CALENTRY.html */
 func (c NotesCalendarEntry) RequestInfo(comments String) error {
-	_, err := c.com().CallMethod("RequestInfo", comments)
+	_, err := callComMethod(c, "RequestInfo", comments)
 	return err
 }
 
@@ -525,7 +525,7 @@ func (c NotesCalendarEntry) TentativelyAccept(comments String, params ...notesCa
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	_, err := c.com().CallMethod("TentativelyAccept", paramsOrdered...)
+	_, err := callComMethod(c, "TentativelyAccept", paramsOrdered...)
 	return err
 }
 
@@ -573,6 +573,6 @@ func (c NotesCalendarEntry) Update(icalentry String, params ...notesCalendarEntr
 			}
 		}
 	}
-	_, err := c.com().CallMethod("Update", paramsOrdered...)
+	_, err := callComMethod(c, "Update", paramsOrdered...)
 	return err
 }

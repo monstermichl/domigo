@@ -32,13 +32,13 @@ func NewNotesRichTextNavigator(dispatchPtr *ole.IDispatch) NotesRichTextNavigato
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLONE_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) Clone() (NotesRichTextNavigator, error) {
-	dispatchPtr, err := r.com().CallObjectMethod("Clone")
+	dispatchPtr, err := callComObjectMethod(r, "Clone")
 	return NewNotesRichTextNavigator(dispatchPtr), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDFIRSTELEMENT_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) FindFirstElement(elementType NotesRichTextNavigatorRtElementType) (Boolean, error) {
-	val, err := r.com().CallMethod("FindFirstElement", elementType)
+	val, err := callComMethod(r, "FindFirstElement", elementType)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -66,13 +66,13 @@ func (r NotesRichTextNavigator) FindFirstString(target String, params ...notesRi
 	if paramsStruct.options != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.options)
 	}
-	val, err := r.com().CallMethod("FindFirstString", paramsOrdered...)
+	val, err := callComMethod(r, "FindFirstString", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDLASTELEMENT_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) FindLastElement(elementType NotesRichTextNavigatorRtElementType) (Boolean, error) {
-	val, err := r.com().CallMethod("FindLastElement", elementType)
+	val, err := callComMethod(r, "FindLastElement", elementType)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -110,7 +110,7 @@ func (r NotesRichTextNavigator) FindNextElement(params ...notesRichTextNavigator
 			paramsOrdered = append(paramsOrdered, *paramsStruct.occurrence)
 		}
 	}
-	val, err := r.com().CallMethod("FindNextElement", paramsOrdered...)
+	val, err := callComMethod(r, "FindNextElement", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -138,7 +138,7 @@ func (r NotesRichTextNavigator) FindNextString(target String, params ...notesRic
 	if paramsStruct.options != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.options)
 	}
-	val, err := r.com().CallMethod("FindNextString", paramsOrdered...)
+	val, err := callComMethod(r, "FindNextString", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
@@ -166,28 +166,28 @@ func (r NotesRichTextNavigator) FindNthElement(elementType NotesRichTextNavigato
 	if paramsStruct.occurrence != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.occurrence)
 	}
-	val, err := r.com().CallMethod("FindNthElement", paramsOrdered...)
+	val, err := callComMethod(r, "FindNthElement", paramsOrdered...)
 	return helpers.CastValue[Boolean](val), err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETELEMENT_METHOD_RTNAV.html */
 /* TODO: Implement later. */
 // func (r NotesRichTextNavigator) GetElement() (Object, error) {
-// 	dispatchPtr, err := r.com().CallObjectMethod("GetElement")
+// 	dispatchPtr, err := CallComObjectMethod(r, "GetElement")
 // 	return unknown.New(dispatchPtr), err
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTELEMENT_METHOD_RTNAV.html */
 /* TODO: Implement later. */
 // func (r NotesRichTextNavigator) GetFirstElement(elementType RtElementType) (Object, error) {
-// 	dispatchPtr, err := r.com().CallObjectMethod("GetFirstElement", elementType)
+// 	dispatchPtr, err := CallComObjectMethod(r, "GetFirstElement", elementType)
 // 	return unknown.New(dispatchPtr), err
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETLASTELEMENT_METHOD_RTNAV.html */
 /* TODO: Implement later. */
 // func (r NotesRichTextNavigator) GetLastElement(elementType RtElementType) (Object, error) {
-// 	dispatchPtr, err := r.com().CallObjectMethod("GetLastElement", elementType)
+// 	dispatchPtr, err := CallComObjectMethod(r, "GetLastElement", elementType)
 // 	return unknown.New(dispatchPtr), err
 // }
 
@@ -226,31 +226,31 @@ func (r NotesRichTextNavigator) FindNthElement(elementType NotesRichTextNavigato
 // 			paramsOrdered = append(paramsOrdered, *paramsStruct.occurrence)
 // 		}
 // 	}
-// 	dispatchPtr, err := r.com().CallObjectMethod("GetNextElement", paramsOrdered...)
+// 	dispatchPtr, err := CallComObjectMethod(r, "GetNextElement", paramsOrdered...)
 // 	return New(Object, error)(dispatchPtr), err
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHELEMENT_METHOD_RTNAV.html */
 /* TODO: Implement later. */
 // func (r NotesRichTextNavigator) GetNthElement(elementType RtElementType, occurrence Long) (Object, error) {
-// 	dispatchPtr, err := r.com().CallObjectMethod("GetNthElement", elementType, occurrence)
+// 	dispatchPtr, err := CallComObjectMethod(r, "GetNthElement", elementType, occurrence)
 // 	return New(Object, error)(dispatchPtr), err
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETCHAROFFSET_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) SetCharOffset(offset Integer) error {
-	_, err := r.com().CallMethod("SetCharOffset", offset)
+	_, err := callComMethod(r, "SetCharOffset", offset)
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETPOSITION_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) SetPosition(element notesStruct) error {
-	_, err := r.com().CallMethod("SetPosition", element.com().Dispatch())
+	_, err := callComMethod(r, "SetPosition", element.com().Dispatch())
 	return err
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETPOSITIONATEND_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) SetPositionAtEnd(element notesStruct) error {
-	_, err := r.com().CallMethod("SetPositionAtEnd", element.com().Dispatch())
+	_, err := callComMethod(r, "SetPositionAtEnd", element.com().Dispatch())
 	return err
 }
