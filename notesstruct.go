@@ -38,78 +38,78 @@ func (s NotesStruct) com() com.Com {
 }
 
 func getComObjectArrayProperty[T notesStruct](s notesStruct, modifyFn com.ModifyFunc[T], name string, params ...any) ([]T, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	return com.GetObjectArrayProperty(s.com(), modifyFn, name, params...)
 }
 
 func callComObjectArrayMethod[T notesStruct](s notesStruct, modifyFn com.ModifyFunc[T], name string, params ...any) ([]T, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	return com.CallObjectArrayMethod(s.com(), modifyFn, name, params...)
 }
 
 func callComMethod[T primitiveType](s notesStruct, name string, params ...any) (T, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	val, err := s.com().CallMethod(name, params...)
 	return helpers.CastValue[T](val), err
 }
 
 func callComAnyMethod(s notesStruct, name string, params ...any) (any, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	return s.com().CallMethod(name, params...)
 }
 
 func callComVoidMethod(s notesStruct, name string, params ...any) error {
-	params = convertParams(params)
+	params = convertParams(params...)
 	_, err := s.com().CallMethod(name, params...)
 	return err
 }
 
 func callComObjectMethod[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...any) (T, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	return com.CallObjectMethod[T](s.com(), createFn, name, params...)
 }
 
 func callComArrayMethod[T primitiveType](s notesStruct, name string, params ...any) ([]T, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	vals, err := s.com().CallArrayMethod(name, params...)
 	return helpers.CastSlice[T](vals), err
 }
 
 func callComAnyArrayMethod(s notesStruct, name string, params ...any) (any, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	return s.com().CallArrayMethod(name, params...)
 }
 
 func getComProperty[T primitiveType](s notesStruct, name string, params ...any) (T, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	val, err := s.com().GetProperty(name, params...)
 	return helpers.CastValue[T](val), err
 }
 
 func getComAnyProperty(s notesStruct, name string, params ...any) (any, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	return s.com().GetProperty(name, params...)
 }
 
 func getComObjectProperty[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...any) (T, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	dispatchPtr, err := s.com().GetObjectProperty(name, params...)
 	return createFn(dispatchPtr), err
 }
 
 func getComArrayProperty[T primitiveType](s notesStruct, name string, params ...any) ([]T, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	vals, err := s.com().GetArrayProperty(name, params...)
 	return helpers.CastSlice[T](vals), err
 }
 
 func getComAnyArrayProperty(s notesStruct, name string, params ...any) ([]any, error) {
-	params = convertParams(params)
+	params = convertParams(params...)
 	return s.com().GetArrayProperty(name, params...)
 }
 
 func putComProperty(s notesStruct, name string, params ...any) error {
-	params = convertParams(params)
+	params = convertParams(params...)
 	return s.com().PutProperty(name, params...)
 }
 
