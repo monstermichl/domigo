@@ -1,5 +1,5 @@
 # DomiGo
-DomiGo is a Go interface to access HCL Domino. Please be aware that at this point there are several methods that are not working properly yet (either due to wrong type implementations or stuff I just couldn't test properly because if my setup). So please feel free to participate.
+DomiGo is a Go interface to access HCL Domino. Please be aware that at this point there are several methods that are not working properly yet (either due to wrong type implementations or stuff I just couldn't test properly due to my setup). So please feel free to participate.
 
 ## Usage
 To get access to HCL Domino, just call the *domigo.Initialize*. The function returns a NotesSession struct which can then be used as described in the [NotesSession documentation](https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESSESSION_CLASS.html).
