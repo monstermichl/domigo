@@ -92,7 +92,7 @@ def properties_stubs(class_name: str, props: List[NotesProperty]) -> Tuple[List[
             stubs.extend([
                 f'/* {url} */',
                 f'func ({receiver} {class_name}) Set{name}(v {go_method_return_type}) error {{',
-                f'    return {receiver}.com().PutProperty("{name}", v)',
+                f'    return putComProperty({receiver}, "{name}", v)',
                 '}',
             ])
 
@@ -214,13 +214,13 @@ def method_stubs(class_name: str, methods: List[NotesMethod]) -> Tuple[List[str]
 
         if notes_type == NotesType.OBJECT:
             if is_array:
-                call = f'callComObjectArrayMethod({receiver}, New{go_cast_type}, "{name}"{call_params})',
+                call = f'callComObjectArrayMethod({receiver}, New{go_cast_type}, "{name}"{call_params})'
             else:
-                call = f'callComObjectMethod({receiver}, New{go_cast_type}, "{name}"{call_params})',
+                call = f'callComObjectMethod({receiver}, New{go_cast_type}, "{name}"{call_params})'
         elif notes_type == NotesType.VOID:
-            call = f'callComVoidMethod({receiver}, "{name}"{call_params})',
+            call = f'callComVoidMethod({receiver}, "{name}"{call_params})'
         else:
-            call = f'callCom{"Array" if is_array else ""}Method[{go_cast_type}]({receiver}, "{name}"{call_params})',
+            call = f'callCom{"Array" if is_array else ""}Method[{go_cast_type}]({receiver}, "{name}"{call_params})'
 
         stubs.extend([
             f'    return {call}'
@@ -307,6 +307,10 @@ def get_return_type(method: NotesMethod) -> Type:
 
 if __name__ == '__main__':
     DATABASE_FILE = 'GoInterface.nsf'
+    GENERATED_DIR = 'generated'
+
+    if not os.path.exists(GENERATED_DIR):
+        os.mkdir(GENERATED_DIR)
 
     urls = get_urls()
 
@@ -321,7 +325,7 @@ if __name__ == '__main__':
         class_name_lower = class_name.lower()
         variable = re.sub('notes', '', class_name_lower)  # Remove the "Notes" prefix.
         receiver = variable[0]  # Just use the first letter.
-        path = os.path.join('generated', class_name_lower)
+        path = os.path.join(GENERATED_DIR, class_name_lower)
         stubs = []
         test_stubs = []
 
