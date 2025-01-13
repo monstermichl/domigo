@@ -135,12 +135,23 @@ func getNotesStruct(val any) (NotesStruct, error) {
 
 func convertParams(params ...any) []any {
 	for i, param := range params {
-		if s, err := getNotesStruct(param); err == nil {
-			params[i] = s.com().Dispatch()
-		} else if reflect.TypeOf(param).Kind() == reflect.Slice {
-			params[i] = convertParams(param.([]any)...)
+		if param != nil {
+			if s, err := getNotesStruct(param); err == nil {
+				params[i] = s.com().Dispatch()
+			} else {
+				val := reflect.ValueOf(param)
+
+				if val.Kind() == reflect.Slice || val.Kind() == reflect.Array {
+					for j := 0; j < val.Len(); j++ {
+						if s, err := getNotesStruct(val.Index(j).Interface()); err == nil {
+							params[j] = convertParams(s.com().Dispatch())
+						}
+					}
+				}
+			}
 		}
 	}
+
 	return params
 }
 
