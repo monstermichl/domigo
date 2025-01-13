@@ -152,8 +152,8 @@ func (s NotesStream) Truncate() error {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_WRITE_METHOD_STREAM.html */
-func (s NotesStream) Write(buffer []Byte) (Byte, error) {
-	return callComMethod[Byte](s, "Write", buffer)
+func (s NotesStream) Write(buffer []Byte) (Long, error) {
+	return callComMethod[Long](s, "Write", buffer)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_WRITETEXT_METHOD_STREAM.html */
@@ -169,7 +169,7 @@ func WithNotesStreamWriteTextEol(eol Long) notesStreamWriteTextParam {
 	}
 }
 
-func (s NotesStream) WriteText(text String, params ...notesStreamWriteTextParam) (Byte, error) {
+func (s NotesStream) WriteText(text String, params ...notesStreamWriteTextParam) (Long, error) {
 	paramsStruct := &notesStreamWriteTextParams{}
 	paramsOrdered := []interface{}{text}
 
@@ -180,5 +180,5 @@ func (s NotesStream) WriteText(text String, params ...notesStreamWriteTextParam)
 	if paramsStruct.eol != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.eol)
 	}
-	return callComMethod[Byte](s, "WriteText", paramsOrdered...)
+	return callComMethod[Long](s, "WriteText", paramsOrdered...)
 }

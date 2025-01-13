@@ -3,6 +3,7 @@ package domigo
 
 import (
 	ole "github.com/go-ole/go-ole"
+	"github.com/monstermichl/domigo/internal/helpers"
 )
 
 type NotesNoteCollection struct {
@@ -11,6 +12,10 @@ type NotesNoteCollection struct {
 
 func NewNotesNoteCollection(dispatchPtr *ole.IDispatch) NotesNoteCollection {
 	return NotesNoteCollection{NewNotesStruct(dispatchPtr)}
+}
+
+func (n NotesNoteCollection) checkCombinableTypes(val any) error {
+	return helpers.CheckTypeNames(val, []string{"number", "string", "NotesDocument", "NotesDocumentCollection", "NotesViewEntry", "NotesViewEntryCollection"})
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -331,7 +336,12 @@ func (n NotesNoteCollection) SetSinceTime(v NotesDateTime) error {
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADD_METHOD_NOTECOLLECTION.html */
-func (n NotesNoteCollection) Add(additionSpecifier Variant) error {
+func (n NotesNoteCollection) Add(additionSpecifier any) error {
+	err := n.checkCombinableTypes(additionSpecifier)
+
+	if err != nil {
+		return err
+	}
 	return callComVoidMethod(n, "Add", additionSpecifier)
 }
 
@@ -356,12 +366,22 @@ func (n NotesNoteCollection) GetNextNoteID(noteID String) (String, error) {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERSECT_METHOD_NOTECOLLECTION.html */
-func (n NotesNoteCollection) Intersect(intersectionSpecifier Variant) error {
+func (n NotesNoteCollection) Intersect(intersectionSpecifier any) error {
+	err := n.checkCombinableTypes(intersectionSpecifier)
+
+	if err != nil {
+		return err
+	}
 	return callComVoidMethod(n, "Intersect", intersectionSpecifier)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_NOTECOLLECTION.html */
-func (n NotesNoteCollection) Remove(removalSpecifier Variant) error {
+func (n NotesNoteCollection) Remove(removalSpecifier any) error {
+	err := n.checkCombinableTypes(removalSpecifier)
+
+	if err != nil {
+		return err
+	}
 	return callComVoidMethod(n, "Remove", removalSpecifier)
 }
 

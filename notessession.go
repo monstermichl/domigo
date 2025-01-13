@@ -9,7 +9,7 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-type NotesSessionPolicy Long
+type NotesSessionPolicy = Long
 
 const (
 	NOTESSESSION_POLICYSETTINGS_ARCHIVE      NotesSessionPolicy = 2
@@ -151,8 +151,8 @@ func (s NotesSession) HttpURL() (String, error) {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERNATIONAL_PROPERTY.html */
-func (s NotesSession) International() (Integer, error) {
-	return getComProperty[Integer](s, "International")
+func (s NotesSession) International() (NotesInternational, error) {
+	return getComObjectProperty(s, NewNotesInternational, "International")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISONSERVER_PROPERTY.html */
@@ -800,7 +800,7 @@ func WithNotesSessionSetEnvironmentVarIssystemvar(issystemvar Boolean) notesSess
 	}
 }
 
-func (s NotesSession) SetEnvironmentVar(name String, valueV Variant, params ...notesSessionSetEnvironmentVarParam) error {
+func (s NotesSession) SetEnvironmentVar(name String, valueV any, params ...notesSessionSetEnvironmentVarParam) error {
 	paramsStruct := &notesSessionSetEnvironmentVarParams{}
 	paramsOrdered := []any{name, valueV}
 

@@ -66,7 +66,7 @@ func callComVoidMethod(s notesStruct, name string, params ...any) error {
 
 func callComObjectMethod[T notesStruct](s notesStruct, createFn com.ModifyFunc[T], name string, params ...any) (T, error) {
 	params = convertParams(params...)
-	return com.CallObjectMethod[T](s.com(), createFn, name, params...)
+	return com.CallObjectMethod(s.com(), createFn, name, params...)
 }
 
 func callComArrayMethod[T primitiveType](s notesStruct, name string, params ...any) ([]T, error) {

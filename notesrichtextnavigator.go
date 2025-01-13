@@ -5,7 +5,7 @@ import (
 	ole "github.com/go-ole/go-ole"
 )
 
-type NotesRichTextNavigatorRtElementType Long
+type NotesRichTextNavigatorRtElementType = Long
 
 const (
 	NOTESRICHTEXTNAVIGATOR_RTELEM_TYPE_DOCLINK        NotesRichTextNavigatorRtElementType = 5
