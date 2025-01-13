@@ -313,6 +313,9 @@ def get_site(url: str) -> BeautifulSoup:
     SITES_DIR = 'sites'
     SITES_FILE = 'sites.json'
 
+    if not os.path.exists(SITES_DIR):
+        os.mkdir(SITES_DIR)
+
     object = read_json(SITES_FILE)
     site_dict = object if object else {}
     url_hash = sha256(url.encode())
