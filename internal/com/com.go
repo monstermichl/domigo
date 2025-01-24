@@ -77,6 +77,7 @@ func (c Com) Release() {
 
 	if err == nil {
 		c.dispatchPtr.Release()
+		c.dispatchPtr = nil
 	}
 }
 
