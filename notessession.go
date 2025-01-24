@@ -252,84 +252,14 @@ func (s NotesSession) CreateDateTime(dateTime String) (NotesDateTime, error) {
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDXLEXPORTER_METHOD_SESSION.html */
-/* TODO: Implement this function correctly (see documentation). */
-// type notesSessionCreateDXLExporterParams struct {
-//     input *Object
-//     output *Object
-// }
-
-// type notesSessionCreateDXLExporterParam func(*notesSessionCreateDXLExporterParams)
-
-// func WithNotesSessionCreateDXLExporterInput(input Object) notesSessionCreateDXLExporterParam {
-//     return func(c *notesSessionCreateDXLExporterParams) {
-//         c.input = &input
-//     }
-// }
-
-// func WithNotesSessionCreateDXLExporterOutput(output Object) notesSessionCreateDXLExporterParam {
-//     return func(c *notesSessionCreateDXLExporterParams) {
-//         c.output = &output
-//     }
-// }
-
-// func (s NotesSession) CreateDXLExporter(params ...notesSessionCreateDXLExporterParam) (Object, error) {
-//     paramsStruct := &notesSessionCreateDXLExporterParams{}
-//     paramsOrdered := []any{}
-
-//     for _, p := range params {
-//         p(paramsStruct)
-//     }
-
-//     if paramsStruct.input != nil {
-//         paramsOrdered = append(paramsOrdered, *paramsStruct.input)
-//             /* TODO: output probably needs to be handled differently with COM. */
-//             if paramsStruct.output != nil {
-//                 paramsOrdered = append(paramsOrdered, *paramsStruct.output)
-//             }
-//     }
-//     dispatchPtr, err := CallComObjectMethod(s, "CreateDXLExporter", paramsOrdered...)
-//     return New(dispatchPtr), err
-// }
+func (s NotesSession) CreateDXLExporter() (NotesDXLExporter, error) {
+	return callComObjectMethod(s, NewNotesDXLExporter, "CreateDXLExporter")
+}
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDXLIMPORTER_METHOD_SESSION.html */
-/* TODO: Implement this function correctly (see documentation). */
-// type notesSessionCreateDXLImporterParams struct {
-//     input *String
-//     output *Object
-// }
-
-// type notesSessionCreateDXLImporterParam func(*notesSessionCreateDXLImporterParams)
-
-// func WithNotesSessionCreateDXLImporterInput(input String) notesSessionCreateDXLImporterParam {
-//     return func(c *notesSessionCreateDXLImporterParams) {
-//         c.input = &input
-//     }
-// }
-
-// func WithNotesSessionCreateDXLImporterOutput(output Object) notesSessionCreateDXLImporterParam {
-//     return func(c *notesSessionCreateDXLImporterParams) {
-//         c.output = &output
-//     }
-// }
-
-// func (s NotesSession) CreateDXLImporter(params ...notesSessionCreateDXLImporterParam) (Object, error) {
-//     paramsStruct := &notesSessionCreateDXLImporterParams{}
-//     paramsOrdered := []any{}
-
-//     for _, p := range params {
-//         p(paramsStruct)
-//     }
-
-//     if paramsStruct.input != nil {
-//         paramsOrdered = append(paramsOrdered, *paramsStruct.input)
-//             /* TODO: output probably needs to be handled differently with COM. */
-//             if paramsStruct.output != nil {
-//                 paramsOrdered = append(paramsOrdered, *paramsStruct.output)
-//             }
-//     }
-//     dispatchPtr, err := CallComObjectMethod(s, "CreateDXLImporter", paramsOrdered...)
-//     return New(dispatchPtr), err
-// }
+func (s NotesSession) CreateDXLImporter() (NotesDXLImporter, error) {
+	return callComObjectMethod(s, NewNotesDXLImporter, "CreateDXLImporter")
+}
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATELOG_METHOD.html */
 func (s NotesSession) CreateLog(programName String) (NotesLog, error) {
