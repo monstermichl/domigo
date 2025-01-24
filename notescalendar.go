@@ -10,8 +10,8 @@ type NotesCalendar struct {
 	NotesStruct
 }
 
-func NewNotesCalendar(dispatchPtr *ole.IDispatch) NotesCalendar {
-	return NotesCalendar{NewNotesStruct(dispatchPtr)}
+func newNotesCalendar(dispatchPtr *ole.IDispatch) NotesCalendar {
+	return NotesCalendar{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -52,7 +52,7 @@ func (c NotesCalendar) SetReadXLotusPropsOutputLevel(v Integer) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNTILTIME_PROPERTY_CAL.html */
 func (c NotesCalendar) UntilTime() (NotesDateTime, error) {
-	return getComObjectProperty(c, NewNotesDateTime, "UntilTime")
+	return getComObjectProperty(c, newNotesDateTime, "UntilTime")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -80,7 +80,7 @@ func (c NotesCalendar) CreateEntry(icalEntry String, params ...notesCalendarCrea
 	if paramsStruct.flags != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.flags)
 	}
-	return callComObjectMethod(c, NewNotesCalendarEntry, "CreateEntry", paramsOrdered...)
+	return callComObjectMethod(c, newNotesCalendarEntry, "CreateEntry", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRIES_METHOD_CAL.html */
@@ -117,22 +117,22 @@ func (c NotesCalendar) GetEntries(start NotesDateTime, end NotesDateTime, params
 			paramsOrdered = append(paramsOrdered, *paramsStruct.maxReturn)
 		}
 	}
-	return callComObjectMethod(c, NewNotesCalendarEntry, "GetEntries", paramsOrdered...)
+	return callComObjectMethod(c, newNotesCalendarEntry, "GetEntries", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD_CAL.html */
 func (c NotesCalendar) GetEntry(uid String) (NotesCalendarEntry, error) {
-	return callComObjectMethod(c, NewNotesCalendarEntry, "GetEntry", uid)
+	return callComObjectMethod(c, newNotesCalendarEntry, "GetEntry", uid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRYBYNOTEID_METHOD_CAL.html */
 func (c NotesCalendar) GetEntryByNoteID(noteid String) (NotesCalendarEntry, error) {
-	return callComObjectMethod(c, NewNotesCalendarEntry, "GetEntryByNoteID", noteid)
+	return callComObjectMethod(c, newNotesCalendarEntry, "GetEntryByNoteID", noteid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRYBYUNID_METHOD_CAL.html */
 func (c NotesCalendar) GetEntryByUNID(unid String) (NotesCalendarEntry, error) {
-	return callComObjectMethod(c, NewNotesCalendarEntry, "GetEntryByUNID", unid)
+	return callComObjectMethod(c, newNotesCalendarEntry, "GetEntryByUNID", unid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEWINVITATIONS_METHOD_CAL.html */
@@ -169,12 +169,12 @@ func (c NotesCalendar) GetNewInvitations(params ...notesCalendarGetNewInvitation
 			paramsOrdered = append(paramsOrdered, *paramsStruct.since)
 		}
 	}
-	return com.CallObjectArrayMethod(c.com(), NewNotesCalendarNotice, "GetNewInvitations", paramsOrdered...)
+	return com.CallObjectArrayMethod(c.com(), newNotesCalendarNotice, "GetNewInvitations", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNOTICEBYUNID_METHOD_CAL.html */
 func (c NotesCalendar) GetNoticeByUNID(unid String) (NotesCalendarNotice, error) {
-	return callComObjectMethod(c, NewNotesCalendarNotice, "GetNoticeByUNID", unid)
+	return callComObjectMethod(c, newNotesCalendarNotice, "GetNoticeByUNID", unid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETRECURRENCEID_METHOD_CAL.html */

@@ -67,9 +67,9 @@ def properties_stubs(class_name: str, props: List[NotesProperty]) -> Tuple[List[
 
             if notes_type == NotesType.OBJECT:
                 if is_array:
-                    call = f'getComObjectArrayProperty({receiver}, New{go_cast_type}, "{name}")'
+                    call = f'getComObjectArrayProperty({receiver}, new{go_cast_type}, "{name}")'
                 else:
-                    call = f'getComObjectProperty({receiver}, New{go_cast_type}, "{name}")'
+                    call = f'getComObjectProperty({receiver}, new{go_cast_type}, "{name}")'
             else:
                 call = f'getCom{"Array" if is_array else ""}Property[{go_cast_type}]({receiver}, "{name}")'
 
@@ -214,9 +214,9 @@ def method_stubs(class_name: str, methods: List[NotesMethod]) -> Tuple[List[str]
 
         if notes_type == NotesType.OBJECT:
             if is_array:
-                call = f'callComObjectArrayMethod({receiver}, New{go_cast_type}, "{name}"{call_params})'
+                call = f'callComObjectArrayMethod({receiver}, new{go_cast_type}, "{name}"{call_params})'
             else:
-                call = f'callComObjectMethod({receiver}, New{go_cast_type}, "{name}"{call_params})'
+                call = f'callComObjectMethod({receiver}, new{go_cast_type}, "{name}"{call_params})'
         elif notes_type == NotesType.VOID:
             call = f'callComVoidMethod({receiver}, "{name}"{call_params})'
         else:
@@ -343,8 +343,8 @@ if __name__ == '__main__':
             '    NotesStruct',
             '}',
             '',
-            f'func New{class_name}(dispatchPtr *ole.IDispatch) {class_name} {{',
-            f'    return {class_name}{{NewNotesStruct(dispatchPtr)}}',
+            f'func new{class_name}(dispatchPtr *ole.IDispatch) {class_name} {{',
+            f'    return {class_name}{{newNotesStruct(dispatchPtr)}}',
             '}',
             '',
         ])

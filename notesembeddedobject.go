@@ -17,8 +17,8 @@ type NotesEmbeddedObject struct {
 	NotesStruct
 }
 
-func NewNotesEmbeddedObject(dispatchPtr *ole.IDispatch) NotesEmbeddedObject {
-	return NotesEmbeddedObject{NewNotesStruct(dispatchPtr)}
+func newNotesEmbeddedObject(dispatchPtr *ole.IDispatch) NotesEmbeddedObject {
+	return NotesEmbeddedObject{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -79,7 +79,7 @@ func (e NotesEmbeddedObject) Object() (Variant, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_OBJECT.html */
 func (e NotesEmbeddedObject) Parent() (NotesRichTextItem, error) {
-	return getComObjectProperty(e, NewNotesRichTextItem, "Parent")
+	return getComObjectProperty(e, newNotesRichTextItem, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RUNREADONLY_PROPERTY_EMBEDDEDOBJ.html */

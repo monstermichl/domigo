@@ -9,8 +9,8 @@ type NotesMIMEHeader struct {
 	NotesStruct
 }
 
-func NewNotesMIMEHeader(dispatchPtr *ole.IDispatch) NotesMIMEHeader {
-	return NotesMIMEHeader{NewNotesStruct(dispatchPtr)}
+func newNotesMIMEHeader(dispatchPtr *ole.IDispatch) NotesMIMEHeader {
+	return NotesMIMEHeader{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -21,7 +21,7 @@ func (m NotesMIMEHeader) HeaderName() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_MIMEHEADER.html */
 func (m NotesMIMEHeader) Parent() (NotesMIMEEntity, error) {
-	return getComObjectProperty(m, NewNotesMIMEEntity, "Parent")
+	return getComObjectProperty(m, newNotesMIMEEntity, "Parent")
 }
 
 /* --------------------------------- Methods ------------------------------------ */

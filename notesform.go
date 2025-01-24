@@ -9,8 +9,8 @@ type NotesForm struct {
 	NotesStruct
 }
 
-func NewNotesForm(dispatchPtr *ole.IDispatch) NotesForm {
-	return NotesForm{NewNotesStruct(dispatchPtr)}
+func newNotesForm(dispatchPtr *ole.IDispatch) NotesForm {
+	return NotesForm{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -61,7 +61,7 @@ func (f NotesForm) NotesURL() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_FORM_COM.html */
 func (f NotesForm) Parent() (NotesDatabase, error) {
-	return getComObjectProperty(f, NewNotesDatabase, "Parent")
+	return getComObjectProperty(f, newNotesDatabase, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY.html */

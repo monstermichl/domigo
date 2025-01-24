@@ -9,8 +9,8 @@ type NotesViewColumn struct {
 	NotesStruct
 }
 
-func NewNotesViewColumn(dispatchPtr *ole.IDispatch) NotesViewColumn {
-	return NotesViewColumn{NewNotesStruct(dispatchPtr)}
+func newNotesViewColumn(dispatchPtr *ole.IDispatch) NotesViewColumn {
+	return NotesViewColumn{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -446,7 +446,7 @@ func (c NotesViewColumn) SetNumberFormat(v Integer) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_NOTESVIEWCOLUMN_CLASS.html */
 func (c NotesViewColumn) Parent() (NotesView, error) {
-	return getComObjectProperty(c, NewNotesView, "Parent")
+	return getComObjectProperty(c, newNotesView, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POSITION_PROPERTY.html */

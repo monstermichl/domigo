@@ -9,8 +9,8 @@ type NotesNewsletter struct {
 	NotesStruct
 }
 
-func NewNotesNewsletter(dispatchPtr *ole.IDispatch) NotesNewsletter {
-	return NotesNewsletter{NewNotesStruct(dispatchPtr)}
+func newNotesNewsletter(dispatchPtr *ole.IDispatch) NotesNewsletter {
+	return NotesNewsletter{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -36,7 +36,7 @@ func (n NotesNewsletter) SetDoSubject(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_NEWSLETTER_COM.html */
 func (n NotesNewsletter) Parent() (NotesSession, error) {
-	return getComObjectProperty(n, NewNotesSession, "Parent")
+	return getComObjectProperty(n, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SUBJECTITEMNAME_PROPERTY.html */
@@ -52,10 +52,10 @@ func (n NotesNewsletter) SetSubjectItemName(v String) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMATDOCUMENT_METHOD.html */
 func (n NotesNewsletter) FormatDocument(notesDatabase NotesDatabase, documentNumber Integer) (NotesDocument, error) {
-	return callComObjectMethod(n, NewNotesDocument, "FormatDocument", notesDatabase, documentNumber)
+	return callComObjectMethod(n, newNotesDocument, "FormatDocument", notesDatabase, documentNumber)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMATMSGWITHDOCLINKS_METHOD.html */
 func (n NotesNewsletter) FormatMsgWithDoclinks(notesDatabase NotesDatabase) (NotesDocument, error) {
-	return callComObjectMethod(n, NewNotesDocument, "FormatMsgWithDoclinks", notesDatabase)
+	return callComObjectMethod(n, newNotesDocument, "FormatMsgWithDoclinks", notesDatabase)
 }

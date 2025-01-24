@@ -11,8 +11,8 @@ type NotesDominoQuery struct {
 	NotesStruct
 }
 
-func NewNotesDominoQuery(dispatchPtr *ole.IDispatch) NotesDominoQuery {
-	return NotesDominoQuery{NewNotesStruct(dispatchPtr)}
+func newNotesDominoQuery(dispatchPtr *ole.IDispatch) NotesDominoQuery {
+	return NotesDominoQuery{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -152,7 +152,7 @@ func (d NotesDominoQuery) Execute(query String, params ...notesDominoQueryExecut
 		}
 	}
 
-	return callComObjectMethod(d, NewNotesDocumentCollection, "Execute", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocumentCollection, "Execute", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EXPLAIN_METHOD_NDQ.html#reference_jkw_wcj_cgb */
@@ -222,7 +222,7 @@ func (d NotesDominoQuery) CreateIndex(indexName String, field []String, params .
 /* TODO: Re-add later. JSON modules have to many circular dependencies for now. */
 // func (d NotesDominoQuery) ListIndexes() (NotesJSONNavigator, error) {
 // 	dispatchPtr, err := CallComObjectMethod(d, "ListIndexes")
-// 	return NewNotesJSONNavigator(dispatchPtr), err
+// 	return newNotesJSONNavigator(dispatchPtr), err
 // }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEINDEX_METHOD_NDQ.html#reference_uqw_grw_ljb */

@@ -9,8 +9,8 @@ type NotesACLEntry struct {
 	NotesStruct
 }
 
-func NewNotesACLEntry(dispatchPtr *ole.IDispatch) NotesACLEntry {
-	return NotesACLEntry{NewNotesStruct(dispatchPtr)}
+func newNotesACLEntry(dispatchPtr *ole.IDispatch) NotesACLEntry {
+	return NotesACLEntry{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -176,12 +176,12 @@ func (a NotesACLEntry) SetName(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAMEOBJECT_PROPERTY.html */
 func (a NotesACLEntry) NameObject() (NotesName, error) {
-	return getComObjectProperty(a, NewNotesName, "NameObject")
+	return getComObjectProperty(a, newNotesName, "NameObject")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_ACLENTRY.html */
 func (a NotesACLEntry) Parent() (NotesACL, error) {
-	return getComObjectProperty(a, NewNotesACL, "Parent")
+	return getComObjectProperty(a, newNotesACL, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROLES_PROPERTY_ACLENTRY.html */

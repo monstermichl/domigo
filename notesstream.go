@@ -9,8 +9,8 @@ type NotesStream struct {
 	NotesStruct
 }
 
-func NewNotesStream(dispatchPtr *ole.IDispatch) NotesStream {
-	return NotesStream{NewNotesStruct(dispatchPtr)}
+func newNotesStream(dispatchPtr *ole.IDispatch) NotesStream {
+	return NotesStream{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -36,7 +36,7 @@ func (s NotesStream) IsReadOnly() (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_STREAM.html */
 func (s NotesStream) Parent() (NotesSession, error) {
-	return getComObjectProperty(s, NewNotesSession, "Parent")
+	return getComObjectProperty(s, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_POSITION_PROPERTY_STREAM.html */

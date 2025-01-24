@@ -21,7 +21,7 @@ type NotesStruct struct {
 	c com.Com
 }
 
-func NewNotesStruct(dispatchPtr *ole.IDispatch) NotesStruct {
+func newNotesStruct(dispatchPtr *ole.IDispatch) NotesStruct {
 	return NotesStruct{com.New(dispatchPtr)}
 }
 

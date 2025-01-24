@@ -11,14 +11,14 @@ type NotesRichTextItem struct {
 	NotesStruct
 }
 
-func NewNotesRichTextItem(dispatchPtr *ole.IDispatch) NotesRichTextItem {
-	return NotesRichTextItem{NewNotesStruct(dispatchPtr)}
+func newNotesRichTextItem(dispatchPtr *ole.IDispatch) NotesRichTextItem {
+	return NotesRichTextItem{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_EMBEDDEDOBJECTS_PROPERTY_RTITEM.html */
 func (r NotesRichTextItem) EmbeddedObjects() ([]NotesEmbeddedObject, error) {
-	return com.GetObjectArrayProperty(r.com(), NewNotesEmbeddedObject, "EmbeddedObjects")
+	return com.GetObjectArrayProperty(r.com(), newNotesEmbeddedObject, "EmbeddedObjects")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -293,12 +293,12 @@ func (r NotesRichTextItem) Converttohtml() error {
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_CREATENAVIGATOR_METHOD_RTITEM.html */
 func (r NotesRichTextItem) CreateNavigator() (NotesRichTextNavigator, error) {
-	return callComObjectMethod(r, NewNotesRichTextNavigator, "CreateNavigator")
+	return callComObjectMethod(r, newNotesRichTextNavigator, "CreateNavigator")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_CREATERANGE_METHOD_RTITEM.html */
 func (r NotesRichTextItem) CreateRange() (NotesRichTextRange, error) {
-	return callComObjectMethod(r, NewNotesRichTextRange, "CreateRange")
+	return callComObjectMethod(r, newNotesRichTextRange, "CreateRange")
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_EMBEDOBJECT_METHOD.html */
@@ -325,7 +325,7 @@ func (r NotesRichTextItem) EmbedObject(embedType NotesEmbeddedObjectEmbedType, c
 	if paramsStruct.name != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.name)
 	}
-	return callComObjectMethod(r, NewNotesEmbeddedObject, "EmbedObject", paramsOrdered...)
+	return callComObjectMethod(r, newNotesEmbeddedObject, "EmbedObject", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_ENDINSERT_METHOD_RTITEM.html */
@@ -340,7 +340,7 @@ func (r NotesRichTextItem) EndSection() error {
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_GETEMBEDDEDOBJECT_METHOD.html */
 func (r NotesRichTextItem) GetEmbeddedObject(name String) (NotesEmbeddedObject, error) {
-	return callComObjectMethod(r, NewNotesEmbeddedObject, "GetEmbeddedObject", name)
+	return callComObjectMethod(r, newNotesEmbeddedObject, "GetEmbeddedObject", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/10.0.1/basic/H_GETFORMATTEDTEXT_METHOD.html */

@@ -9,8 +9,8 @@ type NotesDateTime struct {
 	NotesStruct
 }
 
-func NewNotesDateTime(dispatchPtr *ole.IDispatch) NotesDateTime {
-	return NotesDateTime{NewNotesStruct(dispatchPtr)}
+func newNotesDateTime(dispatchPtr *ole.IDispatch) NotesDateTime {
+	return NotesDateTime{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -61,7 +61,7 @@ func (d NotesDateTime) SetLSLocalTime(v Time) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_DATETIME_COM.html */
 func (d NotesDateTime) Parent() (NotesSession, error) {
-	return getComObjectProperty(d, NewNotesSession, "Parent")
+	return getComObjectProperty(d, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TIMEONLY_PROPERTY.html */

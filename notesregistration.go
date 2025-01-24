@@ -9,8 +9,8 @@ type NotesRegistration struct {
 	NotesStruct
 }
 
-func NewNotesRegistration(dispatchPtr *ole.IDispatch) NotesRegistration {
-	return NotesRegistration{NewNotesStruct(dispatchPtr)}
+func newNotesRegistration(dispatchPtr *ole.IDispatch) NotesRegistration {
+	return NotesRegistration{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */

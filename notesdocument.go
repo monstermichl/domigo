@@ -11,8 +11,8 @@ type NotesDocument struct {
 	NotesStruct
 }
 
-func NewNotesDocument(dispatchPtr *ole.IDispatch) NotesDocument {
-	return NotesDocument{NewNotesStruct(dispatchPtr)}
+func newNotesDocument(dispatchPtr *ole.IDispatch) NotesDocument {
+	return NotesDocument{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -34,7 +34,7 @@ func (d NotesDocument) Created() (Time, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EMBEDDEDOBJECTS_PROPERTY_DOC.html */
 func (d NotesDocument) EmbeddedObjects() ([]NotesEmbeddedObject, error) {
-	return com.GetObjectArrayProperty(d.com(), NewNotesEmbeddedObject, "EmbeddedObjects")
+	return com.GetObjectArrayProperty(d.com(), newNotesEmbeddedObject, "EmbeddedObjects")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPTIONKEYS_PROPERTY.html */
@@ -124,7 +124,7 @@ func (d NotesDocument) IsValid() (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ITEMS_PROPERTY.html */
 func (d NotesDocument) Items() ([]NotesItem, error) {
-	return com.GetObjectArrayProperty(d.com(), NewNotesItem, "Items")
+	return com.GetObjectArrayProperty(d.com(), newNotesItem, "Items")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_KEY_PROPERTY.html */
@@ -169,7 +169,7 @@ func (d NotesDocument) NotesURL() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENTDATABASE_PROPERTY.html */
 func (d NotesDocument) ParentDatabase() (NotesDatabase, error) {
-	return getComObjectProperty(d, NewNotesDatabase, "ParentDatabase")
+	return getComObjectProperty(d, newNotesDatabase, "ParentDatabase")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENTDOCUMENTUNID_PROPERTY.html */
@@ -179,12 +179,12 @@ func (d NotesDocument) ParentDocumentUNID() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENTVIEW_PROPERTY.html */
 func (d NotesDocument) ParentView() (NotesView, error) {
-	return getComObjectProperty(d, NewNotesView, "ParentView")
+	return getComObjectProperty(d, newNotesView, "ParentView")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESPONSES_PROPERTY.html */
 func (d NotesDocument) Responses() (NotesDocumentCollection, error) {
-	return getComObjectProperty(d, NewNotesDocumentCollection, "Responses")
+	return getComObjectProperty(d, newNotesDocumentCollection, "Responses")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVEMESSAGEONSEND_PROPERTY.html */
@@ -245,7 +245,7 @@ func (d NotesDocument) Verifier() (String, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_APPENDITEMVALUE_METHOD.html */
 func (d NotesDocument) AppendItemValue(itemName String, value any) (NotesItem, error) {
-	return callComObjectMethod(d, NewNotesItem, "AppendItemValue", itemName, value)
+	return callComObjectMethod(d, newNotesItem, "AppendItemValue", itemName, value)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ATTACHVCARD_METHOD.html */
@@ -361,12 +361,12 @@ func (d NotesDocument) CopyAllItems(notesDocument NotesDocument, params ...notes
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYITEM_METHOD.html */
 func (d NotesDocument) CopyItem(item NotesItem, newName String) (NotesItem, error) {
-	return callComObjectMethod(d, NewNotesItem, "CopyItem", item, newName)
+	return callComObjectMethod(d, newNotesItem, "CopyItem", item, newName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYTODATABASE_METHOD.html */
 func (d NotesDocument) CopyToDatabase(notesDatabase NotesDatabase) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "CopyToDatabase", notesDatabase)
+	return callComObjectMethod(d, newNotesDocument, "CopyToDatabase", notesDatabase)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEMIMEENTITY_METHOD_DOC.html */
@@ -393,17 +393,17 @@ func (d NotesDocument) CreateMIMEEntity(params ...notesDocumentCreateMIMEEntityP
 	if paramsStruct.itemName != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.itemName)
 	}
-	return callComObjectMethod(d, NewNotesMIMEEntity, "CreateMIMEEntity", paramsOrdered...)
+	return callComObjectMethod(d, newNotesMIMEEntity, "CreateMIMEEntity", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEREPLYMESSAGE_METHOD.html */
 func (d NotesDocument) CreateReplyMessage(all Boolean) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "CreateReplyMessage", all)
+	return callComObjectMethod(d, newNotesDocument, "CreateReplyMessage", all)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATERICHTEXTITEM_METHOD.html */
 func (d NotesDocument) CreateRichTextItem(name String) (NotesRichTextItem, error) {
-	return callComObjectMethod(d, NewNotesRichTextItem, "CreateRichTextItem", name)
+	return callComObjectMethod(d, newNotesRichTextItem, "CreateRichTextItem", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENCRYPT_METHOD.html */
@@ -413,12 +413,12 @@ func (d NotesDocument) Encrypt() error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETATTACHMENT_METHOD.html */
 func (d NotesDocument) GetAttachment(fileName String) (NotesEmbeddedObject, error) {
-	return callComObjectMethod(d, NewNotesEmbeddedObject, "GetAttachment", fileName)
+	return callComObjectMethod(d, newNotesEmbeddedObject, "GetAttachment", fileName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTITEM_METHOD.html */
 func (d NotesDocument) GetFirstItem(name String) (NotesItem, error) {
-	return callComObjectMethod(d, NewNotesItem, "GetFirstItem", name)
+	return callComObjectMethod(d, newNotesItem, "GetFirstItem", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUE_METHOD.html */
@@ -434,7 +434,7 @@ func (d NotesDocument) GetItemValueCustomDataBytes(itemName String, dataTypeName
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETITEMVALUEDATETIMEARRAY_METHOD.html */
 /* TODO: Find out how to handle different return value types. */
 func (d NotesDocument) GetItemValueDateTimeArray(itemName String) ([]NotesDateTime, error) {
-	return com.CallObjectArrayMethod(d.com(), NewNotesDateTime, "GetItemValueDateTimeArray")
+	return com.CallObjectArrayMethod(d.com(), newNotesDateTime, "GetItemValueDateTimeArray")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMIMEENTITY_METHOD_DOC.html */
@@ -461,7 +461,7 @@ func (d NotesDocument) GetMIMEEntity(params ...notesDocumentGetMIMEEntityParam) 
 	if paramsStruct.itemName != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.itemName)
 	}
-	return callComObjectMethod(d, NewNotesMIMEEntity, "GetMIMEEntity", paramsOrdered...)
+	return callComObjectMethod(d, newNotesMIMEEntity, "GetMIMEEntity", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETREAD_METHOD_DOC.html */
@@ -678,7 +678,7 @@ func (d NotesDocument) RenderToRTItem(notesRichTextItem NotesRichTextItem) (Bool
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLACEITEMVALUE_METHOD.html */
 func (d NotesDocument) ReplaceItemValue(itemName String, value any) (NotesItem, error) {
-	return callComObjectMethod(d, NewNotesItem, "ReplaceItemValue", itemName, value)
+	return callComObjectMethod(d, newNotesItem, "ReplaceItemValue", itemName, value)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLACEITEMVALUECUSTOMDATABYTES_METHOD_DOC.html */

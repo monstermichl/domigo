@@ -13,8 +13,8 @@ type NotesView struct {
 	NotesStruct
 }
 
-func NewNotesView(dispatchPtr *ole.IDispatch) NotesView {
-	return NotesView{NewNotesStruct(dispatchPtr)}
+func newNotesView(dispatchPtr *ole.IDispatch) NotesView {
+	return NotesView{newNotesStruct(dispatchPtr)}
 }
 
 func (v NotesView) checkKey(key any) (any, error) {
@@ -43,7 +43,7 @@ func (v NotesView) SetAliases(aliases []String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLENTRIES_PROPERTY_6084.html */
 func (v NotesView) AllEntries() (NotesViewEntryCollection, error) {
-	return getComObjectProperty(v, NewNotesViewEntryCollection, "AllEntries")
+	return getComObjectProperty(v, newNotesViewEntryCollection, "AllEntries")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_AUTOUPDATE_PROPERTY.html */
@@ -78,7 +78,7 @@ func (v NotesView) ColumnNames() ([]String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COLUMNS_PROPERTY.html */
 func (v NotesView) Columns() (NotesViewColumn, error) {
-	return getComObjectProperty(v, NewNotesViewColumn, "Columns")
+	return getComObjectProperty(v, newNotesViewColumn, "Columns")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATED_PROPERTY_VIEW.html */
@@ -183,7 +183,7 @@ func (v NotesView) NotesURL() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_VIEW.html */
 func (v NotesView) Parent() (NotesDatabase, error) {
-	return getComObjectProperty(v, NewNotesDatabase, "Parent")
+	return getComObjectProperty(v, newNotesDatabase, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROTECTREADERS_PROPERTY_VIEW.html */
@@ -277,7 +277,7 @@ func (v NotesView) CopyColumn(sourceColumn Integer, params ...notesViewCopyColum
 	if paramsStruct.destinationIndex != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.destinationIndex)
 	}
-	return callComObjectMethod(v, NewNotesViewColumn, "CopyColumn", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewColumn, "CopyColumn", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATECOLUMN_METHOD_VIEW.html */
@@ -324,7 +324,7 @@ func (v NotesView) CreateColumn(params ...notesViewCreateColumnParam) (NotesView
 			}
 		}
 	}
-	return callComObjectMethod(v, NewNotesViewColumn, "CreateColumn", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewColumn, "CreateColumn", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAV_METHOD_1631.html */
@@ -351,7 +351,7 @@ func (v NotesView) CreateViewNav(params ...notesViewCreateViewNavParam) (NotesVi
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	return callComObjectMethod(v, NewNotesViewNavigator, "CreateViewNav", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewNavigator, "CreateViewNav", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROM_METHOD_5742.html */
@@ -378,7 +378,7 @@ func (v NotesView) CreateViewNavFrom(navigatorObject Variant, params ...notesVie
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	return callComObjectMethod(v, NewNotesViewNavigator, "CreateViewNavFrom", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewNavigator, "CreateViewNavFrom", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROMALLUNREAD.html */
@@ -405,7 +405,7 @@ func (v NotesView) CreateViewNavFromAllUnread(params ...notesViewCreateViewNavFr
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	return callComObjectMethod(v, NewNotesViewNavigator, "CreateViewNavFromAllUnread", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewNavigator, "CreateViewNavFromAllUnread", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROMCATEGORY_METHOD_3595.html */
@@ -432,7 +432,7 @@ func (v NotesView) CreateViewNavFromCategory(category String, params ...notesVie
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	return callComObjectMethod(v, NewNotesViewNavigator, "CreateViewNavFromCategory", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewNavigator, "CreateViewNavFromCategory", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROMCHILDREN_METHOD_9100.html */
@@ -459,7 +459,7 @@ func (v NotesView) CreateViewNavFromChildren(navigatorObject Variant, params ...
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	return callComObjectMethod(v, NewNotesViewNavigator, "CreateViewNavFromChildren", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewNavigator, "CreateViewNavFromChildren", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVFROMDESCENDANTS_METHOD_2893.html */
@@ -486,7 +486,7 @@ func (v NotesView) CreateViewNavFromDescendants(navigatorObject Variant, params 
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	return callComObjectMethod(v, NewNotesViewNavigator, "CreateViewNavFromDescendants", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewNavigator, "CreateViewNavFromDescendants", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEWNAVMAXLEVEL_METHOD_NOTESVIEW_CLASS.html */
@@ -513,7 +513,7 @@ func (v NotesView) CreateViewNavMaxLevel(level Long, params ...notesViewCreateVi
 	if paramsStruct.cacheSize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.cacheSize)
 	}
-	return callComObjectMethod(v, NewNotesViewNavigator, "CreateViewNavMaxLevel", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewNavigator, "CreateViewNavMaxLevel", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCH_METHOD_VIEW.html */
@@ -550,7 +550,7 @@ func (v NotesView) GetAllDocumentsByKey(key any, params ...notesViewGetAllDocume
 	if paramsStruct.exactMatch != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
 	}
-	return callComObjectMethod(v, NewNotesDocumentCollection, "GetAllDocumentsByKey", paramsOrdered...)
+	return callComObjectMethod(v, newNotesDocumentCollection, "GetAllDocumentsByKey", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLENTRIESBYKEY_METHOD_9837.html */
@@ -582,7 +582,7 @@ func (v NotesView) GetAllEntriesByKey(key any, params ...notesViewGetAllEntriesB
 	if paramsStruct.exactMatch != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
 	}
-	return callComObjectMethod(v, NewNotesViewEntryCollection, "GetAllEntriesByKey", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewEntryCollection, "GetAllEntriesByKey", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLREADENTRIES.html */
@@ -609,7 +609,7 @@ func (v NotesView) GetAllReadEntries(params ...notesViewGetAllReadEntriesParam) 
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	return callComObjectMethod(v, NewNotesViewEntryCollection, "GetAllReadEntries", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewEntryCollection, "GetAllReadEntries", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLUNREADENTRIES.html */
@@ -636,17 +636,17 @@ func (v NotesView) GetAllUnreadEntries(params ...notesViewGetAllUnreadEntriesPar
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	return callComObjectMethod(v, NewNotesViewEntryCollection, "GetAllUnreadEntries", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewEntryCollection, "GetAllUnreadEntries", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCHILD_METHOD.html */
 func (v NotesView) GetChild(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetChild", document)
+	return callComObjectMethod(v, newNotesDocument, "GetChild", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCOLUMN_METHOD_NOTESVIEW_CLASS.html */
 func (v NotesView) GetColumn(columnNumber Long) (NotesViewColumn, error) {
-	return callComObjectMethod(v, NewNotesViewColumn, "GetColumn", columnNumber)
+	return callComObjectMethod(v, newNotesViewColumn, "GetColumn", columnNumber)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENTBYKEY_METHOD.html */
@@ -678,7 +678,7 @@ func (v NotesView) GetDocumentByKey(key any, params ...notesViewGetDocumentByKey
 	if paramsStruct.exactMatch != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
 	}
-	return callComObjectMethod(v, NewNotesDocument, "GetDocumentByKey", paramsOrdered...)
+	return callComObjectMethod(v, newNotesDocument, "GetDocumentByKey", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRYBYKEY_METHOD_3846.html */
@@ -710,47 +710,47 @@ func (v NotesView) GetEntryByKey(key any, params ...notesViewGetEntryByKeyParam)
 	if paramsStruct.exactMatch != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.exactMatch)
 	}
-	return callComObjectMethod(v, NewNotesViewEntry, "GetEntryByKey", paramsOrdered...)
+	return callComObjectMethod(v, newNotesViewEntry, "GetEntryByKey", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetFirstDocument() (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetFirstDocument")
+	return callComObjectMethod(v, newNotesDocument, "GetFirstDocument")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETLASTDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetLastDocument() (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetLastDocument")
+	return callComObjectMethod(v, newNotesDocument, "GetLastDocument")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetNextDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetNextDocument", document)
+	return callComObjectMethod(v, newNotesDocument, "GetNextDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTSIBLING_METHOD.html */
 func (v NotesView) GetNextSibling(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetNextSibling", document)
+	return callComObjectMethod(v, newNotesDocument, "GetNextSibling", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetNthDocument(index Long) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetNthDocument", index)
+	return callComObjectMethod(v, newNotesDocument, "GetNthDocument", index)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARENTDOCUMENT_METHOD.html */
 func (v NotesView) GetParentDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetParentDocument", document)
+	return callComObjectMethod(v, newNotesDocument, "GetParentDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVDOCUMENT_METHOD_VIEW.html */
 func (v NotesView) GetPrevDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetPrevDocument", document)
+	return callComObjectMethod(v, newNotesDocument, "GetPrevDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVSIBLING_METHOD.html */
 func (v NotesView) GetPrevSibling(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(v, NewNotesDocument, "GetPrevSibling", document)
+	return callComObjectMethod(v, newNotesDocument, "GetPrevSibling", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCK_METHOD_VIEW.html */

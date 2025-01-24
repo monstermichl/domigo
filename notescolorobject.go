@@ -9,8 +9,8 @@ type NotesColorObject struct {
 	NotesStruct
 }
 
-func NewNotesColorObject(dispatchPtr *ole.IDispatch) NotesColorObject {
-	return NotesColorObject{NewNotesStruct(dispatchPtr)}
+func newNotesColorObject(dispatchPtr *ole.IDispatch) NotesColorObject {
+	return NotesColorObject{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */

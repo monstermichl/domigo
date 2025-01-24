@@ -9,8 +9,8 @@ type NotesQueryResultsProcessor struct {
 	NotesStruct
 }
 
-func NewNotesQueryResultsProcessor(dispatchPtr *ole.IDispatch) NotesQueryResultsProcessor {
-	return NotesQueryResultsProcessor{NewNotesStruct(dispatchPtr)}
+func newNotesQueryResultsProcessor(dispatchPtr *ole.IDispatch) NotesQueryResultsProcessor {
+	return NotesQueryResultsProcessor{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */

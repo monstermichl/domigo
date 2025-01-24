@@ -11,8 +11,8 @@ type NotesCalendarNotice struct {
 	NotesStruct
 }
 
-func NewNotesCalendarNotice(dispatchPtr *ole.IDispatch) NotesCalendarNotice {
-	return NotesCalendarNotice{NewNotesStruct(dispatchPtr)}
+func newNotesCalendarNotice(dispatchPtr *ole.IDispatch) NotesCalendarNotice {
+	return NotesCalendarNotice{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -132,12 +132,12 @@ func (c NotesCalendarNotice) Delegate(commentsToOrganizer String, delegateTo Str
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETASDOCUMENT_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) GetAsDocument() (NotesDocument, error) {
-	return callComObjectMethod(c, NewNotesDocument, "GetAsDocument")
+	return callComObjectMethod(c, newNotesDocument, "GetAsDocument")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETOUTSTANDINGINVITATIONS_METHOD_CALNOTICE.html */
 func (c NotesCalendarNotice) GetOutstandingInvitations() ([]NotesCalendarNotice, error) {
-	return com.CallObjectArrayMethod(c.com(), NewNotesCalendarNotice, "GetOutstandingInvitations")
+	return com.CallObjectArrayMethod(c.com(), newNotesCalendarNotice, "GetOutstandingInvitations")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_READ_METHOD_CALNOTICE.html */

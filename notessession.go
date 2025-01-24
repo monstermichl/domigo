@@ -23,8 +23,8 @@ type NotesSession struct {
 	NotesStruct
 }
 
-func NewNotesSession(dispatchPtr *ole.IDispatch) NotesSession {
-	return NotesSession{NewNotesStruct(dispatchPtr)}
+func newNotesSession(dispatchPtr *ole.IDispatch) NotesSession {
+	return NotesSession{newNotesStruct(dispatchPtr)}
 }
 
 func initialize(params ...any) (NotesSession, error) {
@@ -41,7 +41,7 @@ func initialize(params ...any) (NotesSession, error) {
 	if err != nil {
 		return session, errors.New("session could not be initialized")
 	}
-	session = NewNotesSession(com.Dispatch())
+	session = newNotesSession(com.Dispatch())
 	err = callComVoidMethod(session, "Initialize", params...)
 
 	if err != nil {
@@ -107,7 +107,7 @@ func InitializeUsingNotesUserName(name String, params ...notesSessionInitializeU
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ADDRESSBOOKS_PROPERTY.html */
 func (s NotesSession) AddressBooks() ([]NotesDatabase, error) {
-	return com.GetObjectArrayProperty(s.com(), NewNotesDatabase, "AddressBooks")
+	return com.GetObjectArrayProperty(s.com(), newNotesDatabase, "AddressBooks")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COMMONUSERNAME_PROPERTY.html */
@@ -127,17 +127,17 @@ func (s NotesSession) SetConvertMIME(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTAGENT_PROPERTY.html */
 func (s NotesSession) CurrentAgent() (NotesAgent, error) {
-	return getComObjectProperty(s, NewNotesAgent, "CurrentAgent")
+	return getComObjectProperty(s, newNotesAgent, "CurrentAgent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CURRENTDATABASE_PROPERTY.html */
 func (s NotesSession) CurrentDatabase() (NotesDatabase, error) {
-	return getComObjectProperty(s, NewNotesDatabase, "CurrentDatabase")
+	return getComObjectProperty(s, newNotesDatabase, "CurrentDatabase")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DOCUMENTCONTEXT_PROPERTY.html */
 func (s NotesSession) DocumentContext() (NotesDocument, error) {
-	return getComObjectProperty(s, NewNotesDocument, "DocumentContext")
+	return getComObjectProperty(s, newNotesDocument, "DocumentContext")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_EFFECTIVEUSERNAME_PROPERTY.html */
@@ -152,7 +152,7 @@ func (s NotesSession) HttpURL() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERNATIONAL_PROPERTY.html */
 func (s NotesSession) International() (NotesInternational, error) {
-	return getComObjectProperty(s, NewNotesInternational, "International")
+	return getComObjectProperty(s, newNotesInternational, "International")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ISONSERVER_PROPERTY.html */
@@ -197,7 +197,7 @@ func (s NotesSession) Platform() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVEDDATA_PROPERTY.html */
 func (s NotesSession) SavedData() (NotesDocument, error) {
-	return getComObjectProperty(s, NewNotesDocument, "SavedData")
+	return getComObjectProperty(s, newNotesDocument, "SavedData")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SERVERNAME_PROPERTY_SESSION_COM.html */
@@ -207,12 +207,12 @@ func (s NotesSession) ServerName() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_URLDATABASE_PROPERTY_SESSION_COM.html */
 func (s NotesSession) URLDatabase() (NotesDatabase, error) {
-	return getComObjectProperty(s, NewNotesDatabase, "URLDatabase")
+	return getComObjectProperty(s, newNotesDatabase, "URLDatabase")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERGROUPNAMELIST_PROPERTY_SESSION.html */
 func (s NotesSession) UserGroupNameList() ([]NotesName, error) {
-	return com.GetObjectArrayProperty(s.com(), NewNotesName, "UserGroupNameList")
+	return com.GetObjectArrayProperty(s.com(), newNotesName, "UserGroupNameList")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERNAME_PROPERTY.html */
@@ -222,48 +222,48 @@ func (s NotesSession) UserName() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERNAMELIST_PROPERTY_7482.html */
 func (s NotesSession) UserNameList() ([]NotesName, error) {
-	return com.GetObjectArrayProperty(s.com(), NewNotesName, "UserNameList")
+	return com.GetObjectArrayProperty(s.com(), newNotesName, "UserNameList")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_USERNAMEOBJECT_PROPERTY_SESSION_COM.html */
 func (s NotesSession) UserNameObject() (NotesName, error) {
-	return getComObjectProperty(s, NewNotesName, "UserNameObject")
+	return getComObjectProperty(s, newNotesName, "UserNameObject")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEADMINISTRATIONPROCESS_METHOD_SESSION.html */
 func (s NotesSession) CreateAdministrationProcess(server String) (NotesAdministrationProcess, error) {
-	return callComObjectMethod(s, NewNotesAdministrationProcess, "CreateAdministrationProcess", server)
+	return callComObjectMethod(s, newNotesAdministrationProcess, "CreateAdministrationProcess", server)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATECOLOROBJECT_METHOD_SESSION.html */
 func (s NotesSession) CreateColorObject() (NotesColorObject, error) {
-	return callComObjectMethod(s, NewNotesColorObject, "CreateColorObject")
+	return callComObjectMethod(s, newNotesColorObject, "CreateColorObject")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDATERANGE_METHOD.html */
 func (s NotesSession) CreateDateRange() (NotesDateRange, error) {
-	return callComObjectMethod(s, NewNotesDateRange, "CreateDateRange")
+	return callComObjectMethod(s, newNotesDateRange, "CreateDateRange")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDATETIME_METHOD.html */
 func (s NotesSession) CreateDateTime(dateTime String) (NotesDateTime, error) {
-	return callComObjectMethod(s, NewNotesDateTime, "CreateDateTime", dateTime)
+	return callComObjectMethod(s, newNotesDateTime, "CreateDateTime", dateTime)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDXLEXPORTER_METHOD_SESSION.html */
 func (s NotesSession) CreateDXLExporter() (NotesDXLExporter, error) {
-	return callComObjectMethod(s, NewNotesDXLExporter, "CreateDXLExporter")
+	return callComObjectMethod(s, newNotesDXLExporter, "CreateDXLExporter")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDXLIMPORTER_METHOD_SESSION.html */
 func (s NotesSession) CreateDXLImporter() (NotesDXLImporter, error) {
-	return callComObjectMethod(s, NewNotesDXLImporter, "CreateDXLImporter")
+	return callComObjectMethod(s, newNotesDXLImporter, "CreateDXLImporter")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATELOG_METHOD.html */
 func (s NotesSession) CreateLog(programName String) (NotesLog, error) {
-	return callComObjectMethod(s, NewNotesLog, "CreateLog", programName)
+	return callComObjectMethod(s, newNotesLog, "CreateLog", programName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATENAME_METHOD.html */
@@ -290,27 +290,27 @@ func (s NotesSession) CreateName(name String, params ...notesSessionCreateNamePa
 	if paramsStruct.language != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.language)
 	}
-	return callComObjectMethod(s, NewNotesName, "CreateName", paramsOrdered...)
+	return callComObjectMethod(s, newNotesName, "CreateName", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATENEWSLETTER_METHOD.html */
 func (s NotesSession) CreateNewsletter(notesDocumentCollection NotesDocumentCollection) (NotesNewsletter, error) {
-	return callComObjectMethod(s, NewNotesNewsletter, "CreateNewsletter", notesDocumentCollection)
+	return callComObjectMethod(s, newNotesNewsletter, "CreateNewsletter", notesDocumentCollection)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEREGISTRATION_METHOD_SESSION_COM.html */
 func (s NotesSession) CreateRegistration() (NotesRegistration, error) {
-	return callComObjectMethod(s, NewNotesRegistration, "CreateRegistration")
+	return callComObjectMethod(s, newNotesRegistration, "CreateRegistration")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATERICHTEXTPARAGRAPHSTYLE_METHOD_8901_ABOUT.html */
 func (s NotesSession) CreateRichTextParagraphStyle() (NotesRichTextParagraphStyle, error) {
-	return callComObjectMethod(s, NewNotesRichTextParagraphStyle, "CreateRichTextParagraphStyle")
+	return callComObjectMethod(s, newNotesRichTextParagraphStyle, "CreateRichTextParagraphStyle")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATERICHTEXTSTYLE_METHOD.html */
 func (s NotesSession) CreateRichTextStyle() (NotesRichTextStyle, error) {
-	return callComObjectMethod(s, NewNotesRichTextStyle, "CreateRichTextStyle")
+	return callComObjectMethod(s, newNotesRichTextStyle, "CreateRichTextStyle")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATESAXPARSER_METHOD_SESSION.html */
@@ -354,7 +354,7 @@ func (s NotesSession) CreateRichTextStyle() (NotesRichTextStyle, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATESTREAM_METHOD_SESSION.html */
 func (s NotesSession) CreateStream() (NotesStream, error) {
-	return callComObjectMethod(s, NewNotesStream, "CreateStream")
+	return callComObjectMethod(s, newNotesStream, "CreateStream")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEXSLTRANSFORMER_METHOD_SESSION.html */
@@ -512,7 +512,7 @@ func (s NotesSession) FreeTimeSearch(window NotesDateRange, duration Integer, na
 	if paramsStruct.firstfit != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.firstfit)
 	}
-	return callComObjectMethod(s, NewNotesDateRange, "FreeTimeSearch", paramsOrdered...)
+	return callComObjectMethod(s, newNotesDateRange, "FreeTimeSearch", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDATABASE_METHOD.html */
@@ -539,17 +539,17 @@ func (s NotesSession) GetDatabase(server String, dbfile String, params ...notesS
 	if paramsStruct.createonfail != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.createonfail)
 	}
-	return callComObjectMethod(s, NewNotesDatabase, "GetDatabase", paramsOrdered...)
+	return callComObjectMethod(s, newNotesDatabase, "GetDatabase", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCALENDAR_METHOD.html */
 func (s NotesSession) GetCalendar(mailDatabase NotesDatabase) (NotesCalendar, error) {
-	return callComObjectMethod(s, NewNotesCalendar, "GetCalendar", mailDatabase)
+	return callComObjectMethod(s, newNotesCalendar, "GetCalendar", mailDatabase)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDBDIRECTORY_METHOD.html */
 func (s NotesSession) GetDbDirectory(serverName String) (NotesDbDirectory, error) {
-	return callComObjectMethod(s, NewNotesDbDirectory, "GetDbDirectory", serverName)
+	return callComObjectMethod(s, newNotesDbDirectory, "GetDbDirectory", serverName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDIRECTORY_METHOD.html */
@@ -576,7 +576,7 @@ func (s NotesSession) GetDirectory(params ...notesSessionGetDirectoryParam) (Not
 	if paramsStruct.serverName != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.serverName)
 	}
-	return callComObjectMethod(s, NewNotesDirectory, "GetDirectory", paramsOrdered...)
+	return callComObjectMethod(s, newNotesDirectory, "GetDirectory", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENVIRONMENTSTRING_METHOD.html */
@@ -635,7 +635,7 @@ func (s NotesSession) GetEnvironmentValue(name String, params ...notesSessionGet
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPROPERTYBROKER_METHOD.html */
 func (s NotesSession) GetPropertyBroker() (NotesPropertyBroker, error) {
-	return callComObjectMethod(s, NewNotesPropertyBroker, "GetPropertyBroker")
+	return callComObjectMethod(s, newNotesPropertyBroker, "GetPropertyBroker")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETUSERPOLICYSETTINGS_METHOD_SESSION.html */
@@ -672,7 +672,7 @@ func (s NotesSession) GetUserPolicySettings(server String, name String, policyTy
 			paramsOrdered = append(paramsOrdered, *paramsStruct.reserved)
 		}
 	}
-	return callComObjectMethod(s, NewNotesDocument, "GetUserPolicySettings", paramsOrdered...)
+	return callComObjectMethod(s, newNotesDocument, "GetUserPolicySettings", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HASHPASSWORD_METHOD_SESSION.html */

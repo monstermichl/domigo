@@ -9,8 +9,8 @@ type NotesDirectoryNavigator struct {
 	NotesStruct
 }
 
-func NewNotesDirectoryNavigator(dispatchPtr *ole.IDispatch) NotesDirectoryNavigator {
-	return NotesDirectoryNavigator{NewNotesStruct(dispatchPtr)}
+func newNotesDirectoryNavigator(dispatchPtr *ole.IDispatch) NotesDirectoryNavigator {
+	return NotesDirectoryNavigator{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */

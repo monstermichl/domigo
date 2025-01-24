@@ -11,8 +11,8 @@ type NotesDocumentCollection struct {
 	NotesStruct
 }
 
-func NewNotesDocumentCollection(dispatchPtr *ole.IDispatch) NotesDocumentCollection {
-	return NotesDocumentCollection{NewNotesStruct(dispatchPtr)}
+func newNotesDocumentCollection(dispatchPtr *ole.IDispatch) NotesDocumentCollection {
+	return NotesDocumentCollection{newNotesStruct(dispatchPtr)}
 }
 
 func (d NotesDocumentCollection) checkCombinableTypes(val any) error {
@@ -32,7 +32,7 @@ func (d NotesDocumentCollection) IsSorted() (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_COLLECTION.html */
 func (d NotesDocumentCollection) Parent() (NotesDatabase, error) {
-	return getComObjectProperty(d, NewNotesDatabase, "Parent")
+	return getComObjectProperty(d, newNotesDatabase, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_QUERY_PROPERTY_COLLECTION.html */
@@ -42,7 +42,7 @@ func (d NotesDocumentCollection) Query() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNTILTIME_PROPERTY_COLLECTION.html */
 func (d NotesDocumentCollection) UntilTime() (NotesDateTime, error) {
-	return getComObjectProperty(d, NewNotesDateTime, "UntilTime")
+	return getComObjectProperty(d, newNotesDateTime, "UntilTime")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -101,32 +101,32 @@ func (d NotesDocumentCollection) FTSearch(query String, maxDocs Integer) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENT_METHOD_DOCCOLL.html */
 func (d NotesDocumentCollection) GetDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetDocument", document)
+	return callComObjectMethod(d, newNotesDocument, "GetDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetFirstDocument() (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetFirstDocument")
+	return callComObjectMethod(d, newNotesDocument, "GetFirstDocument")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETLASTDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetLastDocument() (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetLastDocument")
+	return callComObjectMethod(d, newNotesDocument, "GetLastDocument")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetNextDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetNextDocument", document)
+	return callComObjectMethod(d, newNotesDocument, "GetNextDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetNthDocument(n Long) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetNthDocument", n)
+	return callComObjectMethod(d, newNotesDocument, "GetNthDocument", n)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVDOCUMENT_METHOD_COLLECTION.html */
 func (d NotesDocumentCollection) GetPrevDocument(document NotesDocument) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetPrevDocument", document)
+	return callComObjectMethod(d, newNotesDocument, "GetPrevDocument", document)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERSECT_METHOD_COLLECTION.html */

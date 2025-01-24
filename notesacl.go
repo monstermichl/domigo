@@ -9,8 +9,8 @@ type NotesACL struct {
 	NotesStruct
 }
 
-func NewNotesACL(dispatchPtr *ole.IDispatch) NotesACL {
-	return NotesACL{NewNotesStruct(dispatchPtr)}
+func newNotesACL(dispatchPtr *ole.IDispatch) NotesACL {
+	return NotesACL{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -66,7 +66,7 @@ func (a NotesACL) SetIsExtendedAccess(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_ACL.html */
 func (a NotesACL) Parent() (NotesDatabase, error) {
-	return getComObjectProperty(a, NewNotesDatabase, "Parent")
+	return getComObjectProperty(a, newNotesDatabase, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ROLES_PROPERTY_ACL.html */
@@ -92,7 +92,7 @@ func (a NotesACL) AddRole(name String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEACLENTRY_METHOD.html */
 func (a NotesACL) CreateACLEntry(name String, level Long) (NotesACLEntry, error) {
-	return callComObjectMethod(a, NewNotesACLEntry, "CreateACLEntry", name, level)
+	return callComObjectMethod(a, newNotesACLEntry, "CreateACLEntry", name, level)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DELETEROLE_METHOD.html */
@@ -102,17 +102,17 @@ func (a NotesACL) DeleteRole(name String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD.html */
 func (a NotesACL) GetEntry(name String) (NotesACLEntry, error) {
-	return callComObjectMethod(a, NewNotesACLEntry, "GetEntry", name)
+	return callComObjectMethod(a, newNotesACLEntry, "GetEntry", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTENTRY_METHOD.html */
 func (a NotesACL) GetFirstEntry() (NotesACLEntry, error) {
-	return callComObjectMethod(a, NewNotesACLEntry, "GetFirstEntry")
+	return callComObjectMethod(a, newNotesACLEntry, "GetFirstEntry")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTENTRY_METHOD.html */
 func (a NotesACL) GetNextEntry(entry NotesACLEntry) (NotesACLEntry, error) {
-	return callComObjectMethod(a, NewNotesACLEntry, "GetNextEntry", entry)
+	return callComObjectMethod(a, newNotesACLEntry, "GetNextEntry", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVEACLENTRY_METHOD_ACL_COM.html */

@@ -9,8 +9,8 @@ type NotesName struct {
 	NotesStruct
 }
 
-func NewNotesName(dispatchPtr *ole.IDispatch) NotesName {
-	return NotesName{NewNotesStruct(dispatchPtr)}
+func newNotesName(dispatchPtr *ole.IDispatch) NotesName {
+	return NotesName{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -126,7 +126,7 @@ func (n NotesName) OrgUnit4() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_NAME_COM.html */
 func (n NotesName) Parent() (NotesSession, error) {
-	return getComObjectProperty(n, NewNotesSession, "Parent")
+	return getComObjectProperty(n, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PRMD_PROPERTY.html */

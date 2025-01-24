@@ -9,8 +9,8 @@ type NotesRichTextStyle struct {
 	NotesStruct
 }
 
-func NewNotesRichTextStyle(dispatchPtr *ole.IDispatch) NotesRichTextStyle {
-	return NotesRichTextStyle{NewNotesStruct(dispatchPtr)}
+func newNotesRichTextStyle(dispatchPtr *ole.IDispatch) NotesRichTextStyle {
+	return NotesRichTextStyle{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -81,7 +81,7 @@ func (r NotesRichTextStyle) SetNotesFont(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_RICHTEXTSTYLE_COM.html */
 func (r NotesRichTextStyle) Parent() (NotesSession, error) {
-	return getComObjectProperty(r, NewNotesSession, "Parent")
+	return getComObjectProperty(r, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PASSTHRUHTML_PROPERTY_514_ABOUT.html */

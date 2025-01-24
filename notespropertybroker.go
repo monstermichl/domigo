@@ -11,14 +11,14 @@ type NotesPropertyBroker struct {
 	NotesStruct
 }
 
-func NewNotesPropertyBroker(dispatchPtr *ole.IDispatch) NotesPropertyBroker {
-	return NotesPropertyBroker{NewNotesStruct(dispatchPtr)}
+func newNotesPropertyBroker(dispatchPtr *ole.IDispatch) NotesPropertyBroker {
+	return NotesPropertyBroker{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_INPUTPROPERTYCONTEXT.html */
 func (p NotesPropertyBroker) InputPropertyContext() ([]NotesProperty, error) {
-	return com.GetObjectArrayProperty(p.com(), NewNotesProperty, "InputPropertyContext")
+	return com.GetObjectArrayProperty(p.com(), newNotesProperty, "InputPropertyContext")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -29,7 +29,7 @@ func (p NotesPropertyBroker) ClearProperty(name String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_GETPROPERTY_METHOD.html */
 func (p NotesPropertyBroker) GetProperty(name String) (NotesProperty, error) {
-	return callComObjectMethod(p, NewNotesProperty, "GetProperty", name)
+	return callComObjectMethod(p, newNotesProperty, "GetProperty", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_GETPROPERTYVALUE_METHOD.html */
@@ -49,5 +49,5 @@ func (p NotesPropertyBroker) Publish() error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROPERTYBROKER_SETPROPERTYVALUE_METHOD.html */
 func (p NotesPropertyBroker) SetPropertyValue(name String, value String) (NotesProperty, error) {
-	return callComObjectMethod(p, NewNotesProperty, "SetPropertyValue", name, value)
+	return callComObjectMethod(p, newNotesProperty, "SetPropertyValue", name, value)
 }

@@ -13,14 +13,14 @@ type NotesDatabase struct {
 	NotesStruct
 }
 
-func NewNotesDatabase(dispatchPtr *ole.IDispatch) NotesDatabase {
-	return NotesDatabase{NewNotesStruct(dispatchPtr)}
+func newNotesDatabase(dispatchPtr *ole.IDispatch) NotesDatabase {
+	return NotesDatabase{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ACL_PROPERTY.html */
 func (d NotesDatabase) ACL() (NotesACL, error) {
-	return getComObjectProperty(d, NewNotesACL, "ACL")
+	return getComObjectProperty(d, newNotesACL, "ACL")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ACLACTIVITYLOG_PROPERTY_DB.html */
@@ -30,12 +30,12 @@ func (d NotesDatabase) ACLActivityLog() ([]String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_AGENTS_PROPERTY.html */
 func (d NotesDatabase) Agents() ([]NotesAgent, error) {
-	return com.GetObjectArrayProperty(d.com(), NewNotesAgent, "Agents")
+	return com.GetObjectArrayProperty(d.com(), newNotesAgent, "Agents")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ALLDOCUMENTS_PROPERTY.html */
 func (d NotesDatabase) AllDocuments() (NotesDocumentCollection, error) {
-	return getComObjectProperty(d, NewNotesDocumentCollection, "AllDocuments")
+	return getComObjectProperty(d, newNotesDocumentCollection, "AllDocuments")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CATEGORIES_PROPERTY.html */
@@ -111,7 +111,7 @@ func (d NotesDatabase) SetFolderReferencesEnabled(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FORMS_PROPERTY.html */
 func (d NotesDatabase) Forms() ([]NotesForm, error) {
-	return com.GetObjectArrayProperty(d.com(), NewNotesForm, "Forms")
+	return com.GetObjectArrayProperty(d.com(), newNotesForm, "Forms")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTINDEXFREQUENCY_PROPERTY_DB.html */
@@ -241,7 +241,7 @@ func (d NotesDatabase) IsPublicAddressBook() (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTFIXUP_PROPERTY_DB.html */
 func (d NotesDatabase) LastFixup() (NotesDateTime, error) {
-	return getComObjectProperty(d, NewNotesDateTime, "LastFixup")
+	return getComObjectProperty(d, newNotesDateTime, "LastFixup")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTFTINDEXED_PROPERTY.html */
@@ -301,7 +301,7 @@ func (d NotesDatabase) NotesURL() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_DB.html */
 func (d NotesDatabase) Parent() (NotesSession, error) {
-	return getComObjectProperty(d, NewNotesSession, "Parent")
+	return getComObjectProperty(d, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PERCENTUSED_PROPERTY.html */
@@ -316,7 +316,7 @@ func (d NotesDatabase) ReplicaID() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REPLICATIONINFO_PROPERTY_7679_ABOUT.html */
 func (d NotesDatabase) ReplicationInfo() (NotesReplication, error) {
-	return getComObjectProperty(d, NewNotesReplication, "ReplicationInfo")
+	return getComObjectProperty(d, newNotesReplication, "ReplicationInfo")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SERVER_PROPERTY.html */
@@ -381,12 +381,12 @@ func (d NotesDatabase) SetUndeleteExpireTime(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNPROCESSEDDOCUMENTS_PROPERTY.html */
 func (d NotesDatabase) UnprocessedDocuments() (NotesDocumentCollection, error) {
-	return getComObjectProperty(d, NewNotesDocumentCollection, "UnprocessedDocuments")
+	return getComObjectProperty(d, newNotesDocumentCollection, "UnprocessedDocuments")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VIEWS_PROPERTY.html */
 func (d NotesDatabase) Views() ([]NotesView, error) {
-	return com.GetObjectArrayProperty(d.com(), NewNotesView, "Views")
+	return com.GetObjectArrayProperty(d.com(), newNotesView, "Views")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -463,22 +463,22 @@ func (d NotesDatabase) CreateCopy(newServer String, newDbFile String, params ...
 	if paramsStruct.maxsize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.maxsize)
 	}
-	return callComObjectMethod(d, NewNotesDatabase, "CreateCopy", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDatabase, "CreateCopy", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDOCUMENT_METHOD.html */
 func (d NotesDatabase) CreateDocument() (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "CreateDocument")
+	return callComObjectMethod(d, newNotesDocument, "CreateDocument")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDOCUMENTCOLLECTION_METHOD.html */
 func (d NotesDatabase) CreateDocumentCollection() (NotesDocumentCollection, error) {
-	return callComObjectMethod(d, NewNotesDocumentCollection, "CreateDocumentCollection")
+	return callComObjectMethod(d, newNotesDocumentCollection, "CreateDocumentCollection")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEDOMINOQUERY_METHOD.html */
 func (d NotesDatabase) CreateDominoQuery() (NotesDominoQuery, error) {
-	return callComObjectMethod(d, NewNotesDominoQuery, "CreateDominoQuery")
+	return callComObjectMethod(d, newNotesDominoQuery, "CreateDominoQuery")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEFROMTEMPLATE_METHOD.html */
@@ -505,7 +505,7 @@ func (d NotesDatabase) CreateFromTemplate(newServer String, newDbFile String, in
 	if paramsStruct.maxsize != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.maxsize)
 	}
-	return callComObjectMethod(d, NewNotesDatabase, "CreateFromTemplate", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDatabase, "CreateFromTemplate", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEFTINDEX_METHOD_DB.html */
@@ -515,7 +515,7 @@ func (d NotesDatabase) CreateFTIndex(options Long, recreate Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATENOTECOLLECTION_METHOD_DATABASE.html */
 func (d NotesDatabase) CreateNoteCollection(selectAllFlag Boolean) (NotesNoteCollection, error) {
-	return callComObjectMethod(d, NewNotesNoteCollection, "CreateNoteCollection", selectAllFlag)
+	return callComObjectMethod(d, newNotesNoteCollection, "CreateNoteCollection", selectAllFlag)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEOUTLINE_METHOD_DATABASE.html */
@@ -542,12 +542,12 @@ func (d NotesDatabase) CreateOutline(outlinename String, params ...notesDatabase
 	if paramsStruct.defaultOutline != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.defaultOutline)
 	}
-	return callComObjectMethod(d, NewNotesOutline, "CreateOutline", paramsOrdered...)
+	return callComObjectMethod(d, newNotesOutline, "CreateOutline", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEREPLICA_METHOD.html */
 func (d NotesDatabase) CreateReplica(newServer String, newDbFile String) (NotesDatabase, error) {
-	return callComObjectMethod(d, NewNotesDatabase, "CreateReplica", newServer, newDbFile)
+	return callComObjectMethod(d, newNotesDatabase, "CreateReplica", newServer, newDbFile)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEVIEW_METHOD_DB.html */
@@ -604,7 +604,7 @@ func (d NotesDatabase) CreateView(params ...notesDatabaseCreateViewParam) (Notes
 			}
 		}
 	}
-	return callComObjectMethod(d, NewNotesView, "CreateView", paramsOrdered...)
+	return callComObjectMethod(d, newNotesView, "CreateView", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DECRYPT_METHOD_DATABASE.html */
@@ -703,7 +703,7 @@ func (d NotesDatabase) FTDomainSearch(query String, maxDocs Integer, entryform S
 			}
 		}
 	}
-	return callComObjectMethod(d, NewNotesDocument, "FTDomainSearch", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocument, "FTDomainSearch", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCH_METHOD_DB.html */
@@ -740,7 +740,7 @@ func (d NotesDatabase) FTSearch(query String, maxdocs Integer, params ...notesDa
 			paramsOrdered = append(paramsOrdered, *paramsStruct.otheroptions)
 		}
 	}
-	return callComObjectMethod(d, NewNotesDocumentCollection, "FTSearch", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocumentCollection, "FTSearch", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCHRANGE_METHOD_DB.html */
@@ -787,12 +787,12 @@ func (d NotesDatabase) FTSearchRange(query String, maxdocs Integer, params ...no
 			}
 		}
 	}
-	return callComObjectMethod(d, NewNotesDocumentCollection, "FTSearchRange", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocumentCollection, "FTSearchRange", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETAGENT_METHOD.html */
 func (d NotesDatabase) GetAgent(agentName String) (NotesAgent, error) {
-	return callComObjectMethod(d, NewNotesAgent, "GetAgent", agentName)
+	return callComObjectMethod(d, newNotesAgent, "GetAgent", agentName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLREADDOCUMENTS_DATABASE.html */
@@ -819,7 +819,7 @@ func (d NotesDatabase) GetAllReadDocuments(params ...notesDatabaseGetAllReadDocu
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	return callComObjectMethod(d, NewNotesNoteCollection, "GetAllReadDocuments", paramsOrdered...)
+	return callComObjectMethod(d, newNotesNoteCollection, "GetAllReadDocuments", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETALLUNREADDOCUMENTS_DATABASE.html */
@@ -846,17 +846,17 @@ func (d NotesDatabase) GetAllUnreadDocuments(params ...notesDatabaseGetAllUnread
 	if paramsStruct.username != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.username)
 	}
-	return callComObjectMethod(d, NewNotesNoteCollection, "GetAllUnreadDocuments", paramsOrdered...)
+	return callComObjectMethod(d, newNotesNoteCollection, "GetAllUnreadDocuments", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENTBYID_METHOD.html */
 func (d NotesDatabase) GetDocumentByID(noteID String) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetDocumentByID", noteID)
+	return callComObjectMethod(d, newNotesDocument, "GetDocumentByID", noteID)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENTBYUNID_METHOD.html */
 func (d NotesDatabase) GetDocumentByUNID(unid String) (NotesDocument, error) {
-	return callComObjectMethod(d, NewNotesDocument, "GetDocumentByUNID", unid)
+	return callComObjectMethod(d, newNotesDocument, "GetDocumentByUNID", unid)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETDOCUMENTBYURL_METHOD.html */
@@ -953,12 +953,12 @@ func (d NotesDatabase) GetDocumentByURL(URL String, params ...notesDatabaseGetDo
 			}
 		}
 	}
-	return callComObjectMethod(d, NewNotesDocument, "GetDocumentByURL", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocument, "GetDocumentByURL", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFORM_METHOD.html */
 func (d NotesDatabase) GetForm(name String) (NotesForm, error) {
-	return callComObjectMethod(d, NewNotesForm, "GetForm", name)
+	return callComObjectMethod(d, newNotesForm, "GetForm", name)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMODIFIEDDOCUMENTS_METHOD_DB.html */
@@ -995,12 +995,12 @@ func (d NotesDatabase) GetModifiedDocuments(params ...notesDatabaseGetModifiedDo
 			paramsOrdered = append(paramsOrdered, *paramsStruct.noteClass)
 		}
 	}
-	return callComObjectMethod(d, NewNotesDocumentCollection, "GetModifiedDocuments", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocumentCollection, "GetModifiedDocuments", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMODIFIEDDOCUMENTWITHOPTIONS_METHOD_DATABASE.html */
 func (d NotesDatabase) GetModifiedDocumentsWithOptions(modifiedSince NotesDateTime, modifiedUntil NotesDateTime, options Integer) (NotesNoteCollection, error) {
-	return callComObjectMethod(d, NewNotesNoteCollection, "GetModifiedDocumentsWithOptions", modifiedSince, modifiedUntil, options)
+	return callComObjectMethod(d, newNotesNoteCollection, "GetModifiedDocumentsWithOptions", modifiedSince, modifiedUntil, options)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNAMEDDOCUMENT_METHOD.html */
@@ -1042,7 +1042,7 @@ func (d NotesDatabase) GetOption(optionName Integer) (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETOUTLINE_METHOD_DATABASE.html */
 func (d NotesDatabase) GetOutline(outlinename String) (NotesOutline, error) {
-	return callComObjectMethod(d, NewNotesOutline, "GetOutline", outlinename)
+	return callComObjectMethod(d, newNotesOutline, "GetOutline", outlinename)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPROFILEDOCCOLLECTION_METHOD_DATABASE.html */
@@ -1069,7 +1069,7 @@ func (d NotesDatabase) GetProfileDocCollection(params ...notesDatabaseGetProfile
 	if paramsStruct.profilename != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.profilename)
 	}
-	return callComObjectMethod(d, NewNotesDocumentCollection, "GetProfileDocCollection", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocumentCollection, "GetProfileDocCollection", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPROFILEDOCUMENT_METHOD.html */
@@ -1096,12 +1096,12 @@ func (d NotesDatabase) GetProfileDocument(profilename String, params ...notesDat
 	if paramsStruct.uniqueKey != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.uniqueKey)
 	}
-	return callComObjectMethod(d, NewNotesDocument, "GetProfileDocument", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocument, "GetProfileDocument", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETQUERYRESULTSPROCESSOR_METHOD.html */
 func (d NotesDatabase) GetQueryResultsProcessor() (NotesQueryResultsProcessor, error) {
-	return callComObjectMethod(d, NewNotesQueryResultsProcessor, "GetQueryResultsProcessor")
+	return callComObjectMethod(d, newNotesQueryResultsProcessor, "GetQueryResultsProcessor")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETURLHEADERINFO_METHOD.html */
@@ -1183,7 +1183,7 @@ func (d NotesDatabase) GetURLHeaderInfo(params ...notesDatabaseGetURLHeaderInfoP
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETVIEW_METHOD.html */
 func (d NotesDatabase) GetView(viewName String) (NotesView, error) {
-	return callComObjectMethod(d, NewNotesView, "GetView", viewName)
+	return callComObjectMethod(d, newNotesView, "GetView", viewName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GRANTACCESS_METHOD.html */
@@ -1263,7 +1263,7 @@ func (d NotesDatabase) RevokeAccess(name String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SEARCH_METHOD.html */
 func (d NotesDatabase) Search(formula String, notesDateTime NotesDateTime, maxDocs Integer) (NotesDocumentCollection, error) {
-	return callComObjectMethod(d, NewNotesDocumentCollection, "Search", formula, notesDateTime, maxDocs)
+	return callComObjectMethod(d, newNotesDocumentCollection, "Search", formula, notesDateTime, maxDocs)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SETOPTION_METHOD_DB.html */
@@ -1382,7 +1382,7 @@ func (d NotesDatabase) UnprocessedFTSearch(query String, maxdocs Integer, params
 			paramsOrdered = append(paramsOrdered, *paramsStruct.otheroptions)
 		}
 	}
-	return callComObjectMethod(d, NewNotesDocumentCollection, "UnprocessedFTSearch", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocumentCollection, "UnprocessedFTSearch", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNPROCESSEDFTSEARCHRANGE_METHOD_DB.html */
@@ -1429,12 +1429,12 @@ func (d NotesDatabase) UnprocessedFTSearchRange(query String, maxdocs Integer, p
 			}
 		}
 	}
-	return callComObjectMethod(d, NewNotesDocumentCollection, "UnprocessedFTSearchRange", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDocumentCollection, "UnprocessedFTSearchRange", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UNPROCESSEDSEARCH_METHOD.html */
 func (d NotesDatabase) UnprocessedSearch(formula String, notesDateTime NotesDateTime, maxDocs Integer) (NotesDocumentCollection, error) {
-	return callComObjectMethod(d, NewNotesDocumentCollection, "UnprocessedSearch", formula, notesDateTime, maxDocs)
+	return callComObjectMethod(d, newNotesDocumentCollection, "UnprocessedSearch", formula, notesDateTime, maxDocs)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_UPDATEFTINDEX_METHOD.html */

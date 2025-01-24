@@ -23,8 +23,8 @@ type NotesMIMEEntity struct {
 	NotesStruct
 }
 
-func NewNotesMIMEEntity(dispatchPtr *ole.IDispatch) NotesMIMEEntity {
-	return NotesMIMEEntity{NewNotesStruct(dispatchPtr)}
+func newNotesMIMEEntity(dispatchPtr *ole.IDispatch) NotesMIMEEntity {
+	return NotesMIMEEntity{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -65,7 +65,7 @@ func (m NotesMIMEEntity) Encoding() (NotesMIMEEntityEncoding, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HEADEROBJECTS_PROPERTY_MIMEENTITY.html */
 func (m NotesMIMEEntity) HeaderObjects() ([]NotesMIMEHeader, error) {
-	return com.GetObjectArrayProperty(m.com(), NewNotesMIMEHeader, "HeaderObjects")
+	return com.GetObjectArrayProperty(m.com(), newNotesMIMEHeader, "HeaderObjects")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_HEADERS_PROPERTY_MIMEENTITY.html */
@@ -108,17 +108,17 @@ func (m NotesMIMEEntity) CreateChildEntity(params ...notesMIMEEntityCreateChildE
 	if paramsStruct.nextSibling != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.nextSibling)
 	}
-	return callComObjectMethod(m, NewNotesMIMEEntity, "CreateChildEntity", paramsOrdered...)
+	return callComObjectMethod(m, newNotesMIMEEntity, "CreateChildEntity", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEHEADER_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) CreateHeader(headerName String) (NotesMIMEHeader, error) {
-	return callComObjectMethod(m, NewNotesMIMEHeader, "CreateHeader", headerName)
+	return callComObjectMethod(m, newNotesMIMEHeader, "CreateHeader", headerName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEPARENTENTITY_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) CreateParentEntity() (NotesMIMEEntity, error) {
-	return callComObjectMethod(m, NewNotesMIMEEntity, "CreateParentEntity")
+	return callComObjectMethod(m, newNotesMIMEEntity, "CreateParentEntity")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DECODECONTENT_METHOD_MIMEENTITY.html */
@@ -224,7 +224,7 @@ func (m NotesMIMEEntity) GetEntityAsText(stream NotesStream, params ...notesMIME
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTCHILDENTITY_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) GetFirstChildEntity() (NotesMIMEEntity, error) {
-	return callComObjectMethod(m, NewNotesMIMEEntity, "GetFirstChildEntity")
+	return callComObjectMethod(m, newNotesMIMEEntity, "GetFirstChildEntity")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTENTITY_METHOD_MIMEENTITY.html */
@@ -251,12 +251,12 @@ func (m NotesMIMEEntity) GetNextEntity(params ...notesMIMEEntityGetNextEntityPar
 	if paramsStruct.search != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.search)
 	}
-	return callComObjectMethod(m, NewNotesMIMEEntity, "GetNextEntity", paramsOrdered...)
+	return callComObjectMethod(m, newNotesMIMEEntity, "GetNextEntity", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTSIBLING_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) GetNextSibling() (NotesMIMEEntity, error) {
-	return callComObjectMethod(m, NewNotesMIMEEntity, "GetNextSibling")
+	return callComObjectMethod(m, newNotesMIMEEntity, "GetNextSibling")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHHEADER_METHOD_MIMEENTITY.html */
@@ -283,12 +283,12 @@ func (m NotesMIMEEntity) GetNthHeader(headerName String, params ...notesMIMEEnti
 	if paramsStruct.instance != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.instance)
 	}
-	return callComObjectMethod(m, NewNotesMIMEHeader, "GetNthHeader", paramsOrdered...)
+	return callComObjectMethod(m, newNotesMIMEHeader, "GetNthHeader", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARENTENTITY_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) GetParentEntity() (NotesMIMEEntity, error) {
-	return callComObjectMethod(m, NewNotesMIMEEntity, "GetParentEntity")
+	return callComObjectMethod(m, newNotesMIMEEntity, "GetParentEntity")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVENTITY_METHOD_MIMEENTITY.html */
@@ -315,12 +315,12 @@ func (m NotesMIMEEntity) GetPrevEntity(params ...notesMIMEEntityGetPrevEntityPar
 	if paramsStruct.search != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.search)
 	}
-	return callComObjectMethod(m, NewNotesMIMEEntity, "GetPrevEntity", paramsOrdered...)
+	return callComObjectMethod(m, newNotesMIMEEntity, "GetPrevEntity", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVSIBLING_METHOD_MIMEENTITY.html */
 func (m NotesMIMEEntity) GetPrevSibling() (NotesMIMEEntity, error) {
-	return callComObjectMethod(m, NewNotesMIMEEntity, "GetPrevSibling")
+	return callComObjectMethod(m, newNotesMIMEEntity, "GetPrevSibling")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETSOMEHEADERS_METHOD_MIMEENTITY.html */

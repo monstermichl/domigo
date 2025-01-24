@@ -9,8 +9,8 @@ type NotesAdministrationProcess struct {
 	NotesStruct
 }
 
-func NewNotesAdministrationProcess(dispatchPtr *ole.IDispatch) NotesAdministrationProcess {
-	return NotesAdministrationProcess{NewNotesStruct(dispatchPtr)}
+func newNotesAdministrationProcess(dispatchPtr *ole.IDispatch) NotesAdministrationProcess {
+	return NotesAdministrationProcess{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -26,7 +26,7 @@ func (a NotesAdministrationProcess) SetCertificateAuthorityOrg(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFICATEEXPIRATION_PROPERTY_ADMINP.html */
 func (a NotesAdministrationProcess) CertificateExpiration() (NotesDateTime, error) {
-	return getComObjectProperty(a, NewNotesDateTime, "CertificateExpiration")
+	return getComObjectProperty(a, newNotesDateTime, "CertificateExpiration")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CERTIFICATEEXPIRATION_PROPERTY_ADMINP.html */

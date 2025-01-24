@@ -9,8 +9,8 @@ type NotesInternational struct {
 	NotesStruct
 }
 
-func NewNotesInternational(dispatchPtr *ole.IDispatch) NotesInternational {
-	return NotesInternational{NewNotesStruct(dispatchPtr)}
+func newNotesInternational(dispatchPtr *ole.IDispatch) NotesInternational {
+	return NotesInternational{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -81,7 +81,7 @@ func (i NotesInternational) IsTime24Hour() (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_INTERNATIONAL_COM.html */
 func (i NotesInternational) Parent() (NotesSession, error) {
-	return getComObjectProperty(i, NewNotesSession, "Parent")
+	return getComObjectProperty(i, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PMSTRING_PROPERTY.html */

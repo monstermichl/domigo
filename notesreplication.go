@@ -11,8 +11,8 @@ type NotesReplication struct {
 	NotesStruct
 }
 
-func NewNotesReplication(dispatchPtr *ole.IDispatch) NotesReplication {
-	return NotesReplication{NewNotesStruct(dispatchPtr)}
+func newNotesReplication(dispatchPtr *ole.IDispatch) NotesReplication {
+	return NotesReplication{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -131,12 +131,12 @@ func (r NotesReplication) GetEntry(source String, destination String, params ...
 	if paramsStruct.createflag != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.createflag)
 	}
-	return callComObjectMethod(r, NewNotesReplicationEntry, "GetEntry", paramsOrdered...)
+	return callComObjectMethod(r, newNotesReplicationEntry, "GetEntry", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRIES_METHOD.html */
 func (r NotesReplication) GetEntries() ([]NotesReplicationEntry, error) {
-	return com.CallObjectArrayMethod(r.com(), NewNotesReplicationEntry, "GetEntries")
+	return com.CallObjectArrayMethod(r.com(), newNotesReplicationEntry, "GetEntries")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_RESET_METHOD_9955.html */

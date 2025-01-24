@@ -34,8 +34,8 @@ type NotesLog struct {
 	NotesStruct
 }
 
-func NewNotesLog(dispatchPtr *ole.IDispatch) NotesLog {
-	return NotesLog{NewNotesStruct(dispatchPtr)}
+func newNotesLog(dispatchPtr *ole.IDispatch) NotesLog {
+	return NotesLog{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -81,7 +81,7 @@ func (l NotesLog) SetOverwriteFile(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_LOG_COM.html */
 func (l NotesLog) Parent() (NotesSession, error) {
-	return getComObjectProperty(l, NewNotesSession, "Parent")
+	return getComObjectProperty(l, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROGRAMNAME_PROPERTY.html */

@@ -9,8 +9,8 @@ type NotesOutlineEntry struct {
 	NotesStruct
 }
 
-func NewNotesOutlineEntry(dispatchPtr *ole.IDispatch) NotesOutlineEntry {
-	return NotesOutlineEntry{NewNotesStruct(dispatchPtr)}
+func newNotesOutlineEntry(dispatchPtr *ole.IDispatch) NotesOutlineEntry {
+	return NotesOutlineEntry{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -26,12 +26,12 @@ func (o NotesOutlineEntry) SetAlias(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DATABASE_PROPERTY_OUTLINEENTRY.html */
 func (o NotesOutlineEntry) Database() (NotesDatabase, error) {
-	return getComObjectProperty(o, NewNotesDatabase, "Database")
+	return getComObjectProperty(o, newNotesDatabase, "Database")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DOCUMENT_PROPERTY_OUTLINEENTRY.html */
 func (o NotesOutlineEntry) Document() (NotesDocument, error) {
-	return getComObjectProperty(o, NewNotesDocument, "Document")
+	return getComObjectProperty(o, newNotesDocument, "Document")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENTRYCLASS_PROPERTY_OUTLINEENTRY.html */
@@ -151,7 +151,7 @@ func (o NotesOutlineEntry) NamedElement() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_OUTLINEENTRY_COM.html */
 func (o NotesOutlineEntry) Parent() (NotesOutline, error) {
-	return getComObjectProperty(o, NewNotesOutline, "Parent")
+	return getComObjectProperty(o, newNotesOutline, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TYPE_PROPERTY_OUTLINEENTRY.html */
@@ -176,7 +176,7 @@ func (o NotesOutlineEntry) SetUseHideFormula(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_VIEW_PROPERTY_OUTLINEENTRY.html */
 func (o NotesOutlineEntry) View() (NotesView, error) {
-	return getComObjectProperty(o, NewNotesView, "View")
+	return getComObjectProperty(o, newNotesView, "View")
 }
 
 /* --------------------------------- Methods ------------------------------------ */

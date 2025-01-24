@@ -46,14 +46,14 @@ type NotesItem struct {
 	NotesStruct
 }
 
-func NewNotesItem(dispatchPtr *ole.IDispatch) NotesItem {
-	return NotesItem{NewNotesStruct(dispatchPtr)}
+func newNotesItem(dispatchPtr *ole.IDispatch) NotesItem {
+	return NotesItem{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DATETIMEVALUE_PROPERTY.html */
 func (i NotesItem) DateTimeValue() (NotesDateTime, error) {
-	return getComObjectProperty(i, NewNotesDateTime, "DateTimeValue")
+	return getComObjectProperty(i, newNotesDateTime, "DateTimeValue")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DATETIMEVALUE_PROPERTY.html */
@@ -143,7 +143,7 @@ func (i NotesItem) Name() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_ITEM.html */
 func (i NotesItem) Parent() (NotesDocument, error) {
-	return getComObjectProperty(i, NewNotesDocument, "Parent")
+	return getComObjectProperty(i, newNotesDocument, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SAVETODISK_PROPERTY.html */
@@ -203,7 +203,7 @@ func (i NotesItem) Contains(value any) (Boolean, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_COPYITEMTODOCUMENT_METHOD.html */
 func (i NotesItem) CopyItemToDocument(document NotesDocument, newName String) (NotesItem, error) {
-	return callComObjectMethod(i, NewNotesItem, "CopyItemToDocument", document, newName)
+	return callComObjectMethod(i, newNotesItem, "CopyItemToDocument", document, newName)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETVALUECUSTOMDATABYTES_METHOD_ITEM.html */
@@ -214,12 +214,12 @@ func (i NotesItem) GetValueCustomDataBytes(dataTypeName String) ([]Byte, error) 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETVALUEDATETIMEARRAY_METHOD.html */
 /* TODO: Check documentation, return type can vary... */
 func (i NotesItem) GetValueDateTimeArray() ([]NotesDateTime, error) {
-	return com.CallObjectArrayMethod(i.com(), NewNotesDateTime, "GetValueDateTimeArray")
+	return com.CallObjectArrayMethod(i.com(), newNotesDateTime, "GetValueDateTimeArray")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETMIMEENTITY_METHOD_NOTESITEM.html */
 func (i NotesItem) GetMIMEEntity() (NotesMIMEEntity, error) {
-	return callComObjectMethod(i, NewNotesMIMEEntity, "GetMIMEEntity")
+	return callComObjectMethod(i, newNotesMIMEEntity, "GetMIMEEntity")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_REMOVE_METHOD_ITEM.html */

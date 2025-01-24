@@ -10,8 +10,8 @@ type NotesDXLExporter struct {
 	NotesStruct
 }
 
-func NewNotesDXLExporter(dispatchPtr *ole.IDispatch) NotesDXLExporter {
-	return NotesDXLExporter{NewNotesStruct(dispatchPtr)}
+func newNotesDXLExporter(dispatchPtr *ole.IDispatch) NotesDXLExporter {
+	return NotesDXLExporter{newNotesStruct(dispatchPtr)}
 }
 
 func (d NotesDXLExporter) checkImportTypes(val any) error {

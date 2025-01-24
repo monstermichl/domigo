@@ -9,14 +9,14 @@ type NotesDateRange struct {
 	NotesStruct
 }
 
-func NewNotesDateRange(dispatchPtr *ole.IDispatch) NotesDateRange {
-	return NotesDateRange{NewNotesStruct(dispatchPtr)}
+func newNotesDateRange(dispatchPtr *ole.IDispatch) NotesDateRange {
+	return NotesDateRange{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENDDATETIME_PROPERTY.html */
 func (d NotesDateRange) EndDateTime() (NotesDateTime, error) {
-	return getComObjectProperty(d, NewNotesDateTime, "EndDateTime")
+	return getComObjectProperty(d, newNotesDateTime, "EndDateTime")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_ENDDATETIME_PROPERTY.html */
@@ -26,12 +26,12 @@ func (d NotesDateRange) SetEndDateTime(v NotesDateTime) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_DATERANGE_COM.html */
 func (d NotesDateRange) Parent() (NotesSession, error) {
-	return getComObjectProperty(d, NewNotesSession, "Parent")
+	return getComObjectProperty(d, newNotesSession, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STARTDATETIME_PROPERTY.html */
 func (d NotesDateRange) StartDateTime() (NotesDateTime, error) {
-	return getComObjectProperty(d, NewNotesDateTime, "StartDateTime")
+	return getComObjectProperty(d, newNotesDateTime, "StartDateTime")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STARTDATETIME_PROPERTY.html */

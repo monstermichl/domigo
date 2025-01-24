@@ -9,8 +9,8 @@ type NotesProperty struct {
 	NotesStruct
 }
 
-func NewNotesProperty(dispatchPtr *ole.IDispatch) NotesProperty {
-	return NotesProperty{NewNotesStruct(dispatchPtr)}
+func newNotesProperty(dispatchPtr *ole.IDispatch) NotesProperty {
+	return NotesProperty{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */

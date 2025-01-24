@@ -9,8 +9,8 @@ type NotesAgent struct {
 	NotesStruct
 }
 
-func NewNotesAgent(dispatchPtr *ole.IDispatch) NotesAgent {
-	return NotesAgent{NewNotesStruct(dispatchPtr)}
+func newNotesAgent(dispatchPtr *ole.IDispatch) NotesAgent {
+	return NotesAgent{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -101,7 +101,7 @@ func (a NotesAgent) ParameterDocID() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_AGENT.html */
 func (a NotesAgent) Parent() (NotesDatabase, error) {
-	return getComObjectProperty(a, NewNotesDatabase, "Parent")
+	return getComObjectProperty(a, newNotesDatabase, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PROHIBITDESIGNUPDATE_PROPERTY.html */
@@ -142,7 +142,7 @@ func (a NotesAgent) Trigger() (Long, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPERFORMANCEDOCUMENT_METHOD_AGENT.html */
 func (a NotesAgent) GetPerformanceDocument() (NotesAgent, error) {
-	return callComObjectMethod(a, NewNotesAgent, "GetPerformanceDocument")
+	return callComObjectMethod(a, newNotesAgent, "GetPerformanceDocument")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOCK_METHOD_AGENT.html */

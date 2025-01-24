@@ -9,8 +9,8 @@ type NotesViewEntry struct {
 	NotesStruct
 }
 
-func NewNotesViewEntry(dispatchPtr *ole.IDispatch) NotesViewEntry {
-	return NotesViewEntry{NewNotesStruct(dispatchPtr)}
+func newNotesViewEntry(dispatchPtr *ole.IDispatch) NotesViewEntry {
+	return NotesViewEntry{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -36,7 +36,7 @@ func (v NotesViewEntry) DescendantCount() (Long, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_DOCUMENT_PROPERTY_7936.html */
 func (v NotesViewEntry) Document() (NotesDocument, error) {
-	return getComObjectProperty(v, NewNotesDocument, "Document")
+	return getComObjectProperty(v, newNotesDocument, "Document")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FTSEARCHSCORE_PROPERTY_2767.html */
@@ -81,7 +81,7 @@ func (v NotesViewEntry) NoteID() (String, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_3044.html */
 func (v NotesViewEntry) Parent() (NotesView, error) {
-	return getComObjectProperty(v, NewNotesView, "Parent")
+	return getComObjectProperty(v, newNotesView, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SIBLINGCOUNT_PROPERTY_5642.html */

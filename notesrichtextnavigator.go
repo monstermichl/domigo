@@ -22,15 +22,15 @@ type NotesRichTextNavigator struct {
 	NotesStruct
 }
 
-func NewNotesRichTextNavigator(dispatchPtr *ole.IDispatch) NotesRichTextNavigator {
-	return NotesRichTextNavigator{NewNotesStruct(dispatchPtr)}
+func newNotesRichTextNavigator(dispatchPtr *ole.IDispatch) NotesRichTextNavigator {
+	return NotesRichTextNavigator{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLONE_METHOD_RTNAV.html */
 func (r NotesRichTextNavigator) Clone() (NotesRichTextNavigator, error) {
-	return callComObjectMethod(r, NewNotesRichTextNavigator, "Clone")
+	return callComObjectMethod(r, newNotesRichTextNavigator, "Clone")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDFIRSTELEMENT_METHOD_RTNAV.html */

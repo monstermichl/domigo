@@ -9,8 +9,8 @@ type NotesUserID struct {
 	NotesStruct
 }
 
-func NewNotesUserID(dispatchPtr *ole.IDispatch) NotesUserID {
-	return NotesUserID{NewNotesStruct(dispatchPtr)}
+func newNotesUserID(dispatchPtr *ole.IDispatch) NotesUserID {
+	return NotesUserID{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */

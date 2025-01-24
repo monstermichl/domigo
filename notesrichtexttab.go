@@ -18,8 +18,8 @@ type NotesRichTextTab struct {
 	NotesStruct
 }
 
-func NewNotesRichTextTab(dispatchPtr *ole.IDispatch) NotesRichTextTab {
-	return NotesRichTextTab{NewNotesStruct(dispatchPtr)}
+func newNotesRichTextTab(dispatchPtr *ole.IDispatch) NotesRichTextTab {
+	return NotesRichTextTab{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */

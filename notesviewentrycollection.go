@@ -9,8 +9,8 @@ type NotesViewEntryCollection struct {
 	NotesStruct
 }
 
-func NewNotesViewEntryCollection(dispatchPtr *ole.IDispatch) NotesViewEntryCollection {
-	return NotesViewEntryCollection{NewNotesStruct(dispatchPtr)}
+func newNotesViewEntryCollection(dispatchPtr *ole.IDispatch) NotesViewEntryCollection {
+	return NotesViewEntryCollection{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -21,7 +21,7 @@ func (v NotesViewEntryCollection) Count() (Long, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_9184.html */
 func (v NotesViewEntryCollection) Parent() (NotesView, error) {
-	return getComObjectProperty(v, NewNotesView, "Parent")
+	return getComObjectProperty(v, newNotesView, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_QUERY_PROPERTY_8476.html */
@@ -81,32 +81,32 @@ func (v NotesViewEntryCollection) FTSearch(query String, maxDocs Integer) error 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETENTRY_METHOD_9111.html */
 func (v NotesViewEntryCollection) GetEntry(entry any) (NotesViewEntry, error) {
 	/* TODO: Handle different input types (see documentation). */
-	return callComObjectMethod(v, NewNotesViewEntry, "GetEntry", entry)
+	return callComObjectMethod(v, newNotesViewEntry, "GetEntry", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRSTENTRY_METHOD_3097.html */
 func (v NotesViewEntryCollection) GetFirstEntry() (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetFirstEntry")
+	return callComObjectMethod(v, newNotesViewEntry, "GetFirstEntry")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETLASTENTRY_METHOD_5374.html */
 func (v NotesViewEntryCollection) GetLastEntry() (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetLastEntry")
+	return callComObjectMethod(v, newNotesViewEntry, "GetLastEntry")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTENTRY_6168.html */
 func (v NotesViewEntryCollection) GetNextEntry(currententry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetNextEntry", currententry)
+	return callComObjectMethod(v, newNotesViewEntry, "GetNextEntry", currententry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNTHENTRY_METHOD_4753.html */
 func (v NotesViewEntryCollection) GetNthEntry(index Long) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetNthEntry", index)
+	return callComObjectMethod(v, newNotesViewEntry, "GetNthEntry", index)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVENTRY_METHOD_2018.html */
 func (v NotesViewEntryCollection) GetPrevEntry(currententry NotesViewEntry) (NotesViewEntry, error) {
-	return callComObjectMethod(v, NewNotesViewEntry, "GetPrevEntry", currententry)
+	return callComObjectMethod(v, newNotesViewEntry, "GetPrevEntry", currententry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_INTERSECT_METHOD_VIEWENTRYCOLLECTION.html */

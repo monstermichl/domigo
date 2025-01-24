@@ -9,8 +9,8 @@ type NotesDirectory struct {
 	NotesStruct
 }
 
-func NewNotesDirectory(dispatchPtr *ole.IDispatch) NotesDirectory {
-	return NotesDirectory{NewNotesStruct(dispatchPtr)}
+func newNotesDirectory(dispatchPtr *ole.IDispatch) NotesDirectory {
+	return NotesDirectory{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -92,7 +92,7 @@ func (d NotesDirectory) SetUseContextServer(v Boolean) error {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATENAVIGATOR_METHOD_DIRECTORY.html */
 func (d NotesDirectory) CreateNavigator() (NotesDirectoryNavigator, error) {
-	return callComObjectMethod(d, NewNotesDirectoryNavigator, "CreateNavigator")
+	return callComObjectMethod(d, newNotesDirectoryNavigator, "CreateNavigator")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FREELOOKUPBUFFER_METHOD_DIRECTORY.html */
@@ -139,7 +139,7 @@ func (d NotesDirectory) GetMailInfo(username String, params ...notesDirectoryGet
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOOKUPALLNAMES_METHOD_DIRECTORY.html */
 func (d NotesDirectory) LookupAllNames(view NotesView, items []String) (NotesDirectoryNavigator, error) {
-	return callComObjectMethod(d, NewNotesDirectoryNavigator, "LookupAllNames", view, items)
+	return callComObjectMethod(d, newNotesDirectoryNavigator, "LookupAllNames", view, items)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LOOKUPNAMES_METHOD_DIRECTORY.html */
@@ -166,5 +166,5 @@ func (d NotesDirectory) LookupNames(view NotesView, names []String, items []Stri
 	if paramsStruct.partialmatches != nil {
 		paramsOrdered = append(paramsOrdered, *paramsStruct.partialmatches)
 	}
-	return callComObjectMethod(d, NewNotesDirectoryNavigator, "LookupNames", paramsOrdered...)
+	return callComObjectMethod(d, newNotesDirectoryNavigator, "LookupNames", paramsOrdered...)
 }

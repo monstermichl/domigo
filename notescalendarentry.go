@@ -11,8 +11,8 @@ type NotesCalendarEntry struct {
 	NotesStruct
 }
 
-func NewNotesCalendarEntry(dispatchPtr *ole.IDispatch) NotesCalendarEntry {
-	return NotesCalendarEntry{NewNotesStruct(dispatchPtr)}
+func newNotesCalendarEntry(dispatchPtr *ole.IDispatch) NotesCalendarEntry {
+	return NotesCalendarEntry{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -288,12 +288,12 @@ func (c NotesCalendarEntry) GetAsDocument(params ...notesCalendarEntryGetAsDocum
 			paramsOrdered = append(paramsOrdered, *paramsStruct.recurId)
 		}
 	}
-	return callComObjectMethod(c, NewNotesDocument, "GetAsDocument", paramsOrdered...)
+	return callComObjectMethod(c, newNotesDocument, "GetAsDocument", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNOTICES_METHOD_CALENTRY.html */
 func (c NotesCalendarEntry) GetNotices() ([]NotesCalendarNotice, error) {
-	return com.CallObjectArrayMethod(c.com(), NewNotesCalendarNotice, "GetNotices")
+	return com.CallObjectArrayMethod(c.com(), newNotesCalendarNotice, "GetNotices")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MODIFYINVITEES_METHOD_CALENTRY.html */

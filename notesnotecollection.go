@@ -10,8 +10,8 @@ type NotesNoteCollection struct {
 	NotesStruct
 }
 
-func NewNotesNoteCollection(dispatchPtr *ole.IDispatch) NotesNoteCollection {
-	return NotesNoteCollection{NewNotesStruct(dispatchPtr)}
+func newNotesNoteCollection(dispatchPtr *ole.IDispatch) NotesNoteCollection {
+	return NotesNoteCollection{newNotesStruct(dispatchPtr)}
 }
 
 func (n NotesNoteCollection) checkCombinableTypes(val any) error {
@@ -26,12 +26,12 @@ func (n NotesNoteCollection) Count() (Long, error) {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_LASTBUILDTIME_PROPERTY_NC.html */
 func (n NotesNoteCollection) LastBuildTime() (NotesDateTime, error) {
-	return getComObjectProperty(n, NewNotesDateTime, "LastBuildTime")
+	return getComObjectProperty(n, newNotesDateTime, "LastBuildTime")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENT_PROPERTY_NOTECOLLECTION.html */
 func (n NotesNoteCollection) Parent() (NotesNoteCollection, error) {
-	return getComObjectProperty(n, NewNotesNoteCollection, "Parent")
+	return getComObjectProperty(n, newNotesNoteCollection, "Parent")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SELECTACL_PROPERTY_NC.html */
@@ -326,7 +326,7 @@ func (n NotesNoteCollection) SetSelectViews(v Boolean) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SINCETIME_PROPERTY_NC.html */
 func (n NotesNoteCollection) SinceTime() (NotesDateTime, error) {
-	return getComObjectProperty(n, NewNotesDateTime, "SinceTime")
+	return getComObjectProperty(n, newNotesDateTime, "SinceTime")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_SINCETIME_PROPERTY_NC.html */

@@ -18,8 +18,8 @@ type NotesRichTextParagraphStyle struct {
 	NotesStruct
 }
 
-func NewNotesRichTextParagraphStyle(dispatchPtr *ole.IDispatch) NotesRichTextParagraphStyle {
-	return NotesRichTextParagraphStyle{NewNotesStruct(dispatchPtr)}
+func newNotesRichTextParagraphStyle(dispatchPtr *ole.IDispatch) NotesRichTextParagraphStyle {
+	return NotesRichTextParagraphStyle{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -105,7 +105,7 @@ func (r NotesRichTextParagraphStyle) SetSpacingBelow(v Long) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TABS_PROPERTY_5218.html */
 func (r NotesRichTextParagraphStyle) Tabs() ([]NotesRichTextTab, error) {
-	return com.GetObjectArrayProperty(r.com(), NewNotesRichTextTab, "Tabs")
+	return com.GetObjectArrayProperty(r.com(), newNotesRichTextTab, "Tabs")
 }
 
 /* --------------------------------- Methods ------------------------------------ */

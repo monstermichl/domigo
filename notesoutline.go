@@ -9,8 +9,8 @@ type NotesOutline struct {
 	NotesStruct
 }
 
-func NewNotesOutline(dispatchPtr *ole.IDispatch) NotesOutline {
-	return NotesOutline{NewNotesStruct(dispatchPtr)}
+func newNotesOutline(dispatchPtr *ole.IDispatch) NotesOutline {
+	return NotesOutline{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
@@ -46,7 +46,7 @@ func (o NotesOutline) SetName(v String) error {
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_PARENTDATABASE_PROPERTY_OUTLINE_COM.html */
 func (o NotesOutline) ParentDatabase() (NotesDatabase, error) {
-	return getComObjectProperty(o, NewNotesDatabase, "ParentDatabase")
+	return getComObjectProperty(o, newNotesDatabase, "ParentDatabase")
 }
 
 /* --------------------------------- Methods ------------------------------------ */
@@ -146,7 +146,7 @@ func (o NotesOutline) CreateEntry(name String, params ...notesOutlineCreateEntry
 			paramsOrdered = append(paramsOrdered, *paramsStruct.asChild)
 		}
 	}
-	return callComObjectMethod(o, NewNotesOutlineEntry, "CreateEntry", paramsOrdered...)
+	return callComObjectMethod(o, newNotesOutlineEntry, "CreateEntry", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CREATEENTRYFROM_METHOD_MEMDEF_NOTESOUTLINE.html */
@@ -193,47 +193,47 @@ func (o NotesOutline) CreateEntryFrom(entry NotesOutlineEntry, params ...notesOu
 			}
 		}
 	}
-	return callComObjectMethod(o, NewNotesOutlineEntry, "CreateEntryFrom", paramsOrdered...)
+	return callComObjectMethod(o, newNotesOutlineEntry, "CreateEntryFrom", paramsOrdered...)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETCHILD_METHOD_NOTESOUTLINE.html */
 func (o NotesOutline) GetChild(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetChild", entry)
+	return callComObjectMethod(o, newNotesOutlineEntry, "GetChild", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETFIRST_METHOD_OUTLINE.html */
 func (o NotesOutline) GetFirst() (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetFirst")
+	return callComObjectMethod(o, newNotesOutlineEntry, "GetFirst")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETLAST_METHOD_OUTLINE.html */
 func (o NotesOutline) GetLast() (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetLast")
+	return callComObjectMethod(o, newNotesOutlineEntry, "GetLast")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXT_METHOD_OUTLINE.html */
 func (o NotesOutline) GetNext(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetNext", entry)
+	return callComObjectMethod(o, newNotesOutlineEntry, "GetNext", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETNEXTSIBLING_METHOD_OUTLINE.html */
 func (o NotesOutline) GetNextSibling(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetNextSibling", entry)
+	return callComObjectMethod(o, newNotesOutlineEntry, "GetNextSibling", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPARENT_METHOD_OUTLINE.html */
 func (o NotesOutline) GetParent(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetParent", entry)
+	return callComObjectMethod(o, newNotesOutlineEntry, "GetParent", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREV_METHOD_OUTLINE.html */
 func (o NotesOutline) GetPrev(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetPrev", entry)
+	return callComObjectMethod(o, newNotesOutlineEntry, "GetPrev", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_GETPREVSIBLING_METHOD_OUTLINE.html */
 func (o NotesOutline) GetPrevSibling(entry NotesOutlineEntry) (NotesOutlineEntry, error) {
-	return callComObjectMethod(o, NewNotesOutlineEntry, "GetPrevSibling", entry)
+	return callComObjectMethod(o, newNotesOutlineEntry, "GetPrevSibling", entry)
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_MOVEENTRY_METHOD_OUTLINE.html */

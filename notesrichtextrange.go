@@ -9,19 +9,19 @@ type NotesRichTextRange struct {
 	NotesStruct
 }
 
-func NewNotesRichTextRange(dispatchPtr *ole.IDispatch) NotesRichTextRange {
-	return NotesRichTextRange{NewNotesStruct(dispatchPtr)}
+func newNotesRichTextRange(dispatchPtr *ole.IDispatch) NotesRichTextRange {
+	return NotesRichTextRange{newNotesStruct(dispatchPtr)}
 }
 
 /* --------------------------------- Properties --------------------------------- */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NAVIGATOR_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) Navigator() (NotesRichTextNavigator, error) {
-	return getComObjectProperty(r, NewNotesRichTextNavigator, "Navigator")
+	return getComObjectProperty(r, newNotesRichTextNavigator, "Navigator")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_STYLE_PROPERTY_RTRANGE.html */
 func (r NotesRichTextRange) Style() (NotesRichTextStyle, error) {
-	return getComObjectProperty(r, NewNotesRichTextStyle, "Style")
+	return getComObjectProperty(r, newNotesRichTextStyle, "Style")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_TEXTPARAGRAPH_PROPERTY_RTRANGE.html */
@@ -42,7 +42,7 @@ func (r NotesRichTextRange) Type() (Long, error) {
 /* --------------------------------- Methods ------------------------------------ */
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_CLONE_METHOD_RTRANGE.html */
 func (r NotesRichTextRange) Clone() (NotesRichTextRange, error) {
-	return callComObjectMethod(r, NewNotesRichTextRange, "Clone")
+	return callComObjectMethod(r, newNotesRichTextRange, "Clone")
 }
 
 /* https://help.hcl-software.com/dom_designer/14.0.0/basic/H_FINDANDREPLACE_METHOD_RTRANGE.html */
