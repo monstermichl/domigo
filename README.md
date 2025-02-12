@@ -6,7 +6,7 @@ go get -u "github.com/monstermichl/domigo"
 ```
 
 ## Usage
-To get access to HCL Domino, just call the *domigo.Initialize*. The function returns a NotesSession struct which can then be used as described in the [NotesSession documentation](https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESSESSION_CLASS.html).
+To get access to HCL Domino, just call *domigo.Initialize*. The function returns a NotesSession struct which can then be used as described in the [NotesSession documentation](https://help.hcl-software.com/dom_designer/14.0.0/basic/H_NOTESSESSION_CLASS.html).
 
 **IMPORTANT:** The structs/struct-slices which are returned by some methods must be released by calling the *Release*-function (e.g. *defer session.Release()*).
 
